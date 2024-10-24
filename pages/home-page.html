@@ -50,8 +50,19 @@
             </div>
         <div class="navbar">
             <!-- <a href="home-page.html" class="nav-button">Home</a> -->
-            <a href="upload-data.html" class="nav-button">Upload</a>
-            <a href="report-page.html" class="nav-button">Reports</a>
+            <button id="openUploadModal" class="nav-button">Upload</button>
+            <button class="nav-button">Reports</button>
+            <!-- <a href="upload-data.html" class="nav-button" id="openUploadModal">Upload</a>
+            <a href="report-page.html" class="nav-button">Reports</a> -->
         </div>
+        <div id="uploadModal">
+            <a href="template.xlsx" download>Download Excel Template</a>
+            <br><br>
+            <input type="file" id="excelFile" />
+            <button id="uploadButton">Upload Data</button>
+            <button id="closeUploadModal">Close</button> <!-- Add close button -->
+        </div>
+        <script src="../scripts/upload-data.js" type="module"></script>
+        </script>
 </body>
 </html>
