@@ -1,31 +1,40 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import * as XLSX from 'xlsx';
+// // Import required libraries and CSS
+// import '../styles/home-page.css';
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+// import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+// import * as XLSX from 'xlsx';
 
 // Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyCZw5fQgye5zs3fdkNMwbMYik9OpfSRYBg",
-    authDomain: "japanese-report-generation.firebaseapp.com",
-    projectId: "japanese-report-generation",
-    storageBucket: "japanese-report-generation.appspot.com",
-    messagingSenderId: "796914325557",
-    appId: "1:796914325557:web:e65afd6a7473c181f2f97c"
-  };
+// const firebaseConfig = {
+//     apiKey: "AIzaSyCZw5fQgye5zs3fdkNMwbMYik9OpfSRYBg",
+//     authDomain: "japanese-report-generation.firebaseapp.com",
+//     projectId: "japanese-report-generation",
+//     storageBucket: "japanese-report-generation.appspot.com",
+//     messagingSenderId: "796914325557",
+//     appId: "1:796914325557:web:e65afd6a7473c181f2f97c"
+// };
 
 // Initialize Firebase and Firestore
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// const app = initializeApp(firebaseConfig);
+// const db = getFirestore(app);
 
 // DOM Elements
 const openUploadModal = document.getElementById('openUploadModal');
 const uploadModal = document.getElementById('uploadModal');
 const fileInput = document.getElementById('excelFile');
 const uploadButton = document.getElementById('uploadButton');
+const closeUploadModal = document.getElementById('closeUploadModal');
 
 // Show the upload modal
 openUploadModal.addEventListener('click', () => {
     document.body.classList.add('modal-active');
     uploadModal.style.display = 'block';
+});
+
+// Close modal event
+closeUploadModal.addEventListener('click', () => {
+    document.body.classList.remove('modal-active'); // Remove modal-active class
+    uploadModal.style.display = 'none'; // Hide the modal
 });
 
 // Handle file upload and process the Excel data
