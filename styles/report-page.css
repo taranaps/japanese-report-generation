@@ -175,6 +175,7 @@ body {
 
 .side-bar img {
   width: 100%;
+  cursor: pointer;
   height: auto;
   margin-bottom: 10px;
   border: 2px solid #dc143c;
