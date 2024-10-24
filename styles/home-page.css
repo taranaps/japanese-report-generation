@@ -1,0 +1,121 @@
+body {
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    height: 100vh;
+}
+
+.content {
+    padding: 20px;
+    text-align: center;
+    min-height: 90vh;
+}
+
+.dashboard-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    width: 1150px;
+    gap: 40px;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    flex-grow: 1; 
+    width: 60%; 
+}
+
+.logout{
+    margin-top: 20px;
+    margin-left: 100%;
+    width: 40px;
+    height: 40px;
+}
+
+.stat-box {
+    transition: transform 0.5s ease; /* Smooth transition */
+    width: 150px;
+    height: 100px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stat-box:hover {
+    transform: scale(1.1); 
+  }
+
+.stat-box h3 {
+    margin-top: 10px;
+    font-size: 24px;
+}
+
+.graph-line {
+    height: 50px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.attendance-chart {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    width: 35%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.attendance-chart p {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+canvas {
+    width: 100%;
+    height: 200px;
+}
+
+.month {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 14px;
+    color: gray;
+}
+
+.navbar {
+    margin-bottom: 80px;
+    margin-left: 310px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    border-radius: 30px;
+    background-color: #D32F2F;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-button {
+    border-radius: 20px;
+    background-color: #D32F2F ;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-button:hover {
+    background-color: white;
+    color: red;
+    text-decoration: none;
+}
