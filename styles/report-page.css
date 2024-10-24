@@ -144,10 +144,10 @@ body {
 #image-scroll {
   display: flex;
   flex-direction: column;
-  max-height: 100%; /* Ensure the container doesn't exceed the sidebar height */
-  overflow-y: auto; /* Enable vertical scrolling */
-  transition: transform 0.5s ease; /* Smooth scrolling */
-
+  max-height: 100%; 
+  overflow-y: auto; 
+  transition: transform 0.5s ease; 
+  padding-top: 380px;
   /* Hide scrollbar */
   scrollbar-width: none; /* For Firefox */
   -ms-overflow-style: none; /* For Internet Explorer and Edge */
