@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="styles/home-page.css">
+</head>
+<body>
+
+        <div class="container">
+            <div class="header">
+                <a href="login-page.html"><img class="logout" src="./assets/images/logout-icon.svg" alt="logout"></a>
+            </div>
+            <div class="dashboard-container">
+                <div class="dashboard">
+                    <div class="stat-box">
+                        <p>Active Batches</p>
+                        <h3>3/5</h3>
+                    </div>
+                    <div class="stat-box">
+                        <p>Number of Trainees</p>
+                        <h3>40</h3>
+                    </div>
+                    <div class="stat-box">
+                        <p>Av. Session Length</p>
+                        <h3>2h 30m</h3>
+                    </div>
+                    <div class="stat-box">
+                        <p>Total Sessions</p>
+                        <h3>64</h3>
+                    </div>
+                    <div class="stat-box">
+                        <p>Av. Attendance %</p>
+                        <h3>86%</h3>
+                        <div class="graph-line"></div>
+                    </div>
+                    <div class="stat-box">
+                        <p>Av. Score</p>
+                        <h3>74%</h3>
+                        <div class="graph-line"></div>
+                    </div>
+                </div>
+                
+                <div class="attendance-chart">
+                    <p>Attendance</p>
+                    <canvas id="attendanceChart"></canvas>
+                    <p class="month">August</p>
+                </div>
+            </div>
+        <div class="navbar">
+            <a href="home-page.html" class="nav-button">Home</a>
+            <a href="popup-page.html" class="nav-button">Upload</a>
+            <a href="report-page.html" class="nav-button">Reports</a>
+        </div>
+</body>
+</html>
