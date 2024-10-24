@@ -1,16 +1,16 @@
 
 // Import the necessary functions from Firebase SDK
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js"; // Use the same version for auth
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; // Use the same version for auth
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB8jdMlqtR1BnXqhdJnO83F1x0obkUhypM",
-    authDomain: "japanese-trainee-report.firebaseapp.com",
-    projectId: "japanese-trainee-report",
-    storageBucket: "japanese-trainee-report.appspot.com",
-    messagingSenderId: "739792835740",
-    appId: "1:739792835740:web:4f808e43a8d34a5ecd8959"
-};
+    apiKey: "AIzaSyCZw5fQgye5zs3fdkNMwbMYik9OpfSRYBg",
+    authDomain: "japanese-report-generation.firebaseapp.com",
+    projectId: "japanese-report-generation",
+    storageBucket: "japanese-report-generation.appspot.com",
+    messagingSenderId: "796914325557",
+    appId: "1:796914325557:web:e65afd6a7473c181f2f97c"
+  };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
