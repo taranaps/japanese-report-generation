@@ -169,26 +169,34 @@ body::before {
     width:500px;
     height: 200px;
 }
-.download-template{
+/* .download-template{
     color: #DC143C;
-}
+} */
 #excelFile{
     margin-top: 20px;
+    /* margin-bottom: 200px; */
 }
 #uploadButton{
-    margin-top: 100px;
+    /* margin-top: 100px; */
     background: #DC143C;
-    border-radius: 8px;
+    border-radius: 10px;
     border: solid 1px #DC143C;
     height: 30px;
     color: white;
 }
 #closeUploadModal{
-    margin-top: 50px;
+    /* margin-top: 50px; */
     margin-left: 30px;
     background: #DC143C;
-    border-radius: 8px;
+    border-radius: 10px;
     border: solid 1px #DC143C;
     height: 30px;
     color: white;
+}
+.input-buttons{
+    margin-top: 70px;
+    margin-left: 300px;
+}
+.download-template{
+    color: #DC143C;
 }
