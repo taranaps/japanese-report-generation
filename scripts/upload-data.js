@@ -78,10 +78,10 @@ uploadButton.addEventListener('click', async () => {
 });
 
 // Extract Month-Year collection name
-function getCollectionName(month) {
-    const year = new Date().getFullYear();
-    return `${month.toLowerCase()}-${year}`;
-}
+// function getCollectionName(month) {
+//     const year = new Date().getFullYear();
+//     return `${month.toLowerCase()}-${year}`;
+// }
 
 // Process Excel data into structured objects
 function processTraineeData(data) {
