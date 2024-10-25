@@ -183,6 +183,7 @@ body::before {
     border: solid 1px #DC143C;
     height: 30px;
     color: white;
+    cursor: pointer;
 }
 #closeUploadModal{
     /* margin-top: 50px; */
@@ -192,6 +193,7 @@ body::before {
     border: solid 1px #DC143C;
     height: 30px;
     color: white;
+    cursor: pointer;
 }
 .input-buttons{
     margin-top: 70px;
