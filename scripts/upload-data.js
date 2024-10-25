@@ -1,9 +1,9 @@
 // // Import required libraries and CSS
-import '../styles/home-page.css';
-import { db } from '../index.html';  // Import Firestore instance
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
-// import * as XLSX from 'xlsx';
-import * as XLSX from "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/+esm"; 
+// import '../styles/home-page.css';
+// import { db } from '../index.html';  // Import Firestore instance
+// import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+// // import * as XLSX from 'xlsx';
+// import * as XLSX from "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/+esm"; 
 
 // DOM Elements
 const openUploadModal = document.getElementById('openUploadModal');
