@@ -56,11 +56,13 @@
             <a href="report-page.html" class="nav-button">Reports</a> -->
         </div>
         <div id="uploadModal">
-            <a href="template.xlsx" download>Do you want to download the templates? <span class="download-template">Click Here</span></a>
-            <br><br>
-            <input type="file" id="excelFile" />
-            <button id="uploadButton">Upload Data</button>
-            <button id="closeUploadModal">Close</button> <!-- Add close button -->
+            <p>Do you want to download the templates? <a href="../assets/excel/excel-template.csv" download ><span class="download-template">Click Here</span></a></p>
+            <div class="input-excel">
+                <input type="file" id="excelFile" />
+            </div>
+            <div class="input-buttons"><button id="uploadButton">Upload Data</button>
+                <button id="closeUploadModal">Close</button></div>
+             <!-- Add close button -->
         </div>
         <script src="../scripts/upload-data.js" type="module"></script>
         </script>
