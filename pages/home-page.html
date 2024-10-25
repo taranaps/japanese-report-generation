@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="/japanese-report-generation/styles/home-page.css">
+    <link rel="stylesheet" href="/styles/home-page.css">
 </head>
 <body>
-
         <div class="container">
             <div class="header">
-                <a href="login-page.html"><img class="logout" src="/japanese-report-generation//assets/images/logout-icon.svg" alt="logout"></a>
+                <a href="/index.html"><img class="logout" src="/assets/images/logout-icon.svg" alt="logout"></a>
             </div>
             <div class="dashboard-container">
                 <div class="dashboard">
@@ -49,9 +48,20 @@
                 </div>
             </div>
         <div class="navbar">
-            <a href="home-page.html" class="nav-button">Home</a>
-            <a href="popup-page.html" class="nav-button">Upload</a>
-            <a href="report-page.html" class="nav-button">Reports</a>
+            <!-- <a href="home-page.html" class="nav-button">Home</a> -->
+            <button id="openUploadModal" class="nav-button">Upload</button>
+            <button class="nav-button">Reports</button>
+            <!-- <a href="upload-data.html" class="nav-button" id="openUploadModal">Upload</a>
+            <a href="report-page.html" class="nav-button">Reports</a> -->
         </div>
+        <div id="uploadModal">
+            <a href="template.xlsx" download>Download Excel Template</a>
+            <br><br>
+            <input type="file" id="excelFile" />
+            <button id="uploadButton">Upload Data</button>
+            <button id="closeUploadModal">Close</button> <!-- Add close button -->
+        </div>
+        <script src="../scripts/upload-data.js" type="module"></script>
+        </script>
 </body>
 </html>

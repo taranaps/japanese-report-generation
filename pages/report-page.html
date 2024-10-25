@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CKEditor 5 Sample</title>
+		<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/96x96.png" sizes="96x96">
+		<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/120x120.png" sizes="120x120">
+		<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/152x152.png" sizes="152x152">
+		<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/167x167.png" sizes="167x167">
+		<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/180x180.png" sizes="180x180">
+		<link rel="stylesheet" href="../styles/report-page.css">
+		<link rel="stylesheet" href="./ckeditor5/ckeditor5.css">
+		
+	</head>
+	<body>
+		<header>
+			<div class="header">
+			  <a href="home-page.html"><img src="../assets/images/home-icon.svg" alt="" /></a>
+			  <a href="../index.html"><img src="../assets/images/logout-icon.svg" alt="" /></a>
+	  
+			</div>
+		  </header>
+		  <main>
+			  <section class="contents">
+				  <div class="content">
+					  <div class="side-bar">
+						<div class="arrow" id="arrow-up">&#9650;</div>
+						<div class="image-container" id="image-scroll">
+							
+								<img src="../assets/images/template-one.png" alt="Template 1" data-template="template1">
+								<img src="../assets/images/template-two.png" alt="Template 2" data-template="template2">
+								<img src="../assets/images/template-three.png" alt="Template 3" data-template="template3">
+								<img src="../assets/images/template-four.png" alt="Template 4" data-template="template4">
+								<!-- <img src="../assets/images/template-one.png" alt="Template 1" data-template="template1">
+								<img src="../assets/images/template-two.png" alt="Template 2" data-template="template2"> -->
+			
+						</div>	
+						<div class="arrow" id="arrow-down">&#9660;</div>
+					  </div>
+						  <div class="workspace">
+							<div id="editor">Select a template to start editing!</div>
+							        
+						  </div>
+
+				  </div>
+				  
+	  
+			  </section>
+			  <section class="generate-btn">
+				<div class="button-container">
+					<button class="generate-report">Generate Report</button>
+				</div>
+			  </section>
+		  </main>
+
+		<script type="importmap">
+		{
+			"imports": {
+				"ckeditor5": "./ckeditor5/ckeditor5.js",
+				"ckeditor5/": "./ckeditor5/"
+			}
+		}
+		</script>
+		<script type="module" src="../scripts/report-page.js"></script>
+		
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+	</body>
+</html>
