@@ -140,7 +140,7 @@ canvas {
 /* Modal button alignment */
 #uploadModal a {
     text-decoration: none;
-    color: #DC143C;
+    color: #181717;
 }
 
 #uploadModal a:hover {
@@ -163,4 +163,32 @@ body::before {
 /* Show the modal background when the modal is active */
 .modal-active body::before {
     display: block;
+}
+
+#uploadModal{
+    width:500px;
+    height: 200px;
+}
+.download-template{
+    color: #DC143C;
+}
+#excelFile{
+    margin-top: 20px;
+}
+#uploadButton{
+    margin-top: 100px;
+    background: #DC143C;
+    border-radius: 8px;
+    border: solid 1px #DC143C;
+    height: 30px;
+    color: white;
+}
+#closeUploadModal{
+    margin-top: 50px;
+    margin-left: 30px;
+    background: #DC143C;
+    border-radius: 8px;
+    border: solid 1px #DC143C;
+    height: 30px;
+    color: white;
 }
