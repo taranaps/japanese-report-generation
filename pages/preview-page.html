@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/preview-page.css" />
+    <title>preview</title>
+  </head>
+  <body>
+    <div class="popup" id="popup1">
+      <div class="overlay"></div>
+      <div class="preview">
+        <div class="report" id="report">
+         
+        </div>
+        <canvas id="canvas" style="display: none"></canvas>
+        
+        <div class="sidebar">
+          <div class="right">
+            <p>File Type</p>
+            <div class="dropdown">
+              <div class="select">
+                <span class="selected">Select</span>
+                <div class="caret"></div>
+              </div>
+              <ul class="menu">
+                <li class="active">pdf</li>
+                <li>png</li>
+                <li>jpg</li>
+              </ul>
+            </div>
+
+            <div class="download">
+              <button onclick="download_report()">Download</button>
+              <button id="share" onclick="share_report();sharecancelpopup();">Share</button>
+            </div>
+          </div>
+          <div class="cancel">
+            <a href="/pages/report-page.html"><button id="cancel-button">Cancel</button></a>
+            <a href="/pages/home-page.html"><button id="ok-button">Ok</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="downloadpopup" id="downloadpopup">
+      <div class="download_overley"></div>
+      <div class="download_popup">
+        <p>Do yo want to Download?</p>
+        <button id="downloadbutton">Yes</button>
+        <button id="Nobutton">No</button>
+      </div>
+    </div>
+    <div class="sharepopup" id="sharepopup">
+        <div class="share_overley"></div>
+        <div class="share_popup" id="share_popup">
+          <label for="emailInput">Enter Recipient Email:</label><br><br>
+          <input type="text" id="emailInput" placeholder="example@example.com" required>
+          <br><br>
+      
+          <label for="subjectInput">Subject:</label><br><br>
+          <input type="text" id="subjectInput" placeholder="Subject" required>
+          <br><br>
+      
+          <label for="messageInput">Message:</label><br><br>
+          <textarea id="messageInput" placeholder="Write your message here..." rows="4" cols="50" required></textarea>
+          <br><br>
+      
+          <label for="fileInput">Select File to Attach:</label>
+          <input type="file" id="fileInput" required><br><br>
+          <br><br>
+      
+          <button id="send" onclick="sendEmail()">Send Email</button>
+          <button onclick="cancelpopup()">Cancel</button>
+         
+        </div>
+       
+      </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    
+
+    <script src="/scripts/preview-page.js"></script>
+  </body>
+</html>
