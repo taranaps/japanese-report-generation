@@ -1,130 +1,140 @@
-table, th, td {
-    border: 1px solid black;
-  }
-  .demo{
-    background-color: rgb(226, 240, 27);
-    width: 210mm;
-    height: 197mm;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-   
-    
-   
-  }
-  .scaled-content {
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.scaled-content {
     width: 100%;
     height: 100%;
     transform-origin: top left;
 }
 
 
-
-
-
-
-
-
-
-*{
-    font-family: Arial, Helvetica, sans-serif;
-}
-.popup .overlay{
+.preview-popup .popup-overlay {
     position: fixed;
     top: 0px;
     left: 0px;
     width: 100vw;
     height: 100vh;
-    background: rgb(0,0,0,0.7);
+    background: rgb(0, 0, 0, 0.7);
     z-index: 1;
     display: none;
 }
-.popup .preview{
-    position: absolute ;
+
+.preview-popup .preview {
+    position: absolute;
     top: 0%;
     left: 50%;
-    transform: translate(-50%,-50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
     background: #fff;
     width: 450px;
     height: 10px;
     z-index: 2;
 }
-.popup.active .overlay{
+
+.preview-popup.active .popup-overlay {
     display: block;
 }
-.popup.active .preview{
+
+.preview-popup.active .preview {
     transition: all 300ms ease-in-out;
-    transform: translate(-50%,-50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
+
 }
-.preview{
+
+.preview-top {
+    display: grid;
+    background-color: white;
+    grid-column: 1 / -1;
+
+
+}
+
+.preview-top h1 {
+    color: black;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+
+.preview {
     margin-top: 20px;
-    display:grid;
+    display: grid;
     grid-template-columns: auto auto;
     gap: 1px;
-   
-    grid-template-columns: 400px 200px;
-    grid-template-rows:560px;
+
+    grid-template-columns: 500px 400px;
+    grid-template-rows: 40px 500px;
+
     justify-content: center;
-      
+
 }
-.report{
-    background-color:white;
-    overflow-y:auto;
+
+.preview-report {
+    background-color: beige;
+    overflow-y: auto;
     overflow-x: auto;
-    
-    
-  
-    
+    grid-column: 1/2;
+    grid-row: 2/-1;
+    grid-template-rows: 560px;
+
+
+
+
 }
 
-.report img{
-    margin-left: 2%;
-    width: 100%;
-    object-fit: cover;
-}
 
-.sidebar{
+
+.sidebar {
     display: flex;
     flex-direction: column;
-    background-color:#dc143cdb;
+    background-color: #dc143cdb;
     padding: 15px;
-    color: white;   
+    color: white;
+    grid-column: 2/2;
+    grid-row: 2/2;
 }
 
- .dropdown{
+.dropdown {
     min-width: 10em;
     position: relative;
-   
- }
- .dropdown * {
-    box-sizing:border-box;
+    margin-top: 5px;
+
+}
+
+.dropdown * {
+    box-sizing: border-box;
     color: black;
-   
-    
- }
- .select{
-    background:white;
+
+
+}
+
+.select {
+    background: white;
     display: flex;
-    align-items: flex-start;
     border: 2px black solid;
     border-width: 1px;
     border-radius: 0.5em;
     padding: 0.5em;
     cursor: pointer;
-    transition:background 0.3s;
+    transition: background 0.3s;
+    height: 25px;
+    width: 250px;
 
 
 
- }
- .select-clicked{
+}
+
+.select-clicked {
     border: 2px black solid;
     box-shadow: 0 0 0.8em black;
- }
- .select:hover{
+}
+
+.select:hover {
     background: #f3eeee;
 
- }
- .caret{
+}
+
+.caret {
     width: 0;
     height: 0;
     border-left: 5px solid transparent;
@@ -132,17 +142,19 @@ table, th, td {
     border-top: 6px solid black;
     transition: 0.3s;
     align-self: center;
-    margin-left: 100px;
- }
- .caret-rotate{
+    margin-left: 200px;
+}
+
+.caret-rotate {
     transform: rotate(180deg);
- }
- .menu{
+}
+
+.menu {
     list-style: none;
-    padding:0.2em 0.5em;
+    padding: 0.2em 0.5em;
     background: white;
     border: 1px black solid;
-    box-shadow:2px 2px 5px black ;
+    box-shadow: 2px 2px 5px black;
     border-radius: 0.5em;
     position: absolute;
     top: 2em;
@@ -153,28 +165,34 @@ table, th, td {
     display: none;
     transition: 0.2s;
     z-index: 1;
- }
- .menu li{
+
+}
+
+.menu li {
     padding: 0.2em 0.5em;
     margin: 0.3em 0;
     border-radius: 0.5em;
     cursor: pointer;
- }
- .menu li:hover{
+}
+
+.menu li:hover {
     background: #dc143c;
- }
- .active{
+}
+
+.active {
     background: #dc143c;
- }
- .menu-open{
+}
+
+.menu-open {
     display: block;
     opacity: 1;
- }
+}
 
-.download{
+.download {
     margin-top: 50px;
 }
-.download button{
+
+.download button {
     border-radius: 10px;
     border-width: 1px;
     height: 25px;
@@ -182,156 +200,67 @@ table, th, td {
     background-color: white;
     cursor: pointer;
 }
-.cancel{
+
+.cancel {
     display: flex;
     justify-content: flex-end;
-    margin-right: 20px;
+    /* margin-right: 20px; */
 }
-.cancel button{
-    background-color:white;
+
+.cancel button {
+    background-color: white;
     cursor: pointer;
     border-width: 1px;
-   border-radius: 10px;
-   margin-top: 330px;
-  
-   height: 25px;
-   width: 100px;
-}
-
-
-.downloadpopup .download_overley{
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh;
-    background: rgb(0,0,0,0.7);
-    z-index: 1;
-    display: none;
-    
-}
-.downloadpopup .download_popup{
-    position: absolute ;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%) scale(0);
-    background:white;
-    width: 300px;
-    height: 120px;
-    z-index: 2;
-   padding: 20px;
-   border-radius: 20px;
-  
-   
-}
-.downloadpopup .download_popup button{
     border-radius: 10px;
-    border-width: 1px;
+    /* margin-top: 330px; */
+
     height: 25px;
-    width: 80px;
-    margin-left: 45px;
-    margin-top: 30px;
-    background-color: #DC143C;
-    color: white;
-    cursor: pointer;
-}
-.downloadpopup .download_popup p{
-    margin-left: 60px;
+    width: 100px;
 }
 
-
-.downloadpopup.active .download_overlay{
-    display: block;
-}
-.downloadpopup.active .download_popup{
-    transition: all 300ms ease-in-out;
-    transform: translate(-50%,-50%) scale(1);
-}
-
-
-
-#ok-button{
-    height: 25px;
-    width: 80px;
-    margin-left: 10px;
-    margin-right: -20px;
-
-
-}
-#cancel-button{
-    height: 25px;
-    width: 80px;
-    margin-left: 30px;
-
-}
-
-.sharepopup .share_overley{
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh;
-    background: rgb(0,0,0,0.7);
-    z-index: 1;
-    display: none;
-    
-}
-.sharepopup .share_popup{
-    position: absolute ;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%) scale(0);
-    background:white;
-    width: 390px;
-    /* height: 350px; */
-    height: max-content;
-    z-index: 2;
-   padding: 20px;
-   border-radius: 20px;
-   border: 1px solid crimson;
-   
-}
-.share_popup button{
-    background-color: #DC143C;
-    color: white;
-    border-radius: 10px;
-    border-width: 1px;
-    height: 25px;
-    width: auto;
-    cursor: pointer;
-    
-}
-
-
-.sharepopup.active .share_overlay{
-    display: block;
-}
-.sharepopup.active .share_popup{
-    transition: all 300ms ease-in-out;
-    transform: translate(-50%,-50%) scale(1);
-}
-
-.hiddencancelpopup {
-    display: none;
-}
-.share_popup input,textarea{
-    border-color: #dc143c;
-    border-width: 1px;
-    border-radius: 10px;
-
-}
-.share_popup input{
+.share-email input {
     width: 320px;
     height: 20px;
-}
-
-.fileInput{
-    border-radius: 0px;
 
 }
 
+#email-input,
+#subject-input,
+#message-input {
+
+    border-radius: 10px;
+}
+
+input,
+textarea {
+    padding-left: 10px;
+}
+
+textarea {
+    padding-top: 10px;
+}
 
 
+.preview-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
+}
 
+#cancel-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 18px;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    margin-right: 20px;
+    margin-top: 10px;
 
+}
+
+#cancel-button:hover {
+    color: #dc143c;
+}
