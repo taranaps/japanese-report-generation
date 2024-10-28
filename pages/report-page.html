@@ -1,70 +1,353 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>CKEditor 5 Sample</title>
-		<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/32x32.png" sizes="32x32">
-		<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/96x96.png" sizes="96x96">
-		<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/120x120.png" sizes="120x120">
-		<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/152x152.png" sizes="152x152">
-		<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/167x167.png" sizes="167x167">
-		<link rel="apple-touch-icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/180x180.png" sizes="180x180">
-		<link rel="stylesheet" href="../styles/report-page.css">
-		<link rel="stylesheet" href="./ckeditor5/ckeditor5.css">
-		
-	</head>
-	<body>
-		<header>
-			<div class="header">
-			  <a href="home-page.html"><img src="../assets/images/home-icon.svg" alt="" /></a>
-			  <a href="../index.html"><img src="../assets/images/logout-icon.svg" alt="" /></a>
-	  
-			</div>
-		  </header>
-		  <main>
-			  <section class="contents">
-				  <div class="content">
-					  <div class="side-bar">
-						<div class="arrow" id="arrow-up">&#9650;</div>
-						<div class="image-container" id="image-scroll">
-							
-								<img src="../assets/images/template-one.png" alt="Template 1" data-template="template1">
-								<img src="../assets/images/template-two.png" alt="Template 2" data-template="template2">
-								<img src="../assets/images/template-three.png" alt="Template 3" data-template="template3">
-								<img src="../assets/images/template-four.png" alt="Template 4" data-template="template4">
-			
-			
-						</div>	
-						<div class="arrow" id="arrow-down">&#9660;</div>
-					  </div>
-						  <div class="workspace">
-							<div id="editor">Select a template to start editing!</div>
-							        
-						  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report Generation</title>
+    <link rel="stylesheet" href="../styles/report-page.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <img src="../assets/images/home-icon-new.svg" alt="Home" />
+        <img src="../assets/images/sign-out.svg" alt="Logout" />
+      </div>
+    </header>
+    <main>
+      <section class="contents">
+        <div class="content">
+          <div class="side-bar">
+            <div class="arrow" id="arrow-up">&#9650;</div>
+            <div class="image-container" id="image-scroll">
+              <img
+                src="../assets/images/template-three.png"
+                alt="Template1"
+                data-template="template1"
+              />
+              <img
+                src="../assets/images/template-two.png"
+                alt="Template2"
+                data-template="template2"
+              />
+              <img
+                src="../assets/images/template-one.png"
+                alt="Template3"
+                data-template="template3"
+              />
+              <img
+                src="../assets/images/template-four.png"
+                alt="Template4"
+                data-template="template4"
+              />
+            </div>
+            <div class="arrow" id="arrow-down">&#9660;</div>
+          </div>
+          <div class="workspace">
+            <!-- <div id="editor"><h2>Select a template to start editing!</h2></div> -->
+            
+            <div class="template-one" id="template1" style="display: none">
+              <div class="container-template1">
+                <div class="header-template1"><h1>Japanese <br> Language <br> Training Report</h1></div>
+                <div class="main-container">
+                  <div class="left-template1">
+                    <h1><b>Batch </b></h1>
+                    <div class="learners-container-template1">
+                      <div class="learners-template1">
+                        <p>Number of Learners</p>
+                      </div>
+                      <div class="inner-learners-template1">
+                        <!-- Learners data will go here -->
+                      </div>
+                    </div>
+                    <div class="learners-container-template1">
+                      <div class="trainer-template1">
+                        <p>Trainer</p>
+                      </div>
+                      <div class="inner-trainer-template1">
+                        <!-- Trainers data will go here -->
+                      </div>
+                    </div>
+                    <div class="session-container-template1">
+                        <div class="session-template1">
+                      <p>Total Number Sessions Till Date</p></div>
+                      <div class="inner-session-template1"></div>
+                    </div>
+                    <div class="current-level-template1">
+                        <div class="level-heading">
+                      <p>Total Batch Duration</p></div>
+                      <div class="inner-level-template1">
 
-				  </div>
-				  
-	  
-			  </section>
-			  <section class="generate-btn">
-				<div class="button-container">
-					<button class="generate-report">Generate Report</button>
-				</div>
-			  </section>
-		  </main>
+                    
+                      </div>
+                    </div>
+                    <div class="batch-duration-template1">
+                        <div class="duration-heading-template1">
+                      <p>Current Level</p></div>
+                      <div class="duration-body-template1">
 
-		<script type="importmap">
-		{
-			"imports": {
-				"ckeditor5": "./ckeditor5/ckeditor5.js",
-				"ckeditor5/": "./ckeditor5/"
-			}
-		}
-		</script>
-		<script type="module" src="../scripts/report-page.js"></script>
-		
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="right-template1">
+                    <div class="duration-sessions-template1">
+                        <div class="duration-sessions-heading-template1">
+                      <p>Batch Duration</p></div>
+                      <div class="duration-sessions-body-template1">
 
-	</body>
+                      </div>
+
+                    </div>
+                    
+                    <div class="attendance-template1">
+                        <div class="attendance-heading-template1">
+                      <p>Average Attendance</p></div>
+                      <div class="attendance-body-template1">
+
+                      </div>
+
+                    </div>
+                    <div class="evaluation-template1">
+                        <div class="evaluation-heading-template1">
+                      <p>Trainee Details</p></div>
+                      <div class="evaluation-body-template1">
+
+                      </div>
+                    </div>
+                   
+                  </div>
+                  
+                </div>
+                <div class="batch-evaluation-template1">
+                    <div class="batch-evaluation-heading-template1">
+                  <p>Evaluation Details</p></div>
+                  <div class="batch-evaluation-body-template1">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+            <div class="template-two" id="template2" style="display: none">
+                
+                    <div class="container-template2">
+                        <div class="header-template2">
+                            <h1>Japanese Language Training Report</h1>
+                            <h2></h2>
+                        </div>
+                
+                        <div class="summary-template2">
+                            <div class="box-template2">
+                                <h3>Active Batches</h3>
+                                <p class="number"></p>
+                            </div>
+                            <div class="box-template2">
+                                <h3>Number of Learners</h3>
+                                <canvas id="learnersChart"></canvas>
+                            </div>
+                            <div class="box-template2">
+                                <h3>Total No. of Sessions Till Date</h3>
+                                <canvas id="sessionsChart"></canvas>
+                            </div>
+                            <div class="box-template2">
+                                <h3>Total Batch Duration</h3>
+                                <canvas id="batchDurationChart"></canvas>
+                            </div>
+                            <div class="box-template2">
+                                <h3>Current Level</h3>
+                                <canvas id="levelChart"></canvas>
+                            </div>
+                            <div class="box-template2">
+                                <h3>Trainer</h3>
+                                <p class="trainer"></p>
+                            </div>
+                        </div>
+                
+                        <div class="batch-info">
+                            <h2></h2>
+                            <p></p>
+                            <p></p>
+                        </div>
+                
+                        <div class="details-template2">
+                            <div class="trainee-list-template2">
+
+                            </div>
+                            <div class="details-right-template2">
+                                <div class="batch-duration-template2">
+                                    <h4></h4>
+                                    <canvas id="durationChart"></canvas>
+                                </div>
+                                <div class="attendance-template2">
+                                    <h4></h4>
+                                    <canvas id="attendanceChart"></canvas>
+                                </div>
+                            </div>
+                
+                            
+            
+                        </div>
+                    </div>
+                
+            </div>
+            <div class="template-three" id="template3" style="display: none">
+                <div class="report-container">
+                  <h1 class="title">Japanese Training Report</h1>
+                  <h2 class="subtitle">November 2024</h2>
+          
+                  <div class="batch-container">
+                    <div class="batch-card">
+                      <div class="card-title">No. of Batches</div>
+                      <p></p>
+                    </div>
+                    <div class="batch-card">
+                      <div class="card-title">Batches Moved to Japan</div>
+                      <table></table>
+                    </div>
+                    <div class="batch-card">
+                      <div class="card-title">Status Level</div>
+                      <div class="bar-chart">
+                        <div></div>
+                        <div></div>
+                      </div>
+                    </div>
+                  </div>
+          
+                  <h3 class="batch-title">Batch 1</h3>
+          
+                  <div class="batch-container">
+                    <div class="batch-card">
+                      <div class="card-title">NO. OF TRAINEES</div>
+                      <div class="card-content"></div>
+                    </div>
+          
+                    <div class="batch-card">
+                      <div class="card-title">NO. OF TRAINER</div>
+                      <div class="card-content"></div>
+                    </div>
+          
+                    <div class="batch-card">
+                      <div class="card-title">TOTAL SESSIONS/DURATION</div>
+                      <div class="card-content"></div>
+                    </div>
+                  </div>
+          
+                  <div class="batch-container">
+                    <div class="batch-card">
+                      <div class="card-title">Average Attendance</div>
+                      <div class="card-content"></div>
+                    </div>
+                    <div class="batch-card">
+                      <div class="card-title">Evaluation Score</div>
+                      <div class="card-content"></div>
+                    </div>
+                  </div>
+          
+                  <div class="table-title">TRAINEE DETAILS</div>
+                  <div class="table-section">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Emp ID</th>
+                          <th>Name</th>
+                          <th>Dept</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>EMP 001</td>
+                          <td>Trainee 1</td>
+                          <td>DU1</td>
+                        </tr>
+                        <tr>
+                          <td>EMP 002</td>
+                          <td>Trainee 2</td>
+                          <td>DU2</td>
+                        </tr>
+                        <tr>
+                          <td>EMP 003</td>
+                          <td>Trainee 3</td>
+                          <td>DU5</td>
+                        </tr>
+                        <tr>
+                          <td>EMP 004</td>
+                          <td>Trainee 4</td>
+                          <td>DU2</td>
+                        </tr>
+                        <tr>
+                          <td>EMP 005</td>
+                          <td>Trainee 5</td>
+                          <td>DU5</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            
+            <div class="template-four" id="template4" style="display: none;" >
+                <div class="t4top">
+                  <div class="t4month">
+                    <h1>Month</h1>
+                    <h2>year</h2>
+                  </div>
+                  <div class="t4heading">
+                    <h1>JAPANESE LANGUAGE</h1>
+                    <h1>TRAINING REPORT</h1>
+                  </div>
+                </div>
+  
+                <div class="t4body">
+                  <div class="t4leftbody">
+                   <div class="t4batch"><h2>Batch 1</h2></div>
+                   <div class="t4trainee">
+                    <div class="traineedetails"></div>
+                    <div class="traineedetails"></div>
+                    <div class="traineedetails"></div>
+                    <div class="traineedetails"></div>
+                    <div class="traineedetails"></div>
+                    <div class="traineedetails"></div>
+                   </div>
+                  </div>
+                  <div class="t4rightbody">
+                    <div class="graph"></div>
+                  </div>
+                </div>
+  
+                <div class="t4tablediv">
+                  <div class="t4tableleftdiv"> 
+                    <!-- add table details here -->
+                     <p><h3>Grade Explanation </h3></p>
+                    <div class="grade">
+                      .
+                     <div class="gradeexp"><h2>A(90-100)</h2></div>
+                     <div class="gradeexp"><h2>B(80-89)</h2></div>
+                     <div class="gradeexp"><h2>C(70-79)</h2></div>
+                     <div class="gradeexp"><h2>D(60-69)</h2></div>
+                     <div class="gradeexp"><h2>E(< 59-Failed)</h2></div>
+                    </div>
+  
+  
+                  </div>
+                  <div class="t4tablerightdiv">
+                    <div class="t4table">
+  <!-- draw table here -->
+                    </div>
+                  </div>
+  
+                </div>
+    
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section class="generate-btn">
+        <div class="button-container">
+          <button id="generate-report">Generate Report</button>
+        </div>
+      </section>
+    </main>
+    <script src="../scripts/report-page.js"></script>
+    <script src="assets/JavaScript/scrollTemplates.js"></script>
+  </body>
 </html>
