@@ -110,16 +110,13 @@ body {
 .content {
   display: flex;
   justify-content: space-around;
-  /* flex-wrap: wrap; */
   margin-top: 20px;
 }
 .side-bar {
-  /* width: auto; */
   display: flex;
   gap: 20px;
   flex-direction: column;
   border: 2px solid #dc143c;
-  /* flex-wrap: wrap; */
   align-items: center;
   justify-content: space-between;
   padding: 10px;

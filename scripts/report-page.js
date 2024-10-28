@@ -69,8 +69,7 @@ function loadTemplate(templateContent) {
     // Destroy any existing CKEditor instance
     if (editorInstance) {
       editorInstance.destroy();
-    }
-// editorElement.innerHTML = templateContent;  
+    } 
 ClassicEditor.create(editorElement, {
     toolbar: {
         items: [
