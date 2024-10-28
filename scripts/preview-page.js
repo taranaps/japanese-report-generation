@@ -1,21 +1,12 @@
 function his_togglepopup(){
-    document.getElementById("popup1").classList.toggle("active");
+    document.getElementById("preview-popup").classList.toggle("active");
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-    his_togglepopup(); // Automatically call the function on page load
-  });
-
-
-
-
-
 
 
 
 function copyHtml() {
-    var sourceDiv = document.getElementById("#editor");
-    var wrapperDiv = document.querySelector(".report");
+    var sourceDiv = document.getElementById("editor");
+    var wrapperDiv = document.querySelector(".preview-report");
 
     // Clone the source div including its content
     var clonedContent = sourceDiv.cloneNode(true);
@@ -55,36 +46,6 @@ function copyHtml() {
     wrapperDiv.scrollTop = (wrapperDiv.scrollHeight - wrapperDiv.clientHeight) / 2;
 }
 
-
-
-
-function download_report(){
-   var popup= document.getElementById("downloadpopup");
-   document.getElementById("downloadpopup").classList.toggle("active");
-   document.getElementById("downloadbutton").addEventListener("click", closePopup);
-   document.getElementById("Nobutton").addEventListener("click", closePopup); 
-}
-function share_report(){
-    var popup= document.getElementById("share");
-    document.getElementById("sharepopup").classList.toggle("active");
-    // document.getElementById("send").addEventListener("click", closePopupshare);
-    var popup = document.getElementById("downloadpopup");
-    popup.classList.remove("active");
- }
-    
- 
-//  function closePopupshare() {
-//     var popup = document.getElementById("sharepopup");
-//     popup.classList.remove("active");
-//  }
-
-
-
-function closePopup() {
-    var popup = document.getElementById("downloadpopup");
-    popup.classList.remove("active");
- }
-
  const dropdown = document.querySelectorAll('.dropdown');
 
 dropdown.forEach(dropdown => {
@@ -106,7 +67,7 @@ dropdown.forEach(dropdown => {
     function clearDownloadButtonListeners() {
         let newButton = downloadButton.cloneNode(true); 
         downloadButton.replaceWith(newButton); 
-        downloadButton = document.getElementById('downloadbutton'); 
+        downloadButton = document.getElementById('download-button'); 
     }
 
     options.forEach(option => {
@@ -147,7 +108,7 @@ dropdown.forEach(dropdown => {
         const { jsPDF } = window.jspdf; // Import jsPDF
     
         // Capture the div with html2canvas
-        html2canvas(document.querySelector("#report")).then(canvas => {
+        html2canvas(document.querySelector("#preview-report")).then(canvas => {
             var imgData = canvas.toDataURL('image/jpeg', 1.0); // Convert canvas to image with full quality
     
             // Create jsPDF instance (Portrait, A4 page size)
@@ -180,7 +141,7 @@ dropdown.forEach(dropdown => {
     
 
     function downloadJPG() {
-        const element = document.getElementById("report");
+        const element = document.getElementById("preview-report");
 
             // Use html2canvas to capture the div
             html2canvas(element).then((canvas) => {
@@ -198,7 +159,7 @@ dropdown.forEach(dropdown => {
 
     
     function downloadPNG() {
-        const element = document.getElementById("report");
+        const element = document.getElementById("preview-report");
 
             // Use html2canvas to capture the div
             html2canvas(element).then((canvas) => {
@@ -211,35 +172,42 @@ dropdown.forEach(dropdown => {
     }
 });
 
+function sendEmail(){
 
+    // document.getElementById("share-email").addEventListener("send-email", function(event) {
+    //     event.preventDefault();
 
+        const recipients = document.getElementById("email-input").value.split(','); // Split for multiple recipients
+        const subject = document.getElementById("subject-input").value;
+        const message = document.getElementById("message-input").value;
+        const fileInput = document.getElementById("file-input");
+        const attachment = fileInput.files[0] ? fileInput.files[0].name : null; // Get file name if a file is selected
 
-
-
-
-function cancelpopup(){
-    var popup = document.getElementById("share_popup");
-    popup.classList.add("hiddencancelpopup");
+        // Sending Email
+        Email.send({
+            Host: "smtp.gmail.com", // Gmail's SMTP server
+            Username: "hishampallickalll@gmail.com", // Your Gmail address
+            Password: "hishamzzzz", // Your Gmail password or App Password
+            To: recipients.join(','), // Join the recipients into a single string
+            From: "hishampallickalll@gmail.com", // Your email address
+            Subject: subject,
+            Body: message,
+            Attachments: [
+                {
+                    name: attachment, // The file name
+                    data: fileInput.files[0] ? fileInput.files[0] : null // The file data
+                }
+            ]
+        })
+        .then(function (message) {
+            alert("Email sent successfully!");
+            console.log("send successfull");
+            
+        })
+        .catch(function (error) {
+            alert("Failed to send email: " + error);
+            console.log("cant send");
+            
+        });
+    // });
 }
-function sharecancelpopup(){
-    var popup = document.getElementById("share_popup");
-        popup.classList.remove("hiddencancelpopup");
-}
-
-
-
-
-
-
-
-
-
-fetch('report-page.html')  // Replace 'pageA.html' with the path to Page A
-            .then(response => response.text())
-            .then(data => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(data, 'text/html');
-                const divToInsert = doc.querySelector('#editor').innerHTML;
-                document.getElementById('report').innerHTML = divToInsert;
-            })
-            .catch(error => console.error('Error:', error));
