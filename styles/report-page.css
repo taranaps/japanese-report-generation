@@ -173,7 +173,7 @@ body {
 .container-template1 {
   height: auto;
   background: #fcfcfd;
-  width: 800px;
+  width: 850px;
   border-radius: 8px;
   z-index: 10;
   position: absolute;
@@ -532,7 +532,7 @@ margin-top: 30px;
 
 
 .template-four{
-  width : 800px;
+  width : 850px;
   border: 1px solid brown;
   padding: 10px;
   border-radius: 8px;
@@ -652,7 +652,7 @@ margin-top: 30px;
 
 
 .container-template2 {
-  width: 800px;
+  width: 850px;
   padding: 20px;
   background-color: #c1f0c0;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -791,7 +791,7 @@ canvas {
   
 
 .template-three{
-  width : 800px;
+  width : 850px;
   border: 2px solid rgb(247, 205, 205);
   height: auto;
   /* padding: 10px; */
