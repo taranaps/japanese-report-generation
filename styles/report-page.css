@@ -804,6 +804,19 @@ canvas {
   
   
 
+<<<<<<< HEAD
+.template-three{
+  width : 850px;
+  border: 2px solid rgb(247, 205, 205);
+  height: auto;
+  /* padding: 10px; */
+  margin: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: #000000; */
+}
+.report-container {
+=======
   .template-three{
     width : 850px;
     border: 2px solid rgb(247, 205, 205);
@@ -822,6 +835,7 @@ canvas {
     background-color: #fff8e6;
     border-radius: 8px;
   }
+>>>>>>> 4f3a24bd1112110e7bdf745104278e5b727f5007
   
   .title {
     text-align: center;
