@@ -139,12 +139,17 @@ body {
   margin-top: 40px;
   margin-left: 200px;
   box-sizing: border-box;
+  /* position: relative; */
   /* border: solid 1px #555; */
   background: rgb(248, 245, 245);
   
   /* box-sizing: border-box; */
 }
-
+.template-one{
+  width: 70%;
+  background: rgb(248, 245, 245);
+  height: 1500px;
+}
 
 .button-container {
   position: fixed;
@@ -173,7 +178,7 @@ body {
 .container-template1 {
   height: auto;
   background: #fcfcfd;
-  width: 800px;
+  width: 850px;
   border-radius: 8px;
   z-index: 10;
   position: absolute;
@@ -532,7 +537,7 @@ margin-top: 30px;
 
 
 .template-four{
-  width : 800px;
+  width : 850px;
   border: 1px solid brown;
   padding: 10px;
   border-radius: 8px;
@@ -652,9 +657,9 @@ margin-top: 30px;
 
 
 .container-template2 {
-  width: 800px;
+  width: 850px;
   padding: 20px;
-  background-color: #c1f0c0;
+  background-color: #C3FFC0;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
   border: solid 1px #c1f0c0 ;
@@ -677,12 +682,12 @@ margin-top: 30px;
 .header-template2 h1 {
   margin: 0;
   font-size: 3em;
-  color: #0b2b69;
+  color: #333;
 }
 
 .header-template2 h2 {
   margin: 0;
-  color: #0b2b69;
+  color: #333;
 }
 
 .summary-template2 {
@@ -775,6 +780,15 @@ font-size: 20px;
   border-radius: 10px;
   background-color: #ffffff
 }
+.trainee-evelution-template2{
+  border: solid 1px rgb(8, 241, 144);
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  height: 250px;
+  margin-top: 20px;
+}
 
 h4 {
   margin-top: 0;
@@ -791,7 +805,7 @@ canvas {
   
 
   .template-three{
-    width : 800px;
+    width : 850px;
     border: 2px solid rgb(247, 205, 205);
     height: auto;
     /* padding: 10px; */
