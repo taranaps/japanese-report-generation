@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Report Generation</title>
     <link rel="stylesheet" href="../styles/report-page.css" />
+    <link rel="stylesheet" href="../styles/preview-page.css">
   </head>
   <body>
     <header>
@@ -47,7 +48,9 @@
             
             <div class="template-one" id="template1" style="display: none">
               <div class="container-template1">
-                <div class="header-template1"><h1>Japanese <br> Language <br> Training Report</h1></div>
+                <div class="header-template1">
+                  <h1>Japanese <br> Language <br> Training Report</h1>
+                </div>
                 <div class="main-container">
                   <div class="left-template1">
                     <h1><b>Batch </b></h1>
@@ -350,11 +353,128 @@
       </section>
       <section class="generate-btn">
         <div class="button-container">
-          <button id="generate-report">Generate Report</button>
+          <button id="generate-report"  onclick=" preview_togglepopup();copyHtml();">Generate Report</button>
         </div>
       </section>
-    </main>
+
+
+      <div class="preview-popup" id="preview-popup">
+				<div class="popup-overlay"></div>
+				<div class="preview">
+					<div class="preview-top">
+						<div>
+							<h1>Create Document</h1>
+	
+						</div>
+						
+						<div>
+							<a href="../pages/report-page.html"><button id="cancel-button">✕</button></a>
+	
+						</div>
+						
+					</div>	 
+					
+				  <div class="preview-report" id="preview-report">
+				   
+				  </div>
+				  <canvas id="canvas" style="display: none"></canvas>
+				  
+				  <div class="sidebar">
+					<div class="sidebar-container">
+					  <p>File Type</p>
+					  <div class="dropdown">
+						<div class="select">
+						  <span class="selected">Select</span>
+						  <div class="caret"></div>
+						</div>
+						<ul class="menu">
+						  <li class="active">pdf</li>
+						  <li>png</li>
+						  <li>jpg</li>
+						</ul>
+					  </div>
+		  
+					  <div class="download">
+						<button  id="download-button">Download</button>
+						<button  id="share-button" onclick="share_togglepopup()">Share</button>
+						
+						<div class="share-popup" id="share-popup">
+							<div class="share-overley"></div>
+							<div class="share-email" id="share-email">
+								<form id="my-form" onsubmit="formSubmit()"> 
+                  <label for="email-input">Recipient</label><br><br>
+							<input type="text" id="email-input" placeholder="email" required>
+							<br><br>
+						
+							<label for="subject-input">Subject:</label><br><br>
+							<input type="text" id="subject-input" placeholder="Subject" required>
+							<br><br>
+						
+							<label for="message-input">Message:</label><br><br>
+							<textarea id="message-input" placeholder="Write your message here..." rows="4" cols="50" required></textarea>
+							<br><br>
+				
+							<label for="file-input">Select File to Attach:</label>
+							<input type="file" id="file-input" name="attachment" required><br><br>
+							<br><br>
+						
+							<button id="send-email" onclick="sendEmailWithAttachment()">Send Email</button>
+							<button id="cancel-email" >Cancel</button>
+
+							
+
+								</form>
+							
+
+						</div>
+						
+						</div>
+						
+					  </div>
+					</div>
+					
+				  </div>
+				</div>
+			  </div>
+	
+			</main>
+			  
+
+
+   
     <script src="../scripts/report-page.js"></script>
     <script src="assets/JavaScript/scrollTemplates.js"></script>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		  
+			  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+			  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+			  
+			  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+			
+	
+			  <script type="text/javascript"
+			  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+	  </script>
+	  <script type="text/javascript">
+		(function(){
+		   emailjs.init({
+			 publicKey: "IiyHXBGpNDLtLx1h7",
+		   });
+		})();
+	 </script>
+			  
+			  
+		  
+
+
+
+
+
+
   </body>
 </html>
