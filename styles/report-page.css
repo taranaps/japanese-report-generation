@@ -42,24 +42,24 @@ body {
   z-index: 50;
 
 }
+
 .side-bar {
   /* width: auto; */
   display: flex;
   gap: 20px;
   flex-direction: column;
   border: 2px solid #dc143c;
-  margin-top: 70px;
-  margin-left: 50px;
+  /* flex-wrap: wrap; */
   align-items: center;
   justify-content: space-between;
   padding: 10px;
   border-radius: 8px;
   background: #f8edef;
   position: fixed;
-  top: 20px;
+  top: 120px;
   left: 20px;
-  width: 200px;
-  height: calc(100vh - 100px);
+  width: 160px;
+  height: calc(100vh - 150px);
   overflow-y: auto;
   scroll-behavior: smooth;
 }
@@ -68,6 +68,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 30px;
   overflow: hidden; /* Hide content outside container */
 }
 
@@ -77,7 +78,7 @@ body {
   max-height: 100%; /* Ensure the container doesn't exceed the sidebar height */
   overflow-y: auto; /* Enable vertical scrolling */
   transition: transform 0.5s ease; /* Smooth scrolling */
-  padding-top: 500px;
+
   /* Hide scrollbar */
   scrollbar-width: none; /* For Firefox */
   -ms-overflow-style: none; /* For Internet Explorer and Edge */
@@ -109,24 +110,17 @@ body {
   margin-bottom: 10px;
   border: 2px solid #dc143c;
   border-radius: 8px;
-  cursor: pointer;
   transition: background 0.5s, transform 0.5s, box-shadow 0.3s;
+
 }
 .side-bar img:hover {
   transform: scale(1.05);
   transition: transform 0.3s ease-in-out;
   border-color: #ff4757;
+  cursor: pointer;
 }
 .arrow {
   cursor: pointer;
-}
-#editor {
-  flex: 1;
-  margin-left: 180px;
-  min-height: 300px;
-  border: 1px solid #ccc;
-  padding: 20px;
-  background-color: #fff;
 }
 
 .workspace {
@@ -141,15 +135,11 @@ body {
   box-sizing: border-box;
   /* position: relative; */
   /* border: solid 1px #555; */
-  background: rgb(248, 245, 245);
+  /* background: rgb(248, 245, 245); */
   
   /* box-sizing: border-box; */
 }
-.template-one{
-  width: 70%;
-  background: rgb(248, 245, 245);
-  height: 1500px;
-}
+
 
 .button-container {
   position: fixed;
@@ -174,13 +164,21 @@ body {
 }
 
 /* template1   */
+.template-one{
+  width: 70%;
+  padding: 20px;
+  margin-top: 40px;
+  margin-left: 200px;
+  height: 1500px;
+  box-sizing: border-box;
+  /* background: rgb(248, 245, 245); */
+}
 
 .container-template1 {
   height: auto;
   background: #fcfcfd;
-  width: 850px;
+  width: 800px;
   border-radius: 8px;
-  z-index: 0;
   position: absolute;
   top: 140px;
   left: 60px;
@@ -197,7 +195,6 @@ body {
 .header-template1 {
   background: #8061c3;
   height: 20vw;
-  z-index: 1;
   position: relative;
   border-radius: 8px 8px 0 0;
   display: flex;
@@ -206,7 +203,7 @@ body {
 }
 .header-template1 h1 {
   color: black;
-  padding-right: 35px;
+  padding-right: 50px;
   padding-top: 30px;
 }
 .left-template1 {
@@ -214,7 +211,6 @@ body {
   background: #bda7ec;
   width: 45vh;
   border-radius: 8px;
-  z-index: 1;
   position: absolute;
   top: 40px;
   left: 40px;
@@ -231,6 +227,10 @@ body {
   text-align: center;
   font-size: xx-large;
 }
+.learners-container-template1{
+  position: relative;
+
+}
 
 .learners-template1 {
   border-radius: 10px;
@@ -239,8 +239,8 @@ body {
   padding: auto;
   background: #8061c3;
   color: white;
-  position: absolute;
-  z-index: 2;
+  position: absolute; 
+  z-index: 1;
   margin-left: 35px;
 }
 
@@ -259,6 +259,7 @@ body {
   margin: auto;
   position: relative;
   top: 10px;
+  
 }
 
 .trainer-template1 {
@@ -269,7 +270,7 @@ body {
   background: #8061c3;
   color: white;
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   margin-left: 35px;
 }
 
@@ -298,7 +299,7 @@ body {
   background: #8061c3;
   color: white;
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   margin-left: 35px;
 }
 
@@ -327,7 +328,7 @@ body {
   background: #8061c3;
   color: white;
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   margin-left: 35px;
 }
 
@@ -371,7 +372,7 @@ margin-top: 30px;
   background: #8061c3;
   color: white;
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   margin-left: 70px;
 
 }
@@ -394,10 +395,7 @@ margin-top: 30px;
 
 .evaluation-template1{
   width: 100%;
-  margin-top: 35px;
-
-
-  
+  margin-top: 35px;  
 }
 .evaluation-heading-template1{
   border-radius: 10px;
@@ -407,7 +405,7 @@ margin-top: 30px;
   background: #8061c3;
   color: white;
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   margin-left: 70px;
 }
 .evaluation-heading-template1 p {
@@ -430,9 +428,6 @@ margin-top: 30px;
 .batch-evaluation-template1{
   width: 100%-35px;
   margin: 10px 35px;
-  
-
-  
 }
 .batch-evaluation-heading-template1{
   border-radius: 10px;
@@ -442,7 +437,7 @@ margin-top: 30px;
   background: #8061c3;
   color: white;
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   margin-left: 240px;
   
 }
@@ -466,7 +461,6 @@ margin-top: 30px;
 
 .duration-sessions-template1{
   width: 100%;
-  margin-top: 10px;
 
   
 }
@@ -478,7 +472,7 @@ margin-top: 30px;
   background: #8061c3;
   color: white;
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   margin-left: 70px;
 }
 .duration-sessions-heading-template1 p {
@@ -491,7 +485,7 @@ margin-top: 30px;
   border: solid black 1px;
   border-radius: 10px;
   background: white;
-  height: 150px;
+  height: 100px;
   width: 100%;
   margin: auto;
   position: relative;
@@ -512,7 +506,7 @@ margin-top: 30px;
   background: #8061c3;
   color: white;
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   margin-left:23px;
 }
 .duration-heading-template1 p {
@@ -802,23 +796,20 @@ canvas {
 }
   /* template 3 */
   
-  
 
-<<<<<<< HEAD
-.template-three{
+/* .template-three{
   width : 850px;
   border: 2px solid rgb(247, 205, 205);
   height: auto;
   /* padding: 10px; */
-  margin: 30px;
+  /* margin: 30px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
   /* box-shadow: #000000; */
-}
-.report-container {
-=======
+/* }  */
+
   .template-three{
-    width : 850px;
+    width : 800px;
     border: 2px solid rgb(247, 205, 205);
     height: auto;
     /* padding: 10px; */
@@ -835,7 +826,6 @@ canvas {
     background-color: #fff8e6;
     border-radius: 8px;
   }
->>>>>>> 4f3a24bd1112110e7bdf745104278e5b727f5007
   
   .title {
     text-align: center;
