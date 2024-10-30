@@ -65,7 +65,9 @@ function hideAllTemplates() {
         template.style.display = 'none';
     });
 }
-
+// function month(){
+//   const currentMonth = 
+// }
 images.forEach(image => {
     image.addEventListener('click', function() {
         hideAllTemplates()
