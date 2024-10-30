@@ -65,18 +65,62 @@ function hideAllTemplates() {
         template.style.display = 'none';
     });
 }
-
+// function month(){
+//   const currentMonth = 
+// }
 images.forEach(image => {
     image.addEventListener('click', function() {
         hideAllTemplates()
         const templateKey = this.getAttribute('data-template');
-        selectTemplate = this.getAttribute('data-template');
-        console.log(templateKey);
+        // selectTemplate = this.getAttribute('data-template');
+        // console.log(templateKey);
         selectTemplate=templateKey
 
         const selectedTemplate = document.getElementById(templateKey);
         if (selectedTemplate) {
-            selectedTemplate.style.display = 'block';
+
+          if(templateKey==="template1"){
+            fetch("../data.json")
+              .then(response => response.json())
+              .then(content => {
+                let templatHeaderh3 = document.getElementById("header-template1-h3");
+                templatHeaderh3.textContent = content[0].month
+
+              })
+              .catch(error => console.error('Error fetching films:', error));
+          }
+          if(templateKey==="template2"){
+            fetch("../data.json")
+            .then(response => response.json())
+            .then(content =>{
+              let templatHeaderh3 = document.getElementById("template2-month");
+              templatHeaderh3.textContent = content[0].month
+
+            })
+            .catch(error => console.error('Error fetching films:', error));
+          }
+          if(templateKey==="template3"){
+            fetch("../data.json")
+            .then(response => response.json())
+            .then(content =>{
+              let templatHeaderh3 = document.getElementById("subtitle");
+              templatHeaderh3.textContent = content[0].month
+
+            })
+            .catch(error => console.error('Error fetching films:', error));
+          }
+          if(templateKey==="template4"){
+            fetch("../data.json")
+            .then(response => response.json())
+            .then(content =>{
+              let templatHeaderh3 = document.getElementById("t4date");
+              templatHeaderh3.textContent = content[0].month
+
+            })
+            .catch(error => console.error('Error fetching films:', error));
+          }
+
+          selectedTemplate.style.display = 'block';
         }
         copyHtml(selectTemplate)
     });
