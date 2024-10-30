@@ -6,6 +6,7 @@
     <title>Report Generation</title>
     <link rel="stylesheet" href="../styles/report-page.css" />
     <link rel="stylesheet" href="../styles/preview-page.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
   </head>
   <body>
     <header>
@@ -116,6 +117,7 @@
                         <div class="attendance-heading-template1">
                       <p>Average Attendance</p></div>
                       <div class="attendance-body-template1">
+						<canvas id="attendance-body-template1"></canvas>
 
                       </div>
 
@@ -300,7 +302,7 @@
 
                   <div class="graph-title">Trainee Attendance</div>
                   <div class="t3graph">
-
+						<canvas id="t3graph"></canvas>
                     </div></div>
                 </div>
 
@@ -330,7 +332,9 @@
                    </div>
                   </div>
                   <div class="t4rightbody">
-                    <div class="graph"></div>
+                    <div class="graph">
+						<canvas id="graph"></canvas>
+					</div>
                   </div>
                 </div>
   
@@ -453,6 +457,9 @@
 
 
    
-    <script src="../scripts/report-page.js"></script>
+    <script type="module" src="../scripts/report-page.mjs"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </body>
 </html>

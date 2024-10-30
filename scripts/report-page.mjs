@@ -65,15 +65,56 @@ function hideAllTemplates() {
         template.style.display = 'none';
     });
 }
-// function month(){
-//   const currentMonth = 
-// }
+
+function generateChart(data, id) {
+    const canvas = document.getElementById(id);
+    if (!canvas) {
+        console.error(`Canvas with id "${id}" not found`);
+        return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    const chartData = {
+        labels: data.map(item => item.traineeName),
+        datasets: [{
+            label: 'Avg. Attendance',
+            data: data.map(item => item.avgAttendance),
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function getAttendanceData(id) {
+    fetch("../data.json")
+        .then(response => {
+            if (!response.ok) throw new Error("Network response was not ok");
+            return response.json();
+        })
+        .then(data => {
+            generateChart(data, id); // Call generateChart without setting innerHTML
+        })
+        .catch(error => console.error("Error fetching data:", error));
+}
+
 images.forEach(image => {
     image.addEventListener('click', function() {
         hideAllTemplates()
         const templateKey = this.getAttribute('data-template');
-        // selectTemplate = this.getAttribute('data-template');
-        // console.log(templateKey);
         selectTemplate=templateKey
 
         const selectedTemplate = document.getElementById(templateKey);
@@ -85,9 +126,10 @@ images.forEach(image => {
               .then(content => {
                 let templatHeaderh3 = document.getElementById("header-template1-h3");
                 templatHeaderh3.textContent = content[0].month
-
+                
               })
               .catch(error => console.error('Error fetching films:', error));
+              getAttendanceData("attendance-body-template1")
           }
           if(templateKey==="template2"){
             fetch("../data.json")
@@ -95,6 +137,7 @@ images.forEach(image => {
             .then(content =>{
               let templatHeaderh3 = document.getElementById("template2-month");
               templatHeaderh3.textContent = content[0].month
+              getAttendanceData("attendanceChart")
 
             })
             .catch(error => console.error('Error fetching films:', error));
@@ -105,7 +148,7 @@ images.forEach(image => {
             .then(content =>{
               let templatHeaderh3 = document.getElementById("subtitle");
               templatHeaderh3.textContent = content[0].month
-
+              getAttendanceData("t3graph")
             })
             .catch(error => console.error('Error fetching films:', error));
           }
@@ -115,7 +158,7 @@ images.forEach(image => {
             .then(content =>{
               let templatHeaderh3 = document.getElementById("t4date");
               templatHeaderh3.textContent = content[0].month
-
+              getAttendanceData("graph")
             })
             .catch(error => console.error('Error fetching films:', error));
           }
