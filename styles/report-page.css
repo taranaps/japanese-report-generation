@@ -27,7 +27,8 @@ body {
   justify-content: space-between;
   gap: 20px;
   z-index: 100;
-  background:rgba(220, 20, 60, 0.8);
+    background:#dc143c;
+  opacity: 70%;
 }
 .header img {
   width: 30px;
@@ -58,7 +59,7 @@ body {
   position: fixed;
   top: 120px;
   left: 20px;
-  width: 160px;
+  width: 200px;
   height: calc(100vh - 150px);
   overflow-y: auto;
   scroll-behavior: smooth;
@@ -68,7 +69,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 30px;
+  padding-top: 90px;
   overflow: hidden; /* Hide content outside container */
 }
 
@@ -188,7 +189,7 @@ body {
   flex-direction: column;
   gap: 30px;
   margin-left: 300px;
-  font-family: verdana;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   border: solid 1px #4d4d4d;
 }
 
@@ -198,13 +199,20 @@ body {
   position: relative;
   border-radius: 8px 8px 0 0;
   display: flex;
-  justify-content: end;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   font-size: 30px;
+  padding-left: 230px;
 }
 .header-template1 h1 {
   color: black;
-  padding-right: 50px;
-  padding-top: 30px;
+  /* padding-right: 70px;
+  padding-top: 30px; */
+}
+.header-template1 h3{
+  color: white;
+  padding-right: 120px;
 }
 .left-template1 {
   height: auto;
@@ -765,6 +773,13 @@ font-size: 20px;
   background-color: #ffffff;
   margin-bottom: 20px;
 }
+#template2-month{
+  text-align: center;
+  font-size: 18px;
+  padding-top: 5px;
+  margin-bottom: 20px;
+  color: #333;
+}
 
 .attendance-template2 {
   border: solid 1px rgb(8, 241, 144);
@@ -797,16 +812,7 @@ canvas {
   /* template 3 */
   
 
-/* .template-three{
-  width : 850px;
-  border: 2px solid rgb(247, 205, 205);
-  height: auto;
-  /* padding: 10px; */
-  /* margin: 30px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-  /* box-shadow: #000000; */
-/* }  */
+
 
   .template-three{
     width : 800px;
@@ -879,10 +885,10 @@ canvas {
   
   }
   
-  .subtitle {
+  #subtitle {
     text-align: center;
     font-size: 18px;
-    color: #000000;
+    /* color: black; */
     margin-bottom: 20px;
   }
   
