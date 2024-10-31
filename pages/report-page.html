@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Report Generation</title>
     <link rel="stylesheet" href="../styles/report-page.css" />
+    <link rel="stylesheet" href="../styles/preview-page.css">
   </head>
   <body>
     <header>
@@ -19,7 +20,17 @@
           <div class="side-bar">
             <div class="arrow" id="arrow-up">&#9650;</div>
             <div class="image-container" id="image-scroll">
+				<img
+                src="../assets/images/template-three.png"
+                alt="Template1"
+                data-template="template1"
+              />
               <img
+                src="../assets/images/template-three.png"
+                alt="Template1"
+                data-template="template1"
+              />
+			  <img
                 src="../assets/images/template-three.png"
                 alt="Template1"
                 data-template="template1"
@@ -47,7 +58,10 @@
             
             <div class="template-one" id="template1" style="display: none">
               <div class="container-template1">
-                <div class="header-template1"><h1>Japanese <br> Language <br> Training Report</h1></div>
+                <div class="header-template1">
+                  <h1>Japanese <br> Language <br> Training Report</h1>
+				  <h3 id="header-template1-h3">month</h3>
+                </div>
                 <div class="main-container">
                   <div class="left-template1">
                     <h1><b>Batch </b></h1>
@@ -59,7 +73,7 @@
                         <!-- Learners data will go here -->
                       </div>
                     </div>
-                    <div class="learners-container-template1">
+                    <div class="trainer-container-template1">
                       <div class="trainer-template1">
                         <p>Trainer</p>
                       </div>
@@ -69,7 +83,7 @@
                     </div>
                     <div class="session-container-template1">
                         <div class="session-template1">
-                      <p>Total Number Sessions Till Date</p></div>
+                      <p>Total Sessions Till Date</p></div>
                       <div class="inner-session-template1"></div>
                     </div>
                     <div class="current-level-template1">
@@ -132,7 +146,7 @@
                     <div class="container-template2">
                         <div class="header-template2">
                             <h1>Japanese Language Training Report</h1>
-                            <h2></h2>
+                            <h3 id="template2-month"></h3>
                         </div>
                 
                         <div class="summary-template2">
@@ -199,7 +213,7 @@
             <div class="template-three" id="template3" style="display: none" >
                 <div class="report-container">
                   <h1 class="title">Japanese Training Report</h1>
-                  <h2 class="subtitle">November 2024</h2>
+                  <h3 id="subtitle"></h3>
           
                   <div class="batch-container">
                     <div class="batch-card">
@@ -262,8 +276,8 @@
             <div class="template-four" id="template4" style="display: none;" >
                 <div class="t4top">
                   <div class="t4month">
-                    <h1>Month</h1>
-                    <h2>year</h2>
+                    
+                    <h3 id="t4date"></h3>
                   </div>
                   <div class="t4heading">
                     <h1>JAPANESE LANGUAGE</h1>
@@ -318,9 +332,96 @@
       </section>
       <section class="generate-btn">
         <div class="button-container">
-          <button id="generate-report">Generate Report</button>
+          <button id="generate-report"  onclick=" preview_togglepopup();copyHtml();">Generate Report</button>
         </div>
       </section>
+
+
+      <div class="preview-popup" id="preview-popup">
+				<div class="popup-overlay"></div>
+				<div class="preview">
+					<div class="preview-top">
+						<div>
+							<h1>Create Document</h1>
+	
+						</div>
+						
+						<div>
+							<a href="../pages/report-page.html"><button id="cancel-button">✕</button></a>
+	
+						</div>
+						
+					</div>	 
+					
+				  <div class="preview-report" id="preview-report">
+				   
+				  </div>
+				  <canvas id="canvas" style="display: none"></canvas>
+				  
+				  <div class="sidebar">
+					<div class="sidebar-container">
+					  <p>File Type</p>
+					  <div class="dropdown">
+						<div class="select">
+						  <span class="selected">Select</span>
+						  <div class="caret"></div>
+						</div>
+						<ul class="menu">
+						  <li class="active">pdf</li>
+						  <li>png</li>
+						  <li>jpg</li>
+						</ul>
+					  </div>
+		  
+					  <div class="download">
+						<button  id="download-button">Download</button>
+						<button  id="share-button" onclick="share_togglepopup()">Share</button>
+						
+						<div class="share-popup" id="share-popup">
+							<div class="share-overley"></div>
+							<div class="share-email" id="share-email">
+								<form id="my-form" onsubmit="formSubmit()"> 
+                  <label for="email-input">Recipient</label><br><br>
+							<input type="text" id="email-input" placeholder="email" required>
+							<br><br>
+						
+							<label for="subject-input">Subject:</label><br><br>
+							<input type="text" id="subject-input" placeholder="Subject" required>
+							<br><br>
+						
+							<label for="message-input">Message:</label><br><br>
+							<textarea id="message-input" placeholder="Write your message here..." rows="4" cols="50" required></textarea>
+							<br><br>
+				
+							<label for="file-input">Select File to Attach:</label>
+							<input type="file" id="file-input" name="attachment" required><br><br>
+							<br><br>
+						
+							<button id="send-email" onclick="sendEmailWithAttachment()">Send Email</button>
+							<button id="cancel-email" >Cancel</button>
+
+							
+
+								</form>
+							
+
+						</div>
+						
+						</div>
+						
+					  </div>
+					</div>
+					
+				  </div>
+				</div>
+			  </div>
+	
+			</main>
+			  
+
+
+   
+    
     </main>
     <script src="../scripts/report-page.js" type="module"></script>
     <script src="assets/JavaScript/scrollTemplates.js"></script>

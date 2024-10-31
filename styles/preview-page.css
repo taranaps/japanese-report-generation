@@ -22,7 +22,7 @@
 
 .preview-popup .preview {
     position: absolute;
-    top: 0%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     background: #fff;
@@ -62,17 +62,17 @@
     grid-template-columns: auto auto;
     gap: 1px;
 
-    grid-template-columns: 500px 400px;
-    grid-template-rows: 40px 500px;
+    grid-template-columns: 450px 400px;
+    grid-template-rows: 40px 450px;
 
     justify-content: center;
+    
 
 }
 
 .preview-report {
     background-color: beige;
-    overflow-y: auto;
-    overflow-x: auto;
+   overflow: scroll;
     grid-column: 1/2;
     grid-row: 2/-1;
     grid-template-rows: 560px;
@@ -180,7 +180,7 @@
 }
 
 .active {
-    background: #dc143c;
+    /* background: #dc143c; */
 }
 
 .menu-open {
@@ -263,4 +263,88 @@ textarea {
 
 #cancel-button:hover {
     color: #dc143c;
+}
+
+
+
+
+
+
+
+
+.share-popup .share-overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100px;
+    z-index: 1;
+    display: none;
+}
+
+.share-popup .share-email {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: white;
+    /* width: 450px; */
+    height: 100px;
+    z-index: 2;
+
+    width: 370px;
+    height: max-content;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.share-popup.active .share-overlay {
+    display: block;
+}
+
+.share-popup.active .share-email {
+    transition: all 300ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
+
+}
+
+.share-email label{
+    color: #dc143c;
+}
+#email-input{
+    border-color: #dc143c;
+    border-width: 1px;
+    border-radius: 10px;
+    width: 320px;
+    height: 20px;
+}
+
+#send-email,#cancel-email{
+    background-color: #dc143c;
+}
+.share-email{
+    margin-top: 150px;
+}
+
+#email-input,#subject-input{
+    border-color: #dc143c;
+    border-width: 1px;
+    border-style: solid;
+    width: 320px;
+    height: 20px;
+}
+#message-input{
+    border-color: #dc143c;
+    border-width: 1px;
+    border-style: solid;
+    width: 320px;
+    height: 40px;
+
+}
+
+#share-button{
+    margin-left:10px ;
+}
+#file-input{
+    color: black;
 }
