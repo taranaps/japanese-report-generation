@@ -1,23 +1,31 @@
-/* Center the modal */
-#uploadModal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
 body {
     background-color: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: flex-start; 
     height: 100vh;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    z-index: 100;
+    background:#dc143c;
+  }
+
+.sign-out {
+    margin-left: 1130px;
+    margin-top: 5px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
 }
 
 .content {
@@ -27,7 +35,7 @@ body {
 }
 
 .dashboard-container {
-    margin-top: 30px;
+    margin-top: 140px;
     display: flex;
     justify-content: space-between;
     width: 1150px;
@@ -42,37 +50,26 @@ body {
     width: 60%; 
 }
 
-.logout{
-    margin-top: 20px;
-    margin-left: 100%;
-    width: 40px;
-    height: 40px;
-}
-
-.stat-box {
-    transition: transform 0.5s ease; /* Smooth transition */
-    width: 150px;
-    height: 100px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .stat-box:hover {
     transform: scale(1.1); 
   }
 
 .stat-box h3 {
-    margin-top: 10px;
+    margin-right: 50px;
     font-size: 24px;
+    margin-top: 10px;
 }
 
-.graph-line {
-    height: 50px;
+.stat-box p {
     margin-top: 10px;
-    border-radius: 8px;
+}
+
+.card-image {
+    width: 100%;
+    height: 50%; /* Adjust height as needed */
+    object-fit: cover; /* Ensures the image fits within the container */
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .attendance-chart {
@@ -102,8 +99,8 @@ canvas {
     color: gray;
 }
 
-.navbar {
-    margin-bottom: 80px;
+/* .navbar {
+    margin-bottom: 50px;
     margin-left: 420px;
     position: fixed;
     bottom: 0;
@@ -115,17 +112,30 @@ canvas {
     justify-content: space-around;
     padding: 10px 0;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+} */
+
+.footer {
+        margin-bottom: 50px;
+        margin-left: 63%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 30%;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
 }
 
 .nav-button {
-    border-radius: 20px;
+    border-radius: 5px;
     background-color: #DC143C;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 7px 20px;
     font-size: 16px;
     cursor: pointer;
     text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-button:hover {
@@ -134,6 +144,45 @@ canvas {
     text-decoration: none;
 }
 
+.stat-box {
+    transition: transform 0.5s ease; /* Smooth transition */
+    width: 150px;
+    height: 100px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* z-index: 1; */
+    position: relative;
+}
+
+.graph {
+    /* padding: 10px;
+    position: absolute;
+    z-index: 1; */
+    margin-top: 50px;
+}
+
+.box-content {
+    position: absolute;
+    z-index: 2;
+}
+
+
+/* Center the modal */
+#uploadModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
 
 
 
@@ -202,3 +251,10 @@ body::before {
 .download-template{
     color: #DC143C;
 }
+
+
+
+
+
+
+
