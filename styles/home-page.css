@@ -182,9 +182,17 @@ body::before {
     color: white;
     cursor: pointer;
 }
+#tableButton{
+    background: #DC143C;
+    border-radius: 10px;
+    border: solid 1px #DC143C;
+    height: 30px;
+    color: white;
+    cursor: pointer;
+}
 #closeUploadModal{
     /* margin-top: 50px; */
-    margin-left: 30px;
+    /* margin-left: 30px; */
     background: #DC143C;
     border-radius: 10px;
     border: solid 1px #DC143C;
@@ -194,7 +202,7 @@ body::before {
 }
 .input-buttons{
     margin-top: 70px;
-    margin-left: 300px;
+    /* margin-left: 100px; */
 }
 .download-template{
     color: #DC143C;

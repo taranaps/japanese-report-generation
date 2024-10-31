@@ -21,6 +21,11 @@ closeUploadModal.addEventListener('click', () => {
     uploadModal.style.display = 'none'; // Hide the modal
 });
 
+// Redirect to table.html
+tableButton.addEventListener('click', () => {
+    window.location.href = 'table.html';
+});
+
 // Handle file upload and process the Excel data
 uploadButton.addEventListener('click', async () => {
     const file = fileInput.files[0];
@@ -50,8 +55,6 @@ uploadButton.addEventListener('click', async () => {
              // Update meta collection with the new collection name
              await updateMetaCollection(collectionName);
 
-            // Redirect to the table page - trial
-            window.location.href = 'table.html';
         } else {
             alert('No valid trainee data found!');
         }
