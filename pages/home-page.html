@@ -10,35 +10,65 @@
 
         <div class="container">
             <div class="header">
-                <a href="/index.html"><img class="logout" src="/assets/images/logout-icon.svg" alt="logout"></a>
+                <img class="logo" src="/assets/images/experion-logo.png">
+                <a href=#><img class="sign-out" src="/assets/images/home-icon-new.svg" alt="home"></a>
+                <a href="/index.html"><img class="sign-out" src="/assets/images/sign-out.svg" alt="logout"></a>
             </div>
             <div class="dashboard-container">
                 <div class="dashboard">
                     <div class="stat-box">
-                        <p>Active Batches</p>
-                        <h3>3/5</h3>
+                        <div class="box-content">
+                            <p>Active Batches</p>
+                            <h3 id="activeBatches">0</h3>
+                        </div>
+                        <div class="graph">
+                            <img src="/assets/images/Line.png" alt="Sessions Graph" class="card-image">
+                        </div>
                     </div>
                     <div class="stat-box">
-                        <p>Number of Trainees</p>
-                        <h3>40</h3>
+                        <div class="box-content">
+                            <p>Number of Trainees</p>
+                            <h3 id="numTrainees">0</h3>
+                        </div>
+                        <div class="graph">
+                            <img src="/assets/images/line2.png" alt="Sessions Graph" class="card-image">
+                        </div>
                     </div>
                     <div class="stat-box">
-                        <p>Av. Session Length</p>
-                        <h3>2h 30m</h3>
+                        <div class="box-content">
+                            <p>Number of Trainers</p>
+                            <h3 id="numTrainers">0</h3>
+                        </div>
+                        <div class="graph">
+                            <img src="/assets/images/line3.png" alt="Sessions Graph" class="card-image">
+                        </div>
                     </div>
                     <div class="stat-box">
-                        <p>Total Sessions</p>
-                        <h3>64</h3>
+                        <div class="box-content">
+                            <p>Current Level</p>
+                            <h3 id="currentLevel">0</h3>
+                        </div>
+                        <div class="graph">
+                            <img src="/assets/images/line (4).png" alt="Sessions Graph" class="card-image">
+                        </div>
                     </div>
                     <div class="stat-box">
-                        <p>Av. Attendance %</p>
-                        <h3>86%</h3>
-                        <div class="graph-line"></div>
+                        <div class="box-content">
+                            <p>No of Learners</p>
+                            <h3 id="numLearners">0</h3>
+                        </div>
+                        <div class="graph">
+                            <img src="/assets/images/Line (2).png" alt="Sessions Graph" class="card-image">
+                        </div>
                     </div>
                     <div class="stat-box">
-                        <p>Av. Score</p>
-                        <h3>74%</h3>
-                        <div class="graph-line"></div>
+                        <div class="box-content">
+                            <p>Total Sessions</p>
+                            <h3 id="totalSessions">0</h3>
+                        </div>
+                        <div class="graph">
+                            <img src="/assets/images/Line (3).png" alt="Sessions Graph" class="card-image">
+                        </div>
                     </div>
                 </div>
                 
@@ -46,15 +76,35 @@
                     <p>Attendance</p>
                     <canvas id="attendanceChart"></canvas>
                     <p class="month">August</p>
+                    <div class="attendance-table">
+                        <table id="attendanceTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <!-- <div class="graph">
+                        
+                    </div> -->
                 </div>
             </div>
-        <div class="navbar">
+            <div class="footer">
+                <button id="openUploadModal" class="nav-button">Upload Excel</button>
+                <a href="report-page.html"><button class="nav-button">
+                    <!-- <img class="generate" src="/assets/images/generate-icon.svg"> -->
+                Generate Report</button></a>
+            </div>
+        <!-- <div class="navbar"> -->
             <!-- <a href="home-page.html" class="nav-button">Home</a> -->
-            <button id="openUploadModal" class="nav-button">Upload</button>
-            <a href="report-page.html"><button class="nav-button">Reports</button></a>
+            <!-- <button id="openUploadModal" class="nav-button">Upload</button>
+            <a href="report-page.html"><button class="nav-button">Reports</button></a> -->
             <!-- <a href="upload-data.html" class="nav-button" id="openUploadModal">Upload</a>
             <a href="report-page.html" class="nav-button">Reports</a> -->
-        </div>
+        <!-- </div> -->
         <div id="uploadModal">
             <p>Do you want to download the templates? <a href="../assets/excel/excel-template.csv" download ><span class="download-template">Click Here</span></a></p>
             <div class="input-excel">
@@ -65,7 +115,7 @@
              <!-- Add close button -->
         </div>
         <script src="../scripts/upload-data.js" type="module"></script>
-
+        <script src="../scripts/home-page.js" type="module"></script>
         </script>
 </body>
 </html>
