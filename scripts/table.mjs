@@ -4,6 +4,10 @@ import { collection, getDocs, getFirestore, doc, getDoc } from "https://www.gsta
 document.addEventListener('DOMContentLoaded', async () => {
     const dataTable = document.getElementById('dataTable').querySelector('tbody');
     const collectionSelect = document.getElementById('collectionSelect');
+    const ctx = document.getElementById('attendanceChart1').getContext('2d'); // First chart
+    const ctx2 = document.getElementById('attendanceChart2').getContext('2d'); // Second chart for batch 2
+    let attendanceChart1 = null; // First chart variable
+    let attendanceChart2 = null; // Second chart variable
 
     try {
         // Load collections into dropdown
@@ -19,6 +23,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         collectionSelect.addEventListener('change', async (e) => {
             const selectedCollection = e.target.value;
             await loadCollectionData(selectedCollection);
+            await loadAttendanceData(selectedCollection); // Load attendance data for the bar chart
+
         });
     } catch (error) {
         console.error("Error loading collections:", error);
@@ -69,6 +75,102 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             console.error("Error fetching data:", error);
             alert("Failed to load data!");
+        }
+    }
+
+    // Load and display attendance data for the selected collection
+    async function loadAttendanceData(collectionName) {
+        try {
+            const colRef = collection(db, collectionName);
+            const snapshot = await getDocs(colRef);
+            const trainees = snapshot.docs.map(doc => doc.data());
+
+            // Separate data by batch
+            const batch1Trainees = trainees.filter(trainee => trainee.batchName === 'Batch 1');
+            const batch2Trainees = trainees.filter(trainee => trainee.batchName === 'Batch 2');
+
+            // Prepare data for batch 1
+            const labels1 = batch1Trainees.map(trainee => trainee.traineeName);
+            const attendanceData1 = batch1Trainees.map(trainee => trainee.avgAttendance || 0);
+
+            // Prepare data for batch 2
+            const labels2 = batch2Trainees.map(trainee => trainee.traineeName);
+            const attendanceData2 = batch2Trainees.map(trainee => trainee.avgAttendance || 0);
+
+            // Destroy existing charts if they exist
+            if (attendanceChart1) {
+                attendanceChart1.destroy();
+            }
+            if (attendanceChart2) {
+                attendanceChart2.destroy();
+            }
+
+            // Create chart for Batch 1
+            attendanceChart1 = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels1,
+                    datasets: [{
+                        label: 'Batch 1 Average Attendance (%)',
+                        data: attendanceData1,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Average Attendance (%)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Trainee Names'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Create chart for Batch 2
+            attendanceChart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: labels2,
+                    datasets: [{
+                        label: 'Batch 2 Average Attendance (%)',
+                        data: attendanceData2,
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Average Attendance (%)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Trainee Names'
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error("Error loading attendance data:", error);
+            alert("Failed to load attendance data!");
         }
     }
 });
