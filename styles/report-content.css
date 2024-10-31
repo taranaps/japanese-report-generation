@@ -56,3 +56,41 @@ th {
 .chart {
     margin: 20px 0;
 }
+
+.info-box {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #e0f7fa;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Carousel Styles */
+.carousel-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e0f7fa;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-slide {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.carousel-slide.active {
+    display: block;
+    animation: fade 1s ease-in-out;
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

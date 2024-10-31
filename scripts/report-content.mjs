@@ -37,12 +37,22 @@ async function renderReport() {
     const collectionRef = collection(db, latestCollectionName);
     const snapshot = await getDocs(collectionRef);
 
-    const trainerNames = new Set();
+    const trainerName = new Set();
     const batchData = {};
+    let totalTrainees = 0;
 
     snapshot.forEach(doc => {
         const data = doc.data();
-        trainerNames.add(data.trainerName);
+        // Add unique trainer names from the TrainerName array
+        if (Array.isArray(data.trainerName)) {
+            data.trainerName.forEach(trainer => {
+                trainerName.add(trainer);
+                console.log("Adding trainer:", trainer);  // Log each trainer added
+            });
+        } else {
+            console.warn("trainerName is not an array:", data.trainerName); // Log if not an array
+        }
+
         if (!batchData[data.batchName]) {
             batchData[data.batchName] = {
                 trainees: [],
@@ -51,6 +61,7 @@ async function renderReport() {
                 durationTillDate: data.batchDurationTillDate,
                 durationMonth: data.batchDurationMonth,
                 totalAttendance: 0,  // To accumulate attendance for average calculation
+                certificationLevel: data.certificationLevel, // Make sure to capture the certification level here
             };
         }
         batchData[data.batchName].trainees.push({
@@ -61,17 +72,92 @@ async function renderReport() {
             evaluations: data.evaluations,
         });
         batchData[data.batchName].totalAttendance += data.avgAttendance;
+        totalTrainees++;
     });
 
-    displayTrainerNames([...trainerNames]);
+    displayTrainerName([...trainerName]);
     displayBatches(batchData);
     renderBatchAttendanceChart(batchData);
+    displayBatchCount(Object.keys(batchData).length);
+    displayTraineeCount(totalTrainees);
+    displaySessionsCarousel(batchData);
+    displayDurationCarousel(batchData);
+    displayCertificationCarousel(batchData);
 
 }
 
-function displayTrainerNames(trainerNames) {
+
+function displayBatchCount(numBatches) {
+    document.getElementById('num-batches').textContent = numBatches;
+}
+
+function displayTraineeCount(numTrainees) {
+    document.getElementById('num-trainees').textContent = numTrainees;
+}
+
+function displaySessionsCarousel(batchData) {
+    const carousel = document.getElementById('sessions-carousel');
+    carousel.innerHTML = '';
+
+    Object.entries(batchData).forEach(([batchName, details]) => {
+        const slide = document.createElement('div');
+        slide.classList.add('carousel-slide');
+        slide.innerHTML = `<h4>${batchName}</h4><p>Total Sessions Till Date: ${details.sessionsTillDate}</p>`;
+        carousel.appendChild(slide);
+    });
+
+    let currentSlide = 0;
+    setInterval(() => {
+        const slides = document.querySelectorAll('.carousel-slide');
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[currentSlide].classList.add('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+    }, 3000);
+}
+
+function displayDurationCarousel(batchData) {
+    const carousel = document.getElementById('duration-carousel');
+    carousel.innerHTML = '';
+
+    Object.entries(batchData).forEach(([batchName, details]) => {
+        const slide = document.createElement('div');
+        slide.classList.add('carousel-slide');
+        slide.innerHTML = `<h4>${batchName}</h4><p>Duration Till Date: ${details.durationTillDate} hours</p>`;
+        carousel.appendChild(slide);
+    });
+
+    let currentSlide = 0;
+    setInterval(() => {
+        const slides = document.querySelectorAll('#duration-carousel .carousel-slide');
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[currentSlide].classList.add('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+    }, 3000);
+}
+
+function displayCertificationCarousel(batchData) {
+    const carousel = document.getElementById('certification-carousel');
+    carousel.innerHTML = '';
+
+    Object.entries(batchData).forEach(([batchName, details]) => {
+        const slide = document.createElement('div');
+        slide.classList.add('carousel-slide');
+        slide.innerHTML = `<h4>${batchName}</h4><p>Certification Level: ${details.certificationLevel}</p>`;
+        carousel.appendChild(slide);
+    });
+
+    let currentSlide = 0;
+    setInterval(() => {
+        const slides = document.querySelectorAll('#certification-carousel .carousel-slide');
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[currentSlide].classList.add('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+    }, 3000);
+}
+
+function displayTrainerName(trainerName) {
     const trainerBox = document.getElementById('trainer-box');
-    trainerBox.innerHTML = trainerNames.join(", ");
+    trainerBox.innerHTML = `Trainer Count: ${trainerName.length} <br> ${trainerName.join(", ")}`;
 }
 
 function displayBatches(batchData) {
