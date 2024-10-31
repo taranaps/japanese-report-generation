@@ -1,5 +1,5 @@
 import { db } from "./firebaseConfig.mjs";
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+import { collection, addDoc, doc, getDoc, updateDoc, setDoc, arrayUnion, arrayRemove, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 import * as XLSX from '../node_modules/xlsx/xlsx.mjs';
 
 // DOM Elements
@@ -47,8 +47,8 @@ uploadButton.addEventListener('click', async () => {
             const collectionName = getCollectionName(trainees[0].month);
             await uploadDataToFirestore(collectionName, trainees);
 
-            // Store the data in localStorage using the collection name as the key
-            localStorage.setItem(collectionName, JSON.stringify(trainees));
+             // Update meta collection with the new collection name
+             await updateMetaCollection(collectionName);
 
             // Redirect to the table page - trial
             window.location.href = 'table.html';
@@ -76,7 +76,8 @@ function convertExcelDate(excelDate) {
 // Process Excel data into structured objects
 function processTraineeData(sheet, data) {
     const trainees = [];
-    let currentBatch = "", certLevel = "", month = "";
+    let currentBatch = "", certLevel = "", month = "", trainerNames = [], 
+    nOfSessionsTillDate = "", nOfSessionsMonth = "", batchDurTillDate = "", batchDurMonth = ""; 
 
     // Dynamically locate key rows for evaluations
     let { evalNumbers, evalDates, evalNames } = locateEvaluationRows(data);
@@ -90,6 +91,14 @@ function processTraineeData(sheet, data) {
         if (row["Batch Name"]) currentBatch = row["Batch Name"];
         if (row["Certification Level"]) certLevel = row["Certification Level"];
         if (row["Month"]) month = row["Month"];
+        if (row["Trainer Name"]) {
+            // Handle merged cells for trainer names
+            trainerNames = row["Trainer Name"].split(",").map(name => name.trim());
+        }
+        if (row["Number of Sessions Till Date"]) nOfSessionsTillDate = row["Number of Sessions Till Date"];
+        if (row["Number of Sessions (Month)"]) nOfSessionsMonth = row["Number of Sessions (Month)"];
+        if (row["Batch Duration Till Date"]) batchDurTillDate = row["Batch Duration Till Date"];
+        if (row["Batch Duration (Month)"]) batchDurMonth = row["Batch Duration (Month)"];
         if (!row["Trainee Name"]) return; // Skip if no trainee name
 
         const trainee = {
@@ -99,6 +108,11 @@ function processTraineeData(sheet, data) {
             month: month,
             du: row["DU"] || "",
             avgAttendance: row["Avg Attendance Percentage"] || 0,
+            trainerName: trainerNames, // Store trainer names as an array
+            numberOfSessionsTillDate: parseInt(nOfSessionsTillDate) || 0,
+            numberOfSessionsMonth: parseInt(nOfSessionsMonth) || 0,
+            batchDurationTillDate: parseFloat(batchDurTillDate) || 0,
+            batchDurationMonth: parseFloat(batchDurMonth) || 0,
             evaluations: extractEvaluations(row, evalNumbers, evalDates, evalNames)  // Updated call
         };
 
@@ -185,10 +199,33 @@ function extractEvaluations(row, evalNumbers, evalDates, evalNames) {
 async function uploadDataToFirestore(collectionName, trainees) {
     const colRef = collection(db, collectionName);
 
+    // Check if collection with same data already exists
+    const existingDocsSnapshot = await getDocs(colRef);
+    const existingDocs = existingDocsSnapshot.docs.map(doc => doc.data());
+    
+    // Convert trainees and existingDocs to JSON strings for comparison
+    const newData = JSON.stringify(trainees);
+    const existingData = JSON.stringify(existingDocs);
+
+    if (existingDocs.length > 0) {
+        if (newData === existingData) {
+            console.log("No changes detected, skipping upload.");
+            return;
+        } else {
+            // Delete existing docs before replacing with new ones
+            for (const docSnapshot of existingDocsSnapshot.docs) {
+                await deleteDoc(docSnapshot.ref);
+            }
+            console.log("Replaced existing documents in the collection.");
+        }
+    }
+
     for (const trainee of trainees) {
         try {
-            console.log('Uploading Trainee Data:', trainee); // Debugging
-            await addDoc(colRef, trainee);
+            // Rename document to `batch-name-trainee-name`
+            const docName = `${trainee.batchName.replace(/\s+/g, "-").toLowerCase()}-${trainee.traineeName.replace(/\s+/g, "-").toLowerCase()}`;
+            const docRef = doc(colRef, docName);
+            await setDoc(docRef, trainee);
             console.log(`Uploaded ${trainee.traineeName} to Firestore.`);
         } catch (err) {
             console.error(`Error uploading ${trainee.traineeName}:`, err);
@@ -196,3 +233,37 @@ async function uploadDataToFirestore(collectionName, trainees) {
     }
 }
 
+// Function to update meta collection
+async function updateMetaCollection(collectionName) {
+    const metaDocRef = doc(db, 'meta', 'collections');
+    const metaDoc = await getDoc(metaDocRef);
+
+    if (metaDoc.exists()) {
+        // If the meta document exists, update the collection names
+        await updateDoc(metaDocRef, {
+            names: arrayUnion(collectionName) // Use arrayUnion to avoid duplicates
+        });
+    } else {
+        // If the meta document doesn't exist, create it with the collection name
+        await setDoc(metaDocRef, {
+            names: [collectionName]
+        });
+    }
+}
+
+// Remove a collection and update meta document
+async function deleteCollectionAndMeta(collectionName) {
+    const colRef = collection(db, collectionName);
+    const existingDocsSnapshot = await getDocs(colRef);
+    
+    for (const docSnapshot of existingDocsSnapshot.docs) {
+        await deleteDoc(docSnapshot.ref);
+    }
+
+    // Update 'meta' collection to remove collection name
+    const metaDocRef = doc(db, 'meta', 'collections');
+    await updateDoc(metaDocRef, {
+        names: arrayRemove(collectionName)
+    });
+    console.log(`Deleted collection: ${collectionName} and removed from meta.`);
+}

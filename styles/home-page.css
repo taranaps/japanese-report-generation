@@ -1,17 +1,4 @@
-/* Center the modal */
-#uploadModal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
+/* ---Home Page Styles--- */
 body {
     background-color: #f4f4f4;
     display: flex;
@@ -134,9 +121,19 @@ canvas {
     text-decoration: none;
 }
 
-
-
-
+/* ---Upload-Data Pop-up Styles--- */
+#uploadModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
 /* Modal button alignment */
 #uploadModal a {
     text-decoration: none;
@@ -202,3 +199,12 @@ body::before {
 .download-template{
     color: #DC143C;
 }
+
+/* ---Message Display Pop-up Styles--- */
+
+
+
+
+
+
+
