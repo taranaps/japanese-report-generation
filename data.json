@@ -4,6 +4,11 @@
       "batchName": "Batch 1",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -28,10 +33,16 @@
       "traineeName": "Ken B"
     },
     {
+      
       "avgAttendance": 75,
       "batchName": "Batch 1",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -60,6 +71,11 @@
       "batchName": "Batch 1",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -88,6 +104,11 @@
       "batchName": "Batch 1",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -116,6 +137,11 @@
       "batchName": "Batch 1",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -144,6 +170,11 @@
       "batchName": "Batch 1",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -172,6 +203,11 @@
       "batchName": "Batch 1",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -200,6 +236,11 @@
       "batchName": "Batch 1",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -228,6 +269,11 @@
       "batchName": "Batch 1",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -256,6 +302,11 @@
       "batchName": "Batch 1",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -284,6 +335,11 @@
       "batchName": "Batch 1",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -312,6 +368,11 @@
       "batchName": "Batch 1",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -337,9 +398,14 @@
     },
     {
       "avgAttendance": 71,
-      "batchName": "Batch 1",
+      "batchName": "Batch 2",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -365,9 +431,14 @@
     },
     {
       "avgAttendance": 79,
-      "batchName": "Batch 1",
+      "batchName": "Batch 2",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -393,9 +464,14 @@
     },
     {
       "avgAttendance": 70,
-      "batchName": "Batch 1",
+      "batchName": "Batch 2",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",
@@ -421,9 +497,14 @@
     },
     {
       "avgAttendance": 68,
-      "batchName": "Batch 1",
+      "batchName": "Batch 2",
       "certificationLevel": "N3",
       "du": "DU 2",
+      "trainerNames":["Massa San", "Asok San"],
+      "nOfSessionsTillDate":197,
+      "nOfSessionsMonth":35,
+      "batchDurTillDate":68,
+      "batchDurMonth":37,
       "evaluations": [
         {
           "evaluationNo": "E1",

@@ -1,3 +1,8 @@
+// import { db } from "./firebaseConfig.mjs";
+// import { collection, getDocs, getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+
+
 //--------------------------SCROLL TEMPLATES----------------------//
 
 const imageScroll = document.getElementById('image-scroll');
@@ -55,11 +60,20 @@ updateArrowVisibility();
 
 //--------------------TEMPLATE SELECTION-------------------------//
 
+
+// function getSelectedOption() {
+//     const selectElement = document.getElementById('language-select');
+//     const selectedValue = selectElement.value;
+//     return selectedValue;
+// }
 const images = document.querySelectorAll('.image-container img');
 const templates = document.querySelectorAll('.workspace > div');
 let selectTemplate;
 
-
+// document.getElementById('language-select').addEventListener('change', () => {
+//     const selectedOption = getSelectedOption();
+//     console.log(`Selected Language: ${selectedOption}`);
+// })
 function hideAllTemplates() {
     templates.forEach(template => {
         template.style.display = 'none';
@@ -99,6 +113,8 @@ function generateChart(data, id) {
     });
 }
 
+
+
 function getAttendanceData(id) {
     fetch("../data.json")
         .then(response => {
@@ -111,9 +127,115 @@ function getAttendanceData(id) {
         .catch(error => console.error("Error fetching data:", error));
 }
 
+
+function getTraineeDetails(data,id){
+    const createTable = document.getElementById(id)
+    createTable.innerHTML = "";
+    const table = document.createElement("table")
+    const headerRow = document.createElement('tr');
+    const headers = ['SI No.', 'Trainee Name', 'DU', 'Avg. Attendance'];
+    headers.forEach(headerText => {
+        const th = document.createElement('th');
+        th.appendChild(document.createTextNode(headerText));
+        headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+    data.forEach((item, index) => {
+        const row = document.createElement('tr');
+        const siNoCell = document.createElement('td');
+        siNoCell.appendChild(document.createTextNode(index + 1));
+        row.appendChild(siNoCell);
+
+        // Trainee Name cell
+        const traineeCell = document.createElement('td');
+        traineeCell.appendChild(document.createTextNode(item.traineeName));
+        row.appendChild(traineeCell);
+
+        // DU cell
+        const duCell = document.createElement('td');
+        duCell.appendChild(document.createTextNode(item.du));
+        row.appendChild(duCell);
+
+        // Attendance cell
+        const attendanceCell = document.createElement('td');
+        attendanceCell.appendChild(document.createTextNode(item.avgAttendance));
+        row.appendChild(attendanceCell);
+
+        table.appendChild(row);
+    });
+
+    // Append the table to the body or a specific container
+
+    // document.createTable.appendChild(table);
+    return table
+
+}
+
+// Dynamically generate the table with evaluation names as headers
+function createTable(data, id) {
+    const tablePosition = document.getElementById(id);
+    tablePosition.innerHTML="";
+    const table = document.createElement("table");
+    // table.className = "evaluation-table";
+    const headerRow = table.insertRow();
+    // headerRow.className = "evaluation-table-header";
+
+    // Add static headers
+    ["Trainee Name", "DU"].forEach(headerText => {
+        const th = document.createElement("th");
+        th.textContent = headerText;
+        headerRow.appendChild(th);
+    });
+
+    // Gather unique evaluation names, excluding "N/A"
+    const uniqueEvaluations = new Set();
+    data.forEach(item => {
+        item.evaluations.forEach(evaluation => {
+            if (evaluation.evaluationName !== "N/A") {
+                uniqueEvaluations.add(evaluation.evaluationName);
+            }
+        });
+    });
+
+    // Convert Set to Array to maintain order
+    const evaluationHeaders = Array.from(uniqueEvaluations);
+
+    // Add headers for each unique evaluation name
+    evaluationHeaders.forEach(header => {
+        const th = document.createElement("th");
+        th.textContent = header;
+        headerRow.appendChild(th);
+    });
+
+    // Populate table rows with data
+    data.forEach(item => {
+        const row = table.insertRow();
+        row.insertCell().textContent = item.traineeName;
+        row.insertCell().textContent = item.du;
+
+        // Create a map of evaluation names to scores for the current trainee
+        const evaluationMap = {};
+        item.evaluations.forEach(evaluation => {
+            if (evaluation.evaluationName !== "N/A") {
+                evaluationMap[evaluation.evaluationName] = evaluation.evaluationScore;
+            }
+        });
+
+        // Fill the row with scores based on the evaluationHeaders
+        evaluationHeaders.forEach(header => {
+            const cell = row.insertCell();
+            cell.textContent = evaluationMap[header] || ""; // Leave empty if no score for this evaluation
+        });
+    });
+
+    return table;
+}
+
+
 images.forEach(image => {
     image.addEventListener('click', function() {
         hideAllTemplates()
+        // selectBatch()
         const templateKey = this.getAttribute('data-template');
         selectTemplate=templateKey
 
@@ -121,14 +243,21 @@ images.forEach(image => {
         if (selectedTemplate) {
 
           if(templateKey==="template1"){
+            
             fetch("../data.json")
               .then(response => response.json())
               .then(content => {
                 let templatHeaderh3 = document.getElementById("header-template1-h3");
                 templatHeaderh3.textContent = content[0].month
+                const evaluationTable = document.getElementById('evaluation-table-template1');
+                const table = createTable(content,'evaluation-table-template1');
+                evaluationTable.appendChild(table);
+                const traineeDetailsTemplate1 = document.getElementById("trainee-details-template1");
+                const traineeTable = getTraineeDetails(content,"trainee-details-template1");
+                traineeDetailsTemplate1.appendChild(traineeTable);
                 
               })
-              .catch(error => console.error('Error fetching films:', error));
+              .catch(error => console.error('Error loading data:', error));
               getAttendanceData("attendance-body-template1")
           }
           if(templateKey==="template2"){
@@ -137,10 +266,13 @@ images.forEach(image => {
             .then(content =>{
               let templatHeaderh3 = document.getElementById("template2-month");
               templatHeaderh3.textContent = content[0].month
-              getAttendanceData("attendanceChart")
+              const evaluationTable = document.getElementById('evaluation-table-template2');
+                const table = createTable(content,'evaluation-table-template2');
+                evaluationTable.appendChild(table);
 
             })
             .catch(error => console.error('Error fetching films:', error));
+            getAttendanceData("attendanceChart")
           }
           if(templateKey==="template3"){
             fetch("../data.json")
@@ -148,9 +280,12 @@ images.forEach(image => {
             .then(content =>{
               let templatHeaderh3 = document.getElementById("subtitle");
               templatHeaderh3.textContent = content[0].month
-              getAttendanceData("t3graph")
+              const evaluationTable = document.getElementById('evaluation-table-template3');
+                const table = createTable(content,'evaluation-table-template3');
+                evaluationTable.appendChild(table);
             })
             .catch(error => console.error('Error fetching films:', error));
+            getAttendanceData("t3graph");
           }
           if(templateKey==="template4"){
             fetch("../data.json")
@@ -169,6 +304,63 @@ images.forEach(image => {
     });
 });
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

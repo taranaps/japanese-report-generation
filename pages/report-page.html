@@ -53,7 +53,18 @@
               />
             </div>
             <div class="arrow" id="arrow-down">&#9660;</div>
-          </div>
+          </div><div class="whole-container">
+			<!-- <div class="dropdown-container">
+				<label for="language-select">Select a Batch:</label> -->
+				<!-- <select id="language-select">
+					<option value="">Select Batch</option>
+					<option value="Batch 1">Batch 1</option>
+					<option value="Batch 2">Batch 2</option>
+					<option value="Batch 3">Batch 3</option>
+					<option value="french">Batch 4</option>
+					<option value="german">Batch 5</option>
+				</select> -->
+			</div> -->
           <div class="workspace">
             <!-- <div id="editor"><h2>Select a template to start editing!</h2></div> -->
             
@@ -126,7 +137,7 @@
                         <div class="evaluation-heading-template1">
                       <p>Trainee Details</p></div>
                       <div class="evaluation-body-template1">
-
+						<div id="trainee-details-template1"></div>
                       </div>
                     </div>
                    
@@ -137,6 +148,7 @@
                     <div class="batch-evaluation-heading-template1">
                   <p>Evaluation Details</p></div>
                   <div class="batch-evaluation-body-template1">
+					<div id="evaluation-table-template1"></div>
 
                   </div>
                 </div>
@@ -203,6 +215,10 @@
             
                         </div>
 						<div class="trainee-evelution-template2">
+							<h3>Evaluation Details</h3>
+							<div id="evaluation-table-template2">
+
+							</div>
 							
 
 						</div>
@@ -260,49 +276,17 @@
                   </div>
                   
 <br>
-                  <div class="table-title">TRAINEE DETAILS</div>
-                  <div class="table-section">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Emp ID</th>
-                          <th>Name</th>
-                          <th>Dept</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>EMP 001</td>
-                          <td>Trainee 1</td>
-                          <td>DU1</td>
-                        </tr>
-                        <tr>
-                          <td>EMP 002</td>
-                          <td>Trainee 2</td>
-                          <td>DU2</td>
-                        </tr>
-                        <tr>
-                          <td>EMP 003</td>
-                          <td>Trainee 3</td>
-                          <td>DU5</td>
-                        </tr>
-                        <tr>
-                          <td>EMP 004</td>
-                          <td>Trainee 4</td>
-                          <td>DU2</td>
-                        </tr>
-                        <tr>
-                          <td>EMP 005</td>
-                          <td>Trainee 5</td>
-                          <td>DU5</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                 
+                    <div class="graph-title">TRAINEE ATTENDANCE</div>
+                    <div class="t3graph">
+						<canvas id="t3graph"></canvas>
                   </div>
 
-                  <div class="graph-title">Trainee Attendance</div>
-                  <div class="t3graph">
-						<canvas id="t3graph"></canvas>
+                   <div class="table-title">TRAINEE EVALUATION</div>
+                  <div class="table-section">
+						<div id="evaluation-table-template3">
+								
+							</div>
                     </div></div>
                 </div>
 
@@ -363,7 +347,8 @@
     
               </div>
             </div>
-          </div>
+		</div>
+        </div>
         </section>
       </section>
       <section class="generate-btn">
