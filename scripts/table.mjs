@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function getCollectionNames() {
         const metaDocRef = doc(db, 'meta', 'collections');
         const metaDoc = await getDoc(metaDocRef);
-        return metaDoc.exists() ? metaDoc.data().names : [];
+        return metaDoc.exists() ? metaDoc.data().names || [] : [];
     }
 
     // Load and display data for the selected collection
@@ -57,6 +57,36 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <td>${trainee.month}</td>
                     <td>${trainee.du}</td>
                     <td>${trainee.avgAttendance}</td>
+                    <td>${(trainee.trainerName || []).join(', ') || 'N/A'}</td>
+                    <td>${trainee.numberOfSessionsTillDate || 'N/A'}</td>
+                    <td>${trainee.numberOfSessionsMonth || 'N/A'}</td>
+                    <td>${trainee.batchDurationTillDate || 'N/A'}</td>
+                    <td>${trainee.batchDurationMonth || 'N/A'}</td>
+                    <td>${renderEvaluations(trainee.evaluations)}</td>
+                `;
+                dataTable.appendChild(row);
+            });
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            alert("Failed to load data!");
+        }
+    }
+});
+
+// Helper function to render evaluations in a readable format
+function renderEvaluations(evaluations = []) {
+    return evaluations
+    .filter(e => e.evaluationName && e.evaluationName.toUpperCase() !== 'N/A')
+    .map(evl => `
+        <div>
+            <strong>${evl.evaluationName}:</strong> ${evl.evaluationScore} 
+            <em>(${evl.evaluationDate})</em>
+        </div>
+    `).join('');
+}
+
+{/* <td>${data.batchDurationTillDate || 'N/A'}</td>
+                    <td>${data.batchDurationMonth || 'N/A'}</td>
                     <td>
                         <ul>
                             ${trainee.evaluations
@@ -67,13 +97,4 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 </li>
                             `).join('')}
                         </ul>
-                    </td>
-                `;
-                dataTable.appendChild(row);
-            });
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            alert("Failed to load data!");
-        }
-    }
-});
+                    </td> */}
