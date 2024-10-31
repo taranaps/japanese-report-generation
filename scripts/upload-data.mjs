@@ -9,6 +9,9 @@ const fileInput = document.getElementById('excelFile');
 const uploadButton = document.getElementById('uploadButton');
 const closeUploadModal = document.getElementById('closeUploadModal');
 
+const messageModal = document.getElementById('messageModal');
+const messageContent = document.getElementById('messageContent');
+const closeMessageModal = document.getElementById('closeMessageModal');
 // Show the upload modal
 openUploadModal.addEventListener('click', () => {
     document.body.classList.add('modal-active');
@@ -26,17 +29,22 @@ tableButton.addEventListener('click', () => {
     window.location.href = 'table.html';
 });
 
+// Close message modal
+closeMessageModal.addEventListener('click', () => {
+    messageModal.style.display = 'none';
+});
+
 // Handle file upload and process the Excel data
 uploadButton.addEventListener('click', async () => {
     const file = fileInput.files[0];
 
     if (!file || (!file.name.endsWith('.xlsx') && !file.name.endsWith('.csv'))) {
-        alert('Please upload a valid Excel or CSV file!');
+        showMessageModal('Please upload a valid Excel or CSV file!', 'error');        
         return;
     }
 
     if (file.size > 10 * 1024 * 1024) {
-        alert('File size exceeds 10MB!');
+        showMessageModal('File size exceeds 10MB!', 'error');
         return;
     }
 
@@ -51,18 +59,24 @@ uploadButton.addEventListener('click', async () => {
         if (trainees.length > 0) {
             const collectionName = getCollectionName(trainees[0].month);
             await uploadDataToFirestore(collectionName, trainees);
-
-             // Update meta collection with the new collection name
-             await updateMetaCollection(collectionName);
-
+            await updateMetaCollection(collectionName);
+            
+            showMessageModal('File was successfully uploaded!', 'success');
         } else {
-            alert('No valid trainee data found!');
+            showMessageModal('No valid trainee data found!', 'error');
         }
     } catch (err) {
         console.error('Error processing file:', err);
-        alert('Error uploading data.');
+        showMessageModal('Error uploading data. Please try again.', 'error');
     }
 });
+
+// Function to show the success/error modal
+function showMessageModal(message, type) {
+    messageContent.textContent = message;
+    messageContent.className = type; // Apply either "success" or "error" style
+    messageModal.style.display = 'block';
+}
 
 // Extract Month-Year collection name
 function getCollectionName(month) {

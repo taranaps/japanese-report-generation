@@ -208,7 +208,53 @@ body::before {
     color: #DC143C;
 }
 
-/* ---Message Display Pop-up Styles--- */
+/* ---Message Display Pop-up Modal Styles--- */
+/* Message Modal Styles */
+#messageModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    width: 400px;
+    text-align: center;
+}
+
+.modal-content {
+    padding: 20px;
+}
+
+#messageContent.success {
+    color: green;
+    background-color: #e6ffe6;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#messageContent.error {
+    color: red;
+    background-color: #ffe6e6;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+    text-decoration: none;
+}
 
 
 

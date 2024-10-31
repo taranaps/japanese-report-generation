@@ -65,8 +65,16 @@
             <div class="input-buttons">
                 <button id="uploadButton">Upload Data</button>
                 <button id="tableButton">Table</button>
-                <button id="closeUploadModal">Close</button></div>
-             <!-- Add close button -->
+                <button id="closeUploadModal">Close</button>
+            </div>
+        </div>
+
+        <!-- Success/Error Message Modal -->
+        <div id="messageModal" class="modal">
+            <div class="modal-content">
+                <span id="closeMessageModal" class="close">&times;</span>
+                <p id="messageContent"></p>
+            </div>
         </div>
         <script src="../scripts/upload-data.mjs" type="module"></script>
         <script src="../scripts/home-page.js" type="module"></script>
