@@ -1,4 +1,6 @@
 import { checkAuth, logout } from './auth.js';
+import { db } from "./firebaseConfig.mjs";
+import { collection, getDocs, getFirestore, doc, getDoc, where ,query} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
 // Check authentication status
 checkAuth();
@@ -65,76 +67,245 @@ updateArrowVisibility();
 
 //--------------------TEMPLATE SELECTION-------------------------//
 
-const images = document.querySelectorAll('.image-container img');
-const templates = document.querySelectorAll('.workspace > div');
-let selectTemplate;
+document.addEventListener('DOMContentLoaded', async () => {
+
+    const images = document.querySelectorAll('.image-container img');
+    const templates = document.querySelectorAll('.workspace > div');
+    let selectTemplate;
 
 
-function hideAllTemplates() {
-    templates.forEach(template => {
-        template.style.display = 'none';
-    });
-}
-// function month(){
-//   const currentMonth = 
-// }
-images.forEach(image => {
-    image.addEventListener('click', function() {
-        hideAllTemplates()
-        const templateKey = this.getAttribute('data-template');
-        // selectTemplate = this.getAttribute('data-template');
-        // console.log(templateKey);
-        selectTemplate=templateKey
+    function hideAllTemplates() {
+        templates.forEach(template => {
+            template.style.display = 'none';
+        });
+    }
 
-        const selectedTemplate = document.getElementById(templateKey);
-        if (selectedTemplate) {
+    function getTraineeDetails(data,id){
+        const createTable = document.getElementById(id)
+        createTable.innerHTML = "";
+        const table = document.createElement("table")
+        const headerRow = document.createElement('tr');
+        const headers = ['SI No.', 'Trainee Name', 'DU', 'Avg. Attendance'];
+        headers.forEach(headerText => {
+            const th = document.createElement('th');
+            th.appendChild(document.createTextNode(headerText));
+            headerRow.appendChild(th);
+        });
+        table.appendChild(headerRow);
+        data.forEach((item, index) => {
+            const row = document.createElement('tr');
+            const siNoCell = document.createElement('td');
+            siNoCell.appendChild(document.createTextNode(index + 1));
+            row.appendChild(siNoCell);
+    
+            // Trainee Name cell
+            const traineeCell = document.createElement('td');
+            traineeCell.appendChild(document.createTextNode(item.traineeName));
+            row.appendChild(traineeCell);
+    
+            // DU cell
+            const duCell = document.createElement('td');
+            duCell.appendChild(document.createTextNode(item.du));
+            row.appendChild(duCell);
+    
+            // Attendance cell
+            const attendanceCell = document.createElement('td');
+            attendanceCell.appendChild(document.createTextNode(item.avgAttendance));
+            row.appendChild(attendanceCell);
+    
+            table.appendChild(row);
+        });
+    
+        // Append the table to the body or a specific container
+    
+        // document.createTable.appendChild(table);
+        return table
+    
+    }
 
-          if(templateKey==="template1"){
-            fetch("../data.json")
-              .then(response => response.json())
-              .then(content => {
-                let templatHeaderh3 = document.getElementById("header-template1-h3");
+    function generateChart(data, id) {
+        const canvas = document.getElementById(id);
+        if (!canvas) {
+            console.error(`Canvas with id "${id}" not found`);
+            return;
+        }
+    
+        const ctx = canvas.getContext('2d');
+        const chartData = {
+            labels: data.map(item => item.traineeName),
+            datasets: [{
+                label: 'Avg. Attendance',
+                data: data.map(item => item.avgAttendance),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+    
+        new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    async function getAttendanceData(id) {
+        try {
+            // Await the latest collection name
+            const collectionName = await getLatestCollection(); 
+            if (!collectionName) {
+                console.error("No collection name found");
+                return;
+            }
+    
+            const colRef = collection(db, collectionName);
+    
+            // Filter the data for batchName "Batch 1"
+            const q = query(colRef, where("batchName", "==", "Batch 1"));
+            const querySnapshot = await getDocs(q);
+    
+            // Map through the documents to retrieve data in JSON format
+            const data = querySnapshot.docs.map(doc => doc.data());
+    
+            // Pass the data to generateChart
+            generateChart(data, id);
+        } catch (error) {
+            console.error("Error fetching data from Firebase:", error);
+        }
+    }
+    
+
+    async function getLatestCollection() {
+        try {
+            const metaDocRef = doc(db, 'meta', 'collections');
+            const metaDocSnapshot = await getDoc(metaDocRef);
+
+            if (metaDocSnapshot.exists()) {
+                const metaData = metaDocSnapshot.data();
+                const collectionNames = metaData.names;
+
+                if (collectionNames && collectionNames.length > 0) {
+            
+                    const latestCollectionName = collectionNames[collectionNames.length - 1];
+                    // console.log("Latest collection name:", latestCollectionName);
+                    return latestCollectionName;
+                } else {
+                    console.log("No collections found in meta.");
+                    return null;
+                }
+            } else {
+                console.log("Meta document does not exist.");
+                return null;
+            }
+        } catch (error) {
+            console.error("Error fetching the latest collection name:", error);
+            return null;
+        }
+    }
+
+    async function fetchLatestCollectionData() {
+        try {
+            const latestCollectionName = await getLatestCollection();
+            if (latestCollectionName) {
+                const colRef = collection(db, latestCollectionName);
+                const querySnapshot = await getDocs(colRef);
+
+                const latestData = querySnapshot.docs.map(doc => doc.data());
+                // console.log("Data from the latest collection:", latestData);
+                // console.table(latestData);
+
+                return latestData;
+            } else {
+                console.log("No latest collection to fetch.");
+                return null;
+            }
+        } catch (error) {
+            console.error("Error fetching data from the latest collection:", error);
+            return null;
+        }
+    }
+
+    // Call this function where needed, e.g., on page load or a button click
+    fetchLatestCollectionData().then(data => {
+        try {
+            if (data) {
+                // const datava = document.getElementById("datafield");
+                // Set text content to formatted JSON string
+                console.log(data);
+                // datava.textContent = JSON.stringify(data, null, 2); // Format the data for better readability
+            }
+        } catch (error) {
+            console.error("Error displaying data:", error);
+        }
+});
+
+    
+    images.forEach(image => {
+        image.addEventListener('click', function() {
+            hideAllTemplates()
+            const templateKey = this.getAttribute('data-template');
+            selectTemplate=templateKey
+
+            const selectedTemplate = document.getElementById(templateKey);
+            if (selectedTemplate) {
+
+            if(templateKey==="template1"){
+                fetch("../data.json")
+                .then(response => response.json())
+                .then(content => {
+                    let templatHeaderh3 = document.getElementById("header-template1-h3");
+                    templatHeaderh3.textContent = content[0].month
+
+                })
+                .catch(error => console.error('Error fetching films:', error));
+                getAttendanceData("attendance-body-template1")
+            }
+            if(templateKey==="template2"){
+                fetch("../data.json")
+                .then(response => response.json())
+                .then(content =>{
+                let templatHeaderh3 = document.getElementById("template2-month");
                 templatHeaderh3.textContent = content[0].month
 
-              })
-              .catch(error => console.error('Error fetching films:', error));
-          }
-          if(templateKey==="template2"){
-            fetch("../data.json")
-            .then(response => response.json())
-            .then(content =>{
-              let templatHeaderh3 = document.getElementById("template2-month");
-              templatHeaderh3.textContent = content[0].month
+                })
+                .catch(error => console.error('Error fetching films:', error));
+            }
+            if(templateKey==="template3"){
+                fetch("../data.json")
+                .then(response => response.json())
+                .then(content =>{
+                let templatHeaderh3 = document.getElementById("subtitle");
+                templatHeaderh3.textContent = content[0].month
 
-            })
-            .catch(error => console.error('Error fetching films:', error));
-          }
-          if(templateKey==="template3"){
-            fetch("../data.json")
-            .then(response => response.json())
-            .then(content =>{
-              let templatHeaderh3 = document.getElementById("subtitle");
-              templatHeaderh3.textContent = content[0].month
+                })
+                .catch(error => console.error('Error fetching films:', error));
+            }
+            if(templateKey==="template4"){
+                fetch("../data.json")
+                .then(response => response.json())
+                .then(content =>{
+                let templatHeaderh3 = document.getElementById("t4date");
+                templatHeaderh3.textContent = content[0].month
 
-            })
-            .catch(error => console.error('Error fetching films:', error));
-          }
-          if(templateKey==="template4"){
-            fetch("../data.json")
-            .then(response => response.json())
-            .then(content =>{
-              let templatHeaderh3 = document.getElementById("t4date");
-              templatHeaderh3.textContent = content[0].month
+                })
+                .catch(error => console.error('Error fetching films:', error));
+            }
 
-            })
-            .catch(error => console.error('Error fetching films:', error));
-          }
-
-          selectedTemplate.style.display = 'block';
-        }
-        copyHtml(selectTemplate)
+            selectedTemplate.style.display = 'block';
+            }
+            copyHtml(selectTemplate)
+        });
     });
-});
+})
+
+
  
 
 
