@@ -1,0 +1,96 @@
+img{
+    width:210px;
+    height: auto;
+}
+body{
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+main{
+    height: 100vh;
+    /* width: auto; */
+    display: grid;
+    justify-content: center;
+    text-align: center;
+}
+.logo{
+    /* width: 100%; */
+    position: absolute;
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: flex-start;
+
+}
+.login-div{
+    width: 100%;
+    height: auto;
+    /* border: 1px solid gold; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.login-rhom{
+    width: 270px;
+    height: 330px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color:#DC143C;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 100%);
+
+}
+.login-rhom h2 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: normal;
+}
+.input-box {
+    /* width: 100%; */
+    margin: 1rem 0;
+  
+}
+.input-box input {
+    width: 78%;
+    padding: 0.4rem;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+.login-button {
+    width: 78%;
+    padding: 0.5rem;
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgb(188, 184, 184);
+    box-shadow:  2px 2px 5px rgb(95, 95, 95);
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;  
+}
+.login-button:active {
+    border-color:white ;
+    transform: translateX(2px);
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.login-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.explogo{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    /* border: 1px solid green; */
+    right: 100px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Data</title>
+    <link rel="stylesheet" href="../styles/upload-data.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <a href="home-page.html">
+        <button class="close">
+            <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+      </a>
+      <div class="pandbtn">
+        <div>
+          <p>
+            Do you want to download the Excel Template?
+            <a href="../assets/excel/excel-template.csv" class="download-link">Click Here</a>
+          </p>
+        </div>
+        <div>
+            <button class="upload-btn" id="openUploadModal">
+              <span>Upload File</span>
+              <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            </button>
+        </div>
+        <div id="uploadModal">
+            <input type="file" id="excelFile" />
+            <button id="uploadButton">Upload Data</button>
+        </div>
+      </div>
+    </div>
+    <script src="../scripts/upload-data.js" type="module"></script>
+  </body>
+</html>
