@@ -927,6 +927,7 @@ canvas {
     margin-top: -10px;
   }
   .table-section {
+    background-color: #ffe6cc;
     display: flex;
     justify-content: space-around;
     margin-bottom: 30px;

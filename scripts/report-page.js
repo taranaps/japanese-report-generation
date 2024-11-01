@@ -78,6 +78,7 @@ function hideAllTemplates() {
 // function month(){
 //   const currentMonth = 
 // }
+let selectedTemplate =""
 images.forEach(image => {
     image.addEventListener('click', function() {
         hideAllTemplates()
@@ -86,10 +87,11 @@ images.forEach(image => {
         // console.log(templateKey);
         selectTemplate=templateKey
 
-        const selectedTemplate = document.getElementById(templateKey);
+        selectedTemplate = document.getElementById(templateKey);
         if (selectedTemplate) {
 
           if(templateKey==="template1"){
+            
             fetch("../data.json")
               .then(response => response.json())
               .then(content => {
@@ -131,6 +133,8 @@ images.forEach(image => {
           }
 
           selectedTemplate.style.display = 'block';
+          
+          
         }
         copyHtml(selectTemplate)
     });
@@ -471,6 +475,215 @@ dropdown.forEach(dropdown => {
             });
     }
 
+
+
+    //changing color
+
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     const selectColor = document.getElementById("selectcolor");
+    
+    //     // Attach the onchange event
+    //     selectColor.onchange = function() {
+    //         changecolor(this.value);
+    //     };
+    // });
+    
+    const selectColor = document.getElementById("selectcolor");
+    selectColor.addEventListener("change",changecolor)
+
+    function changecolor(event){
+        let value=event.target.value;
+      
+        console.log(value);
+
+        let firstColorDiv=  selectedTemplate
+        console.log(firstColorDiv.classList[0]);
+        // console.log(firstColorDiv.children[0].children[0])
+        if (firstColorDiv.classList[0] == "template-one"){
+            // switch(value){
+            //     case "1":
+            //         firstColorDiv.children[0].children[0].style.backgroundColor="#DC143C";
+            //         firstColorDiv.children[0].children[1].children[0].style.backgroundColor="#e66a83";
+            //         document.getElementById("learners-template1").style.backgroundColor="#DC143C"
+            //         document.getElementById("trainer-template1").style.backgroundColor="#DC143C"
+            //         document.getElementById("session-template1").style.backgroundColor="#DC143C"
+            //         document.getElementById("level-heading").style.backgroundColor="#DC143C"
+            //         document.getElementById("duration-heading-template1").style.backgroundColor="#DC143C"
+            //         document.getElementById("duration-sessions-heading-template1").style.backgroundColor="#DC143C"
+            //         document.getElementById("attendance-heading-template1").style.backgroundColor="#DC143C"
+            //         document.getElementById("evaluation-heading-template1").style.backgroundColor="#DC143C"
+            //         document.getElementById("batch-evaluation-heading-template1").style.backgroundColor="#DC143C"
+
+            //     // document.getElementsByClassName("container-template2")[0].style.backgroundColor="red";
+            //     // document.getElementsByClassName("box-template2")[0].style.backgroundColor="white";
+            //         break;
+            //     case "2":
+                    
+            //         firstColorDiv.children[0].children[1].children[0].style.backgroundColor="#77a6ca";
+            //         firstColorDiv.children[0].children[0].style.backgroundColor="#64a2f5";
+            //         document.getElementById("learners-template1").style.backgroundColor="#64a2f5"
+            //         document.getElementById("trainer-template1").style.backgroundColor="#64a2f5"
+            //         document.getElementById("session-template1").style.backgroundColor="#64a2f5"
+            //         document.getElementById("level-heading").style.backgroundColor="#64a2f5"
+            //         document.getElementById("duration-heading-template1").style.backgroundColor="#64a2f5"
+            //         document.getElementById("duration-sessions-heading-template1").style.backgroundColor="#64a2f5"
+            //         document.getElementById("attendance-heading-template1").style.backgroundColor="#64a2f5"
+            //         document.getElementById("evaluation-heading-template1").style.backgroundColor="#64a2f5"
+            //         document.getElementById("batch-evaluation-heading-template1").style.backgroundColor="#64a2f5"
+            //         break;
+            //     case "3":
+            //         firstColorDiv.children[0].children[0].style.backgroundColor="#43bf73";
+            //         firstColorDiv.children[0].children[1].children[0].style.backgroundColor="#75c794";
+            //         document.getElementById("learners-template1").style.backgroundColor="#43bf73"
+            //         document.getElementById("trainer-template1").style.backgroundColor="#43bf73"
+            //         document.getElementById("session-template1").style.backgroundColor="#43bf73"
+            //         document.getElementById("level-heading").style.backgroundColor="#43bf73"
+            //         document.getElementById("duration-heading-template1").style.backgroundColor="#43bf73"
+            //         document.getElementById("duration-sessions-heading-template1").style.backgroundColor="#43bf73"
+            //         document.getElementById("attendance-heading-template1").style.backgroundColor="#43bf73"
+            //         document.getElementById("evaluation-heading-template1").style.backgroundColor="#43bf73"
+            //         document.getElementById("batch-evaluation-heading-template1").style.backgroundColor="#43bf73"
+            //         break;
+            //     case "4":
+            //         firstColorDiv.children[0].children[0].style.backgroundColor="#8061c3";
+            //         firstColorDiv.children[0].children[1].children[0].style.backgroundColor="#bda7ec";
+            //         document.getElementById("learners-template1").style.backgroundColor="#8061c3"
+            //         document.getElementById("trainer-template1").style.backgroundColor="#8061c3"
+            //         document.getElementById("session-template1").style.backgroundColor="#8061c3"
+            //         document.getElementById("level-heading").style.backgroundColor="#8061c3"
+            //         document.getElementById("duration-heading-template1").style.backgroundColor="#8061c3"
+            //         document.getElementById("duration-sessions-heading-template1").style.backgroundColor="#8061c3"
+            //         document.getElementById("attendance-heading-template1").style.backgroundColor="#8061c3"
+            //         document.getElementById("evaluation-heading-template1").style.backgroundColor="#8061c3"
+            //         document.getElementById("batch-evaluation-heading-template1").style.backgroundColor="#8061c3"
+            //         break;
+            //     default:
+            //         firstColorDiv.children[0].style.backgroundColor="#C3FFC0";  
+            // }
+
+            const colors = {
+                "1": {
+                    bg: "#DC143C",
+                    accent: "#e66a83"
+                },
+                "2": {
+                    bg: "#64a2f5",
+                    accent: "#93bdf5"
+                },
+                "3": {
+                    bg: "#43bf73",
+                    accent: "#75c794"
+                },
+                "4": {
+                    bg: "#8061c3",
+                    accent: "#bda7ec"
+                }
+            };
+            
+            const commonElements = [
+                "learners-template1",
+                "trainer-template1",
+                "session-template1",
+                "level-heading",
+                "duration-heading-template1",
+                "duration-sessions-heading-template1",
+                "attendance-heading-template1",
+                "evaluation-heading-template1",
+                "batch-evaluation-heading-template1"
+            ];
+            
+            function applyColors(value) {
+                const color = colors[value] || { bg: "#C3FFC0", accent: "" };
+            
+                // Set background color for the firstColorDiv children
+                firstColorDiv.children[0].children[0].style.backgroundColor = color.bg;
+                if (color.accent) {
+                    firstColorDiv.children[0].children[1].children[0].style.backgroundColor = color.accent;
+                }
+            
+                // Apply common background color to other elements
+                commonElements.forEach(id => {
+                    document.getElementById(id).style.backgroundColor = color.bg;
+                });
+            }
+            
+            // Example of calling the function
+            applyColors(value);
+            
+        }
+        else if(firstColorDiv.classList[0] == "template-two") {
+            switch(value)
+            {
+                case "1":
+                    firstColorDiv.children[0].style.backgroundColor="#DC143C";
+                    
+
+                    break;
+                case "2":
+                    firstColorDiv.children[0].style.backgroundColor="#64a2f5";
+                    break;
+                case "3":
+                    firstColorDiv.children[0].style.backgroundColor="#43bf73";
+                    break;
+                case "4":
+                    firstColorDiv.children[0].style.backgroundColor="#8061c3";
+                    break;
+                default:
+                    firstColorDiv.children[0].style.backgroundColor="#C3FFC0";  
+            }
+        }
+        else if(firstColorDiv.classList[0] == "template-three") {
+            switch(value)
+            {
+                case "1":
+                    firstColorDiv.children[0].style.backgroundColor="#DC143C";
+                    document.getElementById("t3graph").style.backgroundColor="#e66a83";
+                    document.getElementById("table-section").style.backgroundColor="#e66a83";
+                    document.getElementById("t3batchname").style.color="white";
+                    
+
+                    break;
+                case "2":
+                    firstColorDiv.children[0].style.backgroundColor="#64a2f5";
+                    document.getElementById("t3graph").style.backgroundColor="#5d94de";
+                    document.getElementById("table-section").style.backgroundColor="#5d94de";
+                    document.getElementById("t3batchname").style.color="#5d94de";
+                    break;
+                case "3":
+                    firstColorDiv.children[0].style.backgroundColor="green";
+                    break;
+                case "4":
+                    firstColorDiv.children[0].style.backgroundColor="violet";
+                    break;
+                default:
+                    firstColorDiv.children[0].style.backgroundColor="#C3FFC0";  
+            }
+        }
+        else if(firstColorDiv.classList[0] == "template-four") {
+            switch(value)
+            {
+                case "1":
+                    firstColorDiv.children[0].style.backgroundColor="red";
+                    break;
+                case "2":
+                    firstColorDiv.children[0].style.backgroundColor="blue";
+                    break;
+                case "3":
+                    firstColorDiv.children[0].style.backgroundColor="green";
+                    break;
+                case "4":
+                    firstColorDiv.children[0].style.backgroundColor="violet";
+                    break;
+                default:
+                    firstColorDiv.children[0].style.backgroundColor="#C3FFC0";  
+            }
+        }
+
+        }
+        
+
+            
+        
 
 
     
