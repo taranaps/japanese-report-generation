@@ -393,29 +393,23 @@
 						<div class="share-popup" id="share-popup">
 							<div class="share-overley"></div>
 							<div class="share-email" id="share-email">
-								<form id="my-form" onsubmit="formSubmit()"> 
-                  <label for="email-input">Recipient</label><br><br>
-							<input type="text" id="email-input" placeholder="email" required>
-							<br><br>
-						
-							<label for="subject-input">Subject:</label><br><br>
-							<input type="text" id="subject-input" placeholder="Subject" required>
-							<br><br>
-						
-							<label for="message-input">Message:</label><br><br>
-							<textarea id="message-input" placeholder="Write your message here..." rows="4" cols="50" required></textarea>
-							<br><br>
-				
-							<label for="file-input">Select File to Attach:</label>
-							<input type="file" id="file-input" name="attachment" required><br><br>
-							<br><br>
-						
-							<button id="send-email" onclick="sendEmailWithAttachment()">Send Email</button>
-							<button id="cancel-email" >Cancel</button>
-
-							
-
-								</form>
+								<form id="email-form" enctype="multipart/form-data">
+                  <label id="label1" for="to">To:</label>
+                  <input type="email" id="to" name="to" required><br><br>
+          
+                  <label id="label2" for="subject">Subject:</label>
+                  <input type="text" id="subject" name="subject" value="Japanese Training Report" required><br><br>
+          
+                  <label id="label3" for="message">Message:</label>
+                  <textarea id="message" name="message" required>Please find below the Japanese Training Report of the month 
+                  </textarea><br><br>
+          
+                  <label id="label4" for="attachment">Attachment:</label>
+                  <input id="file-input" type="file" id="attachment" name="attachment"><br><br>
+          
+                  <button id="send-email" type="button" onclick="sendEmail()">Send Email</button>
+                  <button id="cancel-email" >Cancel</button>
+              </form>
 							
 
 						</div>
@@ -436,9 +430,23 @@
    
     
     </main>
+<<<<<<< HEAD
     <script src="../scripts/report-page.mjs" type="module"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+=======
+    <script src="../scripts/report-page.js" type="module"></script>
+    <script src="assets/JavaScript/scrollTemplates.js"></script>
+    <script src="../scripts/preview-page.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+
+>>>>>>> c9c505ddba8b4e0ea5e1d9a8fdaf5c956e4a7bcc
   </body>
 </html>

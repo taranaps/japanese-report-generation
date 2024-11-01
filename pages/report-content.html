@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Report</title>
+    <link rel="stylesheet" href="../styles/report-content.css">
+    <script type="module" src="../scripts/report-content.mjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="report-container">
+        <!-- Number of Batches -->
+        <div class="info-box" id="num-batches-box">
+            <h3>Number of Batches</h3>
+            <p id="num-batches">Loading...</p>
+        </div>
+         <!-- Number of Trainees -->
+         <div class="info-box" id="num-trainees-box">
+            <h3>Number of Trainees</h3>
+            <p id="num-trainees">Loading...</p>
+        </div>
+
+        <!-- Total Sessions Carousel -->
+        <div class="carousel-container">
+            <h3>Total Number of Sessions Till Date</h3>
+            <div class="carousel" id="sessions-carousel">
+                <!-- Carousel slides will be dynamically generated -->
+            </div>
+        </div>
+
+        <!-- Batch Duration Till Date Carousel -->
+        <div class="carousel-container">
+            <h3>Batch Duration Till Date</h3>
+            <div class="carousel" id="duration-carousel">
+                <!-- Carousel slides will be dynamically generated -->
+            </div>
+        </div>
+
+        <!-- Certification Level Carousel -->
+        <div class="carousel-container">
+            <h3>Certification Level</h3>
+            <div class="carousel" id="certification-carousel">
+                <!-- Carousel slides will be dynamically generated -->
+            </div>
+        </div>
+
+        <!-- Trainer Section -->
+        <section id="trainer-section">
+            <h3>Sensei/Trainer</h3>
+            <div id="trainer-box" class="info-box">Loading...</div>
+        </section>
+
+
+        <!-- Trainer Section -->
+        <!-- <section id="trainer-section">
+            <h2>Trainer Names</h2>
+            <div id="trainer-box" class="info-box"></div>
+        </section> -->
+
+        <canvas id="batch-attendance-chart" width="400" height="200"></canvas>
+
+        <!-- Batches Section -->
+        <section id="batches-section"></section>
+    </div>
+</body>
+</html>

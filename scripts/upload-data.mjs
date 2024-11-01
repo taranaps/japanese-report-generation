@@ -12,6 +12,8 @@ const closeUploadModal = document.getElementById('closeUploadModal');
 const messageModal = document.getElementById('messageModal');
 const messageContent = document.getElementById('messageContent');
 const closeMessageModal = document.getElementById('closeMessageModal');
+const tableButton = document.getElementById('tableButton');
+const reportButton = document.getElementById('reportButton');
 // Show the upload modal
 openUploadModal.addEventListener('click', () => {
     document.body.classList.add('modal-active');
@@ -29,6 +31,11 @@ tableButton.addEventListener('click', () => {
     window.location.href = 'table.html';
 });
 
+// Redirect to report-content.html
+reportButton.addEventListener('click', () => {
+    window.location.href = 'report-content.html';
+});
+
 // Close message modal
 closeMessageModal.addEventListener('click', () => {
     messageModal.style.display = 'none';
@@ -39,7 +46,7 @@ uploadButton.addEventListener('click', async () => {
     const file = fileInput.files[0];
 
     if (!file || (!file.name.endsWith('.xlsx') && !file.name.endsWith('.csv'))) {
-        showMessageModal('Please upload a valid Excel or CSV file!', 'error');        
+        showMessageModal('Please upload a valid Excel or CSV file!', 'error');
         return;
     }
 
@@ -54,16 +61,15 @@ uploadButton.addEventListener('click', async () => {
         const sheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
 
-        const trainees = processTraineeData(sheet, jsonData);
-
-        if (trainees.length > 0) {
+        const validationResult = validateData(jsonData);
+        if (validationResult.isValid) {
+            const trainees = processTraineeData(sheet, jsonData);
             const collectionName = getCollectionName(trainees[0].month);
             await uploadDataToFirestore(collectionName, trainees);
             await updateMetaCollection(collectionName);
-            
             showMessageModal('File was successfully uploaded!', 'success');
         } else {
-            showMessageModal('No valid trainee data found!', 'error');
+            showMessageModal(validationResult.errorMessage, 'error');
         }
     } catch (err) {
         console.error('Error processing file:', err);
@@ -84,6 +90,103 @@ function getCollectionName(month) {
     return `${month.toLowerCase()}-${year}`;
 }
 
+// Validate the uploaded data against the specified rules
+function validateData(data) {
+    const expectedHeaders = [
+        'Trainer Name', 'Batch Name', 'Number of Sessions Till Date', 'Number of Sessions (Month)',
+        'Batch Duration Till Date', 'Batch Duration (Month)', 'Certification Level', 'Month',
+        'Trainee Name', 'DU', 'Avg Attendance Percentage', 'Evaluation'
+    ];
+
+    // Check headers
+    const headers = Object.keys(data[0]);
+    for (const header of expectedHeaders) {
+        if (!headers.includes(header)) {
+            return { isValid: false, errorMessage: `Missing header: ${header}` };
+        }
+    }
+
+    // Ensure the sub-headers under 'Evaluation' exist
+    // const evaluationSubHeaders = ['Evaluation No', 'Date', 'Evaluation Name'];
+    // const evaluationHeadersPresent = evaluationSubHeaders.every(subHeader => headers.includes(subHeader));
+    // if (!evaluationHeadersPresent) {
+    //     return { isValid: false, errorMessage: `Missing evaluation sub-headers. Please check the 'Evaluation' section.` };
+    // }
+
+    // Validation rules
+    for (let row of data) {
+        if (row['Batch Name'] && !/^Batch \d+$/.test(row['Batch Name'])) {
+            return { isValid: false, errorMessage: `Invalid Batch Name format for '${row['Batch Name']}'. Expected format: 'Batch [num]'` };
+        }
+
+        if (row['Certification Level'] && !/^(N[1-5])$/.test(row['Certification Level'])) {
+            return { isValid: false, errorMessage: `Invalid Certification Level: '${row['Certification Level']}'. Expected values: N1, N2, N3, N4, N5` };
+        }
+
+        if (row['Month'] && !['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].includes(row['Month'])) {
+            return { isValid: false, errorMessage: `Invalid Month: '${row['Month']}'. Expected a month name.` };
+        }
+
+        if (row['DU'] && !/^DU \d+$/.test(row['DU'])) {
+            return { isValid: false, errorMessage: `Invalid DU format: '${row['DU']}'. Expected format: 'DU [num]' where num is from 1 to 6` };
+        }
+
+        if (row['Avg Attendance Percentage'] && (row['Avg Attendance Percentage'] < 1 || row['Avg Attendance Percentage'] > 100)) {
+            return { isValid: false, errorMessage: `Avg Attendance Percentage must be between 1 and 100.` };
+        }
+
+        // // Evaluation section validation
+        // if (row['Evaluation']) {
+        //     const evaluationNumber = row['Evaluation No'];
+        //     const evaluationDate = row['Date'];
+        //     const evaluationName = row['Evaluation Name'];
+
+        //     if (evaluationNumber && !/^E \d+$/.test(evaluationNumber)) {
+        //         return { isValid: false, errorMessage: `Invalid Evaluation No: '${evaluationNumber}'. Expected format: 'E [num]'` };
+        //     }
+
+        //     if (evaluationDate && !isValidDate(evaluationDate, row['Month'])) {
+        //         return { isValid: false, errorMessage: `Invalid Date: '${evaluationDate}'. Expected format: 'DD/MM/YYYY' with the month matching '${row['Month']}'` };
+        //     }
+
+        //     // Check for required values in the evaluation columns
+        //     if ((evaluationName && !evaluationDate) || (evaluationDate && !evaluationName)) {
+        //         return { isValid: false, errorMessage: `If Evaluation Name is provided, Date must also be provided and vice versa.` };
+        //     }
+        // }
+
+        // Check if Trainee Name has corresponding values in all columns
+        // if (row['Trainee Name'] && Object.values(row).some(value => value === "")) {
+        //     return { isValid: false, errorMessage: `All fields for trainee '${row['Trainee Name']}' must have values.` };
+        // }
+    }
+
+    return { isValid: true };
+}
+
+// Check if the date is valid and matches the month
+function isValidDate(dateString, expectedMonth) {
+    const dateParts = dateString.split('/');
+    if (dateParts.length !== 3) return false;
+
+    const day = parseInt(dateParts[0]);
+    const month = parseInt(dateParts[1]) - 1; // JS months are 0-indexed
+    const year = parseInt(dateParts[2]);
+
+    const date = new Date(year, month, day);
+    return date.getFullYear() === year && date.getMonth() === month && date.getDate() === day && isSameMonth(date, expectedMonth);
+}
+
+// Check if the date month matches the expected month
+function isSameMonth(date, expectedMonth) {
+    const monthNames = [
+        'January', 'February', 'March', 'April',
+        'May', 'June', 'July', 'August',
+        'September', 'October', 'November', 'December'
+    ];
+    return monthNames[date.getMonth()] === expectedMonth;
+}
+
 // Convert Excel dates to JavaScript Date objects
 function convertExcelDate(excelDate) {
     const date = XLSX.SSF.parse_date_code(excelDate);
@@ -93,8 +196,8 @@ function convertExcelDate(excelDate) {
 // Process Excel data into structured objects
 function processTraineeData(sheet, data) {
     const trainees = [];
-    let currentBatch = "", certLevel = "", month = "", trainerNames = [], 
-    nOfSessionsTillDate = "", nOfSessionsMonth = "", batchDurTillDate = "", batchDurMonth = ""; 
+    let currentBatch = "", certLevel = "", month = "", trainerNames = [],
+        nOfSessionsTillDate = "", nOfSessionsMonth = "", batchDurTillDate = "", batchDurMonth = "";
 
     // Dynamically locate key rows for evaluations
     let { evalNumbers, evalDates, evalNames } = locateEvaluationRows(data);
@@ -179,34 +282,34 @@ function extractEvaluations(row, evalNumbers, evalDates, evalNames) {
 
     const validEvalNumbers = evalNumbers
         .filter(num => typeof num === 'string' && num.trim() !== '' && !num.toLowerCase().includes("evaluation no"))
-        .map(num => num.trim());  
+        .map(num => num.trim());
 
     const validEvalDates = evalDates
         .filter(num => typeof num === 'number' && !isNaN(num))
-        .map(num => convertExcelDate(num));  
+        .map(num => convertExcelDate(num));
 
     const validEvalNames = evalNames
         .filter(num => typeof num === 'string' && num.trim() !== '' && !num.toLowerCase().includes("evaluation name"))
-        .map(num => num.trim());  
+        .map(num => num.trim());
 
     evaluationKeys.forEach((key, index) => {
-        const evalNo = validEvalNumbers[index] || `Evaluation ${index + 1}`; 
+        const evalNo = validEvalNumbers[index] || `Evaluation ${index + 1}`;
         const score = row[key] !== undefined ? row[key].toString().trim() : "Absent";
         const evaluationDate = validEvalDates[index] ? validEvalDates[index].toLocaleDateString() : "N/A";
         const evaluationName = validEvalNames[index] || "N/A";
 
         evaluations.push({
-            evaluationNo: evalNo,  
+            evaluationNo: evalNo,
             evaluationDate: evaluationDate,
             evaluationName: evaluationName,
             evaluationScore: score
         });
         console.log('---Evaluation:', {
-                        evaluationNo: evalNo,
-                        evaluationDate: evaluationDate,
-                        evaluationName: evalNames[index],
-                        evaluationScore: score
-                    });
+            evaluationNo: evalNo,
+            evaluationDate: evaluationDate,
+            evaluationName: evalNames[index],
+            evaluationScore: score
+        });
     });
 
     return evaluations;
@@ -219,7 +322,7 @@ async function uploadDataToFirestore(collectionName, trainees) {
     // Check if collection with same data already exists
     const existingDocsSnapshot = await getDocs(colRef);
     const existingDocs = existingDocsSnapshot.docs.map(doc => doc.data());
-    
+
     // Convert trainees and existingDocs to JSON strings for comparison
     const newData = JSON.stringify(trainees);
     const existingData = JSON.stringify(existingDocs);
@@ -272,7 +375,7 @@ async function updateMetaCollection(collectionName) {
 async function deleteCollectionAndMeta(collectionName) {
     const colRef = collection(db, collectionName);
     const existingDocsSnapshot = await getDocs(colRef);
-    
+
     for (const docSnapshot of existingDocsSnapshot.docs) {
         await deleteDoc(docSnapshot.ref);
     }
