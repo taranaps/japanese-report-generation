@@ -141,7 +141,63 @@ body {
   /* box-sizing: border-box; */
 }
 
+#trainee-details-template1{
+  box-sizing: border-box;
+}
+#trainee-details-template1 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 30px auto;
+  color:#7f719e ;
+}
+#trainee-details-template1 th{
+  background-color: #8061c3;
+  color: rgb(250, 245, 245);
+}
+#trainee-details-template1 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #000000;
+  border: 1px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}  
+#trainee-details-template1 td{
+  background: #bda7ec;
+}
 
+
+#evaluation-table-template1{
+  box-sizing: border-box;
+}
+#evaluation-table-template1 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 30px auto;
+}
+#evaluation-table-template1 th{
+  background-color: #8061c3;
+  color: rgb(250, 245, 245);
+}
+#evaluation-table-template1 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #000000;
+  border: 1px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}  
+#evaluation-table-template1 td{
+  background: #bda7ec;
+}
+#certificationBarChart{
+  margin: auto;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
 .button-container {
   position: fixed;
   bottom: 20px;
@@ -350,7 +406,7 @@ body {
   border: solid black 1px;
   border-radius: 10px;
   background: white;
-  height: 150px;
+  height: auto;
   width: 95%;
   margin: auto;
   position: relative;
@@ -371,6 +427,42 @@ body {
   width: 100%;
 margin-top: 30px;
   
+}
+#trainer-name-template1{
+  margin: 20px;
+  padding: auto;
+}
+#trainer-name-template1 h3{
+  color: #8061c3;
+  font-size: 2.3rem;
+  text-align: center;
+  /* margin-top: 10px; */
+  /* font-weight: 100; */
+  
+}
+
+#progressBarsContainer-templae1{
+  width: 90%;
+  margin: 10px;
+}
+/* Progress bar background */
+
+#progressBarsContainer-templae1 .progress-bar {
+  width: 100%;
+  background-color: #e0e0e0; /* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+}
+
+/* Inner progress bar */
+#progressBarsContainer-templae1 .progress {
+  height: 20px; /* Height of the progress indicator */
+  background-color: #76c7c0; /* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; /* Smooth transition for width change */
+}
+#progressBarsContainer-templae1 label{
+  color: #000000;
 }
 .attendance-heading-template1{
   border-radius: 10px;
@@ -426,7 +518,7 @@ margin-top: 30px;
   border: solid black 1px;
   border-radius: 10px;
   background: white;
-  height: 300px;
+  height: auto;
   width: 100%;
   margin: auto;
   position: relative;
@@ -459,7 +551,7 @@ margin-top: 30px;
   border: solid black 1px;
   border-radius: 10px;
   background: white;
-  height: 300px;
+  height: auto;
   width: 100%;
   margin: auto;
   position: relative;
@@ -533,6 +625,10 @@ margin-top: 30px;
   position: relative;
   top: 10px;
  
+}
+.inner-level-template1{
+  height: auto;
+  width: auto;
 }
 
 /* template 4 */
@@ -755,11 +851,54 @@ font-size: 20px;
   margin-top: 35px;
 
 }
+#trainee-details-template2 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+#trainee-details-template2 th{
+  background-color: #69f170;
+  color: rgb(250, 245, 245);
+}
+#trainee-details-template2 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ffffff;
+  color: #000000;
+  border: 2px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}
+#trainee-details-template2 td{
+  background:#C3FFC0;
+}
+
+#evaluation-table-template2 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+#evaluation-table-template2 th{
+  background-color: #69f170;
+  color: rgb(250, 245, 245);
+}
+#evaluation-table-template2 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ffffff;
+  color: #000000;
+  border: 2px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}
+#evaluation-table-template2 td{
+  background:#C3FFC0;
+}
 
 .trainee-list-template2{
   border: solid 1px rgb(8, 241, 144);
   width: 60%;
-  height: 350px;
+  height: auto;
   border-radius: 10px;
   background-color: #ffffff;
 }
@@ -773,6 +912,12 @@ font-size: 20px;
   background-color: #ffffff;
   margin-bottom: 20px;
 }
+.trainee-list-template2 h3{
+  margin: 10px;
+  font-size: 2em;
+  text-align: center;
+}
+
 #template2-month{
   text-align: center;
   font-size: 18px;
@@ -937,7 +1082,50 @@ canvas {
     border-radius: 25px;
 
   }
+  /* .graph-title{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    margin-left: 300px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
   
+  } */
+  
+  .graph-title-trainee{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    margin-left: 300px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  
+  }
+  .graph-title-attendance{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    margin-left: 300px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  
+  
+  }
   .graph-title{
     background-color: #0062FF;
     color: white;
@@ -955,6 +1143,22 @@ canvas {
   .t3graph{
     background-color: #ffe6cc;
     width: 100%;
+    height: 250px;
+    margin-bottom: 15px;
+    border: 2px solid black;
+    border-radius: 20px;
+  }
+  .t3graph-attendance{
+    background-color: #ffe6cc;
+    width: 49%;
+    height: 250px;
+    margin-bottom: 15px;
+    border: 2px solid black;
+    border-radius: 20px;
+  }
+  .t3graph-trainee{
+    background-color: #ffe6cc;
+    width: 49%;
     height: 250px;
     margin-bottom: 15px;
     border: 2px solid black;

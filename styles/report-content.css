@@ -1,0 +1,96 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+.report-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Styles */
+#trainer-section, .batch-container {
+    margin-bottom: 30px;
+}
+
+h2, h3 {
+    color: #333;
+}
+
+.info-box {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #e0f7fa;
+    border-radius: 4px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #00796b;
+    color: white;
+}
+
+.evaluation-table {
+    margin-top: 20px;
+}
+
+/* Chart Styles */
+.chart {
+    margin: 20px 0;
+}
+
+.info-box {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #e0f7fa;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Carousel Styles */
+.carousel-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e0f7fa;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-slide {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.carousel-slide.active {
+    display: block;
+    animation: fade 1s ease-in-out;
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

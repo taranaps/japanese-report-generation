@@ -6,7 +6,8 @@
     <title>Report Generation</title>
     <link rel="stylesheet" href="../styles/report-page.css" />
     <link rel="stylesheet" href="../styles/preview-page.css">
-    <script src="../scripts/report-page.js" defer type="module"></script>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <!-- <script src="../scripts/report-page.js" defer type="module"></script> -->
   </head>
   <body>
     <header>
@@ -53,6 +54,13 @@
               />
             </div>
             <div class="arrow" id="arrow-down">&#9660;</div>
+          </div><div class="select-batch">
+			<select id="batchSelect">
+				<option value="">Select Batch</option>
+			</select>
+		  </div>
+		  
+		
           </div>
          <div class="select-theme" style="margin-top:30px ;">
           <label for="selectcolor">Choose the theme</label>
@@ -82,7 +90,8 @@
                         <p>Number of Learners</p>
                       </div>
                       <div class="inner-learners-template1">
-                        <!-- Learners data will go here -->
+                        <canvas id="trainee-piechart-template1"></canvas>
+
                       </div>
                     </div>
                     <div class="trainer-container-template1">
@@ -90,25 +99,27 @@
                         <p>Trainer</p>
                       </div>
                       <div class="inner-trainer-template1">
-                        <!-- Trainers data will go here -->
+                        <div id="trainer-name-template1"></div>
                       </div>
                     </div>
                     <div class="session-container-template1">
                         <div class="session-template1" id="session-template1">
                       <p>Total Sessions Till Date</p></div>
-                      <div class="inner-session-template1"></div>
+                      <div class="inner-session-template1">
+						<div id="progressBarsContainer-templae1"></div>
+					  </div>
                     </div>
                     <div class="current-level-template1">
                         <div class="level-heading" id="level-heading">
-                      <p>Total Batch Duration</p></div>
+                      <p>Current Level</p></div>
                       <div class="inner-level-template1">
-
+						<canvas id="certificationBarChart"></canvas>
                     
                       </div>
                     </div>
                     <div class="batch-duration-template1">
                         <div class="duration-heading-template1" id="duration-heading-template1">
-                      <p>Current Level</p></div>
+                      <p>Total Batch Duration</p></div>
                       <div class="duration-body-template1">
 
                       </div>
@@ -128,7 +139,7 @@
                         <div class="attendance-heading-template1" id="attendance-heading-template1">
                       <p>Average Attendance</p></div>
                       <div class="attendance-body-template1">
-
+						<canvas id="attendance-body-template1"></canvas>
                       </div>
 
                     </div>
@@ -136,7 +147,7 @@
                         <div class="evaluation-heading-template1" id="evaluation-heading-template1">
                       <p>Trainee Details</p></div>
                       <div class="evaluation-body-template1">
-
+						<div id="trainee-details-template1"></div>
                       </div>
                     </div>
                    
@@ -147,7 +158,7 @@
                     <div class="batch-evaluation-heading-template1" id="batch-evaluation-heading-template1">
                   <p>Evaluation Details</p></div>
                   <div class="batch-evaluation-body-template1">
-
+					<div id="evaluation-table-template1"></div>
                   </div>
                 </div>
               </div>
@@ -196,7 +207,8 @@
                 
                         <div class="details-template2">
                             <div class="trainee-list-template2">
-
+								<h3>Trainee Details</h3>
+								<div id="trainee-details-template2"></div>
                             </div>
                             <div class="details-right-template2">
                                 <div class="batch-duration-template2">
@@ -262,7 +274,7 @@
                     </div>
                   </div>
         
-                  <div class="t3batchname"><h3 class="batch-title">Batch 1</h3>
+                  <div class="t3batchname"><h3 class="batch-title"></h3>
                     <div class="t3sessions">
                       <h3 class="">Total Sessions: </h3>
                       <h3 class="">Total Duration: </h3>
@@ -271,10 +283,12 @@
 
                   </div>
                   
-<br>
+<br>		
                  
-                    <div class="graph-title">TRAINEE ATTENDANCE</div>
-                    <div class="t3graph" id="t3graph">
+                    <div class="graph-title-trainee">TRAINEE DETAILS</div>
+                    <div class="t3graph-trainee" id="t3graph">
+					<div class="graph-title-attendance">TRAINEE ATTENDANCE</div>
+					<div class="t3graph-attendance">
                       
                   </div>
 
@@ -299,7 +313,7 @@
   
                 <div class="t4body">
                   <div class="t4leftbody">
-                   <div class="t4batch"><h2>Batch 1</h2></div>
+                   <div class="t4batch"><h2></h2></div>
                    <div class="t4trainee">
                     <div class="traineedetails"></div>
                     <div class="traineedetails"></div>
@@ -392,29 +406,23 @@
 						<div class="share-popup" id="share-popup">
 							<div class="share-overley"></div>
 							<div class="share-email" id="share-email">
-								<form id="my-form" onsubmit="formSubmit()"> 
-                  <label for="email-input">Recipient</label><br><br>
-							<input type="text" id="email-input" placeholder="email" required>
-							<br><br>
-						
-							<label for="subject-input">Subject:</label><br><br>
-							<input type="text" id="subject-input" placeholder="Subject" required>
-							<br><br>
-						
-							<label for="message-input">Message:</label><br><br>
-							<textarea id="message-input" placeholder="Write your message here..." rows="4" cols="50" required></textarea>
-							<br><br>
-				
-							<label for="file-input">Select File to Attach:</label>
-							<input type="file" id="file-input" name="attachment" required><br><br>
-							<br><br>
-						
-							<button id="send-email" onclick="sendEmailWithAttachment()">Send Email</button>
-							<button id="cancel-email" >Cancel</button>
-
-							
-
-								</form>
+								<form id="email-form" enctype="multipart/form-data">
+                  <label id="label1" for="to">To:</label>
+                  <input type="email" id="to" name="to" required><br><br>
+          
+                  <label id="label2" for="subject">Subject:</label>
+                  <input type="text" id="subject" name="subject" value="Japanese Training Report" required><br><br>
+          
+                  <label id="label3" for="message">Message:</label>
+                  <textarea id="message" name="message" required>Please find below the Japanese Training Report of the month 
+                  </textarea><br><br>
+          
+                  <label id="label4" for="attachment">Attachment:</label>
+                  <input id="file-input" type="file" id="attachment" name="attachment"><br><br>
+          
+                  <button id="send-email" type="button" onclick="sendEmail()">Send Email</button>
+                  <button id="cancel-email" >Cancel</button>
+              </form>
 							
 
 						</div>
@@ -435,7 +443,17 @@
    
     
     </main>
+
+    <script src="../scripts/report-page.mjs" type="module"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../scripts/report-page.js" type="module"></script>
-    <script src="assets/JavaScript/scrollTemplates.js"></script>
+    <script src="../scripts/preview-page.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
   </body>
 </html>
