@@ -222,15 +222,45 @@ body {
 
 /* template1   */
 .template-one{
-  width: 70%;
+  height: auto;
+  background: #fcfcfd;
+  width: 800px;
+  border-radius: 8px;
+  position: absolute;
+  top: 140px;
+  left: 60px;
+  box-sizing: border-box;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-left: 300px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: solid 1px #4d4d4d;
+  /* height: auto;
+  background: #fcfcfd;
+  width: 800px;
+  border-radius: 8px;
+  position: absolute;
+  /* top: 140px; */
+  /* left: 60px; */
+  /* box-sizing: border-box;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 30px; */
+  /* margin-left: 300px; */
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: solid 1px #4d4d4d; */ 
+  /* width: 1000px;
   padding: 20px;
   margin-top: 40px;
   margin-left: 200px;
   height: 1500px;
   box-sizing: border-box;
-  /* background: rgb(248, 245, 245); */
+  background: rgb(248, 245, 245); */
 }
-
+/* 
 .container-template1 {
   height: auto;
   background: #fcfcfd;
@@ -247,7 +277,7 @@ body {
   margin-left: 300px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   border: solid 1px #4d4d4d;
-}
+} */
 
 .header-template1 {
   background: #8061c3;
@@ -447,17 +477,27 @@ margin-top: 30px;
 }
 /* Progress bar background */
 
-#progressBarsContainer-templae1 .progress-bar {
+.progress-bar {
   width: 100%;
-  background-color: #e0e0e0; /* Background color of the progress bar */
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #8061c3;/* Background color of the progress bar */
   border-radius: 5px; /* Rounded corners */
   overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+.progress-bar h3{
+  /* padding: auto; */
+  padding-top: 10px;
+  text-align: center;
 }
 
 /* Inner progress bar */
-#progressBarsContainer-templae1 .progress {
-  height: 20px; /* Height of the progress indicator */
-  background-color: #76c7c0; /* Default color for the progress */
+.progress {
+  margin: 10px;
+  height: 40px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
   border-radius: 5px; /* Rounded corners */
   transition: width 0.4s ease; /* Smooth transition for width change */
 }
@@ -585,7 +625,7 @@ margin-top: 30px;
   border: solid black 1px;
   border-radius: 10px;
   background: white;
-  height: 100px;
+  height: auto;
   width: 100%;
   margin: auto;
   position: relative;
@@ -619,7 +659,7 @@ margin-top: 30px;
   border: solid black 1px;
   border-radius: 10px;
   background: white;
-  height: 100px;
+  height: auto;
   width: 100%;
   margin: auto;
   position: relative;

@@ -505,6 +505,8 @@ async function getBatchDetailsFromLatestCollection() {
                     batchDurationTillDate: trainee.batchDurationTillDate || 'N/A',
                     certificationLevel: trainee.certificationLevel || 'N/A',
                     numberOfSessionsTillDate: trainee.numberOfSessionsTillDate || 'N/A',
+                    batchDurationMonth: trainee.batchDurationMonth || 'N/A',
+                    numberOfSessionsMonth: trainee.numberOfSessionsMonth || 'N/A',
                     trainerName: trainee.trainerName || 'N/A' // Set trainer name only once
                 };
             }
@@ -523,34 +525,53 @@ async function getBatchDetailsFromLatestCollection() {
     }
 }
 
-function renderTotalSessionProgressBars(batchDetails,id) {
-    const container = document.getElementById(id); // Assume there's a container for the progress bars
-
+function renderTotalSessionProgressBars(batchDetails,sessionTillDateId,batchDurationId,sessionDurationId,selectedBatch) {
+    const batchSessionContainer = document.getElementById(sessionTillDateId); // Assume there's a container for the progress bars
+    const batchDurationContainer = document.getElementById(batchDurationId);
+    const sessionDurationContainer = document.getElementById(sessionDurationId);
     // Clear existing content
-    container.innerHTML = '';
+    batchSessionContainer.innerHTML = '';
+    batchDurationContainer.innerHTML = '';
+    sessionDurationContainer.innerHTML = '';
 
     // Create progress bars for each batch
-    for (const [batchName, details] of Object.entries(batchDetails)) {
-        const { numberOfSessionsTillDate, maxSessions } = details;
-
-        const progress = (numberOfSessionsTillDate / 300) * 100;
-
-        const progressBarHTML = `
-            <div class="progress-bar-container">
-                <label>${batchName} - ${numberOfSessionsTillDate} Sessions</label>
-                <div class="progress">
-                    <div class="progress-bar" style="width: ${progress}%;"></div>
-                </div>
+    
+for (const [batchName, details] of Object.entries(batchDetails)) {
+    const { numberOfSessionsTillDate ,batchDurationTillDate,numberOfSessionsMonth,batchDurationMonth} = details;
+    const progressBarHTML = `
+            <div class="progress">
+                <div class="progress-bar"><h3 >${batchName} - ${numberOfSessionsTillDate} Sessions</h3></div>
             </div>
-        `;
+    `;
+    batchSessionContainer.innerHTML += progressBarHTML;
 
-        container.innerHTML += progressBarHTML;
+
+    const batchDurationTilldateHTML = `
+    <div class="progress">
+        <div class="progress-bar"><h3 >${batchName} - ${batchDurationTillDate} </h3></div>
+    </div>
+`;
+    batchDurationContainer.innerHTML += batchDurationTilldateHTML;
+
+    if(batchName===selectedBatch){
+        const sessionDurationHTML = `
+        <div class="progress">
+            <div class="progress-bar"><h3>Total Duration: ${batchDurationMonth} </h3></div>
+        </div>
+        <div class="progress">
+        <div class="progress-bar"><h3 >Total Sessions: ${numberOfSessionsMonth} </h3></div>
+        </div>
+        `
+        sessionDurationContainer.innerHTML += sessionDurationHTML;
     }
+
+    
 }
-async function loadAndDisplayBatchDetails(id) {
+}
+async function loadAndDisplayBatchDetails(sessionTillDateId,batchDurationId,sessionDurationId,selectedBatch) {
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (batchDetails) {
-        renderTotalSessionProgressBars(batchDetails,id);
+        renderTotalSessionProgressBars(batchDetails,sessionTillDateId,batchDurationId,sessionDurationId,selectedBatch);
     }
 }
 
@@ -736,7 +757,7 @@ function displayTrainers(batchDetails, id) {
 
                             initTrainerDetails('trainer-name-template1');
 
-                            loadAndDisplayBatchDetails('progressBarsContainer-templae1')
+                            loadAndDisplayBatchDetails('progressBarsContainer-templae1','whole-duration-data-templae1','duration-sessions-data-template1',selectedBatch)
 
                             break;
                         case "template2":
@@ -752,16 +773,16 @@ function displayTrainers(batchDetails, id) {
                             template3Header.textContent = selectedBatch; // Display selected batch instead
                             await getAttendanceData(filteredData,"t3graph"); 
                             
-                            traineeTable = await getTraineeDetails(filteredData,"trainee-details-template3") // Call your attendance data function
-                            traineeDetailsTemplate1.appendChild(traineeTable);
+                            // traineeTable = await getTraineeDetails(filteredData,"trainee-details-template3") // Call your attendance data function
+                            // traineeDetailsTemplate1.appendChild(traineeTable);
                             break;
                         case "template4":
                             const template4Header = document.getElementById("t4date");
                             template4Header.textContent = selectedBatch; // Display selected batch instead
                             await getAttendanceData(filteredData,"attendanceChart"); 
                             
-                            traineeTable = await getTraineeDetails(filteredData,"trainee-details-template2") // Call your attendance data function
-                            traineeDetailsTemplate1.appendChild(traineeTable);
+                            // traineeTable = await getTraineeDetails(filteredData,"trainee-details-template2") // Call your attendance data function
+                            // traineeDetailsTemplate1.appendChild(traineeTable);
                             break;
                     }
                 }
