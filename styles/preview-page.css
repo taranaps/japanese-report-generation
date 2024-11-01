@@ -351,3 +351,28 @@ textarea {
 #file-input{
     color: black;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media print {
+    #template2{
+        page-break-inside: avoid; /* Prevents page break inside this element */
+    }
+}
