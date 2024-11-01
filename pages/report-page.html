@@ -53,7 +53,13 @@
               />
             </div>
             <div class="arrow" id="arrow-down">&#9660;</div>
-          </div>
+          </div><div class="select-batch">
+			<select id="batchSelect">
+				<option value="">Select Batch</option>
+			</select>
+		  </div>
+		  
+		
           <div class="workspace">
             <!-- <div id="editor"><h2>Select a template to start editing!</h2></div> -->
             
@@ -71,7 +77,8 @@
                         <p>Number of Learners</p>
                       </div>
                       <div class="inner-learners-template1">
-                        <!-- Learners data will go here -->
+                        <canvas id="trainee-piechart-template1"></canvas>
+
                       </div>
                     </div>
                     <div class="trainer-container-template1">
@@ -79,25 +86,27 @@
                         <p>Trainer</p>
                       </div>
                       <div class="inner-trainer-template1">
-                        <!-- Trainers data will go here -->
+                        <div id="trainer-name-template1"></div>
                       </div>
                     </div>
                     <div class="session-container-template1">
                         <div class="session-template1">
                       <p>Total Sessions Till Date</p></div>
-                      <div class="inner-session-template1"></div>
+                      <div class="inner-session-template1">
+						<div id="progressBarsContainer-templae1"></div>
+					  </div>
                     </div>
                     <div class="current-level-template1">
                         <div class="level-heading">
-                      <p>Total Batch Duration</p></div>
+                      <p>Current Level</p></div>
                       <div class="inner-level-template1">
-
+						<canvas id="certificationBarChart"></canvas>
                     
                       </div>
                     </div>
                     <div class="batch-duration-template1">
                         <div class="duration-heading-template1">
-                      <p>Current Level</p></div>
+                      <p>Total Batch Duration</p></div>
                       <div class="duration-body-template1">
 
                       </div>
@@ -125,7 +134,7 @@
                         <div class="evaluation-heading-template1">
                       <p>Trainee Details</p></div>
                       <div class="evaluation-body-template1">
-
+						<div id="trainee-details-template1"></div>
                       </div>
                     </div>
                    
@@ -136,7 +145,7 @@
                     <div class="batch-evaluation-heading-template1">
                   <p>Evaluation Details</p></div>
                   <div class="batch-evaluation-body-template1">
-
+					<div id="evaluation-table-template1"></div>
                   </div>
                 </div>
               </div>
@@ -185,7 +194,8 @@
                 
                         <div class="details-template2">
                             <div class="trainee-list-template2">
-
+								<h3>Trainee Details</h3>
+								<div id="trainee-details-template2"></div>
                             </div>
                             <div class="details-right-template2">
                                 <div class="batch-duration-template2">
@@ -251,7 +261,7 @@
                     </div>
                   </div>
         
-                  <div class="t3batchname"><h3 class="batch-title">Batch 1</h3>
+                  <div class="t3batchname"><h3 class="batch-title"></h3>
                     <div class="t3sessions">
                       <h3 class="">Total Sessions: </h3>
                       <h3 class="">Total Duration: </h3>
@@ -260,10 +270,12 @@
 
                   </div>
                   
-<br>
+<br>		
                  
-                    <div class="graph-title">TRAINEE ATTENDANCE</div>
-                    <div class="t3graph">
+                    <div class="graph-title-trainee">TRAINEE DETAILS</div>
+                    <div class="t3graph-trainee">
+					<div class="graph-title-attendance">TRAINEE ATTENDANCE</div>
+					<div class="t3graph-attendance">
                       
                   </div>
 
@@ -288,7 +300,7 @@
   
                 <div class="t4body">
                   <div class="t4leftbody">
-                   <div class="t4batch"><h2>Batch 1</h2></div>
+                   <div class="t4batch"><h2></h2></div>
                    <div class="t4trainee">
                     <div class="traineedetails"></div>
                     <div class="traineedetails"></div>
