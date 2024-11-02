@@ -66,6 +66,7 @@ function updateArrowVisibility() {
 updateArrowVisibility();
 
 //--------------------TEMPLATE SELECTION-------------------------//
+let selectedTemplate = "";
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -427,7 +428,7 @@ for (const [batchName, details] of Object.entries(batchDetails)) {
     const { numberOfSessionsTillDate ,batchDurationTillDate,numberOfSessionsMonth,batchDurationMonth} = details;
     const progressBarHTML = `
             <div class="progress">
-                <div class="progress-bar"><h3 >${batchName} - ${numberOfSessionsTillDate} Sessions</h3></div>
+                <div class="progress-bar" id="progress-bar-no-of-sessions"><h3 >${batchName} - ${numberOfSessionsTillDate} Sessions</h3></div>
             </div>
     `;
     batchSessionContainer.innerHTML += progressBarHTML;
@@ -435,7 +436,7 @@ for (const [batchName, details] of Object.entries(batchDetails)) {
 
     const batchDurationTilldateHTML = `
     <div class="progress">
-        <div class="progress-bar"><h3 >${batchName} - ${batchDurationTillDate} </h3></div>
+        <div class="progress-bar" id="progress-bar-duration-till"><h3 >${batchName} - ${batchDurationTillDate} </h3></div>
     </div>
 `;
     batchDurationContainer.innerHTML += batchDurationTilldateHTML;
@@ -443,10 +444,10 @@ for (const [batchName, details] of Object.entries(batchDetails)) {
     if(batchName===selectedBatch){
         const sessionDurationHTML = `
         <div class="progress">
-            <div class="progress-bar"><h3>Total Duration: ${batchDurationMonth} </h3></div>
+            <div class="progress-bar id="progress-bar-duration-month"><h3>Total Duration: ${batchDurationMonth} </h3></div>
         </div>
         <div class="progress">
-        <div class="progress-bar"><h3 >Total Sessions: ${numberOfSessionsMonth} </h3></div>
+        <div class="progress-bar" id="progress-bar-session-month"><h3 >Total Sessions: ${numberOfSessionsMonth} </h3></div>
         </div>
         `
         sessionDurationContainer.innerHTML += sessionDurationHTML;
@@ -730,7 +731,7 @@ async function populateBatchDataTemplate1() {
 }
 
 
-    let selectedTemplate = "";
+    // let selectedTemplate = "";
     
     images.forEach(image => {
         image.addEventListener('click', async function() {
@@ -895,71 +896,10 @@ const selectColor = document.getElementById("selectcolor");
       
         console.log(value);
 
-        let firstColorDiv=  selectedTemplate;
+        let firstColorDiv =  selectedTemplate;
         console.log(firstColorDiv.classList[0]);
-        // console.log(firstColorDiv.children[0].children[0])
+
         if (firstColorDiv.classList[0] == "template-one"){
-            // switch(value){
-            //     case "1":
-            //         firstColorDiv.children[0].children[0].style.backgroundColor="#DC143C";
-            //         firstColorDiv.children[0].children[1].children[0].style.backgroundColor="#e66a83";
-            //         document.getElementById("learners-template1").style.backgroundColor="#DC143C"
-            //         document.getElementById("trainer-template1").style.backgroundColor="#DC143C"
-            //         document.getElementById("session-template1").style.backgroundColor="#DC143C"
-            //         document.getElementById("level-heading").style.backgroundColor="#DC143C"
-            //         document.getElementById("duration-heading-template1").style.backgroundColor="#DC143C"
-            //         document.getElementById("duration-sessions-heading-template1").style.backgroundColor="#DC143C"
-            //         document.getElementById("attendance-heading-template1").style.backgroundColor="#DC143C"
-            //         document.getElementById("evaluation-heading-template1").style.backgroundColor="#DC143C"
-            //         document.getElementById("batch-evaluation-heading-template1").style.backgroundColor="#DC143C"
-
-            //     // document.getElementsByClassName("container-template2")[0].style.backgroundColor="red";
-            //     // document.getElementsByClassName("box-template2")[0].style.backgroundColor="white";
-            //         break;
-            //     case "2":
-                    
-            //         firstColorDiv.children[0].children[1].children[0].style.backgroundColor="#77a6ca";
-            //         firstColorDiv.children[0].children[0].style.backgroundColor="#64a2f5";
-            //         document.getElementById("learners-template1").style.backgroundColor="#64a2f5"
-            //         document.getElementById("trainer-template1").style.backgroundColor="#64a2f5"
-            //         document.getElementById("session-template1").style.backgroundColor="#64a2f5"
-            //         document.getElementById("level-heading").style.backgroundColor="#64a2f5"
-            //         document.getElementById("duration-heading-template1").style.backgroundColor="#64a2f5"
-            //         document.getElementById("duration-sessions-heading-template1").style.backgroundColor="#64a2f5"
-            //         document.getElementById("attendance-heading-template1").style.backgroundColor="#64a2f5"
-            //         document.getElementById("evaluation-heading-template1").style.backgroundColor="#64a2f5"
-            //         document.getElementById("batch-evaluation-heading-template1").style.backgroundColor="#64a2f5"
-            //         break;
-            //     case "3":
-            //         firstColorDiv.children[0].children[0].style.backgroundColor="#43bf73";
-            //         firstColorDiv.children[0].children[1].children[0].style.backgroundColor="#75c794";
-            //         document.getElementById("learners-template1").style.backgroundColor="#43bf73"
-            //         document.getElementById("trainer-template1").style.backgroundColor="#43bf73"
-            //         document.getElementById("session-template1").style.backgroundColor="#43bf73"
-            //         document.getElementById("level-heading").style.backgroundColor="#43bf73"
-            //         document.getElementById("duration-heading-template1").style.backgroundColor="#43bf73"
-            //         document.getElementById("duration-sessions-heading-template1").style.backgroundColor="#43bf73"
-            //         document.getElementById("attendance-heading-template1").style.backgroundColor="#43bf73"
-            //         document.getElementById("evaluation-heading-template1").style.backgroundColor="#43bf73"
-            //         document.getElementById("batch-evaluation-heading-template1").style.backgroundColor="#43bf73"
-            //         break;
-            //     case "4":
-            //         firstColorDiv.children[0].children[0].style.backgroundColor="#8061c3";
-            //         firstColorDiv.children[0].children[1].children[0].style.backgroundColor="#bda7ec";
-            //         document.getElementById("learners-template1").style.backgroundColor="#8061c3"
-            //         document.getElementById("trainer-template1").style.backgroundColor="#8061c3"
-            //         document.getElementById("session-template1").style.backgroundColor="#8061c3"
-            //         document.getElementById("level-heading").style.backgroundColor="#8061c3"
-            //         document.getElementById("duration-heading-template1").style.backgroundColor="#8061c3"
-            //         document.getElementById("duration-sessions-heading-template1").style.backgroundColor="#8061c3"
-            //         document.getElementById("attendance-heading-template1").style.backgroundColor="#8061c3"
-            //         document.getElementById("evaluation-heading-template1").style.backgroundColor="#8061c3"
-            //         document.getElementById("batch-evaluation-heading-template1").style.backgroundColor="#8061c3"
-            //         break;
-            //     default:
-            //         firstColorDiv.children[0].style.backgroundColor="#C3FFC0";  
-            // }
-
             const colors = {
                 "1": {
                     bg: "#DC143C",
@@ -988,11 +928,12 @@ const selectColor = document.getElementById("selectcolor");
                 "duration-sessions-heading-template1",
                 "attendance-heading-template1",
                 "evaluation-heading-template1",
-                "batch-evaluation-heading-template1"
+                "batch-evaluation-heading-template1",ṭ
+                             
             ];
             
             function applyColors(value) {
-                const color = colors[value] || { bg: "#C3FFC0", accent: "" };
+                const color = colors[value] || { bg: "#C3FFC0", accent: "green" };
             
                 // Set background color for the firstColorDiv children
                 firstColorDiv.children[0].children[0].style.backgroundColor = color.bg;
@@ -1004,10 +945,46 @@ const selectColor = document.getElementById("selectcolor");
                 commonElements.forEach(id => {
                     document.getElementById(id).style.backgroundColor = color.bg;
                 });
+                var th = document.querySelectorAll("#trainee-details-template1 th");
+                th.forEach((e)=>{
+                    e.style.backgroundColor=color.bg;
+                })
+                var td = document.querySelectorAll("#trainee-details-template1 td");
+                td.forEach((e)=>{
+                    e.style.backgroundColor=color.accent;
+                })
+                var td = document.querySelectorAll("#evaluation-table-template1 th");
+                td.forEach((e)=>{
+                    e.style.backgroundColor=color.bg;
+                }) 
+                var th = document.querySelectorAll("#evaluation-table-template1 td");
+                th.forEach((e)=>{
+                    e.style.backgroundColor=color.accent;
+                })
+            
+                var th1 = document.querySelectorAll("#progressBarsContainer-templae1 .progress-bar");
+                th1.forEach((e)=>{
+                    e.style.backgroundColor=color.bg;
+                })
+                
+                var th2 = document.querySelectorAll("#duration-sessions-data-template1 .progress-bar");
+                th2.forEach((e)=>{
+                    e.style.backgroundColor=color.bg;
+                })
+                var th4 = document.querySelectorAll("#whole-duration-data-templae1 .progress-bar");
+                th4.forEach((e)=>{
+                    e.style.backgroundColor=color.bg;
+                })
+                var th4 = document.querySelectorAll("#trainer-name-template1 h3");
+                th4.forEach((e)=>{
+                    e.style.color=color.bg;
+                })
+ 
+                
             }
             
             // Example of calling the function
-            applyColors(value);
+             applyColors(value);
             
         }
         else if(firstColorDiv.classList[0] == "template-two") {
