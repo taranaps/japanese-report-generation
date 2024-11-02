@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const images = document.querySelectorAll('.image-container img');
     const templates = document.querySelectorAll('.workspace > div');
-    let selectTemplate;
+    // let selectTemplate;
 
 
     function hideAllTemplates() {
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    function createEvaluationTable(data, id) {
+    async function createEvaluationTable(data, id) {
         const tablePosition = document.getElementById(id);
         tablePosition.innerHTML="";
         const table = document.createElement("table");
@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-async function generateTraineePieChart(id, backgroundColor = [], borderColor = []) {
+async function generateTraineePieChart(id, chartType = 'pie', backgroundColor = [], borderColor = []) {
     const batchCounts = await getBatchTraineeCounts();
     if (!batchCounts) {
         console.error("No batch data available for the chart.");
@@ -328,7 +328,7 @@ async function generateTraineePieChart(id, backgroundColor = [], borderColor = [
 
     const ctx = document.getElementById(id).getContext('2d');
     new Chart(ctx, {
-        type: 'pie',
+        type: chartType,
         data: {
             labels: batchNames,
             datasets: [{
@@ -348,7 +348,7 @@ async function generateTraineePieChart(id, backgroundColor = [], borderColor = [
             responsive: true,
             plugins: {
                 legend: {
-                    position: 'top',
+                    position: 'bottom',
                 },
                 tooltip: {
                     callbacks: {
@@ -676,11 +676,18 @@ async function populateBatchDataTemplate2(){
     
     for (const [batchName, details] of Object.entries(batchDetails)) {
         const filteredData = await getFilteredDocuments(batchName);
-        // Create a new container for each batch
+        
         const batchContainer = document.createElement('div');
         batchContainer.classList.add('batchwise-data-template2');
         
-        // Populate the HTML content for each batch
+        const batchDurationMonth = details.batchDurationMonth; 
+        const numberOfSessionsMonth = details.numberOfSessionsMonth;
+
+        if (batchDurationMonth === undefined || numberOfSessionsMonth === undefined) {
+            console.error(`No batch data available for ${batchName}.`);
+            continue; // Skip this iteration
+        }
+
         batchContainer.innerHTML = `
             <div class="batch-info">
                 <h2>${batchName}</h2>
@@ -692,8 +699,13 @@ async function populateBatchDataTemplate2(){
                 </div>
                 <div class="details-right-template2">
                     <div class="batch-duration-template2">
-                        <h3>Batch Sessions and Duration</h3>
-                        <canvas id="durationChart-${batchName}"></canvas>
+                        
+                        <div id="durationChart-${batchName}">
+                            <h1>Total Sessions: ${numberOfSessionsMonth} </h1>
+                            <h1>Total Duration: ${batchDurationMonth} </h1>
+                            
+                            
+                        </div>
                     </div>
                     <div class="attendance-template2">
                         <h3>Attendance</h3>
@@ -710,7 +722,7 @@ async function populateBatchDataTemplate2(){
         mainContainer.appendChild(batchContainer);
 
         const evaluationTable1 = document.getElementById(`evaluation-table-${batchName}`);
-        const table1 = createEvaluationTable(filteredData, `evaluation-table-${batchName}`);
+        const table1 = await createEvaluationTable(filteredData, `evaluation-table-${batchName}`);
         evaluationTable1.appendChild(table1);
 
         await getAttendanceData(filteredData,`attendanceChart-${batchName}`); 
@@ -764,7 +776,7 @@ async function populateBatchDataTemplate1() {
                             traineeDetailsTemplate1.appendChild(traineeTable1);
 
                             const evaluationTable1 = document.getElementById('evaluation-table-template1');
-                            const table1 = createEvaluationTable(filteredData, 'evaluation-table-template1');
+                            const table1 = await createEvaluationTable(filteredData, 'evaluation-table-template1');
                             evaluationTable1.appendChild(table1);
 
                             const numberOfTrainees = document.getElementById("trainee-piechart-template1");
@@ -785,7 +797,7 @@ async function populateBatchDataTemplate1() {
                                 'rgba(200, 163, 251, 1)',
                                 'rgba(218, 180, 255, 1)'
                             ];
-                            numberOfTrainees.textContent =  generateTraineePieChart('trainee-piechart-template1',backgroundColor, borderColor);
+                            numberOfTrainees.textContent =  generateTraineePieChart('trainee-piechart-template1','pie', backgroundColor, borderColor);
 
                             const backgroundColor2 = '#8061c3';
                             const borderColor2 = '#8061c3';
@@ -805,8 +817,8 @@ async function populateBatchDataTemplate1() {
                                 populateBatchDataTemplate2();
                             }
                             else{
-                                const evaluationTable1 = document.getElementById('evaluation-table-template2');
-                            const table1 = createEvaluationTable(filteredData, 'evaluation-table-template2');
+                            const evaluationTable1 = document.getElementById('evaluation-table-template2');
+                            const table1 = await createEvaluationTable(filteredData, 'evaluation-table-template2');
                             evaluationTable1.appendChild(table1);
 
                             const template2Header = document.getElementById("batch-name-template2");
@@ -832,26 +844,28 @@ async function populateBatchDataTemplate1() {
                                 '#30eb26',
                                 '#0d6609 '
                             ];
-                            numberOfTrainees.textContent =  generateTraineePieChart('learnersChart',backgroundColor, borderColor);
+                            numberOfTrainees.textContent =  generateTraineePieChart('learnersChart','pie',backgroundColor, borderColor);
                             
                             const batchCountDisplay = document.getElementById('number');
                             batchCountDisplay.textContent =  await getNofBatches();
+                            const diaplayBatch = document.getElementById('batch-number');
+                            diaplayBatch.textContent = generateTraineePieChart('batch-number','doughnut',backgroundColor, borderColor)
                             const backgroundColor2 = '#69f170';
                             const borderColor2 = '#69f170';
                             initCertificationChart("levelChart",backgroundColor2,borderColor2);
                             loadAndDisplayBatchDetails('sessionsChart','batchDurationChart','durationChart',selectedBatch)
                             initTrainerDetails('trainer-name-template2');
-                            const nofSessions = document.getElementById("batch-sessions-template2");
-                            const batchData = await getBatchObject();
-                            const numberOfSessionsMonth = batchData.numberOfSessionsMonth
-                            console.log(numberOfSessionsMonth);
+                            // const nofSessions = document.getElementById("batch-sessions-template2");
+                            // const batchData = await getBatchObject();
+                            // const numberOfSessionsMonth = batchData.numberOfSessionsMonth
+                            // console.log(numberOfSessionsMonth);
                             
-                            nofSessions.textContent = numberOfSessionsMonth
-                            const batchDuration = document.getElementById("batch-duration-template2");
-                            const batchDurationMonth = batchData.batchDurationMonth;
-                            console.log(batchDurationMonth);
+                            // nofSessions.textContent = numberOfSessionsMonth
+                            // const batchDuration = document.getElementById("batch-duration-template2");
+                            // const batchDurationMonth = batchData.batchDurationMonth;
+                            // console.log(batchDurationMonth);
                             
-                            batchDuration.textContent = batchDurationMonth;
+                            // batchDuration.textContent = batchDurationMonth;
 
                             }
                             break;

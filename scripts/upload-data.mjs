@@ -62,6 +62,10 @@ uploadButton.addEventListener('click', async () => {
         const jsonData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
 
         const validationResult = validateData(jsonData);
+        // if (!validationResult.isValid) {
+        //     showMessageModal(validationResult.errorMessage, 'error');
+        //     return;  // Prevent upload if validation fails
+        // }
         if (validationResult.isValid) {
             const trainees = processTraineeData(sheet, jsonData);
             const collectionName = getCollectionName(trainees[0].month);
@@ -106,12 +110,14 @@ function validateData(data) {
         }
     }
 
-    // Ensure the sub-headers under 'Evaluation' exist
-    // const evaluationSubHeaders = ['Evaluation No', 'Date', 'Evaluation Name'];
-    // const evaluationHeadersPresent = evaluationSubHeaders.every(subHeader => headers.includes(subHeader));
-    // if (!evaluationHeadersPresent) {
-    //     return { isValid: false, errorMessage: `Missing evaluation sub-headers. Please check the 'Evaluation' section.` };
-    // }
+    // Check if all "Month" values are the same
+    const monthColumnValues = data.map(row => row['Month']).filter(Boolean); // Filter out any empty values
+    const uniqueMonths = [...new Set(monthColumnValues)];
+
+    if (uniqueMonths.length !== 1) {
+        return { isValid: false, errorMessage: "All rows under the 'Month' column must have the same value." };
+    }
+
 
     // Validation rules
     for (let row of data) {
@@ -135,23 +141,78 @@ function validateData(data) {
             return { isValid: false, errorMessage: `Avg Attendance Percentage must be between 1 and 100.` };
         }
 
-        // // Evaluation section validation
-        // if (row['Evaluation']) {
-        //     const evaluationNumber = row['Evaluation No'];
-        //     const evaluationDate = row['Date'];
-        //     const evaluationName = row['Evaluation Name'];
+        const { evalNumbers, evalDates, evalNames } = locateEvaluationRows(data);
 
-        //     if (evaluationNumber && !/^E \d+$/.test(evaluationNumber)) {
-        //         return { isValid: false, errorMessage: `Invalid Evaluation No: '${evaluationNumber}'. Expected format: 'E [num]'` };
+        // Ensure evalNumbers, evalDates, evalNames are arrays
+        // evalNumbers = Array.isArray(evalNumbers) ? evalNumbers : Object.values(evalNumbers || {});
+        // evalDates = Array.isArray(evalDates) ? evalDates : Object.values(evalDates || {});
+        // evalNames = Array.isArray(evalNames) ? evalNames : Object.values(evalNames || {});
+        // const evaluations = extractEvaluations(row, evalNumbers, evalDates, evalNames)
+        // const evaluations = extractEvaluations(row);
+        // console.log('---Evaluation in validation:', {evaluations});
+        // for (let evalEntry of evaluations) {
+        //     if (evalEntry.evaluationNo && !/^E\d+$/.test(evalEntry.evaluationNo)) {
+        //         return { isValid: false, errorMessage: `Invalid Evaluation No: '${evalEntry.evaluationNo}'. Expected format: 'E[num]'` };
+        //     }
+        //     if (evalEntry.evaluationDate && !isValidDate(evalEntry.evaluationDate, row['Month'])) {
+        //         return { isValid: false, errorMessage: `Invalid Date: '${evalEntry.evaluationDate}'. Expected format: 'DD/MM/YYYY' matching the month '${row['Month']}'` };
+        //     }
+        //     if (evalEntry.evaluationName && !evalEntry.evaluationDate) {
+        //         return { isValid: false, errorMessage: "Both Evaluation Name and Date must be provided." };
+        //     }
+        //     if (evalEntry.score && !['A', 'B', 'C', 'D', 'F', 'Absent'].includes(evalEntry.score)) {
+        //         return { isValid: false, errorMessage: `Invalid Score: '${evalEntry.score}'. Expected one of: A, B, C, D, F, Absent` };
+        //     }
+        // }
+
+        
+
+        // for(let i = 0; i < evalNumbers; i++){
+        //     if(evaluations) {
+        //         let eno = evaluations[i].evaluationNo;
+        //         let ename = evaluations[i].evaluationName;
+        //         let edate = evaluations[i].evaluationDate;
+        //         let escore = evaluations[i].evaluationNo;
+        //         console.log('---validation eno:', {eno});
+        //         console.log('---validation ename:', {ename});
+        //         console.log('---validation edate:', {edate});
+        //         console.log('---validation escore:', {escore});
+        //         if (evaluations[i].evaluationNo && !/^E\d+$/.test(evaluations[i].evaluationNo)) {
+        //                 return { isValid: false, errorMessage: `Invalid Evaluation No: '${evaluations.evaluationNo}'. Expected format: 'E[num]'` };
+        //             }
+            
+        //         if (evaluations.evaluationDate && !isValidDate(evaluations.evaluationDate, row['Month'])) {
+        //                 return { isValid: false, errorMessage: `Invalid Date: '${evaluations.evaluationDate}'. Expected format: 'DD/MM/YYYY' with the month matching '${row['Month']}'` };
+        //             }
+            
+        //                 // Check for required values in the evaluation columns
+        //         if ((evaluations.evaluationName && !evaluations.evaluationDate) || (evaluations.evaluationDate && !evaluations.evaluationName)) {
+        //                 return { isValid: false, errorMessage: `If Evaluation Name is provided, Date must also be provided and vice versa.` };
+        //             }
+        //         if (evaluations.score && !['A', 'B', 'C', 'D', 'F', 'Absent'].includes(evaluations.score)) {
+        //                 return { isValid: false, errorMessage: `Invalid Score: '${evaluations.score}'. Expected format: '['A', 'B', 'C', 'D', 'F', 'Absent']'` };
+        //             }
+        //     }
+        // }
+
+        // if (row['Trainee Name']) {
+        //     const rowValues = Object.values(row);
+        //     if (rowValues.some(value => value === "" && !['Evaluation'].includes(headers[rowValues.indexOf(value)]))) {
+        //         return { isValid: false, errorMessage: `All fields for trainee '${row['Trainee Name']}' must have values except under the Evaluation section.` };
         //     }
 
-        //     if (evaluationDate && !isValidDate(evaluationDate, row['Month'])) {
-        //         return { isValid: false, errorMessage: `Invalid Date: '${evaluationDate}'. Expected format: 'DD/MM/YYYY' with the month matching '${row['Month']}'` };
-        //     }
+        //     // Evaluation-specific validation
+        //     if (row['Evaluation Name'] && row['Date']) {
+        //         const validScores = ["A", "B", "C", "D", "F", "Absent"];
+        //         const evaluationScores = headers.slice(headers.indexOf('Evaluation') + 1).map(header => row[header]);
 
-        //     // Check for required values in the evaluation columns
-        //     if ((evaluationName && !evaluationDate) || (evaluationDate && !evaluationName)) {
-        //         return { isValid: false, errorMessage: `If Evaluation Name is provided, Date must also be provided and vice versa.` };
+        //         if (evaluationScores.some(score => score && !validScores.includes(score))) {
+        //             return { isValid: false, errorMessage: `Invalid score for trainee '${row['Trainee Name']}'. Scores must be one of ${validScores.join(", ")}.` };
+        //         }
+
+        //         if (evaluationScores.some(score => score === "")) {
+        //             return { isValid: false, errorMessage: `All scores under Evaluation must be filled if Evaluation Name and Date are present for trainee '${row['Trainee Name']}'` };
+        //         }
         //     }
         // }
 
@@ -337,6 +398,7 @@ async function uploadDataToFirestore(collectionName, trainees) {
                 await deleteDoc(docSnapshot.ref);
             }
             console.log("Replaced existing documents in the collection.");
+            showMessageModal('Replaced existing documents in the collection.', 'success');
         }
     }
 

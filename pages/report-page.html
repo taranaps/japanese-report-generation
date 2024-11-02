@@ -53,10 +53,7 @@
               />
             </div>
             <div class="arrow" id="arrow-down">&#9660;</div>
-          </div><div class="select-batch">
-			<select id="batchSelect">
-				<option value="">Select Batch</option>
-			</select>
+          </div>
 		  </div>
 		  
 		
@@ -180,6 +177,7 @@
                             <div class="box-template2">
                                 <h3>Active Batches</h3>
                                 <h1 id="number"></h1>
+								<canvas id="batch-number"></canvas>
                             </div>
                             <div class="box-template2">
                                 <h3>Number of Learners</h3>
@@ -187,11 +185,11 @@
                             </div>
                             <div class="box-template2">
                                 <h3>Total No. of Sessions Till Date</h3>
-                                <canvas id="sessionsChart"></canvas>
+                                <div id="sessionsChart"></div>
                             </div>
                             <div class="box-template2">
                                 <h3>Total Batch Duration</h3>
-                                <canvas id="batchDurationChart"></canvas>
+                                <div id="batchDurationChart"></div>
                             </div>
                             <div class="box-template2">
                                 <h3>Current Level</h3>
@@ -214,25 +212,14 @@
                             </div>
                             <div class="details-right-template2">
                                 <div class="batch-duration-template2">
-									<div class="sessions-temp2"><h3>Total Sessions</h3>
-									<p id="batch-sessions-template2"></p>
-									</div>
-									<div class="duration-temp2"><h3>Total Duration</h3>
-									<p id="batch-duration-template2"></p></div>
-                                    
-									
-
-
-                                    <canvas id="durationChart"></canvas>
+					
+                                    <div id="durationChart"></div>
                                 </div>
                                 <div class="attendance-template2">
                                     <h3>Attendance</h3>
                                     <canvas id="attendanceChart"></canvas>
                                 </div>
                             </div>
-                
-                            
-            
                         </div>
 						<div class="trainee-evaluation-template2">
 							<h3>Evaluation Details</h3>
@@ -246,7 +233,7 @@
 
             <!-- Third template here -->
 
-            <div class="template-three" id="template3" style="display: none" >
+            <!-- <div class="template-three" id="template3" style="display: none" >
                 <div class="report-container">
                   <h1 class="title">Japanese Training Report</h1>
                   <h3 id="subtitle"></h3>
@@ -310,7 +297,83 @@
                     </div></div>
                 </div>
 
-			</div>
+			</div> -->
+
+      <!-- temp3 new -->
+
+      <div class="template-three" id="template3" style="display: none"  >
+        <div class="report-container">
+          <h1 class="title">Japanese Training Report</h1>
+          <h3 id="subtitle"></h3>
+  
+          <div class="batch-container">
+            <div class="batch-card">
+              <div class="card-title">No. of Batches</div>
+              <p></p>
+            </div>
+            <div class="batch-card">
+              <div class="card-title">Trainers</div>
+              <table></table>
+            </div>
+            <div class="batch-card">
+              <div class="card-title">Current Level</div>
+              <div class="bar-chart">
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </div>          
+  
+          <div class="batch-container">
+            <div class="batch-card">
+              <div class="card-title">No. Of Learners</div>
+              <div class="card-content"></div>
+            </div>
+  
+            <div class="batch-card">
+              <div class="card-title">Total Sessions</div>
+              <div class="card-content"></div>
+            </div>
+  
+            <div class="batch-card">
+              <div class="card-title">Total Durations</div>
+              <div class="card-content"></div>
+            </div>
+          </div>
+
+          <div class="t3batchname"><h3 class="batch-title"></h3>
+            <div class="t3sessions">
+              <h3 class="t3sessions-firsth">Total Sessions:</h3>
+              <h3 class="t3sessions-secondh">Total Duration: </h3>
+            </div>
+          </div>
+          
+<br>		
+         
+            <!-- <div class="graph-title-trainee">TRAINEE DETAILS</div>
+            <div class="t3graph-trainee">
+            <div class="graph-title-attendance">TRAINEE ATTENDANCE</div>
+            <div class="t3graph-attendance">
+               -->
+               <div class="traneediv">
+                <div class="t3graphtraine"><div class="graph-title-trainee">Trainee Details</div>
+                 <div class="t3graph-trainee"> </div></div> 
+       <div class="t3traineeatt"><div class="graph-title-attendance">Trainee Attendence</div>
+       <div class="t3graph-attendance"> </div>
+             </div>
+           </div>
+
+           <div class="eval-table">
+           <div class="table-title">Trainee Evaluation</div>
+           <div class="table-section">
+ 
+             </div>
+            </div>
+          </div>
+
+         </div>
+
+      <!-- end of temp3 -->
             <div class="template-four" id="template4" style="display: none;" >
                 <div class="t4top">
                   <div class="t4month">
@@ -360,18 +423,95 @@
   <!-- draw table here -->
                     </div>
                   </div>
+                 
   
                 </div>
-    
+                
+               
               </div>
+              
             
           </div>
-        </section>
+          <div class="right-sidebar">
+            <div class="right-sidebarContainer">
+              <div class="select-batch">
+                <select id="batchSelect">
+                  <option value="">Select Batch</option>
+                </select>
+                </div>
+                <h2>select theme</h2>
+                <div class="sidebar-theme">
+                  <div class="theme-color-black" onclick="testfunction()"></div>
+                  <div class="theme-color-violet"></div>
+                  <div class="theme-color-red"></div>
+                  <div class="theme-color-blue"></div>
+                  <div class="theme-color-green"></div>
+                  <div class="theme-color-orange"></div>
+
+                </div>
+                <div class="toggle-learners">
+                  <h2>No. of Learners</h2>
+                  <div class="learners">
+                    <div class="select-learner">
+                      <span class="selected-learner"><p>Select</p></span>
+                      <div class="ccaret"></div>
+                    </div>
+                    <ul class="menu-learner">
+                      <li class="active-learner">5-10</li>
+                      <li>10-15</li>
+                      <li>15-20</li>
+                    </ul>
+                    </div>
+                  
+
+
+                </div>
+                <div class="toggle-certification">
+                  <h2>Certification Level</h2>
+                  <div class="learners">
+                    <div class="select-learner">
+                      <span class="selected-learner"><p>Select</p></span>
+                      <div class="ccaret"></div>
+                    </div>
+                    <ul class="menu-learner">
+                      <li class="active-learner">N5</li>
+                      <li>N4</li>
+                      <li>N3</li>
+                      <li>N2</li>
+                      <li>N1</li>
+                    </ul>
+                    </div>
+                  
+
+
+                </div>
+                <div class="toggle-attendence">
+                  <h2>Attendence</h2>
+                  <div class="learners">
+                    <div class="select-learner">
+                      <span class="selected-learner"><p>Select</p></span>
+                      <div class="ccaret"></div>
+                    </div>
+                    <ul class="menu-learner">
+                      <li class="active-learner">Month</li>
+                      <li>Daily</li>
+                      
+                    </ul>
+                    </div>
+                  
+
+
+                </div>
+
+            </div>
+          </div>
+          <div class="button-container">
+            <button id="generate-report"  onclick=" preview_togglepopup();copyHtml(selectTemplate);">Generate Report</button>
+          </div>
+        <!-- </section> -->
       </section>
       <section class="generate-btn">
-        <div class="button-container">
-          <button id="generate-report"  onclick=" preview_togglepopup();copyHtml(selectTemplate);">Generate Report</button>
-        </div>
+       
       </section>
 
 
