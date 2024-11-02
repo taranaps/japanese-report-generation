@@ -548,28 +548,28 @@ function renderCertificationLevelChart(batchData, chartElementId,backgroundColor
 }
 
 
-async function getBatchObject() {
-    const batchDetails = await getBatchDetailsFromLatestCollection();
-    if (!batchDetails) {
-        console.error("No batch details found.");
-        return;
-    }
-    const batchDataArray = Object.entries(batchDetails).map(([batchName, details]) => ({
-        batchName,
-        certificationLevel: details.certificationLevel, 
-        batchDurationTillDate: details.batchDurationTillDate,
-        certificationLevel: details.certificationLevel ,
-        numberOfSessionsTillDate: details.numberOfSessionsTillDate ,
-        batchDurationMonth: details.batchDurationMonth ,
-        numberOfSessionsMonth: details.numberOfSessionsMonth,
-        trainerName: details.trainerName 
+// async function getBatchObject() {
+//     const batchDetails = await getBatchDetailsFromLatestCollection();
+//     if (!batchDetails) {
+//         console.error("No batch details found.");
+//         return;
+//     }
+//     const batchDataArray = Object.entries(batchDetails).map(([batchName, details]) => ({
+//         batchName,
+//         certificationLevel: details.certificationLevel, 
+//         batchDurationTillDate: details.batchDurationTillDate,
+//         certificationLevel: details.certificationLevel ,
+//         numberOfSessionsTillDate: details.numberOfSessionsTillDate ,
+//         batchDurationMonth: details.batchDurationMonth ,
+//         numberOfSessionsMonth: details.numberOfSessionsMonth,
+//         trainerName: details.trainerName 
 
-    }));
-    console.log("batch details: ", batchDataArray);
-    return batchDataArray;
+//     }));
+//     console.log("batch details: ", batchDataArray);
+//     return batchDataArray;
     
     
-}
+// }
 
 async function initCertificationChart(chartElementId,backgroundColor, borderColor) {
     // Fetch batch details
@@ -741,7 +741,79 @@ async function populateBatchDataTemplate1() {
 
 }
 
+async function populateBatchDataTemplate3(){
+    const batchDetails = await getBatchDetailsFromLatestCollection();
+    if (!batchDetails) {
+        console.error("No batch details found.");
+        return;
+    }
 
+
+    const mainContainer = document.getElementById('batchwise-data-template3'); 
+    mainContainer.innerHTML = ''; // Clear any previous content
+
+    const numberOfBatches = Object.keys(batchDetails).length;
+    const batchCountDisplay = document.getElementById('number-of-Batch-tmeplate3');
+    batchCountDisplay.textContent =  numberOfBatches;
+    
+    for (const [batchName, details] of Object.entries(batchDetails)) {
+        // const filteredData = await getFilteredDocuments(batchName);
+        
+        const batchContainer = document.createElement('div');
+        batchContainer.classList.add('batchwise-data-template3');
+        
+        const batchDurationMonth = details.batchDurationMonth; 
+        const numberOfSessionsMonth = details.numberOfSessionsMonth;
+
+        if (batchDurationMonth === undefined || numberOfSessionsMonth === undefined) {
+            console.error(`No batch data available for ${batchName}.`);
+            continue; // Skip this iteration
+        }
+
+        batchContainer.innerHTML = `
+            <div class="t3batchname">
+            <h3 class="batch-title">${batchName}</h3>
+            <div class="t3sessions">
+                <h3 class="t3sessions-firsth">Total Sessions: ${numberOfSessionsMonth}</h3>
+                <h3 class="t3sessions-secondh">Total Duration: ${batchDurationMonth}</h3>
+            </div>
+        </div>
+        <div class="traneediv">
+            <div class="t3graphtraine">
+                <div class="graph-title-trainee">Trainee Details</div>
+                <div class="t3graph-trainee"></div>
+            </div>
+            <div class="t3traineeatt">
+                <div class="graph-title-attendance">Trainee Attendance</div>
+                <div class="t3graph-attendance"></div>
+            </div>
+        </div>
+        <div class="eval-table">
+            <div class="table-title">Trainee Evaluation</div>
+            <div class="table-section"></div>
+        </div>
+        `;
+
+        mainContainer.appendChild(batchContainer);
+
+        // const evaluationTable1 = document.getElementById(`evaluation-table-${batchName}`);
+        // const table1 = await createEvaluationTable(filteredData, `evaluation-table-${batchName}`);
+        // evaluationTable1.appendChild(table1);
+
+        // await getAttendanceData(filteredData,`attendanceChart-${batchName}`); 
+
+        // const traineeDetailsTemplate2 = document.getElementById(`trainee-details-${batchName}`);
+        // const traineeTable2 = await getTraineeDetails(filteredData,`trainee-details-${batchName}`) // Call your attendance data function
+        // traineeDetailsTemplate2.appendChild(traineeTable2);
+
+    }
+}
+    
+async function batchwiseDataTemplate3() {
+    const template3Header = document.getElementById("subtitle");
+    template3Header.textContent = selectedBatch; // Display selected batch instead
+    await getAttendanceData(filteredData,"t3graph"); 
+}
     
     images.forEach(image => {
         image.addEventListener('click', async function() {
@@ -853,24 +925,22 @@ async function populateBatchDataTemplate1() {
                             initCertificationChart("levelChart",backgroundColor2,borderColor2);
                             loadAndDisplayBatchDetails('sessionsChart','batchDurationChart','durationChart',selectedBatch)
                             initTrainerDetails('trainer-name-template2');
-                            // const nofSessions = document.getElementById("batch-sessions-template2");
-                            // const batchData = await getBatchObject();
-                            // const numberOfSessionsMonth = batchData.numberOfSessionsMonth
-                            // console.log(numberOfSessionsMonth);
-                            
-                            // nofSessions.textContent = numberOfSessionsMonth
-                            // const batchDuration = document.getElementById("batch-duration-template2");
-                            // const batchDurationMonth = batchData.batchDurationMonth;
-                            // console.log(batchDurationMonth);
-                            
-                            // batchDuration.textContent = batchDurationMonth;
 
                             }
                             break;
                         case "template3":
-                            const template3Header = document.getElementById("subtitle");
-                            template3Header.textContent = selectedBatch; // Display selected batch instead
-                            await getAttendanceData(filteredData,"t3graph"); 
+
+                        if(selectedBatch==='whole-batch'){
+                            const populatedDataTemplate3 = document.getElementById('batchwise-data-template2');
+                                populatedDataTemplate3.innerHTML = '';
+                                populateBatchDataTemplate3();
+                                
+
+                        }
+                        else{
+                            batchwiseDataTemplate3();
+                        }
+                            
                             
                             // traineeTable = await getTraineeDetails(filteredData,"trainee-details-template3") // Call your attendance data function
                             // traineeDetailsTemplate1.appendChild(traineeTable);
