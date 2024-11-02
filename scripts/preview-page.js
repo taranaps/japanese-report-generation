@@ -464,10 +464,6 @@ dropdown.forEach(dropdown => {
     }
 });
 
-function testfunction(){
-    alert("hai hisham");
-
-}
 
 
 const learner = document.querySelectorAll('.learners');

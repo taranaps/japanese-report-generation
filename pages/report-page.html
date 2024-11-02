@@ -58,28 +58,17 @@
 		  
 		
           </div>
-         <div class="select-theme" style="margin-top:30px ;">
-          <label for="selectcolor">Choose the theme</label>
-          <select name="selectcolor" id="selectcolor" >
-            <option value="0">Select</option>
-            <option value="1">red</option>
-                <option value="2">blue</option>
-                <option value="3">green</option>
-            <option value="4">violet</option>
-            
-        </select>
-      </div> 
           <div class="workspace">
             <!-- <div id="editor"><h2>Select a template to start editing!</h2></div> -->
             
             <div class="template-one" id="template1" style="display: none">
               <div class="container-template1">
-                <div class="header-template1">
+                <div class="header-template1" id="header-template1">
                   <h1>Japanese <br> Language <br> Training Report</h1>
 				  <h3 id="header-template1-h3">month</h3>
                 </div>
                 <div class="main-container">
-                  <div class="left-template1">
+                  <div class="left-template1" id="left-template1">
                     <h1><b>Batch </b></h1>
                     <div class="learners-container-template1">
                       <div class="learners-template1" id="learners-template1">
@@ -167,7 +156,7 @@
         
             <div class="template-two" id="template2" style="display: none">
                 
-                    <div class="container-template2">
+                    <div class="container-template2" id="container-template2">
                         <div class="header-template2">
                             <h1>Japanese Language Training Report</h1>
                             <h3 id="template2-month"></h3>
@@ -441,12 +430,12 @@
                 </div>
                 <h2>select theme</h2>
                 <div class="sidebar-theme">
-                  <div class="theme-color-black" onclick="testfunction()"></div>
-                  <div class="theme-color-violet"></div>
-                  <div class="theme-color-red"></div>
-                  <div class="theme-color-blue"></div>
-                  <div class="theme-color-green"></div>
-                  <div class="theme-color-orange"></div>
+                  <div class="theme-color-dark-blue" id="theme-color-dark-blue"></div>
+                  <div class="theme-color-violet" id="theme-color-violet"></div>
+                  <div class="theme-color-red" id="theme-color-red"></div>
+                  <div class="theme-color-blue" id="theme-color-blue"></div>
+                  <div class="theme-color-green" id="theme-color-green"></div>
+                  <div class="theme-color-orange" id="theme-color-orange"></div>
 
                 </div>
                 <div class="toggle-learners">
