@@ -1257,41 +1257,41 @@ text-align: center;
 
 
 
-  .template-three{
+  /* .template-three{
     width : 800px;
     border: 2px solid rgb(247, 205, 205);
-    height: auto;
+    height: auto; */
     /* padding: 10px; */
-    margin: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* margin: 30px; */
+    /* border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     /* box-shadow: #000000; */
-  }
-  .report-container {
+  /* } */
+  /* .report-container { */
     
     /* max-width: 900px; */
-    margin: 0 auto;
+    /* margin: 0 auto;
     padding: 20px;
     background-color: #fff8e6;
     border-radius: 8px;
-  }
+  } */
   
-  .title {
+  /* .title {
     text-align: center;
     font-size: 36px;
     color: #333;
     margin-bottom: 5px;
-  }
+  } */
   
   
-  .batch-container {
+  /* .batch-container {
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
     padding-bottom: 20px;
-  }
+  } */
   
-  .batch-card {
+  /* .batch-card {
     position: relative;
     width: 30%;
     text-align: center;
@@ -1302,9 +1302,9 @@ text-align: center;
     padding-top: 40px; 
     margin-right: 20px; 
     height: 150px;
-  }
+  } */
   
-  .card-title {
+  /* .card-title {
     position: absolute;
     top: -15px;
     left: 50%;
@@ -1314,49 +1314,49 @@ text-align: center;
     padding: 5px 15px;
     border-radius: 20px;
     font-size: 14px;
-    width: 130px;
+    width: 130px; */
     /* border: 2px solid #0062FF; */
-  }
-  .t3batchname{
+  /* } */
+  /* .t3batchname{
     width: 100%;
-    height: 50px;
+    height: 50px; */
     /* border: 2px solid black; */
-    border-radius: 20px;
+    /* border-radius: 20px;
     display: flex;
     justify-content: space-between;
   
   }
-  
-  #subtitle {
+   */
+  /* #subtitle {
     text-align: center;
-    font-size: 18px;
+    font-size: 18px; */
     /* color: black; */
-    margin-bottom: 20px;
-  }
+    /* margin-bottom: 20px;
+  } */
   
-  .table-section {
+  /* .table-section {
     display: flex;
     justify-content: space-around;
     margin-bottom: 30px;
-  }
+  } */
 
   
-  .batch-title {
+  /* .batch-title { */
     /* text-align: center; */
-    color: #333;
+    /* color: #333;
     margin-top: 15px;
     font-size: x-large;
     margin-left: 10px;
-  }
-  .t3sessions{
+  } */
+  /* .t3sessions{
     font-size: small;
     margin-top: 10px;
     margin-right: 50px;
     display: flex;
     flex-direction: column;
-  }
+  } */
   
-  .table-title {
+  /* .table-title {
     background-color: #0062FF;
     color: white;
     text-align: center;
@@ -1368,8 +1368,8 @@ text-align: center;
     width: fit-content;
     position: absolute;
     margin-top: -10px;
-  }
-  .table-section {
+  } */
+  /* .table-section {
     display: flex;
     justify-content: space-around;
     margin-bottom: 30px;
@@ -1378,7 +1378,7 @@ text-align: center;
     border: 2px solid black;
     border-radius: 25px;
 
-  }
+  } */
   /* .graph-title{
     background-color: #0062FF;
     color: white;
@@ -1394,7 +1394,7 @@ text-align: center;
   
   } */
   
-  .graph-title-trainee{
+  /* .graph-title-trainee{
     background-color: #0062FF;
     color: white;
     text-align: center;
@@ -1422,8 +1422,8 @@ text-align: center;
     margin-top: -10px;
   
   
-  }
-  .graph-title{
+  } */
+  /* .graph-title{
     background-color: #0062FF;
     color: white;
     text-align: center;
@@ -1436,24 +1436,24 @@ text-align: center;
     position: absolute;
     margin-top: -10px;
   
-  }
-  .t3graph{
+  } */
+  /* .t3graph{
     background-color: #ffe6cc;
     width: 100%;
     height: 250px;
     margin-bottom: 15px;
     border: 2px solid black;
     border-radius: 20px;
-  }
-  .t3graph-attendance{
+  } */
+  /* .t3graph-attendance{
     background-color: #ffe6cc;
     width: 49%;
     height: 250px;
     margin-bottom: 15px;
     border: 2px solid black;
     border-radius: 20px;
-  }
-  .t3graph-trainee{
+  } */
+  /* .t3graph-trainee{
     background-color: #ffe6cc;
     width: 49%;
     height: 250px;
@@ -1480,4 +1480,280 @@ text-align: center;
   
   .table-section td {
     background-color: #ffe6cc;
+  } */
+
+  /* temp3 */
+
+  *{
+    margin:0;
+    padding: 0;
+}
+.template-three{
+    width : 800px;
+    border: 2px solid rgb(247, 205, 205);
+    height: auto;
+    /* padding: 10px; */
+    margin: 30px;
+    /* border-radius: 8px; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: #000000; */
   }
+  .report-container {
+    
+    /* max-width: 900px; */
+    margin: 0 auto;
+    padding: 40px;
+    /* margin-left: 10px; */
+    background-color: #fff8e6;
+    /* border-radius: 8px; */
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  
+  .batch-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding-bottom: 20px;
+  }
+  
+  .batch-card {
+    position: relative;
+    width: 30%;
+    text-align: center;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    /* border-radius: 20px; */
+    padding: 20px;
+    padding-top: 40px; 
+    margin-right: 20px; 
+    height: 150px;
+  }
+  
+  .card-title {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #0062FF;
+    color: white;
+    padding: 5px 15px;
+    /* border-radius: 20px; */
+    font-size: 14px;
+    width: 130px;
+    /* border: 2px solid #0062FF; */
+  }
+  .t3batchname{
+    width: 97%;
+    height: 80px;
+    border: 2px solid black;
+    /* border-radius: 20px; */
+    display: flex;
+    /* background-color: #0062FF; */
+    /* justify-content: space-between; */
+    align-items: center;
+    justify-content: center;
+    
+  
+  }
+  
+  #subtitle {
+    text-align: center;
+    font-size: 18px;
+    /* color: black; */
+    margin-bottom: 20px;
+  }
+  
+  .table-section {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+  }
+
+  
+  .batch-title {
+    text-align: center;
+    color: #333;
+    margin-top: 15px;
+    font-size: x-large;
+    padding: 10px;
+
+   
+  }
+  .t3sessions{
+    font-size: small;
+    align-items: center;
+    margin-top: 10px;
+    margin-right: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    /* flex-direction: column; */
+    /* display: inline-flex; */
+  }
+ 
+  .t3sessions-secondh{
+    margin-left: 320px;
+      }
+      .t3sessions-firsth{
+        padding: 30px;
+      }
+
+  
+  .table-title {
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    /* border-radius: 20px; */
+    margin-bottom: 15px;
+    margin-left: 240px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  }
+  .table-section {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    width: 98%;
+    margin: auto;
+    margin-left: -2px;
+    margin-bottom: 20px;
+    height: 250px;
+    border: 2px solid black;
+    /* border-radius: 25px; */
+
+  }
+
+  .traneediv{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  .t3graphtraine{
+    width: 47%;
+    height: 200px;
+    border: 2px solid black;
+    margin-left: -15px;
+  }
+  .t3traineeatt{
+    width: 47%;
+    height: 200px;
+    border: 2px solid black;
+    margin-left: 0px;
+  }
+  /* .graph-title{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    margin-left: 300px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  
+  } */
+  
+  .graph-title-trainee{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    /* border-radius: 20px; */
+    margin-bottom: 15px;
+    margin-left: 95px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  
+  }
+  .graph-title-attendance{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    /* border-radius: 20px; */
+    margin-bottom: 15px;
+    margin-left: 80px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  
+  
+  }
+  .graph-title{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    /* border-radius: 20px; */
+    margin-bottom: 15px;
+    margin-left: 300px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  
+  }
+  .t3graph{
+    background-color: #ffe6cc;
+    width: 100%;
+    height: 250px;
+    margin-bottom: 15px;
+    border: 2px solid black;
+    /* border-radius: 20px; */
+  }
+  /* .t3graph-attendance{
+    background-color: #ffe6cc;
+    width: 49%;
+    height: 250px;
+    margin-bottom: 15px;
+    border: 2px solid black; */
+    /* border-radius: 20px; */
+  /* } */
+  /* .t3graph-trainee{
+    background-color: #ffe6cc;
+    width: 49%;
+    height: 250px;
+    margin-bottom: 15px;
+    border: 2px solid black; */
+    /* border-radius: 20px; */
+  /* } */
+  
+  .table-section table {
+    width: 70%;
+    border-collapse: collapse;
+  }
+  
+  .table-section th, .table-section td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .table-section th {
+    background-color: #ff6f00;
+    color: white;
+  }
+  
+  .table-section td {
+    background-color: #ffe6cc;
+  }
+  .eval-table{
+    margin-top: 30px;
+  }
+
