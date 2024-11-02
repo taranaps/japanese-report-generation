@@ -53,10 +53,7 @@
               />
             </div>
             <div class="arrow" id="arrow-down">&#9660;</div>
-          </div><div class="select-batch">
-			<select id="batchSelect">
-				<option value="">Select Batch</option>
-			</select>
+          </div>
 		  </div>
 		  
 		
@@ -348,18 +345,95 @@
   <!-- draw table here -->
                     </div>
                   </div>
+                 
   
                 </div>
-    
+                
+               
               </div>
+              
             
           </div>
-        </section>
+          <div class="right-sidebar">
+            <div class="right-sidebarContainer">
+              <div class="select-batch">
+                <select id="batchSelect">
+                  <option value="">Select Batch</option>
+                </select>
+                </div>
+                <h2>select theme</h2>
+                <div class="sidebar-theme">
+                  <div class="theme-color-black" onclick="testfunction()"></div>
+                  <div class="theme-color-violet"></div>
+                  <div class="theme-color-red"></div>
+                  <div class="theme-color-blue"></div>
+                  <div class="theme-color-green"></div>
+                  <div class="theme-color-orange"></div>
+
+                </div>
+                <div class="toggle-learners">
+                  <h2>No. of Learners</h2>
+                  <div class="learners">
+                    <div class="select-learner">
+                      <span class="selected-learner"><p>Select</p></span>
+                      <div class="ccaret"></div>
+                    </div>
+                    <ul class="menu-learner">
+                      <li class="active-learner">5-10</li>
+                      <li>10-15</li>
+                      <li>15-20</li>
+                    </ul>
+                    </div>
+                  
+
+
+                </div>
+                <div class="toggle-certification">
+                  <h2>Certification Level</h2>
+                  <div class="learners">
+                    <div class="select-learner">
+                      <span class="selected-learner"><p>Select</p></span>
+                      <div class="ccaret"></div>
+                    </div>
+                    <ul class="menu-learner">
+                      <li class="active-learner">N5</li>
+                      <li>N4</li>
+                      <li>N3</li>
+                      <li>N2</li>
+                      <li>N1</li>
+                    </ul>
+                    </div>
+                  
+
+
+                </div>
+                <div class="toggle-attendence">
+                  <h2>Attendence</h2>
+                  <div class="learners">
+                    <div class="select-learner">
+                      <span class="selected-learner"><p>Select</p></span>
+                      <div class="ccaret"></div>
+                    </div>
+                    <ul class="menu-learner">
+                      <li class="active-learner">Month</li>
+                      <li>Daily</li>
+                      
+                    </ul>
+                    </div>
+                  
+
+
+                </div>
+
+            </div>
+          </div>
+          <div class="button-container">
+            <button id="generate-report"  onclick=" preview_togglepopup();copyHtml(selectTemplate);">Generate Report</button>
+          </div>
+        <!-- </section> -->
       </section>
       <section class="generate-btn">
-        <div class="button-container">
-          <button id="generate-report"  onclick=" preview_togglepopup();copyHtml(selectTemplate);">Generate Report</button>
-        </div>
+       
       </section>
 
 

@@ -464,6 +464,58 @@ dropdown.forEach(dropdown => {
     }
 });
 
+function testfunction(){
+    alert("hai hisham");
+
+}
+
+
+const learner = document.querySelectorAll('.learners');
+
+learner.forEach(learner => {
+    const select = learner.querySelector('.select-learner');
+    const caret = learner.querySelector('.ccaret');
+    const menu = learner.querySelector('.menu-learner');
+    const options = learner.querySelectorAll('.menu-learner li');
+    const selected = learner.querySelector('.selected-learner');
+
+    // Toggle the dropdown on select click
+    select.addEventListener('click', () => {
+        select.classList.toggle('select-clicked-lerner');
+        caret.classList.toggle('caret-rotate-lerner');
+        menu.classList.toggle('menu-open-lerner');
+    });
+
+    // Handle option selection
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            // Update the selected text
+            selected.innerText = option.innerText;
+
+            // Close the dropdown
+            select.classList.remove('select-clicked-lerner');
+            caret.classList.remove('caret-rotate-lerner');
+            menu.classList.remove('menu-open-lerner');
+
+            // Remove active class and styles from all options
+            options.forEach(opt => {
+                opt.classList.remove('active-learner');
+                opt.style.backgroundColor = '';
+            });
+
+            // Set the clicked option as active
+            option.classList.add('active-learner');
+            option.style.backgroundColor = '#dc143cfa'; // Optional color change
+        });
+    });
+});
+
+
+    
+
+
+
+
 
   
 
