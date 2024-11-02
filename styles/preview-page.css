@@ -223,10 +223,13 @@
     height: 20px;
 
 }
+#label1,#label2,#label3,#label4{
+    color: black;
+}
 
-#email-input,
-#subject-input,
-#message-input {
+#to,
+#subject,
+#message {
 
     border-radius: 10px;
 }
@@ -311,7 +314,7 @@ textarea {
 .share-email label{
     color: #dc143c;
 }
-#email-input{
+#to{
     border-color: #dc143c;
     border-width: 1px;
     border-radius: 10px;
@@ -326,19 +329,19 @@ textarea {
     margin-top: 150px;
 }
 
-#email-input,#subject-input{
+#to,#subject{
     border-color: #dc143c;
     border-width: 1px;
     border-style: solid;
     width: 320px;
     height: 20px;
 }
-#message-input{
+#message{
     border-color: #dc143c;
     border-width: 1px;
     border-style: solid;
     width: 320px;
-    height: 40px;
+    height: 50px;
 
 }
 
@@ -347,4 +350,29 @@ textarea {
 }
 #file-input{
     color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media print {
+    #template2{
+        page-break-inside: avoid; /* Prevents page break inside this element */
+    }
 }
