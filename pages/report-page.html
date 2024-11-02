@@ -53,13 +53,22 @@
               />
             </div>
             <div class="arrow" id="arrow-down">&#9660;</div>
-          </div><div class="select-batch">
-			<select id="batchSelect">
-				<option value="">Select Batch</option>
-			</select>
+          </div>
 		  </div>
 		  
 		
+          </div>
+         <div class="select-theme" style="margin-top:30px ;">
+          <label for="selectcolor">Choose the theme</label>
+          <select name="selectcolor" id="selectcolor" >
+            <option value="0">Select</option>
+            <option value="1">red</option>
+                <option value="2">blue</option>
+                <option value="3">green</option>
+            <option value="4">violet</option>
+            
+        </select>
+      </div> 
           <div class="workspace">
             <!-- <div id="editor"><h2>Select a template to start editing!</h2></div> -->
             
@@ -73,7 +82,7 @@
                   <div class="left-template1">
                     <h1><b>Batch </b></h1>
                     <div class="learners-container-template1">
-                      <div class="learners-template1">
+                      <div class="learners-template1" id="learners-template1">
                         <p>Number of Learners</p>
                       </div>
                       <div class="inner-learners-template1">
@@ -82,22 +91,22 @@
                       </div>
                     </div>
                     <div class="trainer-container-template1">
-                      <div class="trainer-template1">
-                        <p>Trainers</p>
+                      <div class="trainer-template1" id="trainer-template1">
+                        <p>Trainer</p>
                       </div>
                       <div class="inner-trainer-template1">
                         <div id="trainer-name-template1"></div>
                       </div>
                     </div>
                     <div class="session-container-template1">
-                        <div class="session-template1">
+                        <div class="session-template1" id="session-template1">
                       <p>Total Sessions Till Date</p></div>
                       <div class="inner-session-template1">
 						<div id="progressBarsContainer-templae1"></div>
 					  </div>
                     </div>
                     <div class="current-level-template1">
-                        <div class="level-heading">
+                        <div class="level-heading" id="level-heading">
                       <p>Current Level</p></div>
                       <div class="inner-level-template1">
 						<canvas id="certificationBarChart"></canvas>
@@ -105,7 +114,7 @@
                       </div>
                     </div>
                     <div class="batch-duration-template1">
-                        <div class="duration-heading-template1">
+                        <div class="duration-heading-template1" id="duration-heading-template1">
                       <p>Total Batch Duration</p></div>
                       <div class="duration-body-template1">
 						<div id="whole-duration-data-templae1"></div>
@@ -115,7 +124,7 @@
                   </div>
                   <div class="right-template1">
                     <div class="duration-sessions-template1">
-                        <div class="duration-sessions-heading-template1">
+                        <div class="duration-sessions-heading-template1" id="duration-sessions-heading-template1">
                       <p>Batch Duration</p></div>
                       <div class="duration-sessions-body-template1">
 						<div id="duration-sessions-data-template1"></div>
@@ -125,7 +134,7 @@
                     </div>
                     
                     <div class="attendance-template1">
-                        <div class="attendance-heading-template1">
+                        <div class="attendance-heading-template1" id="attendance-heading-template1">
                       <p>Average Attendance</p></div>
                       <div class="attendance-body-template1">
 						<canvas id="attendance-body-template1"></canvas>
@@ -133,7 +142,7 @@
 
                     </div>
                     <div class="evaluation-template1">
-                        <div class="evaluation-heading-template1">
+                        <div class="evaluation-heading-template1" id="evaluation-heading-template1">
                       <p>Trainee Details</p></div>
                       <div class="evaluation-body-template1">
 						<div id="trainee-details-template1"></div>
@@ -144,7 +153,7 @@
                   
                 </div>
                 <div class="batch-evaluation-template1">
-                    <div class="batch-evaluation-heading-template1">
+                    <div class="batch-evaluation-heading-template1" id="batch-evaluation-heading-template1">
                   <p>Evaluation Details</p></div>
                   <div class="batch-evaluation-body-template1">
 					<div id="evaluation-table-template1"></div>
@@ -276,14 +285,14 @@
 <br>		
                  
                     <div class="graph-title-trainee">TRAINEE DETAILS</div>
-                    <div class="t3graph-trainee">
+                    <div class="t3graph-trainee" id="t3graph">
 					<div class="graph-title-attendance">TRAINEE ATTENDANCE</div>
 					<div class="t3graph-attendance">
                       
                   </div>
 
                    <div class="table-title">TRAINEE EVALUATION</div>
-                  <div class="table-section">
+                  <div class="table-section" id="table-section">
 
                     </div></div>
                 </div>
@@ -408,18 +417,95 @@
   <!-- draw table here -->
                     </div>
                   </div>
+                 
   
                 </div>
-    
+                
+               
               </div>
+              
             
           </div>
-        </section>
+          <div class="right-sidebar">
+            <div class="right-sidebarContainer">
+              <div class="select-batch">
+                <select id="batchSelect">
+                  <option value="">Select Batch</option>
+                </select>
+                </div>
+                <h2>select theme</h2>
+                <div class="sidebar-theme">
+                  <div class="theme-color-black" onclick="testfunction()"></div>
+                  <div class="theme-color-violet"></div>
+                  <div class="theme-color-red"></div>
+                  <div class="theme-color-blue"></div>
+                  <div class="theme-color-green"></div>
+                  <div class="theme-color-orange"></div>
+
+                </div>
+                <div class="toggle-learners">
+                  <h2>No. of Learners</h2>
+                  <div class="learners">
+                    <div class="select-learner">
+                      <span class="selected-learner"><p>Select</p></span>
+                      <div class="ccaret"></div>
+                    </div>
+                    <ul class="menu-learner">
+                      <li class="active-learner">5-10</li>
+                      <li>10-15</li>
+                      <li>15-20</li>
+                    </ul>
+                    </div>
+                  
+
+
+                </div>
+                <div class="toggle-certification">
+                  <h2>Certification Level</h2>
+                  <div class="learners">
+                    <div class="select-learner">
+                      <span class="selected-learner"><p>Select</p></span>
+                      <div class="ccaret"></div>
+                    </div>
+                    <ul class="menu-learner">
+                      <li class="active-learner">N5</li>
+                      <li>N4</li>
+                      <li>N3</li>
+                      <li>N2</li>
+                      <li>N1</li>
+                    </ul>
+                    </div>
+                  
+
+
+                </div>
+                <div class="toggle-attendence">
+                  <h2>Attendence</h2>
+                  <div class="learners">
+                    <div class="select-learner">
+                      <span class="selected-learner"><p>Select</p></span>
+                      <div class="ccaret"></div>
+                    </div>
+                    <ul class="menu-learner">
+                      <li class="active-learner">Month</li>
+                      <li>Daily</li>
+                      
+                    </ul>
+                    </div>
+                  
+
+
+                </div>
+
+            </div>
+          </div>
+          <div class="button-container">
+            <button id="generate-report"  onclick=" preview_togglepopup();copyHtml(selectTemplate);">Generate Report</button>
+          </div>
+        <!-- </section> -->
       </section>
       <section class="generate-btn">
-        <div class="button-container">
-          <button id="generate-report"  onclick=" preview_togglepopup();copyHtml(selectTemplate);">Generate Report</button>
-        </div>
+       
       </section>
 
 
@@ -508,7 +594,6 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../scripts/report-page.js" type="module"></script>
     <script src="../scripts/preview-page.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>

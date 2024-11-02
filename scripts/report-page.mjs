@@ -66,6 +66,7 @@ function updateArrowVisibility() {
 updateArrowVisibility();
 
 //--------------------TEMPLATE SELECTION-------------------------//
+let selectedTemplate = "";
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -427,7 +428,7 @@ for (const [batchName, details] of Object.entries(batchDetails)) {
     const { numberOfSessionsTillDate ,batchDurationTillDate,numberOfSessionsMonth,batchDurationMonth} = details;
     const progressBarHTML = `
             <div class="progress">
-                <div class="progress-bar"><h3 >${batchName} - ${numberOfSessionsTillDate} Sessions</h3></div>
+                <div class="progress-bar" id="progress-bar-no-of-sessions"><h3 >${batchName} - ${numberOfSessionsTillDate} Sessions</h3></div>
             </div>
     `;
     batchSessionContainer.innerHTML += progressBarHTML;
@@ -435,7 +436,7 @@ for (const [batchName, details] of Object.entries(batchDetails)) {
 
     const batchDurationTilldateHTML = `
     <div class="progress">
-        <div class="progress-bar"><h3 >${batchName} - ${batchDurationTillDate} </h3></div>
+        <div class="progress-bar" id="progress-bar-duration-till"><h3 >${batchName} - ${batchDurationTillDate} </h3></div>
     </div>
 `;
     batchDurationContainer.innerHTML += batchDurationTilldateHTML;
@@ -443,10 +444,10 @@ for (const [batchName, details] of Object.entries(batchDetails)) {
     if(batchName===selectedBatch){
         const sessionDurationHTML = `
         <div class="progress">
-            <div class="progress-bar"><h3>Total Duration: ${batchDurationMonth} </h3></div>
+            <div class="progress-bar id="progress-bar-duration-month"><h3>Total Duration: ${batchDurationMonth} </h3></div>
         </div>
         <div class="progress">
-        <div class="progress-bar"><h3 >Total Sessions: ${numberOfSessionsMonth} </h3></div>
+        <div class="progress-bar" id="progress-bar-session-month"><h3 >Total Sessions: ${numberOfSessionsMonth} </h3></div>
         </div>
         `
         sessionDurationContainer.innerHTML += sessionDurationHTML;
@@ -821,7 +822,7 @@ async function batchwiseDataTemplate3() {
             const templateKey = this.getAttribute('data-template');
             selectTemplate = templateKey;
 
-            const selectedTemplate = document.getElementById(templateKey);
+            selectedTemplate = document.getElementById(templateKey);
             if (selectedTemplate) {
                 const selectedBatch = batchSelect.value;
                 if (selectedBatch) {
@@ -964,3 +965,184 @@ async function batchwiseDataTemplate3() {
 
 
 })
+
+
+
+
+///-Change color//
+
+const selectColor = document.getElementById("selectcolor");
+    selectColor.addEventListener("change",changecolor)
+
+    function changecolor(event){
+        let value=event.target.value;
+      
+        console.log(value);
+
+        let firstColorDiv =  selectedTemplate;
+        console.log(firstColorDiv.classList[0]);
+
+        if (firstColorDiv.classList[0] == "template-one"){
+            const colors = {
+                "1": {
+                    bg: "#DC143C",
+                    accent: "#e66a83"
+                },
+                "2": {
+                    bg: "#64a2f5",
+                    accent: "#93bdf5"
+                },
+                "3": {
+                    bg: "#43bf73",
+                    accent: "#75c794"
+                },
+                "4": {
+                    bg: "#8061c3",
+                    accent: "#bda7ec"
+                }
+            };
+            
+            const commonElements = [
+                "learners-template1",
+                "trainer-template1",
+                "session-template1",
+                "level-heading",
+                "duration-heading-template1",
+                "duration-sessions-heading-template1",
+                "attendance-heading-template1",
+                "evaluation-heading-template1",
+                "batch-evaluation-heading-template1"
+                             
+            ];
+            
+            function applyColors(value) {
+                const color = colors[value] || { bg: "#C3FFC0", accent: "green" };
+            
+                // Set background color for the firstColorDiv children
+                firstColorDiv.children[0].children[0].style.backgroundColor = color.bg;
+                if (color.accent) {
+                    firstColorDiv.children[0].children[1].children[0].style.backgroundColor = color.accent;
+                }
+            
+                // Apply common background color to other elements
+                commonElements.forEach(id => {
+                    document.getElementById(id).style.backgroundColor = color.bg;
+                });
+                var th = document.querySelectorAll("#trainee-details-template1 th");
+                th.forEach((e)=>{
+                    e.style.backgroundColor=color.bg;
+                })
+                var td = document.querySelectorAll("#trainee-details-template1 td");
+                td.forEach((e)=>{
+                    e.style.backgroundColor=color.accent;
+                })
+                var td = document.querySelectorAll("#evaluation-table-template1 th");
+                td.forEach((e)=>{
+                    e.style.backgroundColor=color.bg;
+                }) 
+                var th = document.querySelectorAll("#evaluation-table-template1 td");
+                th.forEach((e)=>{
+                    e.style.backgroundColor=color.accent;
+                })
+            
+                var th1 = document.querySelectorAll("#progressBarsContainer-templae1 .progress-bar");
+                th1.forEach((e)=>{
+                    e.style.backgroundColor=color.bg;
+                })
+                
+                var th2 = document.querySelectorAll("#duration-sessions-data-template1 .progress-bar");
+                th2.forEach((e)=>{
+                    e.style.backgroundColor=color.bg;
+                })
+                var th4 = document.querySelectorAll("#whole-duration-data-templae1 .progress-bar");
+                th4.forEach((e)=>{
+                    e.style.backgroundColor=color.bg;
+                })
+                var th4 = document.querySelectorAll("#trainer-name-template1 h3");
+                th4.forEach((e)=>{
+                    e.style.color=color.bg;
+                })
+ 
+                
+            }
+            
+            // Example of calling the function
+             applyColors(value);
+            
+        }
+        else if(firstColorDiv.classList[0] == "template-two") {
+            switch(value)
+            {
+                case "1":
+                    firstColorDiv.children[0].style.backgroundColor="#DC143C";
+                    
+
+                    break;
+                case "2":
+                    firstColorDiv.children[0].style.backgroundColor="#64a2f5";
+                    break;
+                case "3":
+                    firstColorDiv.children[0].style.backgroundColor="#43bf73";
+                    break;
+                case "4":
+                    firstColorDiv.children[0].style.backgroundColor="#8061c3";
+                    break;
+                default:
+                    firstColorDiv.children[0].style.backgroundColor="#C3FFC0";  
+            }
+        }
+        else if(firstColorDiv.classList[0] == "template-three") {
+            switch(value)
+            {
+                case "1":
+                    firstColorDiv.children[0].style.backgroundColor="#DC143C";
+                    document.getElementById("t3graph").style.backgroundColor="#e66a83";
+                    document.getElementById("table-section").style.backgroundColor="#e66a83";
+                    document.getElementById("t3batchname").style.color="white";
+                    
+
+                    break;
+                case "2":
+                    firstColorDiv.children[0].style.backgroundColor="#64a2f5";
+                    document.getElementById("t3graph").style.backgroundColor="#5d94de";
+                    document.getElementById("table-section").style.backgroundColor="#5d94de";
+                    document.getElementById("t3batchname").style.color="#5d94de";
+                    break;
+                case "3":
+                    firstColorDiv.children[0].style.backgroundColor="green";
+                    break;
+                case "4":
+                    firstColorDiv.children[0].style.backgroundColor="violet";
+                    break;
+                default:
+                    firstColorDiv.children[0].style.backgroundColor="#C3FFC0";  
+            }
+        }
+        else if(firstColorDiv.classList[0] == "template-four") {
+            switch(value)
+            {
+                case "1":
+                    firstColorDiv.children[0].style.backgroundColor="red";
+                    break;
+                case "2":
+                    firstColorDiv.children[0].style.backgroundColor="blue";
+                    break;
+                case "3":
+                    firstColorDiv.children[0].style.backgroundColor="green";
+                    break;
+                case "4":
+                    firstColorDiv.children[0].style.backgroundColor="violet";
+                    break;
+                default:
+                    firstColorDiv.children[0].style.backgroundColor="#C3FFC0";  
+            }
+        }
+
+        }
+        
+
+            
+        
+
+
+    
