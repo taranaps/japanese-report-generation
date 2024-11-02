@@ -632,7 +632,7 @@ margin-top: 30px;
 
 .batch-evaluation-template1{
   width: 100%-35px;
-  margin: 10px 35px;
+  margin: 50px 35px;
 }
 .batch-evaluation-heading-template1{
   border-radius: 10px;
@@ -932,7 +932,7 @@ margin: 30px;
 }
 
 .box-template2 h1 {
-  font-size: 7rem;
+  font-size: 5rem;
   font-weight: bold;
   color: #333;
 }
@@ -996,45 +996,44 @@ font-size: 20px;
 }
 .details-template2 {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   margin-top: 35px;
 
 }
-
+/* 
 
 #durationChart{
   width: 90%;
   margin: 10px;
 }
-/* Progress bar background */
+
 
 #durationChart .progress-bar {
   width: 100%;
   height: 30px;
   margin-top: 20px;
   padding: auto;
-  background-color:  #8061c3;/* Background color of the progress bar */
-  border-radius: 5px; /* Rounded corners */
-  overflow: hidden; /* Ensures the inner progress fits */
+  background-color:  #8061c3;
+  border-radius: 5px; 
+  overflow: hidden;
   color: #fcfcfc;
 }
 #durationChart .progress-bar h3{
-  /* padding: auto; */
   padding-top: 10px;
   text-align: center;
 }
 
-/* Inner progress bar */
+
 #durationChart .progress {
   margin: 10px;
-  height: 40px; /* Height of the progress indicator */
-  background-color: #e0e0e0;/* Default color for the progress */
-  border-radius: 5px; /* Rounded corners */
-  transition: width 0.4s ease; /* Smooth transition for width change */
-}
+  height: 40px; 
+  background-color: #e0e0e0;
+  border-radius: 5px; 
+  transition: width 0.4s ease;
+}  
 #durationChart label{
   color: #000000;
-}
+} */
 
 #trainee-details-template2 table{
   width: 90%;
@@ -1082,7 +1081,7 @@ font-size: 20px;
 
 .trainee-list-template2{
   border: solid 1px rgb(8, 241, 144);
-  width: 60%;
+  width: 50%;
   height: auto;
   border-radius: 10px;
   background-color: #ffffff;
@@ -1090,8 +1089,7 @@ font-size: 20px;
 .batch-duration-template2{
   border: solid 1px rgb(8, 241, 144);
   width: 100%;
-  height: 80px;
-  padding: 20px;
+  height: 100px;
   background-color: #fff;
   border-radius: 10px;
   background-color: #ffffff;
@@ -1112,7 +1110,9 @@ font-size: 20px;
   margin-bottom: 20px;
   color: #333;
 }
-
+.details-right-template2{
+  width: 50%;
+}
 .attendance-template2 {
   border: solid 1px rgb(8, 241, 144);
   width: 100%;
@@ -1160,18 +1160,19 @@ text-align: center;
   width: 100%; /* Or a specific width like 600px */
   height: 300px;
   padding: 10px;
+  /* background: #0E486B; */
 }
 #batchDurationChart{
   width: 90%;
-  margin: 10px;
-  
+  margin-left: 10px;
+  margin-top: 50px;  
 }
 #batchDurationChart .progress-bar{
   width: 100%;
   height: 30px;
   margin-top: 20px;
   padding: auto;
-  background-color:  #07eb79;/* Background color of the progress bar */
+  background-color:  #69f170;/* Background color of the progress bar */
   border-radius: 5px; /* Rounded corners */
   overflow: hidden; /* Ensures the inner progress fits */
   color: #fcfcfc;
@@ -1192,7 +1193,8 @@ text-align: center;
 }
 #sessionsChart{
   width: 90%;
-  margin: 10px;
+  margin-left: 10px;
+  margin-top: 50px; 
   
 }
 #sessionsChart .progress-bar{
@@ -1200,7 +1202,7 @@ text-align: center;
   height: 30px;
   margin-top: 20px;
   padding: auto;
-  background-color:  #07eb79;/* Background color of the progress bar */
+  background-color:  #69f170;/* Background color of the progress bar */
   border-radius: 5px; /* Rounded corners */
   overflow: hidden; /* Ensures the inner progress fits */
   color: #fcfcfc;
@@ -1210,7 +1212,7 @@ text-align: center;
   text-align: center;
 }
 #sessionsChart .progress{
-  margin: 10px;
+  /* margin: 10px; */
   height: 40px; /* Height of the progress indicator */
   background-color: #e0e0e0;/* Default color for the progress */
   border-radius: 5px; /* Rounded corners */
@@ -1219,7 +1221,37 @@ text-align: center;
 #sessionsChart label{
   color: #000000;
 }
-
+#durationChart{
+  width: 90%;
+  margin-top: 5px;
+  
+  /* margin-left: 10px; */
+  /* margin-top: 50px;  */
+}
+#durationChart .progress-bar{
+  width: 100%;
+  height: 20px;
+  margin-top: 10px;
+  padding: auto;
+  background-color:  #69f170;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+#durationChart .progress-bar h3{
+  padding-top: 5px;
+  text-align: center;
+}
+#durationChart .progress{
+  margin: 10px;
+  height: 30px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; 
+}
+#durationChart label{
+  color: #000000;
+}
   /* template 3 */
   
 
