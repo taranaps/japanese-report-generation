@@ -83,7 +83,7 @@ async function renderReport() {
     displaySessionsCarousel(batchData);
     displayDurationCarousel(batchData);
     displayCertificationCarousel(batchData);
-
+    
 }
 
 
