@@ -1518,10 +1518,6 @@ text-align: center;
 
   /* temp3 */
 
-  *{
-    margin:0;
-    padding: 0;
-}
 .template-three{
     width : 800px;
     border: 2px solid rgb(247, 205, 205);
@@ -1672,7 +1668,7 @@ text-align: center;
     height: auto;
     display: flex;
     justify-content: space-around;
-    margin-top: 10px;
+    margin-top: 20px;
   }
   .t3graphtraine{
     width: 47%;
