@@ -447,7 +447,7 @@ margin-top: 30px;
 }
 /* Progress bar background */
 
-.progress-bar {
+#progressBarsContainer-templae1 .progress-bar {
   width: 100%;
   height: 30px;
   margin-top: 20px;
@@ -457,14 +457,14 @@ margin-top: 30px;
   overflow: hidden; /* Ensures the inner progress fits */
   color: #fcfcfc;
 }
-.progress-bar h3{
+#progressBarsContainer-templae1 .progress-bar h3{
   /* padding: auto; */
   padding-top: 10px;
   text-align: center;
 }
 
 /* Inner progress bar */
-.progress {
+#progressBarsContainer-templae1 .progress {
   margin: 10px;
   height: 40px; /* Height of the progress indicator */
   background-color: #e0e0e0;/* Default color for the progress */
@@ -472,6 +472,71 @@ margin-top: 30px;
   transition: width 0.4s ease; /* Smooth transition for width change */
 }
 #progressBarsContainer-templae1 label{
+  color: #000000;
+}
+#whole-duration-data-templae1{
+  width: 90%;
+  margin: 10px;
+}
+/* Progress bar background */
+
+#whole-duration-data-templae1 .progress-bar {
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #8061c3;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+#whole-duration-data-templae1 .progress-bar h3{
+  /* padding: auto; */
+  padding-top: 10px;
+  text-align: center;
+}
+
+/* Inner progress bar */
+#whole-duration-data-templae1 .progress {
+  margin: 10px;
+  height: 40px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; /* Smooth transition for width change */
+}
+#whole-duration-data-templae1 label{
+  color: #000000;
+}
+#duration-sessions-data-template1{
+  width: 90%;
+  margin: 10px;
+}
+/* Progress bar background */
+
+#duration-sessions-data-template1 .progress-bar {
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #8061c3;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+#duration-sessions-data-template1 .progress-bar h3{
+  /* padding: auto; */
+  padding-top: 10px;
+  text-align: center;
+}
+
+#duration-sessions-data-template1 .progress {
+  margin: 10px;
+  height: 40px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; /* Smooth transition for width change */
+}
+#whole-duration-data-templae1 label{
   color: #000000;
 }
 .attendance-heading-template1{
@@ -768,6 +833,7 @@ margin-top: 30px;
   width: 800px;
   padding: 20px;
   background-color: #C3FFC0;
+  
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
   border: solid 1px #c1f0c0 ;
@@ -775,8 +841,16 @@ margin-top: 30px;
   /* margin-left: auto; */
   border-radius: 8px;
   margin: 30px;
+  height: auto;
 }
+#trainer-name-template2 h3{
+  color: #59e952;
+  font-size: 2.5rem;
+  text-align: center;
+margin: 30px;  
 
+  
+}
 .header-template2 {
   text-align: center;
   padding: 20px;
@@ -785,6 +859,7 @@ margin-top: 30px;
   height: 90px;
   margin-bottom: 35px;
   border: solid 1px rgb(8, 241, 144);
+  
 }
 
 .header-template2 h1 {
@@ -810,12 +885,15 @@ margin-top: 30px;
   padding: 20px;
   text-align: center;
   border-radius: 20px;
-  width: 230px;
+  width: 240px;
   /* margin-left: 50px;
   margin-top: 10px; */
-  margin: auto;
-  height: 180px;
+  /* margin: auto; */
+  height: 310px;
   border: solid 1px rgb(8, 241, 144);
+  /* overflow: auto;  */
+
+  max-width: 100%; 
 }
 
 .box-template2 h3 {
@@ -823,8 +901,8 @@ margin-top: 30px;
   font-size: 2em;
 }
 
-.box-template2 .number {
-  font-size: 2.5em;
+.box-template2 h1 {
+  font-size: 7rem;
   font-weight: bold;
   color: #333;
 }
@@ -854,13 +932,80 @@ margin-top: 6px;
 padding: 1px;
 font-size: 20px;
 }
-
+.batch-info h2{
+  text-align: center;
+  padding: auto;
+  color: #333;
+}
+.batchwise-data-template2 h3{
+  margin: 10px;
+  font-size: 2em;
+  text-align: center;
+  color: #333;
+}
+.batchwise-data-template2 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+.batchwise-data-template2 th{
+  background-color: #69f170;
+  color: rgb(250, 245, 245);
+}
+.batchwise-data-template2 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ffffff;
+  color: #000000;
+  border: 2px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}
+.batchwise-data-template2 td{
+  background:#C3FFC0;
+}
 .details-template2 {
   display: flex;
   gap: 20px;
   margin-top: 35px;
 
 }
+
+
+#durationChart{
+  width: 90%;
+  margin: 10px;
+}
+/* Progress bar background */
+
+#durationChart .progress-bar {
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #8061c3;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+#durationChart .progress-bar h3{
+  /* padding: auto; */
+  padding-top: 10px;
+  text-align: center;
+}
+
+/* Inner progress bar */
+#durationChart .progress {
+  margin: 10px;
+  height: 40px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; /* Smooth transition for width change */
+}
+#durationChart label{
+  color: #000000;
+}
+
 #trainee-details-template2 table{
   width: 90%;
   border-collapse: collapse;
@@ -921,6 +1066,8 @@ font-size: 20px;
   border-radius: 10px;
   background-color: #ffffff;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 .trainee-list-template2 h3{
   margin: 10px;
@@ -944,7 +1091,22 @@ font-size: 20px;
   border-radius: 10px;
   background-color: #ffffff
 }
-.trainee-evelution-template2{
+.trainee-evaluation-template2{
+  border: solid 1px rgb(8, 241, 144);
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  height: auto;
+  margin-top: 20px;
+}
+.trainee-evaluation-template2 h3{
+  margin: 10px;
+font-size: 2em;
+text-align: center;
+}
+
+/* .trainee-evelution-template2{
   border: solid 1px rgb(8, 241, 144);
   width: 100%;
   padding: 20px;
@@ -952,18 +1114,82 @@ font-size: 20px;
   border-radius: 10px;
   height: 250px;
   margin-top: 20px;
-}
+} */
 
-h4 {
+/* h4 {
   margin-top: 0;
   text-align: center;
   color: #0b2b69;
-}
+} */
 
-canvas {
+/* canvas {
   width: 100%;
   height: 200px;
+} */
+#levelChart{
+  width: 100%; /* Or a specific width like 600px */
+  height: 300px;
+  padding: 10px;
 }
+#batchDurationChart{
+  width: 90%;
+  margin: 10px;
+  
+}
+#batchDurationChart .progress-bar{
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #07eb79;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+#batchDurationChart .progress-bar h3{
+  padding-top: 10px;
+  text-align: center;
+}
+#batchDurationChart .progress{
+  margin: 10px;
+  height: 40px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; 
+}
+#batchDurationChart label{
+  color: #000000;
+}
+#sessionsChart{
+  width: 90%;
+  margin: 10px;
+  
+}
+#sessionsChart .progress-bar{
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #07eb79;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+#sessionsChart .progress-bar h3{
+  padding-top: 10px;
+  text-align: center;
+}
+#sessionsChart .progress{
+  margin: 10px;
+  height: 40px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; 
+}
+#sessionsChart label{
+  color: #000000;
+}
+
   /* template 3 */
   
 
