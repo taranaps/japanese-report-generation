@@ -942,7 +942,7 @@ const selectColor = document.getElementById("selectcolor");
                 "duration-sessions-heading-template1",
                 "attendance-heading-template1",
                 "evaluation-heading-template1",
-                "batch-evaluation-heading-template1",ṭ
+                "batch-evaluation-heading-template1"
                              
             ];
             
