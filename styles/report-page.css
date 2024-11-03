@@ -1552,6 +1552,43 @@ text-align: center;
 
   } */
 
+  
+/* .card-content{
+  width: 90%;
+  margin-left: 10px;
+  margin-top: 50px;  
+} */
+
+#trainers-template3{
+  color: #ff6f00;
+  font-size: 2.1rem;
+  font-weight: 100;
+  padding: 20px;
+}
+#trainers-template3 h3{
+  padding-top: 10px;
+}
+.card-content .progress-bar{
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #ff6f00;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+.card-content .progress-bar h3{
+  padding-top: 10px;
+  text-align: center;
+}
+.card-content .progress{
+  margin: 10px;
+  height: 40px; /* Height of the progress indicator */
+  background-color: #0062FF;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; 
+}
   .batch-container {
     display: flex;
     justify-content: space-between;
@@ -1585,19 +1622,7 @@ text-align: center;
     width: 130px;
     /* border: 2px solid #0062FF; */
   }
-  .t3batchname{
-    width: 100%;
-    height: 80px;
-    border: 2px solid black;
-    /* border-radius: 20px; */
-    display: flex;
-    /* background-color: #0062FF; */
-    /* justify-content: space-between; */
-    align-items: center;
-    justify-content: center;
-    
-  
-  }
+ 
   #current-level-template3{
     width: 100%;
     height: 200px;
@@ -1617,35 +1642,42 @@ text-align: center;
   } */
 
   
+ 
+  .trainee-attendance-div{
+    display: flex;
+    justify-content: space-between;
+  }
+  .t3batchname .t3sessions{
+    width: 100%;
+    height: 80px;
+    border: 2px solid black;
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    
+  
+  }
   .batch-title {
     text-align: center;
     color: #333;
     margin-top: 15px;
     font-size: x-large;
     padding: 10px;
+    width: 40%;
 
    
   }
-  .trainee-attendance-div{
-    display: flex;
-    justify-content: space-between;
-  }
-  .t3sessions{
-    font-size: small;
-    align-items: center;
-    margin-top: 10px;
-    margin-right: 50px;
-    display: flex;
-    justify-content: space-evenly;
-    /* flex-direction: column; */
-    /* display: inline-flex; */
-  }
- 
   .t3sessions-secondh{
-    margin-left: 320px;
+    width: 30%;
+    padding: 30px;
+    padding-left: 70px;
+    font-size: 1.3rem;
       }
  .t3sessions-firsth{
+        width: 30%;
         padding: 30px;
+        font-size: 1.3rem;
+
       }
 
   
@@ -1684,6 +1716,10 @@ text-align: center;
     /* display: flex;
     justify-content: space-between; */
     margin-top: 20px;
+  }
+  .trainee-attendance-template3{
+    display: flex;
+    justify-content: space-between;
   }
   .t3graphtraine{
     width: 50%;
@@ -1805,7 +1841,15 @@ text-align: center;
   padding: 12px;
   text-align: center;
 }
-
+#number-of-Batch-tmeplate3{
+  color: #0062FF;
+  font-size: 8rem;
+}
+.batch-text{
+  padding-top: 30px;
+  color: #0062FF;
+  font-size: 2.8rem;
+}
 .t3graphtraine th {
   background-color: #ff6f00;
   color: white;

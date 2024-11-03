@@ -310,6 +310,7 @@
             <div class="batch-card">
               <div class="card-title">No. of Batches</div>
               <h1 id="number-of-Batch-tmeplate3"></h1>
+			  <h1 class="batch-text">Batches</h1>
 			  <canvas id="batch-number-template3"></canvas>
             </div>
             <div class="batch-card">
@@ -327,30 +328,35 @@
   
           <div class="batch-container">
             <div class="batch-card">
-              <div class="card-title">No. Of Learners</div>
-              <div class="card-content"></div>
+              <div class="card-title">No of Learners</div>
+              <canvas class="card-content" id="card-content"></canvas>
             </div>
   
             <div class="batch-card">
               <div class="card-title">Total Sessions</div>
-              <div class="card-content"></div>
+
+              <div class="card-content" id="card-content-sessions">
+
+			  </div>
             </div>
   
             <div class="batch-card">
-              <div class="card-title">Total Durations</div>
-              <div class="card-content"></div>
+              <div class="card-title" id="card-title">Total Durations</div>
+              <div class="card-content" id="card-content-duration"></div>
             </div>
           </div>
 		</div>
 		  <div id="batchwise-data-template3">
-          <div class="t3batchname"><h3 class="batch-title"></h3>
+          <div class="t3batchname">
             <div class="t3sessions">
-              <h3 class="t3sessions-firsth">Total Sessions:</h3>
-              <h3 class="t3sessions-secondh">Total Duration: </h3>
+              <h2 class="t3sessions-firsth" id="t3sessions-firsth">Total Sessions:</h2>
+			  <h1 class="batch-title" id="batch-title"></h1>
+              <h2 class="t3sessions-secondh" id="t3sessions-secondh">Total Duration:</h2>
             </div>
           </div>
           		
             <div class="traneediv">
+				<div class="trainee-attendance-template3">
                 <div class="t3graphtraine">
 					<div class="graph-title-trainee">Trainee Details</div>
                  	<div class="t3graph-trainee" id="t3graph-trainee"> </div>
@@ -359,6 +365,7 @@
 					<div class="graph-title-attendance">Trainee Attendence</div>
        				<canvas class="t3graph-attendance" id="t3graph-attendance"> </canvas>
              	</div>
+			</div>
            </div>
 
            <div class="eval-table">
