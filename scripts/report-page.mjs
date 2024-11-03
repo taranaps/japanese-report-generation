@@ -758,7 +758,7 @@ async function populateBatchDataTemplate3(){
     batchCountDisplay.textContent =  numberOfBatches;
     
     for (const [batchName, details] of Object.entries(batchDetails)) {
-        // const filteredData = await getFilteredDocuments(batchName);
+        const filteredData = await getFilteredDocuments(batchName);
         
         const batchContainer = document.createElement('div');
         batchContainer.classList.add('batchwise-data-template3');
@@ -780,40 +780,80 @@ async function populateBatchDataTemplate3(){
             </div>
         </div>
         <div class="traneediv">
+            <div class="democheck">
             <div class="t3graphtraine">
                 <div class="graph-title-trainee">Trainee Details</div>
-                <div class="t3graph-trainee"></div>
+                <div class="t3graph-trainee">
+                    <div id="t3graph-trainee-${batchName}">
+                
+                </div>
+                </div>
             </div>
             <div class="t3traineeatt">
                 <div class="graph-title-attendance">Trainee Attendance</div>
-                <div class="t3graph-attendance"></div>
+                <div class="t3graph-attendance">
+                <canvas id="t3graph-attendance-${batchName}" ></canvas>
+
+                </div
+            </div>
             </div>
         </div>
         <div class="eval-table">
             <div class="table-title">Trainee Evaluation</div>
-            <div class="table-section"></div>
+            <div class="table-section">
+                <div id="evaluation-table-${batchName}" style="width:100%;"></div>
+            </div>
         </div>
         `;
 
         mainContainer.appendChild(batchContainer);
 
-        // const evaluationTable1 = document.getElementById(`evaluation-table-${batchName}`);
-        // const table1 = await createEvaluationTable(filteredData, `evaluation-table-${batchName}`);
-        // evaluationTable1.appendChild(table1);
+        const evaluationTable = document.getElementById(`evaluation-table-${batchName}`);
+        const table1 = await createEvaluationTable(filteredData, `evaluation-table-${batchName}`);
+        evaluationTable.appendChild(table1);
 
-        // await getAttendanceData(filteredData,`attendanceChart-${batchName}`); 
+        await getAttendanceData(filteredData,`t3graph-attendance-${batchName}`); 
+        console.log(filteredData);
 
-        // const traineeDetailsTemplate2 = document.getElementById(`trainee-details-${batchName}`);
-        // const traineeTable2 = await getTraineeDetails(filteredData,`trainee-details-${batchName}`) // Call your attendance data function
-        // traineeDetailsTemplate2.appendChild(traineeTable2);
+
+        const traineeDetailsTemplate2 = document.getElementById(`t3graph-trainee-${batchName}`);
+        const traineeTable2 = await getTraineeDetails(filteredData,`t3graph-trainee-${batchName}`) 
+        traineeDetailsTemplate2.appendChild(traineeTable2);
 
     }
 }
     
-async function batchwiseDataTemplate3() {
-    const template3Header = document.getElementById("subtitle");
-    template3Header.textContent = selectedBatch; // Display selected batch instead
-    await getAttendanceData(filteredData,"t3graph"); 
+async function batchwiseDataTemplate3(selectedBatch) {
+    // const template3Header = document.getElementById("subtitle");
+    // template3Header.textContent = selectedBatch; // Display selected batch instead
+    const currentDate = await getLatestCollection();
+    const filteredData = await getFilteredDocuments(selectedBatch);
+
+    const template1Header = document.getElementById("subtitle");
+    template1Header.textContent = formatCollectionName(currentDate);
+
+    await getAttendanceData(filteredData,"t3graph-attendance"); 
+
+    const traineeDetailsTemplate1 = document.getElementById("t3graph-trainee");
+    const traineeTable1 = await getTraineeDetails(filteredData,"t3graph-trainee") // Call your attendance data function
+    traineeDetailsTemplate1.appendChild(traineeTable1);
+
+    
+    const evaluationTable1 = document.getElementById('table-section');
+    const table1 = await createEvaluationTable(filteredData, 'table-section');
+    evaluationTable1.appendChild(table1);
+
+    
+    const batchCountDisplay = document.getElementById('number-of-Batch-tmeplate3');
+    batchCountDisplay.textContent =  await getNofBatches();
+
+    initTrainerDetails('trainers-template3');
+
+    const backgroundColor2 = '#0062FF';
+    const borderColor2 = '#0062FF';
+    initCertificationChart("current-level-template3",backgroundColor2, borderColor2)
+    
+
 }
     
     images.forEach(image => {
@@ -888,6 +928,9 @@ async function batchwiseDataTemplate3() {
                                 populateBatchDataTemplate2();
                             }
                             else{
+                            const template1Header = document.getElementById("template2-month");
+                            template1Header.textContent = formatCollectionName(currentDate);
+                                
                             const evaluationTable1 = document.getElementById('evaluation-table-template2');
                             const table1 = await createEvaluationTable(filteredData, 'evaluation-table-template2');
                             evaluationTable1.appendChild(table1);
@@ -939,7 +982,7 @@ async function batchwiseDataTemplate3() {
 
                         }
                         else{
-                            batchwiseDataTemplate3();
+                            batchwiseDataTemplate3(selectedBatch);
                         }
                             
                             
