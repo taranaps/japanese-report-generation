@@ -1,4 +1,4 @@
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -2072,9 +2072,9 @@ text-align: center;
     background: #dc143c;
 }
 
-.active-learner {
-    /* background: #dc143c; */
-}
+/* .active-learner {
+    /* background: #dc143c;
+} */ 
 
 .menu-open-lerner {
     display: block;
