@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return table;
   }
 
-  function generateChart(data, id) {
+  async function generateChart(data, id) {
     const canvas = document.getElementById(id);
     if (!canvas) {
       console.error(`Canvas with id "${id}" not found`);
@@ -206,6 +206,51 @@ document.addEventListener("DOMContentLoaded", async () => {
       },
     });
   }
+  async function generateChartToggle(data, id, chartType = "line") {
+    const canvas = document.getElementById(id);
+    console.log(`Selected chart type: ${chartType}`); // Log the selected chart type
+    if (!canvas) {
+        console.error(`Canvas with id "${id}" not found`);
+        return;
+    }
+    console.log('Canvas found:', canvas); // Log the canvas element to ensure it was found
+
+    // Clear existing chart instance if any
+    if (canvas.chartInstance) {
+        console.log('Destroying existing chart instance');
+        canvas.chartInstance.destroy();
+    }
+
+    const ctx = canvas.getContext("2d");
+    const chartData = {
+        labels: data.map((item) => item.traineeName),
+        datasets: [
+            {
+                label: "Avg. Attendance",
+                data: data.map((item) => item.avgAttendance),
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    // Create new chart instance and store it in the canvas element
+    console.log('Creating new chart instance');
+    canvas.chartInstance = new Chart(ctx, {
+        type: chartType,
+        data: chartData,
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
+}
+
 
   async function getAttendanceData(data, id) {
     try {
@@ -320,69 +365,69 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-//   async function generateTraineePieChart(id,chartType = "pie",backgroundColor = [], borderColor = [])
-//     {
-//     const batchCounts = await getBatchTraineeCounts();
-//     if (!batchCounts) {
-//       console.error("No batch data available for the chart.");
-//       return;
-//     }
+  async function generateTraineeDoughnutChart(id,chartType = "doughnut",backgroundColor = [], borderColor = [])
+    {
+    const batchCounts = await getBatchTraineeCounts();
+    if (!batchCounts) {
+      console.error("No batch data available for the chart.");
+      return;
+    }
 
-//     const batchNames = Object.keys(batchCounts);
-//     const traineeCounts = Object.values(batchCounts);
+    const batchNames = Object.keys(batchCounts);
+    const traineeCounts = Object.values(batchCounts);
 
-//     const ctx = document.getElementById(id).getContext("2d");
-//     new Chart(ctx, {
-//       type: chartType,
-//       data: {
-//         labels: batchNames,
-//         datasets: [
-//           {
-//             label: "Number of Trainees per Batch",
-//             data: traineeCounts,
-//             backgroundColor: backgroundColor.length
-//               ? backgroundColor
-//               : [
-//                   "#8061c3",
-//                   "#c6b5eb",
-//                   "#6823fc",
-//                   "#4109b9",
-//                   "#2d175c",
-//                   "#7f719e",
-//                 ],
-//             borderColor: borderColor.length
-//               ? borderColor
-//               : [
-//                   "rgba(128, 97, 195, 1)",
-//                   "rgba(146, 113, 209, 1)",
-//                   "rgba(164, 130, 223, 1)",
-//                   "rgba(182, 146, 237, 1)",
-//                   "rgba(200, 163, 251, 1)",
-//                   "rgba(218, 180, 255, 1)",
-//                 ],
-//             borderWidth: 1,
-//           },
-//         ],
-//       },
-//       options: {
-//         responsive: true,
-//         plugins: {
-//           legend: {
-//             position: "bottom",
-//           },
-//           tooltip: {
-//             callbacks: {
-//               label: function (context) {
-//                 const label = context.label || "";
-//                 const value = context.raw;
-//                 return `${label}: ${value} trainees`;
-//               },
-//             },
-//           },
-//         },
-//       },
-//     });
-//   }
+    const ctx = document.getElementById(id).getContext("2d");
+    new Chart(ctx, {
+      type: chartType,
+      data: {
+        labels: batchNames,
+        datasets: [
+          {
+            label: "Number of Trainees per Batch",
+            data: traineeCounts,
+            backgroundColor: backgroundColor.length
+              ? backgroundColor
+              : [
+                  "#8061c3",
+                  "#c6b5eb",
+                  "#6823fc",
+                  "#4109b9",
+                  "#2d175c",
+                  "#7f719e",
+                ],
+            borderColor: borderColor.length
+              ? borderColor
+              : [
+                  "rgba(128, 97, 195, 1)",
+                  "rgba(146, 113, 209, 1)",
+                  "rgba(164, 130, 223, 1)",
+                  "rgba(182, 146, 237, 1)",
+                  "rgba(200, 163, 251, 1)",
+                  "rgba(218, 180, 255, 1)",
+                ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "bottom",
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const label = context.label || "";
+                const value = context.raw;
+                return `${label}: ${value} trainees`;
+              },
+            },
+          },
+        },
+      },
+    });
+  }
 
 let traineeChartInstance; // Global variable to store the current chart instance
 
@@ -396,6 +441,15 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
   // Get batch names and trainee counts from the data
   const batchNames = Object.keys(batchCounts);
   const traineeCounts = Object.values(batchCounts);
+
+  if (chartType === "bar" || chartType === "line") {
+    canvas.style.width = "600px"; // Example width for bar/line charts
+    canvas.style.height = "400px"; // Example height for bar/line charts
+    canvas.style.margin = "20px";
+  } else {
+    canvas.style.width = "400px"; // Default width for other charts
+    canvas.style.height = "300px"; // Default height for other charts
+  }
 
   // Destroy the existing chart instance if it exists
   if (traineeChartInstance) {
@@ -1028,7 +1082,7 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
     const template1Header = document.getElementById("subtitle");
     template1Header.textContent = formatCollectionName(currentDate);
 
-    await getAttendanceData(filteredData, "t3graph-attendance");
+    // await getAttendanceData(filteredData, "t3graph-attendance");
 
     const traineeDetailsTemplate1 = document.getElementById("t3graph-trainee");
     const traineeTable1 = await getTraineeDetails(
@@ -1088,6 +1142,20 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
     const template3Header = document.getElementById("batch-title");
     template3Header.textContent = selectedBatch;
     console.log(selectedBatch);
+
+    document.getElementById('chartTypeDropdown').addEventListener('change', (event) => {
+        const selectedChartType = event.target.value;
+        generateTraineePieChart("card-content",selectedChartType,backgroundColor,borderColor);  
+        
+      });
+
+      generateChartToggle(filteredData, 't3graph-attendance', 'bar');
+      document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
+          const selectedChartType = event.target.value;
+          generateChartToggle(filteredData, 't3graph-attendance', selectedChartType);
+          
+      });  
+
   }
 
   images.forEach((image) => {
@@ -1115,7 +1183,14 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
                   "header-template1-h3"
                 );
                 template1Header.textContent = formatCollectionName(currentDate); 
-                await getAttendanceData(filteredData,"attendance-body-template1");
+                // await getAttendanceData(filteredData,"attendance-body-template1");
+                generateChartToggle(filteredData, 'attendance-body-template1', 'bar');
+                document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
+                    const selectedChartType = event.target.value;
+                    generateChartToggle(filteredData, 'attendance-body-template1', selectedChartType);
+                    
+                });
+                // generateChartToggle(filteredData, 'attendance-body-template1', 'bar');
 
                 const traineeDetailsTemplate1 = document.getElementById("trainee-details-template1");
 
@@ -1174,7 +1249,7 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
                   "duration-sessions-data-template1",
                   selectedBatch
                 );
-
+                
                 document.getElementById('chartTypeDropdown').addEventListener('change', (event) => {
                     const selectedChartType = event.target.value;
                     generateTraineePieChart("trainee-piechart-template1",selectedChartType,backgroundColor,borderColor);
@@ -1207,7 +1282,16 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
                   "batch-name-template2"
                 );
                 template2Header.textContent = selectedBatch; // Display selected batch instead
-                await getAttendanceData(filteredData, "attendanceChart");
+
+                // await getAttendanceData(filteredData, "attendanceChart");
+
+                generateChartToggle(filteredData, 'attendanceChart', 'bar');
+                document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
+                    const selectedChartType = event.target.value;
+                    generateChartToggle(filteredData, 'attendanceChart', selectedChartType);
+                    
+                });
+
                 const traineeDetailsTemplate2 = document.getElementById(
                   "trainee-details-template2"
                 );
@@ -1244,7 +1328,7 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
                 const batchCountDisplay = document.getElementById("number");
                 batchCountDisplay.textContent = await getNofBatches();
                 const diaplayBatch = document.getElementById("batch-number");
-                diaplayBatch.textContent = generateTraineePieChart(
+                diaplayBatch.textContent = generateTraineeDoughnutChart(
                   "batch-number",
                   "doughnut",
                   backgroundColor,
@@ -1264,6 +1348,12 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
                   selectedBatch
                 );
                 initTrainerDetails("trainer-name-template2");
+                
+                document.getElementById('chartTypeDropdown').addEventListener('change', (event) => {
+                    const selectedChartType = event.target.value;
+                    generateTraineePieChart("learnersChart",selectedChartType,backgroundColor,borderColor);
+                    
+                  });
               }
               break;
             case "template3":

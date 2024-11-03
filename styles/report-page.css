@@ -258,7 +258,7 @@ body {
 .template-one{
   height: auto;
   background: #fcfcfd;
-  width: 700px;
+  width: 800px;
   border-radius: 8px;
   position: absolute;
   top: 140px;
@@ -483,8 +483,8 @@ body {
 .right-template1{
 
   width: 46%;
-  margin-left: 360px;
-  margin-top: 10px;
+  margin-left: 378px;
+  margin-top: 25px;
   padding: 0;
 }
 .attendance-template1{
@@ -628,6 +628,7 @@ margin-top: 30px;
   height: 250px;
   width: 100%;
   margin: auto;
+  padding-top:24px ;
   position: relative;
   top: 10px;
 }
@@ -665,8 +666,8 @@ margin-top: 30px;
 }
 
 .batch-evaluation-template1{
-  width: 100%-35px;
-  margin: 50px 35px;
+  width: 88%;
+  margin: 100px 30px;
 }
 .batch-evaluation-heading-template1{
   border-radius: 10px;
@@ -766,7 +767,7 @@ margin-top: 30px;
  
 }
 .inner-level-template1{
-  height: auto;
+  height: 200px;
   width: auto;
 }
 
@@ -936,7 +937,9 @@ margin: 30px;
   margin: 0;
   color: #333;
 }
-
+#trainee-piechart-template1{
+  margin-top: 20px
+}
 .summary-template2 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1154,6 +1157,11 @@ font-size: 20px;
   background-color: #fff;
   border-radius: 10px;
   background-color: #ffffff
+}
+.attendance-template2 h3{
+  text-align: center;
+  font-size: 2.1rem;
+  margin-bottom: 5px;
 }
 .trainee-evaluation-template2{
   border: solid 1px rgb(8, 241, 144);

@@ -177,6 +177,7 @@
                             <div class="box-template2">
                                 <h3>Active Batches</h3>
                                 <h1 id="number"></h1>
+								<!-- <h1 id="Batch-text-template2">Batches</h1> -->
 								<canvas id="batch-number"></canvas>
                             </div>
                             <div class="box-template2">
@@ -393,6 +394,8 @@
 					  <option value="bar">Bar Chart</option>
 					  <option value="line">Line Chart</option>
 					  <option value="doughnut">Doughnut Chart</option>
+					  <option value="radar">Radar</option>
+					  <option value="polarArea">Polar Area</option>
 					</select>
 				  </div>
                   
@@ -402,18 +405,14 @@
                 <div class="toggle-certification">
                   <h2>Certification Level</h2>
                   <div class="learners">
-                    <div class="select-learner">
-
-                      <span class="selected-learner" id="selected-learner"><p>Select</p></span>
-                      <div class="ccaret"></div>
-                    </div>
-                    <ul class="menu-learner">
-                      <li class="active-learner">line Graph</li>
-                      <li>Bubble Chart</li>
-                      <li>Bar Graph</li>
-                      <li>Scatter Chart</li>
-                      <!-- <li>Bubble Chart</li> -->
-                    </ul>
+                    <select id="chartType-dropdown-certification">
+						<option value="line">Line</option>
+						<option value="bar">Bar</option>
+						<option value="pie">Pie</option>
+						<option value="doughnut">Doughnut</option>
+						<option value="radar">Radar</option>
+						<option value="polarArea">Polar Area</option>
+					</select>
                     </div>
                   
 
@@ -422,16 +421,14 @@
                 <div class="toggle-attendence">
                   <h2>Attendence</h2>
                   <div class="learners">
-                    <div class="select-learner">
-                      <span class="selected-learner"><p>Select</p></span>
-                      <div class="ccaret"></div>
-                    </div>
-                    <ul class="menu-learner">
-                      <li class="active-learner">Line Graph</li>
-                      <li>Bar Graph</li>
-					  <li>Bubble Chart</li>
-                      
-                    </ul>
+					<select id="chartTypeDropdownAttendance">
+						<option value="line">Line</option>
+						<option value="bar">Bar</option>
+						<option value="pie">Pie</option>
+						<option value="doughnut">Doughnut</option>
+						<option value="radar">Radar</option>
+						<option value="polarArea">Polar Area</option>
+					</select>
                     </div>
                   
 
