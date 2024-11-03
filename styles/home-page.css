@@ -9,14 +9,16 @@
 }
 
 .sidebar {
-    width: 80px;
+    width: 70px;
+    height: 60%;
     background-color: #DC143C;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
-    position: relative;
+    position: fixed;
     border-radius: 10px;
+    left: 0;
 }
 
 .nav-items {
@@ -71,14 +73,13 @@
     position: relative;
 }
 
-/* Tooltip text */
 .nav-item::after {
     content: attr(data-tooltip); /* Display the text from data-tooltip */
     position: absolute;
-    left: 110%; /* Adjust to position the tooltip to the right of the icon */
-    top: 50%;
-    transform: translateY(-50%);
-    background-color:#181717b9;
+    left: 50%; /* Center horizontally */
+    bottom: 100%; /* Position tooltip above the icon */
+    transform: translateX(-50%) translateY(-5px); /* Center tooltip horizontally and add space above icon */
+    background-color: #181717b9;
     color: #fff;
     padding: 5px 10px;
     border-radius: 4px;
@@ -87,7 +88,7 @@
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     font-size: 14px;
-    pointer-events: none; /* Ensures the tooltip doesn't interfere with hover */
+    pointer-events: none; /* Prevents tooltip from blocking hover events */
     z-index: 10;
 }
 
@@ -96,14 +97,6 @@
     opacity: 1;
     visibility: visible;
 }
-
-
-/*  */
-
-
-
-
-
 
 body {
     background-color: #f4f4f4;
@@ -153,7 +146,7 @@ body {
     margin-top: 100px;
     display: flex;
     justify-content: space-between;
-    width: 1150px;
+    /* width: 1150px; */
     gap: 40px;
 }
 
