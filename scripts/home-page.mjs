@@ -49,7 +49,7 @@ async function renderDashboard() {
   const collectionRef = collection(db, latestCollectionName);
   const snapshot = await getDocs(collectionRef);
 
-  const trainerName = new Set(); // Fixed here to match declaration
+  const trainerName = new Set();
   const batchData = {};
   let totalTrainees = 0;
 
@@ -59,7 +59,7 @@ async function renderDashboard() {
     // Add unique trainer names from the TrainerName array
     if (Array.isArray(data.trainerName)) {
       data.trainerName.forEach((trainer) => {
-        trainerName.add(trainer); // Fixed here to match declaration
+        trainerName.add(trainer);
         console.log("Adding trainer:", trainer);
       });
     } else {
@@ -85,13 +85,14 @@ async function renderDashboard() {
     batchData[data.batchName].totalAttendance += data.avgAttendance;
     totalTrainees++;
   });
+
   displayTrainerName([...trainerName]);
   renderBatchAttendanceChart(batchData);
   displayBatchCount(Object.keys(batchData).length);
   displayTraineeCount(totalTrainees);
-  displaySessionsCarousel(batchData);
-  displayDurationCarousel(batchData);
-  displayCertificationCarousel(batchData);
+
+  // Start the synchronized carousel for batches
+  startBatchCarousel(batchData);
 }
 
 function displayBatchCount(numBatches) {
@@ -102,77 +103,39 @@ function displayTraineeCount(numTrainees) {
   document.getElementById("numTrainees").textContent = numTrainees;
 }
 
-function displaySessionsCarousel(batchData) {
-  const carousel = document.getElementById("totalSessions");
-  carousel.innerHTML = "";
-
-  Object.entries(batchData).forEach(([batchName, details]) => {
-    const slide = document.createElement("div");
-    slide.classList.add("carousel-slide");
-    slide.innerHTML = `<h4>${batchName}</h4><p>Total Sessions Till Date: ${details.sessionsTillDate}</p>`;
-    carousel.appendChild(slide);
-  });
-
-  let currentSlide = 0;
-  setInterval(() => {
-    const slides = document.querySelectorAll(".carousel-slide");
-    slides.forEach((slide) => slide.classList.remove("active"));
-    slides[currentSlide].classList.add("active");
-    currentSlide = (currentSlide + 1) % slides.length;
-  }, 2000);
-}
-
-function displayDurationCarousel(batchData) {
-  const carousel = document.getElementById("totalDuration");
-  carousel.innerHTML = "";
-
-  Object.entries(batchData).forEach(([batchName, details]) => {
-    const slide = document.createElement("div");
-    slide.classList.add("carousel-slide");
-    slide.innerHTML = `<h4>${batchName}</h4><p>Duration Till Date: ${details.durationTillDate} hours</p>`;
-    carousel.appendChild(slide);
-  });
-
-  let currentSlide = 0;
-  setInterval(() => {
-    const slides = document.querySelectorAll(
-      "#duration-carousel .carousel-slide"
-    );
-    slides.forEach((slide) => slide.classList.remove("active"));
-    slides[currentSlide].classList.add("active");
-    currentSlide = (currentSlide + 1) % slides.length;
-  }, 2000);
-}
-
-function displayCertificationCarousel(batchData) {
-  const carousel = document.getElementById("certificationLevel");
-  carousel.innerHTML = "";
-
-  Object.entries(batchData).forEach(([batchName, details]) => {
-    const slide = document.createElement("div");
-    slide.classList.add("carousel-slide");
-    slide.innerHTML = `<h4>${batchName}</h4><p>Certification Level: ${details.certificationLevel}</p>`;
-    carousel.appendChild(slide);
-  });
-
-  let currentSlide = 0;
-  setInterval(() => {
-    const slides = document.querySelectorAll(
-      "#certification-carousel .carousel-slide"
-    );
-    slides.forEach((slide) => slide.classList.remove("active"));
-    slides[currentSlide].classList.add("active");
-    currentSlide = (currentSlide + 1) % slides.length;
-  }, 2000);
-}
-
 function displayTrainerName(trainerName) {
   const trainerBox = document.getElementById("trainerNames");
-  // trainerBox.innerHTML = `Trainer Count: ${
-  //   trainerName.length
-  // } <br> ${trainerName.join(", ")}`;
   trainerBox.innerHTML = trainerName.join(", ");
+}
 
+// Display batch data across all carousels simultaneously
+function displayBatchData(batchName, details) {
+  // Update Sessions carousel
+  const sessionsCarousel = document.getElementById("totalSessions");
+  sessionsCarousel.innerHTML = `<h4>${batchName}</h4><p>Total Sessions Till Date: ${details.sessionsTillDate}</p>`;
+
+  // Update Duration carousel
+  const durationCarousel = document.getElementById("totalDuration");
+  durationCarousel.innerHTML = `<h4>${batchName}</h4><p>Duration Till Date: ${details.durationTillDate} hours</p>`;
+
+  // Update Certification carousel
+  const certificationCarousel = document.getElementById("certificationLevel");
+  certificationCarousel.innerHTML = `<h4>${batchName}</h4><p>Certification Level: ${details.certificationLevel}</p>`;
+}
+
+// Start the batch carousel to rotate through batches simultaneously
+function startBatchCarousel(batchData) {
+  const batchNames = Object.keys(batchData);
+  let currentBatchIndex = 0;
+
+  setInterval(() => {
+    const batchName = batchNames[currentBatchIndex];
+    const details = batchData[batchName];
+    displayBatchData(batchName, details);
+
+    // Move to the next batch
+    currentBatchIndex = (currentBatchIndex + 1) % batchNames.length;
+  }, 3000);
 }
 
 // Render batch attendance chart for all batches
