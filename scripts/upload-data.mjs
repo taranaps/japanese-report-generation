@@ -165,7 +165,7 @@ function validateData(data) {
         //     }
         // }
 
-        
+
 
         // for(let i = 0; i < evalNumbers; i++){
         //     if(evaluations) {
@@ -180,11 +180,11 @@ function validateData(data) {
         //         if (evaluations[i].evaluationNo && !/^E\d+$/.test(evaluations[i].evaluationNo)) {
         //                 return { isValid: false, errorMessage: `Invalid Evaluation No: '${evaluations.evaluationNo}'. Expected format: 'E[num]'` };
         //             }
-            
+
         //         if (evaluations.evaluationDate && !isValidDate(evaluations.evaluationDate, row['Month'])) {
         //                 return { isValid: false, errorMessage: `Invalid Date: '${evaluations.evaluationDate}'. Expected format: 'DD/MM/YYYY' with the month matching '${row['Month']}'` };
         //             }
-            
+
         //                 // Check for required values in the evaluation columns
         //         if ((evaluations.evaluationName && !evaluations.evaluationDate) || (evaluations.evaluationDate && !evaluations.evaluationName)) {
         //                 return { isValid: false, errorMessage: `If Evaluation Name is provided, Date must also be provided and vice versa.` };

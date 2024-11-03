@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const selectedCollection = e.target.value;
             await loadCollectionData(selectedCollection);
             await loadAttendanceData(selectedCollection); // Load attendance data for the bar chart
+            renderBatchDurationChart(selectedCollection);
+            renderSessionCountChart(selectedCollection);
 
         });
     } catch (error) {
@@ -176,7 +178,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // Helper function to render evaluations in a readable format
-function renderEvaluations(evaluations = []) {
+async function renderEvaluations(evaluations = []) {
     return evaluations
     .filter(e => e.evaluationName && e.evaluationName.toUpperCase() !== 'N/A')
     .map(evl => `
@@ -186,6 +188,74 @@ function renderEvaluations(evaluations = []) {
         </div>
     `).join('');
 }
+
+// Render batch duration chart
+async function renderBatchDurationChart(collectionName) {
+    const colRef = collection(db, collectionName);
+    const snapshot = await getDocs(colRef);
+    const trainees = snapshot.docs.map(doc => doc.data());
+
+    const batchNames = Object.keys(batchData);
+    const batchDurations = batchNames.map(batchName => batchData[batchName].batchDurationMonth);
+
+    const ctx = document.getElementById('batch-duration-chart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: batchNames,
+            datasets: [{
+                label: 'Batch Duration (Months)',
+                data: batchDurations,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true },
+                x: { title: { display: true, text: 'Batch Name' } },
+                y: { title: { display: true, text: 'Duration (Months)' } }
+            }
+        }
+    });
+}
+
+// Render session count chart
+async function renderSessionCountChart(collectionName) {
+
+    const colRef = collection(db, collectionName);
+    const snapshot = await getDocs(colRef);
+    const trainees = snapshot.docs.map(doc => doc.data());
+
+    const batchNames = Object.keys(batchData);
+    const sessionCounts = batchNames.map(batchName => batchData[batchName].numberOfSessionsMonth);
+
+    const ctx = document.getElementById('session-count-chart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: batchNames,
+            datasets: [{
+                label: 'Number of Sessions (Month)',
+                data: sessionCounts,
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 1,
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true },
+                x: { title: { display: true, text: 'Batch Name' } },
+                y: { title: { display: true, text: 'Sessions' } }
+            }
+        }
+    });
+}
+
 
 {/* <td>${data.batchDurationTillDate || 'N/A'}</td>
                     <td>${data.batchDurationMonth || 'N/A'}</td>
