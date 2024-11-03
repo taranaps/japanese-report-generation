@@ -323,7 +323,7 @@ body {
   align-items: center;
   flex-direction: column;
   font-size: 30px;
-  padding-left: 230px;
+  padding-left: 313px;
 }
 .header-template1 h1 {
   color: black;
@@ -482,7 +482,7 @@ body {
 }
 .right-template1{
 
-  width: 50%;
+  width: 46%;
   margin-left: 360px;
   margin-top: 10px;
   padding: 0;
@@ -691,7 +691,7 @@ margin-top: 30px;
   border-radius: 10px;
   background: white;
   height: auto;
-  width: 100%;
+  width: 103%;
   margin: auto;
   position: relative;
   top: 10px;

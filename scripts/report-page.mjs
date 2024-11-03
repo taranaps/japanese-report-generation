@@ -1,14 +1,6 @@
 import { checkAuth, logout } from "./auth.js";
 import { db } from "./firebaseConfig.mjs";
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  doc,
-  getDoc,
-  where,
-  query,
-} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+import {collection,getDocs,getFirestore,doc,getDoc,where,query,} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
 // Check authentication status
 checkAuth();
@@ -74,6 +66,9 @@ function updateArrowVisibility() {
 updateArrowVisibility();
 
 //--------------------TEMPLATE SELECTION-------------------------//
+
+
+
 let selectedTemplate = "";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -101,7 +96,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const filteredData = snapshot.docs.map((doc) => doc.data());
       return filteredData;
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error fetching filtered documents:", error);
       return null;
     }
@@ -113,19 +109,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       const colRef = collection(db, collectionName);
       const snapshot = await getDocs(colRef);
 
-      const batchNames = [
-        ...new Set(snapshot.docs.map((doc) => doc.data().batchName)),
-      ];
+      const batchNames = [...new Set(snapshot.docs.map((doc) => doc.data().batchName)),];
 
-      batchSelect.innerHTML =
-        '<option value="">Select Batch</option> <option value="whole-batch">Whole Batch</option>';
+      batchSelect.innerHTML ='<option value="">Select Batch</option> <option value="whole-batch">Whole Batch</option>';
       batchNames.forEach((batch) => {
         const option = document.createElement("option");
         option.value = batch;
         option.textContent = batch;
         batchSelect.appendChild(option);
       });
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error loading batch options:", error);
     }
   }
@@ -145,12 +139,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const table = document.createElement("table");
     const headerRow = document.createElement("tr");
     const headers = ["SI No.", "Trainee Name", "DU", "Avg. Attendance"];
+
     headers.forEach((headerText) => {
       const th = document.createElement("th");
       th.appendChild(document.createTextNode(headerText));
       headerRow.appendChild(th);
     });
+
     table.appendChild(headerRow);
+
     data.forEach((item, index) => {
       const row = document.createElement("tr");
       const siNoCell = document.createElement("td");
@@ -287,12 +284,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     return table;
   }
-  function formatCollectionName(collectionName) {
-    const [month, year] = collectionName.split("-"); // Split by hyphen
 
-    // Capitalize the first letter of the month and concatenate with the year
+  function formatCollectionName(collectionName) {
+    const [month, year] = collectionName.split("-"); 
     return month.charAt(0).toUpperCase() + month.slice(1) + " " + year;
   }
+
 
   async function getBatchTraineeCounts() {
     try {
@@ -316,79 +313,148 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
 
       return batchCounts;
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error fetching trainee counts:", error);
       return null;
     }
   }
 
-  async function generateTraineePieChart(
-    id,
-    chartType = "pie",
-    backgroundColor = [],
-    borderColor = []
-  ) {
-    const batchCounts = await getBatchTraineeCounts();
-    if (!batchCounts) {
-      console.error("No batch data available for the chart.");
-      return;
-    }
+//   async function generateTraineePieChart(id,chartType = "pie",backgroundColor = [], borderColor = [])
+//     {
+//     const batchCounts = await getBatchTraineeCounts();
+//     if (!batchCounts) {
+//       console.error("No batch data available for the chart.");
+//       return;
+//     }
 
-    const batchNames = Object.keys(batchCounts);
-    const traineeCounts = Object.values(batchCounts);
+//     const batchNames = Object.keys(batchCounts);
+//     const traineeCounts = Object.values(batchCounts);
 
-    const ctx = document.getElementById(id).getContext("2d");
-    new Chart(ctx, {
-      type: chartType,
-      data: {
-        labels: batchNames,
-        datasets: [
-          {
-            label: "Number of Trainees per Batch",
-            data: traineeCounts,
-            backgroundColor: backgroundColor.length
-              ? backgroundColor
-              : [
-                  "#8061c3",
-                  "#c6b5eb",
-                  "#6823fc",
-                  "#4109b9",
-                  "#2d175c",
-                  "#7f719e",
-                ],
-            borderColor: borderColor.length
-              ? borderColor
-              : [
-                  "rgba(128, 97, 195, 1)",
-                  "rgba(146, 113, 209, 1)",
-                  "rgba(164, 130, 223, 1)",
-                  "rgba(182, 146, 237, 1)",
-                  "rgba(200, 163, 251, 1)",
-                  "rgba(218, 180, 255, 1)",
-                ],
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "bottom",
-          },
-          tooltip: {
-            callbacks: {
-              label: function (context) {
-                const label = context.label || "";
-                const value = context.raw;
-                return `${label}: ${value} trainees`;
-              },
+//     const ctx = document.getElementById(id).getContext("2d");
+//     new Chart(ctx, {
+//       type: chartType,
+//       data: {
+//         labels: batchNames,
+//         datasets: [
+//           {
+//             label: "Number of Trainees per Batch",
+//             data: traineeCounts,
+//             backgroundColor: backgroundColor.length
+//               ? backgroundColor
+//               : [
+//                   "#8061c3",
+//                   "#c6b5eb",
+//                   "#6823fc",
+//                   "#4109b9",
+//                   "#2d175c",
+//                   "#7f719e",
+//                 ],
+//             borderColor: borderColor.length
+//               ? borderColor
+//               : [
+//                   "rgba(128, 97, 195, 1)",
+//                   "rgba(146, 113, 209, 1)",
+//                   "rgba(164, 130, 223, 1)",
+//                   "rgba(182, 146, 237, 1)",
+//                   "rgba(200, 163, 251, 1)",
+//                   "rgba(218, 180, 255, 1)",
+//                 ],
+//             borderWidth: 1,
+//           },
+//         ],
+//       },
+//       options: {
+//         responsive: true,
+//         plugins: {
+//           legend: {
+//             position: "bottom",
+//           },
+//           tooltip: {
+//             callbacks: {
+//               label: function (context) {
+//                 const label = context.label || "";
+//                 const value = context.raw;
+//                 return `${label}: ${value} trainees`;
+//               },
+//             },
+//           },
+//         },
+//       },
+//     });
+//   }
+
+let traineeChartInstance; // Global variable to store the current chart instance
+
+async function generateTraineePieChart(id, chartType = "pie", backgroundColor = [], borderColor = []) {
+  const batchCounts = await getBatchTraineeCounts();
+  if (!batchCounts) {
+    console.error("No batch data available for the chart.");
+    return;
+  }
+
+  // Get batch names and trainee counts from the data
+  const batchNames = Object.keys(batchCounts);
+  const traineeCounts = Object.values(batchCounts);
+
+  // Destroy the existing chart instance if it exists
+  if (traineeChartInstance) {
+    traineeChartInstance.destroy();
+  }
+
+  // Get the context of the canvas element
+  const ctx = document.getElementById(id).getContext("2d");
+  traineeChartInstance = new Chart(ctx, {
+    type: chartType, // Use the chart type passed to the function
+    data: {
+      labels: batchNames,
+      datasets: [
+        {
+          label: "Number of Trainees per Batch",
+          data: traineeCounts,
+          backgroundColor: backgroundColor.length
+            ? backgroundColor
+            : [
+                "#8061c3",
+                "#c6b5eb",
+                "#6823fc",
+                "#4109b9",
+                "#2d175c",
+                "#7f719e",
+              ],
+          borderColor: borderColor.length
+            ? borderColor
+            : [
+                "rgba(128, 97, 195, 1)",
+                "rgba(146, 113, 209, 1)",
+                "rgba(164, 130, 223, 1)",
+                "rgba(182, 146, 237, 1)",
+                "rgba(200, 163, 251, 1)",
+                "rgba(218, 180, 255, 1)",
+              ],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              const label = context.label || "";
+              const value = context.raw;
+              return `${label}: ${value} trainees`;
             },
           },
         },
       },
-    });
-  }
+    },
+  });
+}
 
   async function getBatchDetailsFromLatestCollection() {
     try {
@@ -495,7 +561,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function renderTotalSessionsAndDuration(
     batchDetails,
     sessionTillDateId,
-    batchDurationId,
+    batchDurationId
   ) {
     const batchSessionContainer = document.getElementById(sessionTillDateId); // Assume there's a container for the progress bars
     const batchDurationContainer = document.getElementById(batchDurationId);
@@ -506,10 +572,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Create progress bars for each batch
 
     for (const [batchName, details] of Object.entries(batchDetails)) {
-      const {
-        numberOfSessionsTillDate,
-        batchDurationTillDate
-      } = details;
+      const { numberOfSessionsTillDate, batchDurationTillDate } = details;
       const progressBarHTML = `
             <div class="progress">
                 <div class="progress-bar" id="progress-bar-no-of-sessions"><h3 >${batchName} - ${numberOfSessionsTillDate} Sessions</h3></div>
@@ -546,16 +609,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function loadSessionsAndDurationWholeBatch(
     sessionTillDateId,
-    batchDurationId,
-
+    batchDurationId
   ) {
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (batchDetails) {
       renderTotalSessionsAndDuration(
         batchDetails,
         sessionTillDateId,
-        batchDurationId,
-    
+        batchDurationId
       );
     }
   }
@@ -661,28 +722,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       },
     });
   }
-
-  // async function getBatchObject() {
-  //     const batchDetails = await getBatchDetailsFromLatestCollection();
-  //     if (!batchDetails) {
-  //         console.error("No batch details found.");
-  //         return;
-  //     }
-  //     const batchDataArray = Object.entries(batchDetails).map(([batchName, details]) => ({
-  //         batchName,
-  //         certificationLevel: details.certificationLevel,
-  //         batchDurationTillDate: details.batchDurationTillDate,
-  //         certificationLevel: details.certificationLevel ,
-  //         numberOfSessionsTillDate: details.numberOfSessionsTillDate ,
-  //         batchDurationMonth: details.batchDurationMonth ,
-  //         numberOfSessionsMonth: details.numberOfSessionsMonth,
-  //         trainerName: details.trainerName
-
-  //     }));
-  //     console.log("batch details: ", batchDataArray);
-  //     return batchDataArray;
-
-  // }
 
   async function initCertificationChart(
     chartElementId,
@@ -974,15 +1013,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error("No batch details found.");
       return;
     }
+
     const sessionsPerBatch = batchDetails[selectedBatch].numberOfSessionsMonth;
     const sessionsTemplate3 = document.getElementById("t3sessions-firsth");
-    sessionsTemplate3.textContent=`Total Sessions: ${sessionsPerBatch}`;
+    sessionsTemplate3.textContent = `Total Sessions: ${sessionsPerBatch}`;
 
     const durationPerBatch = batchDetails[selectedBatch].batchDurationMonth;
     const durationTemplae3 = document.getElementById("t3sessions-secondh");
-    durationTemplae3.textContent = `Total duration: ${durationPerBatch}`
-    // const template3Header = document.getElementById("subtitle");
-    // template3Header.textContent = selectedBatch; // Display selected batch instead
+    durationTemplae3.textContent = `Total duration: ${durationPerBatch}`;
+
     const currentDate = await getLatestCollection();
     const filteredData = await getFilteredDocuments(selectedBatch);
 
@@ -995,7 +1034,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const traineeTable1 = await getTraineeDetails(
       filteredData,
       "t3graph-trainee"
-    ); // Call your attendance data function
+    ); 
     traineeDetailsTemplate1.appendChild(traineeTable1);
 
     const evaluationTable1 = document.getElementById("table-section");
@@ -1009,8 +1048,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     initTrainerDetails("trainers-template3");
 
-    const backgroundColor2 = "#0062FF";
-    const borderColor2 = "#0062FF";
+    const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
+    const borderColor2 = 'rgba(255, 159, 64, 0.2)';
     initCertificationChart(
       "current-level-template3",
       backgroundColor2,
@@ -1020,20 +1059,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     const numberOfTrainees = document.getElementById("card-content");
 
     const backgroundColor = [
-      "#ff6f00",
-      "#e99454",
-      "#f55004",
-      "#c24004",
-      "#f1966c",
-      "#fa3d2f ",
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
     ];
     const borderColor = [
-      "#ff6f00",
-      "#e99454",
-      "#f55004",
-      "#c24004",
-      "#f1966c",
-      "#fa3d2f ",
+      'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
     ];
     numberOfTrainees.textContent = generateTraineePieChart(
       "card-content",
@@ -1043,14 +1082,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
     loadSessionsAndDurationWholeBatch(
       "card-content-sessions",
-      "card-content-duration",
-    
+      "card-content-duration"
     );
 
     const template3Header = document.getElementById("batch-title");
-      template3Header.textContent = selectedBatch; 
-      console.log(selectedBatch);
-      
+    template3Header.textContent = selectedBatch;
+    console.log(selectedBatch);
   }
 
   images.forEach((image) => {
@@ -1077,20 +1114,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const template1Header = document.getElementById(
                   "header-template1-h3"
                 );
-                template1Header.textContent = formatCollectionName(currentDate); // Display selected batch instead()
-                // console.log("filtered data:",filteredData)
-                await getAttendanceData(
-                  filteredData,
-                  "attendance-body-template1"
-                );
-                const traineeDetailsTemplate1 = document.getElementById(
-                  "trainee-details-template1"
-                );
+                template1Header.textContent = formatCollectionName(currentDate); 
+                await getAttendanceData(filteredData,"attendance-body-template1");
 
-                const traineeTable1 = await getTraineeDetails(
-                  filteredData,
-                  "trainee-details-template1"
-                ); // Call your attendance data function
+                const traineeDetailsTemplate1 = document.getElementById("trainee-details-template1");
+
+                const traineeTable1 = await getTraineeDetails(filteredData,"trainee-details-template1");
                 traineeDetailsTemplate1.appendChild(traineeTable1);
 
                 const evaluationTable1 = document.getElementById(
@@ -1107,12 +1136,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 );
 
                 const backgroundColor = [
-                  "#8061c3",
-                  "#c6b5eb",
-                  "#6823fc",
-                  "#4109b9",
-                  "#2d175c",
-                  "#7f719e ",
+                 'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
                 ];
                 const borderColor = [
                   "rgba(128, 97, 195, 1)",
@@ -1129,8 +1158,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                   borderColor
                 );
 
-                const backgroundColor2 = "#8061c3";
-                const borderColor2 = "#8061c3";
+                const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
+                const borderColor2 = 'rgba(153, 102, 255, 1)';
                 initCertificationChart(
                   "certificationBarChart",
                   backgroundColor2,
@@ -1145,6 +1174,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                   "duration-sessions-data-template1",
                   selectedBatch
                 );
+
+                document.getElementById('chartTypeDropdown').addEventListener('change', (event) => {
+                    const selectedChartType = event.target.value;
+                    generateTraineePieChart("trainee-piechart-template1",selectedChartType,backgroundColor,borderColor);
+                    
+                  });
               }
               break;
             case "template2":
@@ -1184,20 +1219,20 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const numberOfTrainees =
                   document.getElementById("learnersChart");
                 const backgroundColor = [
-                  "#C3FFC0",
-                  "#8cf087",
-                  "#6bda65",
-                  "#31af2b",
-                  "#30eb26",
-                  "#0d6609 ",
+                 'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
                 ];
                 const borderColor = [
-                  "#C3FFC0",
-                  "#8cf087",
-                  "#6bda65",
-                  "#31af2b",
-                  "#30eb26",
-                  "#0d6609 ",
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
                 ];
                 numberOfTrainees.textContent = generateTraineePieChart(
                   "learnersChart",
@@ -1215,8 +1250,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                   backgroundColor,
                   borderColor
                 );
-                const backgroundColor2 = "#69f170";
-                const borderColor2 = "#69f170";
+                const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
+                const borderColor2 = 'rgba(153, 102, 255, 1)';
                 initCertificationChart(
                   "levelChart",
                   backgroundColor2,
@@ -1261,6 +1296,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 });
+
+
+
+//-------------------- Toggle Charts---------------------------//
+
 
 ///-Change color//
 
