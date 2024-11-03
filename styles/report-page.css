@@ -2017,10 +2017,10 @@ text-align: center;
 
 }
 
-.select-clicked-lerner {
-    /* border: 2px black solid; */
-    /* box-shadow: 0 0 0.8em black; */
-}
+/* .select-clicked-lerner {
+    border: 2px black solid; */
+    /* box-shadow: 0 0 0.8em black; 
+} */
 
 .select-learner:hover {
     background: #f3eeee;
@@ -2072,9 +2072,9 @@ text-align: center;
     background: #dc143c;
 }
 
-.active-learner {
-    /* background: #dc143c; */
-}
+/* .active-learner {
+    /* background: #dc143c; 
+} */
 
 .menu-open-lerner {
     display: block;
