@@ -2073,8 +2073,13 @@ text-align: center;
 }
 
 /* .active-learner {
+<<<<<<< HEAD
     /* background: #dc143c;
 } */ 
+=======
+    /* background: #dc143c; 
+} */
+>>>>>>> templatereport
 
 .menu-open-lerner {
     display: block;
