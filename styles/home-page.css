@@ -9,16 +9,21 @@
 }
 
 .sidebar {
-    width: 70px;
+    width: 60px;
     height: 60%;
+    margin-top: 30px;
     background-color: #DC143C;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
+    justify-content: center;
     position: fixed;
-    border-radius: 10px;
+    /* border-radius: 10px; */
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
     left: 0;
+
 }
 
 .nav-items {
@@ -76,12 +81,13 @@
 .nav-item::after {
     content: attr(data-tooltip); /* Display the text from data-tooltip */
     position: absolute;
-    left: 50%; /* Center horizontally */
-    bottom: 100%; /* Position tooltip above the icon */
+    /* right: 40px; */
+    left: 90%; /* Center horizontally */
+    bottom: 80%; /*Position tooltip above the icon */
     transform: translateX(-50%) translateY(-5px); /* Center tooltip horizontally and add space above icon */
     background-color: #181717b9;
     color: #fff;
-    padding: 5px 10px;
+    padding: 1px 5px;
     border-radius: 4px;
     white-space: nowrap;
     opacity: 0;
@@ -100,11 +106,14 @@
 
 body {
     background-color: #f4f4f4;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: inter;
     display: flex;
     justify-content: center;
     align-items: flex-start; 
     height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .header {
@@ -163,13 +172,14 @@ body {
 
 .stat-box h1 {
     font-size: 80px;
-    margin-top: 5px;
+    margin-top: -15px;
 }
 
 .stat-box h2 {
-    padding: 10px;
+    font-size: 25px;
+    /* padding: 10px;
     align-items: center;
-    display: flex;
+    display: flex; */
 }
 
 .card-image {
@@ -232,6 +242,7 @@ body {
 .carousel {
     position: relative;
     overflow: hidden;
+    margin-top: -25px;
 }
 
 .carousel-slide {
@@ -286,7 +297,7 @@ body {
 
 .stat-box:hover {
     background-color: #ffeaea;
-    color: #DC143C; 
+    /* color: white;  */
 }
 
 .graph {
@@ -299,6 +310,7 @@ body {
 .box-content {
     position: absolute;
     z-index: 2;
+
 }
 
 /* ---Upload-Data Pop-up Styles--- */

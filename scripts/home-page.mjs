@@ -12,7 +12,7 @@ checkAuth();
 
 // Attach logout function to the logout button
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector(".logout").addEventListener("click", logout);
+  document.querySelector("#logout").addEventListener("click", logout);
 });
 
 async function fetchLatestCollection() {
@@ -105,22 +105,22 @@ function displayTraineeCount(numTrainees) {
 
 function displayTrainerName(trainerName) {
   const trainerBox = document.getElementById("trainerNames");
-  trainerBox.innerHTML = trainerName.join(", ");
+  trainerBox.innerHTML = trainerName.join("<br>");
 }
 
 // Display batch data across all carousels simultaneously
 function displayBatchData(batchName, details) {
   // Update Sessions carousel
   const sessionsCarousel = document.getElementById("totalSessions");
-  sessionsCarousel.innerHTML = `<h4>${batchName}</h4><p>Total Sessions Till Date: ${details.sessionsTillDate}</p>`;
+  sessionsCarousel.innerHTML = `<h2>${batchName}</h2><h1>${details.sessionsTillDate}</h1>`;
 
   // Update Duration carousel
   const durationCarousel = document.getElementById("totalDuration");
-  durationCarousel.innerHTML = `<h4>${batchName}</h4><p>Duration Till Date: ${details.durationTillDate} hours</p>`;
+  durationCarousel.innerHTML = `<h2>${batchName}</h2><h1>${details.durationTillDate}</h1>`;
 
   // Update Certification carousel
   const certificationCarousel = document.getElementById("certificationLevel");
-  certificationCarousel.innerHTML = `<h4>${batchName}</h4><p>Certification Level: ${details.certificationLevel}</p>`;
+  certificationCarousel.innerHTML = `<h2>${batchName}</h2><h1>${details.certificationLevel}</h1>`;
 }
 
 // Start the batch carousel to rotate through batches simultaneously
