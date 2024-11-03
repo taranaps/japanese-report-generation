@@ -258,7 +258,7 @@ body {
 .template-one{
   height: auto;
   background: #fcfcfd;
-  width: 700px;
+  width: 800px;
   border-radius: 8px;
   position: absolute;
   top: 140px;
@@ -1823,7 +1823,7 @@ text-align: center;
   }
 
 
-  .theme-color-black, .theme-color-violet, .theme-color-red, .theme-color-orange, .theme-color-blue,.theme-color-green{
+  .theme-color-dark-blue, .theme-color-violet, .theme-color-red, .theme-color-orange, .theme-color-blue,.theme-color-green{
     
     position: relative;
     width: 2em; /* Width of the rhombus */
@@ -1837,8 +1837,8 @@ text-align: center;
     cursor: pointer;
     
   }
-  .theme-color-black{
-    background-color: #000000;
+  .theme-color-dark-blue{
+    background-color: #3e68b9;
   }
   .theme-color-violet{
     background-color: #8061c3;

@@ -6,7 +6,7 @@
     <title>Report Generation</title>
     <link rel="stylesheet" href="../styles/report-page.css" />
     <link rel="stylesheet" href="../styles/preview-page.css">
-	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+	  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
   </head>
   <body>
     <header>
@@ -21,7 +21,7 @@
           <div class="side-bar">
             <div class="arrow" id="arrow-up">&#9650;</div>
             <div class="image-container" id="image-scroll">
-				<img
+              <img
                 src="../assets/images/template-three.png"
                 alt="Template1"
                 data-template="template1"
@@ -31,7 +31,7 @@
                 alt="Template1"
                 data-template="template1"
               />
-			  <img
+              <img
                 src="../assets/images/template-three.png"
                 alt="Template1"
                 data-template="template1"
@@ -58,28 +58,17 @@
 		  
 		
           </div>
-         <div class="select-theme" style="margin-top:30px ;">
-          <label for="selectcolor">Choose the theme</label>
-          <select name="selectcolor" id="selectcolor" >
-            <option value="0">Select</option>
-            <option value="1">red</option>
-                <option value="2">blue</option>
-                <option value="3">green</option>
-            <option value="4">violet</option>
-            
-        </select>
-      </div> 
           <div class="workspace">
             <!-- <div id="editor"><h2>Select a template to start editing!</h2></div> -->
             
             <div class="template-one" id="template1" style="display: none">
               <div class="container-template1">
-                <div class="header-template1">
+                <div class="header-template1" id="header-template1">
                   <h1>Japanese <br> Language <br> Training Report</h1>
-				  <h3 id="header-template1-h3">month</h3>
+                  <h3 id="header-template1-h3">month</h3>
                 </div>
                 <div class="main-container">
-                  <div class="left-template1">
+                  <div class="left-template1" id="left-template1">
                     <h1><b>Batch </b></h1>
                     <div class="learners-container-template1">
                       <div class="learners-template1" id="learners-template1">
@@ -87,7 +76,6 @@
                       </div>
                       <div class="inner-learners-template1">
                         <canvas id="trainee-piechart-template1"></canvas>
-
                       </div>
                     </div>
                     <div class="trainer-container-template1">
@@ -99,75 +87,72 @@
                       </div>
                     </div>
                     <div class="session-container-template1">
-                        <div class="session-template1" id="session-template1">
+                      <div class="session-template1" id="session-template1">
                       <p>Total Sessions Till Date</p></div>
                       <div class="inner-session-template1">
-						<div id="progressBarsContainer-templae1"></div>
-					  </div>
+                        <div id="progressBarsContainer-templae1"></div>
+                      </div>
                     </div>
                     <div class="current-level-template1">
-                        <div class="level-heading" id="level-heading">
-                      <p>Current Level</p></div>
+                      <div class="level-heading" id="level-heading">
+                        <p>Current Level</p>
+                      </div>
                       <div class="inner-level-template1">
-						<canvas id="certificationBarChart"></canvas>
-                    
+                        <canvas id="certificationBarChart"></canvas>                    
                       </div>
                     </div>
                     <div class="batch-duration-template1">
-                        <div class="duration-heading-template1" id="duration-heading-template1">
-                      <p>Total Batch Duration</p></div>
+                      <div class="duration-heading-template1" id="duration-heading-template1">
+                        <p>Total Batch Duration</p>
+                      </div>
                       <div class="duration-body-template1">
-						<div id="whole-duration-data-templae1"></div>
-
+                        <div id="whole-duration-data-templae1"></div>
                       </div>
                     </div>
                   </div>
                   <div class="right-template1">
                     <div class="duration-sessions-template1">
-                        <div class="duration-sessions-heading-template1" id="duration-sessions-heading-template1">
-                      <p>Batch Duration</p></div>
+                      <div class="duration-sessions-heading-template1" id="duration-sessions-heading-template1">
+                        <p>Batch Duration</p>
+                      </div>
                       <div class="duration-sessions-body-template1">
-						<div id="duration-sessions-data-template1"></div>
-
+                        <div id="duration-sessions-data-template1"></div>
                       </div>
-
-                    </div>
-                    
+                    </div>                   
                     <div class="attendance-template1">
-                        <div class="attendance-heading-template1" id="attendance-heading-template1">
-                      <p>Average Attendance</p></div>
-                      <div class="attendance-body-template1">
-						<canvas id="attendance-body-template1"></canvas>
+                      <div class="attendance-heading-template1" id="attendance-heading-template1">
+                        <p>Average Attendance</p>
                       </div>
-
+                      <div class="attendance-body-template1">
+                        <canvas id="attendance-body-template1"></canvas>
+                      </div>
                     </div>
                     <div class="evaluation-template1">
-                        <div class="evaluation-heading-template1" id="evaluation-heading-template1">
-                      <p>Trainee Details</p></div>
-                      <div class="evaluation-body-template1">
-						<div id="trainee-details-template1"></div>
+                      <div class="evaluation-heading-template1" id="evaluation-heading-template1">
+                        <p>Trainee Details</p>
                       </div>
-                    </div>
-                   
-                  </div>
-                  
+                      <div class="evaluation-body-template1">
+                        <div id="trainee-details-template1"></div>
+                      </div>
+                    </div>              
+                  </div>                  
                 </div>
                 <div class="batch-evaluation-template1">
-                    <div class="batch-evaluation-heading-template1" id="batch-evaluation-heading-template1">
-                  <p>Evaluation Details</p></div>
+                  <div class="batch-evaluation-heading-template1" id="batch-evaluation-heading-template1">
+                    <p>Evaluation Details</p>
+                  </div>
                   <div class="batch-evaluation-body-template1">
-					<div id="evaluation-table-template1"></div>
+                    <div id="evaluation-table-template1"></div>
                   </div>
                 </div>
-				<div id="batchwise-data-template1">
-
-				</div>
+                <div id="batchwise-data-template1">
+                </div>
               </div>
             </div>
         
             <div class="template-two" id="template2" style="display: none">
                 
-                    <div class="container-template2">
+                    <div class="container-template2" id="container-template2">
                         <div class="header-template2">
                             <h1>Japanese Language Training Report</h1>
                             <h3 id="template2-month"></h3>
@@ -282,7 +267,7 @@
 
                   </div>
                   
-<br>		
+                  <br>		
                  
                     <div class="graph-title-trainee">TRAINEE DETAILS</div>
                     <div class="t3graph-trainee" id="t3graph">
@@ -435,12 +420,12 @@
                 </div>
                 <h2>select theme</h2>
                 <div class="sidebar-theme">
-                  <div class="theme-color-black" onclick="testfunction()"></div>
-                  <div class="theme-color-violet"></div>
-                  <div class="theme-color-red"></div>
-                  <div class="theme-color-blue"></div>
-                  <div class="theme-color-green"></div>
-                  <div class="theme-color-orange"></div>
+                  <div class="theme-color-dark-blue" id="theme-color-dark-blue"></div>
+                  <div class="theme-color-violet" id="theme-color-violet"></div>
+                  <div class="theme-color-red" id="theme-color-red"></div>
+                  <div class="theme-color-blue" id="theme-color-blue"></div>
+                  <div class="theme-color-green" id="theme-color-green"></div>
+                  <div class="theme-color-orange" id="theme-color-orange"></div>
 
                 </div>
                 <div class="toggle-learners">

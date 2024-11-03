@@ -83,7 +83,7 @@ async function renderReport() {
     displaySessionsCarousel(batchData);
     displayDurationCarousel(batchData);
     displayCertificationCarousel(batchData);
-    
+
 }
 
 
@@ -201,8 +201,8 @@ function displayBatches(batchData) {
                     </tr>
                 </thead>
                 <tbody>
-                    ${details.trainees.flatMap(trainee => 
-                        trainee.evaluations.map(evaluation => `
+                    ${details.trainees.flatMap(trainee =>
+            trainee.evaluations.map(evaluation => `
                             <tr>
                                 <td>${trainee.name}</td>
                                 <td>${evaluation.evaluationName}</td>
@@ -210,7 +210,7 @@ function displayBatches(batchData) {
                                 <td>${evaluation.score}</td>
                             </tr>
                         `)
-                    ).join('')}
+        ).join('')}
                 </tbody>
             </table>
         `;
