@@ -21,16 +21,27 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 73px;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 20px;
   z-index: 100;
-    background:#dc143c;
-  opacity: 70%;
+  background:#dc143c;
+
 }
-.header img {
+.home-logout{
+  display: flex;
+  gap: 20px;
+}
+.logo {
+  width: 110px;
+  margin-left: 10px;
+  height: auto;
+  cursor: pointer;
+}
+.header a img{
   width: 30px;
   height: 30px;
   cursor: pointer;
