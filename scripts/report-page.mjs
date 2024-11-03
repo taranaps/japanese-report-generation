@@ -1393,167 +1393,114 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
 
 ///-Change color//
 
-const selectColor = document.getElementById("selectcolor");
-selectColor.addEventListener("change", changecolor);
+// const selectheme =document.getElementById("theme-color-black");
+// selectheme.addEventListener("click",changecolor);
+// function testfunction(){
+//     alert("hai hisham");
+// }
 
-function changecolor(event) {
-  let value = event.target.value;
 
-  console.log(value);
+const themeColors = {
+  "theme-color-dark-blue": { bg: "#3e68b9", accent: "#6e9af0" },
+  "theme-color-violet": { bg: "#8061c3", accent: "#bda7ec" },
+  "theme-color-red": { bg: "#dc143c", accent: "#e66a83" },
+  "theme-color-blue": { bg: "#64a2f5", accent: "#93bdf5" },
+  "theme-color-green": { bg: "#43bf73", accent: "#6bed9d" },
+  "theme-color-orange": { bg: "#f09951", accent: "#f7b57e" }
+};
 
-  let firstColorDiv = selectedTemplate;
-  console.log(firstColorDiv.classList[0]);
+// Add event listeners to each theme color
+document.querySelectorAll('.sidebar-theme div').forEach(div => {
+  div.addEventListener('click', () => {
+      applyTheme(div.id);
+  });
+});
+const commonElements = [
+  "header-template1",
+  "learners-template1",
+  "trainer-template1",
+  "session-template1",
+  "level-heading",
+  "duration-heading-template1",
+  "duration-sessions-heading-template1",
+  "attendance-heading-template1",
+  "evaluation-heading-template1",
+  "batch-evaluation-heading-template1",
+  "container-template2"
+];
+function applyTheme(themeId) {
+  const color = themeColors[themeId] || { bg: "#C3FFC0", accent: "green" };
+  console.log("Selected Theme:", themeId);
 
-  if (firstColorDiv.classList[0] == "template-one") {
-    const colors = {
-      1: {
-        bg: "#DC143C",
-        accent: "#e66a83",
-      },
-      2: {
-        bg: "#64a2f5",
-        accent: "#93bdf5",
-      },
-      3: {
-        bg: "#43bf73",
-        accent: "#75c794",
-      },
-      4: {
-        bg: "#8061c3",
-        accent: "#bda7ec",
-      },
-    };
+  // let firstColorDiv = selectedTemplate; 
+  // firstColorDiv.children[0].children[0].style.backgroundColor = color.bg;
+  // firstColorDiv.children[0].children[1].children[0].style.backgroundColor = color.accent;
 
-    const commonElements = [
-      "learners-template1",
-      "trainer-template1",
-      "session-template1",
-      "level-heading",
-      "duration-heading-template1",
-      "duration-sessions-heading-template1",
-      "attendance-heading-template1",
-      "evaluation-heading-template1",
-      "batch-evaluation-heading-template1",
-    ];
-
-    function applyColors(value) {
-      const color = colors[value] || { bg: "#C3FFC0", accent: "green" };
-
-      // Set background color for the firstColorDiv children
-      firstColorDiv.children[0].children[0].style.backgroundColor = color.bg;
-      if (color.accent) {
-        firstColorDiv.children[0].children[1].children[0].style.backgroundColor =
-          color.accent;
+  // Apply common background color to other elements
+  document.getElementById("left-template1").style.backgroundColor = color.accent;
+  document.querySelector(".report-container").style.backgroundColor = color.accent;
+  commonElements.forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+          element.style.backgroundColor = color.bg;
       }
+  });
 
-      // Apply common background color to other elements
-      commonElements.forEach((id) => {
-        document.getElementById(id).style.backgroundColor = color.bg;
-      });
-      var th = document.querySelectorAll("#trainee-details-template1 th");
-      th.forEach((e) => {
-        e.style.backgroundColor = color.bg;
-      });
-      var td = document.querySelectorAll("#trainee-details-template1 td");
-      td.forEach((e) => {
-        e.style.backgroundColor = color.accent;
-      });
-      var td = document.querySelectorAll("#evaluation-table-template1 th");
-      td.forEach((e) => {
-        e.style.backgroundColor = color.bg;
-      });
-      var th = document.querySelectorAll("#evaluation-table-template1 td");
-      th.forEach((e) => {
-        e.style.backgroundColor = color.accent;
-      });
+  // Apply colors to tables and progress bars
+  const tables = [
+      "#trainee-details-template1",
+      "#evaluation-table-template1",
+      "#trainee-details-template2",
+      "#batchwise-data-template2",
+      ".t3graphtraine",
+      ".table-section"
 
-      var th1 = document.querySelectorAll(
-        "#progressBarsContainer-templae1 .progress-bar"
-      );
-      th1.forEach((e) => {
-        e.style.backgroundColor = color.bg;
-      });
+      
+      
+  ];
 
-      var th2 = document.querySelectorAll(
-        "#duration-sessions-data-template1 .progress-bar"
-      );
-      th2.forEach((e) => {
-        e.style.backgroundColor = color.bg;
-      });
-      var th4 = document.querySelectorAll(
-        "#whole-duration-data-templae1 .progress-bar"
-      );
-      th4.forEach((e) => {
-        e.style.backgroundColor = color.bg;
-      });
-      var th4 = document.querySelectorAll("#trainer-name-template1 h3");
-      th4.forEach((e) => {
-        e.style.color = color.bg;
-      });
-    }
+  tables.forEach(tableId => {
+      const thElements = document.querySelectorAll(`${tableId} th`);
+      thElements.forEach(e => e.style.backgroundColor = color.bg);
+      
+      const tdElements = document.querySelectorAll(`${tableId} td`);
+      tdElements.forEach(e => e.style.backgroundColor = color.accent);
+  });
 
-    // Example of calling the function
-    applyColors(value);
-  } else if (firstColorDiv.classList[0] == "template-two") {
-    switch (value) {
-      case "1":
-        firstColorDiv.children[0].style.backgroundColor = "#DC143C";
+                  var th4 = document.querySelectorAll("#whole-duration-data-templae1 .progress-bar");
+                  th4.forEach((e)=>{
+                      e.style.backgroundColor=color.bg;
+                  })
+                  var th1 = document.querySelectorAll("#progressBarsContainer-templae1 .progress-bar");
+                  th1.forEach((e)=>{
+                      e.style.backgroundColor=color.bg;
+                  })
+              
+                  var th2 = document.querySelectorAll("#duration-sessions-data-template1 .progress-bar");
+                  th2.forEach((e)=>{
+                      e.style.backgroundColor=color.bg;
+                  })
+                  var th2 = document.querySelectorAll("#sessionsChart .progress-bar");
+                  th2.forEach((e)=>{
+                      e.style.backgroundColor=color.bg;
+                  })
+                  var th2 = document.querySelectorAll("#batchDurationChart .progress-bar");
+                  th2.forEach((e)=>{
+                      e.style.backgroundColor=color.bg;
+                  })
+                  var th2 = document.querySelectorAll("#durationChart .progress-bar");
+                  th2.forEach((e)=>{
+                      e.style.backgroundColor=color.bg;
+                  })
 
-        break;
-      case "2":
-        firstColorDiv.children[0].style.backgroundColor = "#64a2f5";
-        break;
-      case "3":
-        firstColorDiv.children[0].style.backgroundColor = "#43bf73";
-        break;
-      case "4":
-        firstColorDiv.children[0].style.backgroundColor = "#8061c3";
-        break;
-      default:
-        firstColorDiv.children[0].style.backgroundColor = "#C3FFC0";
-    }
-  } else if (firstColorDiv.classList[0] == "template-three") {
-    switch (value) {
-      case "1":
-        firstColorDiv.children[0].style.backgroundColor = "#DC143C";
-        document.getElementById("t3graph").style.backgroundColor = "#e66a83";
-        document.getElementById("table-section").style.backgroundColor =
-          "#e66a83";
-        document.getElementById("t3batchname").style.color = "white";
-
-        break;
-      case "2":
-        firstColorDiv.children[0].style.backgroundColor = "#64a2f5";
-        document.getElementById("t3graph").style.backgroundColor = "#5d94de";
-        document.getElementById("table-section").style.backgroundColor =
-          "#5d94de";
-        document.getElementById("t3batchname").style.color = "#5d94de";
-        break;
-      case "3":
-        firstColorDiv.children[0].style.backgroundColor = "green";
-        break;
-      case "4":
-        firstColorDiv.children[0].style.backgroundColor = "violet";
-        break;
-      default:
-        firstColorDiv.children[0].style.backgroundColor = "#C3FFC0";
-    }
-  } else if (firstColorDiv.classList[0] == "template-four") {
-    switch (value) {
-      case "1":
-        firstColorDiv.children[0].style.backgroundColor = "red";
-        break;
-      case "2":
-        firstColorDiv.children[0].style.backgroundColor = "blue";
-        break;
-      case "3":
-        firstColorDiv.children[0].style.backgroundColor = "green";
-        break;
-      case "4":
-        firstColorDiv.children[0].style.backgroundColor = "violet";
-        break;
-      default:
-        firstColorDiv.children[0].style.backgroundColor = "#C3FFC0";
-    }
-  }
+   // Change text color for trainer names
+  const trainerNames = document.querySelectorAll("#trainer-name-template1 h3");
+  trainerNames.forEach(e => e.style.color = color.bg);
+  const trainerNames2 = document.querySelectorAll("#trainer-name-template2 h3");
+  trainerNames2.forEach(e => e.style.color = color.bg);
 }
+
+
+
+
+
