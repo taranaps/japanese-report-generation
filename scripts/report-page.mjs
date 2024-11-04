@@ -1632,6 +1632,7 @@ function renderCertificationLevelChart(
 
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (!batchDetails) {
+      
       console.error("No batch details found.");
       return;
     }
@@ -1727,6 +1728,99 @@ function renderCertificationLevelChart(
       initCertificationChart("current-level-template3",backgroundColor2,borderColor2,selectedChartType);
                     
       });
+  }
+
+  async function populateBatchDataTemplate5() {
+    const batchDetails = await getBatchDetailsFromLatestCollection();
+    if (!batchDetails) {
+      console.error("No batch details found.");
+      return;
+    }
+
+    const mainContainer = document.getElementById("batchwise-data-template5");
+    mainContainer.innerHTML = ""; // Clear any previous content
+
+    const numberOfBatches = Object.keys(batchDetails).length;
+    // const batchCountDisplay = document.getElementById(
+    //   ""
+    // );
+    // batchCountDisplay.textContent = numberOfBatches;
+
+    for (const [batchName, details] of Object.entries(batchDetails)) {
+      const filteredData = await getFilteredDocuments(batchName);
+
+      const batchContainer = document.createElement("div");
+      batchContainer.classList.add("batchwise-data-template5");
+
+      const batchDurationMonth = details.batchDurationMonth;
+      const numberOfSessionsMonth = details.numberOfSessionsMonth;
+
+      if (
+        batchDurationMonth === undefined ||
+        numberOfSessionsMonth === undefined
+      ) {
+        console.error(`No batch data available for ${batchName}.`);
+        continue; // Skip this iteration
+      }
+      batchContainer.innerHTML = `
+            <div class="t5-batchname">
+            <h3 class="batch-info">${batchName}</h3>
+            <div class="batch-duration-template5">
+                <h2 class="sessions-temp5">Total Sessions: ${numberOfSessionsMonth}</h2>
+                <h2 class="sessions-temp5">Total Duration: ${batchDurationMonth}</h2>
+            </div>
+        </div>
+        <div class="traneediv">
+            <div class="democheck">
+            <div class="t3graphtraine">
+                <div class="graph-title-trainee">Trainee Details</div>
+                <div class="t3graph-trainee">
+                    <div id="t5-trainee-details-${batchName}">
+                
+                </div>
+                </div>
+            </div>
+            
+                <div class="attendence-template5">Trainee Attendance</div>
+                <div class="t3graph-attendance">
+                <canvas id="t5-attentenceChart-${batchName}" ></canvas>
+
+                
+            </div>
+            </div>
+        </div>
+        <div class="eval-table">
+            <div class="table-title">Trainee Evaluation</div>
+            <div class="table-section">
+                <div id="t5-evaluation-table-${batchName}" style="width:100%;"></div>
+            </div>
+        </div>
+        `;
+
+      mainContainer.appendChild(batchContainer);
+
+      const evaluationTable = document.getElementById(
+        `t5-evaluation-table-${batchName}`
+      );
+      const table1 = await createEvaluationTable(
+        filteredData,
+        `t5-evaluation-table-${batchName}`
+      );
+      evaluationTable.appendChild(table1);
+
+      await getAttendanceData(filteredData, `t5-attendenceChart-${batchName}`);
+      // console.log(filteredData);
+
+      const traineeDetailsTemplate2 = document.getElementById(
+        `t5-trainee-details-${batchName}`
+      );
+      const traineeTable2 = await getTraineeDetails(
+        filteredData,
+        `t5-trainee-details-${batchName}`
+      );
+      traineeDetailsTemplate2.appendChild(traineeTable2);
+
+    }
   }
 
   async function batchwiseDataTemplate5(selectedBatch) {
@@ -2036,7 +2130,12 @@ function renderCertificationLevelChart(
               break;
               case "template5":
                 if (selectedBatch === "whole-batch") {
-                    
+                  const populatedDataTemplate5 = document.getElementById(
+                    "batchwise-data-template5"
+                  );
+                  populatedDataTemplate5.innerHTML = "";
+                  // batchwiseDataTemplate5(selectedBatch);
+                  populateBatchDataTemplate5();
                   } else {
                     batchwiseDataTemplate5(selectedBatch);
                   }

@@ -2143,7 +2143,7 @@ text-align: center;
 /* template-5 */
 
 .container-template5 {
-  width: 850px;
+  width: 800px;
   padding: 20px;
   background-color: #41698b;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -2187,8 +2187,6 @@ text-align: center;
 }
 
 .summary-template5 {
- 
-  margin: 30px;
   display: flex;
   /* grid-template-columns: repeat(3, 1fr); */
   gap: 20px;
@@ -2227,7 +2225,7 @@ text-align: center;
 }
 
 .batch-info {
-  margin: 25px;
+  /* margin: 25px; */
   margin-top: 35px;
   padding: 20px;
   background-color: #eceff1;
@@ -2239,7 +2237,6 @@ text-align: center;
 }
 
 .details-template5 {
-  margin: 20px;
   display: flex;
   gap: 20px;
   margin-top: 35px;
