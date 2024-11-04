@@ -27,14 +27,14 @@ closeUploadModal.addEventListener('click', () => {
 });
 
 // Redirect to table.html
-tableButton.addEventListener('click', () => {
-    window.location.href = 'table.html';
-});
+// tableButton.addEventListener('click', () => {
+//     window.location.href = 'table.html';
+// });
 
 // Redirect to report-content.html
-reportButton.addEventListener('click', () => {
-    window.location.href = 'report-content.html';
-});
+// reportButton.addEventListener('click', () => {
+//     window.location.href = 'report-content.html';
+// });
 
 // Close message modal
 closeMessageModal.addEventListener('click', () => {
