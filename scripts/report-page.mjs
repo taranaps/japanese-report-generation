@@ -1763,38 +1763,38 @@ function renderCertificationLevelChart(
         continue; // Skip this iteration
       }
       batchContainer.innerHTML = `
-            <div class="t5-batchname">
-            <h3 class="batch-info">${batchName}</h3>
-            <div class="batch-duration-template5">
-                <h2 class="sessions-temp5">Total Sessions: ${numberOfSessionsMonth}</h2>
-                <h2 class="sessions-temp5">Total Duration: ${batchDurationMonth}</h2>
-            </div>
-        </div>
-        <div class="traneediv">
-            <div class="democheck">
-            <div class="t3graphtraine">
-                <div class="graph-title-trainee">Trainee Details</div>
-                <div class="t3graph-trainee">
-                    <div id="t5-trainee-details-${batchName}">
-                
+            <div class="batch-info">
+                  <h2 id="batch-name-t5-${batchName}"></h2>
                 </div>
+      
+                <div class="details-template5">
+                  <div class="trainee-list-template5">
+                    <h3>Trainee Details</h3>
+                    <div id="trainee-details-template5-${batchName}"></div>
+                  </div>
+                  <div class="details-right-template5">
+                    <div class="batch-duration-template5">
+                      <div class="sessions-temp5">
+                        <h3>Total Sessions</h3>
+                        <p id="batch-sessions-template5-${batchName}"></p>
+                      </div>
+                      <div class="sessions-temp5">
+                        <h3>Total Duration</h3>
+                        <p id="batch-duration-template5-${batchName}"></p>
+                      </div>
+                      <div id="durationChart-t5-${batchName}"></div>
+                    </div>
+                    <div class="attendance-template5">
+                      <h3>Attendance</h3>
+                      <canvas id="attendanceChart-t5-${batchName}"></canvas>
+                    </div>
+                  </div>
                 </div>
-            </div>
-            
-                <div class="attendence-template5">Trainee Attendance</div>
-                <div class="t3graph-attendance">
-                <canvas id="t5-attentenceChart-${batchName}" ></canvas>
-
-                
-            </div>
-            </div>
-        </div>
-        <div class="eval-table">
-            <div class="table-title">Trainee Evaluation</div>
-            <div class="table-section">
-                <div id="t5-evaluation-table-${batchName}" style="width:100%;"></div>
-            </div>
-        </div>
+                <div class="trainee-evaluation-template5">
+                  <h3>Evaluation Details</h3>
+                  <div id="evaluation-table-template5-${batchName}"></div>
+                </div>
+              </div>
         `;
 
       mainContainer.appendChild(batchContainer);
@@ -1812,11 +1812,11 @@ function renderCertificationLevelChart(
       // console.log(filteredData);
 
       const traineeDetailsTemplate2 = document.getElementById(
-        `t5-trainee-details-${batchName}`
+        `trainee-details-template5-${batchName}`
       );
       const traineeTable2 = await getTraineeDetails(
         filteredData,
-        `t5-trainee-details-${batchName}`
+        `trainee-details-template5-${batchName}`
       );
       traineeDetailsTemplate2.appendChild(traineeTable2);
 
@@ -1842,10 +1842,13 @@ function renderCertificationLevelChart(
     const currentDate = await getLatestCollection();
     const filteredData = await getFilteredDocuments(selectedBatch);
 
+    const batchText = document.getElementById('batch-name-t5');
+    batchText.textContent = selectedBatch;
+
     const template1Header = document.getElementById("template5-month");
     template1Header.textContent = formatCollectionName(currentDate);
 
-    await getAttendanceData(filteredData, "attendenceChart-t5");
+    await getAttendanceData(filteredData, "attendanceChart-t5");
 
     const traineeDetailsTemplate1 = document.getElementById("trainee-details-template5");
     const traineeTable1 = await getTraineeDetails(
@@ -1893,13 +1896,15 @@ function renderCertificationLevelChart(
       borderColor
     );
     loadSessionsAndDurationWholeBatch(
-      "sessionsCharts-t5",
-      "batch-duration-chart"
+      "batch-duration-chart-t5","sessionsChart-t5"
+      
     );
 
     const template5Header = document.getElementById("batch-title");
     template5Header.textContent = selectedBatch;
     console.log(selectedBatch);
+
+    
   }
 
   images.forEach((image) => {

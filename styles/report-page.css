@@ -2171,7 +2171,12 @@ text-align: center;
 .first-box .box-template5-2{
   height: 326px;
 }
-
+.attendence-template5{
+  width: 50%;
+}
+.t5graphtraine{
+  width: 50%;
+}
 .header-template5 h1 {
   margin: 0;
   font-size: 45px;
