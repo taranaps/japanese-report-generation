@@ -31,6 +31,7 @@ const templates = document.querySelectorAll('.workspace > div');
 let selectTemplate;
 
 
+
 function hideAllTemplates() {
     templates.forEach(template => {
         template.style.display = 'none';
@@ -39,6 +40,7 @@ function hideAllTemplates() {
 // function month(){
 //   const currentMonth = 
 // }
+
 images.forEach(image => {
     image.addEventListener('click', function() {
         hideAllTemplates()
@@ -507,7 +509,370 @@ learner.forEach(learner => {
 });
 
 
+
+
+let tableContainer;
+images.forEach(image => {
+    image.addEventListener('click', function() {
+        hideAllTemplates()
+        const templateKey = this.getAttribute('data-template');
+        // selectTemplate = this.getAttribute('data-template');
+        // console.log(templateKey);
+        selectTemplate=templateKey;
+
+        const selectedTemplate = document.getElementById(templateKey);
+        if (selectedTemplate) {
+
+            if(templateKey==="template2"){
+                tableContainer = document.getElementById('tableContainer2')  
+            }
+            else if(templateKey==="template4"){
+                tableContainer=document.getElementById('tableContainer4')
+            }
+            else if(templateKey==="template3"){
+                tableContainer=document.getElementById('tableContainer3')
+            }
+            else{
+                tableContainer=document.getElementById('tableContainer1')
+
+            }
+
+            tableContainer.innerHTML = '';
+
+
+
+        }})});
+
+
+
+const contentDiv = document.getElementById('workspace');
+// const tableContainer = document.getElementById('tableContainer');
+let selectedCell = null; // To track the currently selected cell
+
+function createTable() {
+    const rows = parseInt(document.getElementById('rowCount').value);
+    const cols = parseInt(document.getElementById('colCount').value);
     
+    const table = document.createElement('table');
+    table.className = 'custom-table';
+    
+    for (let i = 0; i < rows; i++) {
+        const row = table.insertRow();
+        for (let j = 0; j < cols; j++) {
+            const cell = row.insertCell();
+            cell.contentEditable = true; // Make cell editable
+            cell.innerText = `Row ${i + 1}, Col ${j + 1}`;
+            cell.onclick = () => selectCell(cell); // Set as selected on click
+        }
+    }
+
+    tableContainer.appendChild(table);
+    selectedTable = table;
+}
+
+function selectCell(cell) {
+    // Clear highlight from previously selected cell
+    if (selectedCell) {
+        selectedCell.classList.remove('selected-cell');
+    }
+    
+    // Highlight the new selected cell
+    selectedCell = cell;
+    selectedCell.classList.add('selected-cell');
+}
+
+
+
+
+
+function toggleBold() {
+    if (selectedCell) {
+        selectedCell.style.fontWeight = selectedCell.style.fontWeight === 'bold' ? 'normal' : 'bold';
+    } else {
+        alert('Please select a cell to apply bold formatting.');
+    }
+}
+
+function changeTextColor() {
+    const color = document.getElementById('textColorPicker').value;
+    if (selectedCell) {
+        selectedCell.style.color = color;
+    } else {
+        alert('Please select a cell to change text color.');
+    }
+}
+
+function changeCellColor() {
+    const color = document.getElementById('bgColorPicker').value;
+    if (selectedCell) {
+        selectedCell.style.backgroundColor = color;
+    } else {
+        alert('Please select a cell to change background color.');
+    }
+}
+
+function toggleBorder() {
+    const tables = document.querySelectorAll('.custom-table');
+    tables.forEach(table => {
+        table.classList.toggle('dark-border');
+    });
+}
+
+function changeRowColor() {
+    if (!selectedCell) {
+        alert('Please select a cell to change the row color.');
+        return;
+    }
+    const row = selectedCell.parentElement;
+    const color = document.getElementById('rowColorPicker').value;
+    Array.from(row.cells).forEach(cell => {
+        cell.style.backgroundColor = color;
+    });
+}
+
+function changeColumnColor() {
+    if (!selectedCell) {
+        alert('Please select a cell to change the column color.');
+        return;
+    }
+    const columnIndex = selectedCell.cellIndex;
+    const tables = document.querySelectorAll('.custom-table');
+    const color = document.getElementById('colColorPicker').value;
+    tables.forEach(table => {
+        Array.from(table.rows).forEach(row => {
+            row.cells[columnIndex].style.backgroundColor = color;
+        });
+    });
+}
+
+
+// let selectedCells = [];
+// function selectCell(cell, event) {
+//             // Check if the Ctrl or Command key is pressed for multi-select
+//             if (event.ctrlKey || event.metaKey) {
+//                 if (selectedCells.includes(cell)) {
+//                     // Deselect the cell
+//                     selectedCells = selectedCells.filter(c => c !== cell);
+//                     cell.classList.remove('selected-cell'); // Remove highlight
+//                 } else {
+//                     // Select the cell
+//                     selectedCells.push(cell);
+//                     cell.classList.add('selected-cell'); // Add highlight
+//                 }
+//             } else {
+//                 // If no key is pressed, clear selections and select the clicked cell
+//                 clearSelections();
+//                 selectedCells.push(cell);
+//                 cell.classList.add('selected-cell');
+//             }
+//         }
+
+function mergeCells() {
+    if (!selectedTable) {
+        alert("Please add a table first.");
+        return;
+    }
+
+    const startRow = parseInt(document.getElementById("mergeRowStart").value) - 1;
+    const endRow = parseInt(document.getElementById("mergeRowEnd").value) - 1;
+    const startCol = parseInt(document.getElementById("mergeColStart").value) - 1;
+    const endCol = parseInt(document.getElementById("mergeColEnd").value) - 1;
+
+    // Validate inputs
+    if (startRow < 0 || endRow < startRow || startCol < 0 || endCol < startCol) {
+        alert("Please enter valid merge range.");
+        return;
+    }
+
+    // Merge the selected cells by setting colspan and rowspan on the top-left cell
+    const mainCell = selectedTable.rows[startRow].cells[startCol];
+    const rowspan = endRow - startRow + 1;
+    const colspan = endCol - startCol + 1;
+
+    mainCell.rowSpan = rowspan;
+    mainCell.colSpan = colspan;
+
+    // Remove the merged cells from the table
+    for (let i = startRow; i <= endRow; i++) {
+        for (let j = startCol; j <= endCol; j++) {
+            if (i === startRow && j === startCol) continue;
+            selectedTable.rows[i].deleteCell(startCol); // Always delete at startCol as cells shift left
+        }
+    }
+}
+
+
+
+        function deleteCell() {
+            if (!selectedTable) {
+                alert("Please add a table first.");
+                return;
+            }
+        
+            const deleteRow = parseInt(document.getElementById("deleteRow").value) - 1;
+            const deleteCol = parseInt(document.getElementById("deleteCol").value) - 1;
+        
+            // Validate inputs
+            if (deleteRow < 0 || deleteRow >= selectedTable.rows.length || 
+                deleteCol < 0 || deleteCol >= selectedTable.rows[deleteRow].cells.length) {
+                alert("Please enter a valid cell location.");
+                return;
+            }
+        
+            // Delete the specified cell
+            selectedTable.rows[deleteRow].deleteCell(deleteCol);
+        
+            // If the row has no more cells, delete the entire row
+            if (selectedTable.rows[deleteRow].cells.length === 0) {
+                selectedTable.deleteRow(deleteRow);
+            }
+        }
+
+        function setTableSpacing() {
+            const spacing = parseInt(document.getElementById('tableSpacing').value) || 0;
+            const tables = document.querySelectorAll('.custom-table');
+            
+            tables.forEach((table, index) => {
+                if (index > 0) { // Skip the first table to avoid top margin on it
+                    table.style.marginTop = `${spacing}px`;
+                }
+            });
+        }
+
+        function increaseIndent() {
+            if (selectedCell) {
+                let currentIndent = parseInt(selectedCell.style.paddingLeft) || 0;
+                selectedCell.style.paddingLeft = (currentIndent + 10) + 'px';
+            } else {
+                alert('Please select a cell to indent.');
+            }
+        }
+        
+        
+        function decreaseIndent() {
+            if (selectedCell) {
+                let currentIndent = parseInt(selectedCell.style.paddingLeft) || 0;
+                if (currentIndent > 0) {
+                    selectedCell.style.paddingLeft = (currentIndent - 10) + 'px';
+                }
+            } else {
+                alert('Please select a cell to decrease indent.');
+            }
+        }
+
+        function increaseTextSize() {
+            if (selectedCell) {
+                let currentSize = parseInt(window.getComputedStyle(selectedCell).fontSize);
+                selectedCell.style.fontSize = (currentSize + 2) + 'px';
+            } else {
+                alert('Please select a cell to increase text size.');
+            }
+        }
+        
+        
+        function decreaseTextSize() {
+            if (selectedCell) {
+                let currentSize = parseInt(window.getComputedStyle(selectedCell).fontSize);
+                if (currentSize > 6) { // Prevents text size from becoming too small
+                    selectedCell.style.fontSize = (currentSize - 2) + 'px';
+                }
+            } else {
+                alert('Please select a cell to decrease text size.');
+            }
+        }
+
+
+        function increaseTableTextSize() {
+            if (selectedTable) {
+                const cells = selectedTable.getElementsByTagName('td');
+                for (let cell of cells) {
+                    let currentSize = parseInt(window.getComputedStyle(cell).fontSize);
+                    cell.style.fontSize = (currentSize + 2) + 'px';
+                }
+            } else {
+                alert('Please select a table to increase text size.');
+            }
+        }
+        
+        
+        function decreaseTableTextSize() {
+            if (selectedTable) {
+                const cells = selectedTable.getElementsByTagName('td');
+                for (let cell of cells) {
+                    let currentSize = parseInt(window.getComputedStyle(cell).fontSize);
+                    if (currentSize > 6) { // Prevents text size from becoming too small
+                        cell.style.fontSize = (currentSize - 2) + 'px';
+                    }
+                }
+            } else {
+                alert('Please select a table to decrease text size.');
+            }
+        }
+
+
+
+        const editor = document.getElementById('editor');
+    const toolbar = document.getElementById('toolbar');
+
+    // Show the toolbar when the editor is focused or when typing
+    editor.addEventListener('focus', showToolbar);
+    editor.addEventListener('input', showToolbar);
+
+    // Hide the toolbar when clicking outside the editor
+    document.addEventListener('click', (event) => {
+        if (!editor.contains(event.target) && !toolbar.contains(event.target)) {
+            toolbar.style.display = 'none';
+        }
+    });
+
+    function showToolbar() {
+        toolbar.style.display = 'flex';
+    }
+
+    // Toolbar functions
+    function changeBackgroundColor() {
+        const bgColor = document.getElementById('bgColorPicker').value;
+        editor.style.backgroundColor = bgColor; // Change the background color of the editor
+    }
+
+    function changeFontColor() {
+        const fontColor = document.getElementById('fontColorPicker').value;
+        document.execCommand('foreColor', false, fontColor); // Change font color
+    }
+
+    function toggleBold() {
+        document.execCommand('bold');
+    }
+
+    function toggleItalic() {
+        document.execCommand('italic');
+    }
+
+    function addBulletPoints() {
+        document.execCommand('insertUnorderedList');
+    }
+
+    function increaseFontSize() {
+        document.execCommand('fontSize', false, '5');
+    }
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

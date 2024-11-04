@@ -11,7 +11,7 @@ document.getElementById("login-button").addEventListener("click", function () {
       .then((userCredential) => {
           // alert(userCredential)
               const user = userCredential.user;
-              window.location.href = "../pages/home-page.html"
+              window.location.href ="../pages/home-page.html"
       })
       .catch((error) => {
           // const errorMessage = error.message;

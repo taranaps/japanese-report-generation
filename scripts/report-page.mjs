@@ -1060,5 +1060,9 @@ function applyTheme(themeId) {
     //     bars.forEach(e => e.style.backgroundColor = color.bg);
     // });
 
+
+
+    
+
    
 

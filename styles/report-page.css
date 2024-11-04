@@ -246,6 +246,9 @@ body {
   transition: background-color 0.3s ease;
   /* margin-right: 46px; */
   /* margin-bottom: 450px; */
+ margin-right: 15px;
+ margin-bottom: -10px;
+ position: static;
  
   
 }
@@ -784,6 +787,13 @@ margin-top: 30px;
   /* padding: 10px; */
   /* margin-left: auto; */
 
+}
+
+.tablecontent{
+  height: auto;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 .t4top{
   height:auto;
@@ -1802,6 +1812,7 @@ text-align: center;
   .right-sidebar{
     display: flex;
     margin-left: -150px;
+    margin-top: 40px;
     
     width: 170px;
     /* position: relative; */
@@ -1811,20 +1822,48 @@ text-align: center;
     border: 2px solid #dc143c;
     border-radius: 10px;
     height: calc(100vh - 150px);
+    /* height: auto; */
     /* position:static; */
     padding-bottom: 10px;
     position: fixed;
-  top: 90px;
+   overflow-y: auto;
+   overflow-x: hidden;
+  top: 50px;
   left: 1220px;
   padding-left: 10px;
+  background-color: white;
+  padding-bottom: 10px;
+
+
     
     
 
    
   }
+
+
+  .right-sidebar::-webkit-scrollbar {
+    width: 0; 
+}
+
+
+.right-sidebar {
+    -ms-overflow-style: none;
+}
+
+
+.right-sidebar {
+    scrollbar-width: none;
+}
   .right-sidebarContainer{
-    margin-top: 30px;
+    max-height: calc(100vh - 130px);
+    margin-left: -10px;
+   align-items: center;
+ 
+   
   }
+  
+
 
 
   .theme-color-dark-blue, .theme-color-violet, .theme-color-red, .theme-color-orange, .theme-color-blue,.theme-color-green{
@@ -1972,4 +2011,349 @@ text-align: center;
     display: block;
     opacity: 1;
 }
+
+
+
+
+
+/* .content-container {
+  padding: 20px;
+  border: 1px solid #ddd;
+  max-width: 800px;
+  margin: auto;
+} */
+
+/* .table-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+} */
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.custom-table td[contenteditable="true"] {
+  cursor: text;
+}
+
+.dark-border td {
+  border: 2px solid #333;
+}
+
+.selected-cell {
+  outline: 2px solid #4CAF50; /* Highlight selected cell */
+}
+
+.table-options, .table-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+  padding: 10px;
+  margin-left: 10px;
+  
+}
+.table-controls button{
+ border-radius: 10px;
+  background-color: #dc143c;
+  width: 150px;
+  height: 20px;
+ 
+
+}
+.table-options input{
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+}
+
+
+.table-options button{
+  border-radius: 10px;
+  background-color: #dc143c;
+  width: 150px;
+  height: 20px;
+ 
+
+}
+.tablecontent1{
+  background-color: white;
+  border: 1px solid black ;
+  padding: 10px;
+  margin: 10px 30px;
+
+}
+.tablecontent2{
+  background-color: white;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+
+}
+.tablecontent3{
+  background-color:#ffffff;
+  padding:10px ;
+
+}
+.tablecontent4{
+  background-color: #0E486B ;
+  margin-top: 5px;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+}
+.controls input{
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+
+}
+.controls button{
+  margin-top: 5px;
+  background-color: #dc143c;
+  border-radius: 10px;
+  width: 150px;
+  height: 20px;
+
+}
+.delete-cell input{
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+
+}
+.delete-cell button{
+  margin-top: 5px;
+  background-color: #dc143c;
+  border-radius: 10px;
+  width: 150px;
+  height: 20px;
+
+}
+.controls{
+ 
+  padding: 2px;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  width: 170px;
+}
+.delete-cell{
+ 
+  padding: 2px;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  width: 170px;
+}
+.table-options{
+  
+  padding: 2px;
+  border-radius: 10px;
+  margin-top: 10px;
+  width: 170px;
+
+
+}
+.text-bold button{
+  background-color: #dc143c;
+  border-radius: 10px;
+  width: 150px;
+  height: 20px;
+  margin-top: 5px;
+
+
+}
+.text-bold{
+ 
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  width: 170px;
+}
+
+#textColorPicker,#bgColorPicker{
+  margin-top: 5px;
+  margin-bottom: 5px;
+ 
+}
+.change-single-color{
+ 
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  width: 170px;
+  
+}
+.text-bold h3{
+  margin-top: 5px;
+}
+.table-controls{
+  
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  margin-left: 5px;
+  width: 170px;
+}
+.select-batch{
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  margin-left: 5px;
+  width: 170px;
+
+}
+.select-theme{
+  
+  border-radius: 10px;
+  background-color: white;
+  padding-left: 25px;
+  margin-left: 5px;
+  width: 170px;
+
+
+}
+.toggle-learners,.toggle-certification,.toggle-attendence{
+  
+  border-radius: 10px;
+  background-color: white;
+  padding-left: 10px;
+  margin-left: 5px;
+  width: 170px;
+
+}
+.table-spacing button{
+  background-color: #dc143c;
+  border-radius: 10px;
+  width: 150px;
+  height: 20px;
+  margin-top: 5px;
+
+}
+.table-spacing input{
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+
+}
+.table-spacing{
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+  padding-left: 15px;
+  width: 170px;
+
+}
+
+.table-indent button{
+  background-color: #dc143c;
+  border-radius: 10px;
+  width: 150px;
+  height: 20px;
+  margin-top: 5px;
+
+}
+.table-indent {
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+  padding-left: 15px;
+  width: 170px;
+
+}
+.table-text-size button{
+  background-color: #dc143c;
+  border-radius: 10px;
+  width: 150px;
+  height: 20px;
+  margin-top: 5px;
+
+}
+.table-text-size{
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+  padding-left: 15px;
+  width: 170px;
+
+}
+.table-text-size h3{
+  margin-bottom:5px ;
+  margin-top: 10px;
+
+}
+
+
+
+
+.toolbar {
+  display: none; /* Initially hidden */
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px; /* Space between toolbar and editor */
+  gap: 10px;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+  position: relative;
+}
+
+.toolbar button, .toolbar input {
+  padding: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #dc143c;
+  border-radius: 10px;
+  width: 120px;
+  height: 40px;
+}
+
+/* Editor container */
+.editor-container {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+  overflow-y: auto;
+  min-height: 30px; /* Minimum height for the editable area */
+}
+
+.editor-container[contenteditable="true"] {
+  outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 

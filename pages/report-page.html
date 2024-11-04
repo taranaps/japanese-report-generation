@@ -11,7 +11,7 @@
   <body>
     <header>
       <div class="header">
-        <img src="../assets/images/home-icon-new.svg" alt="Home" />
+       <img src="../assets/images/home-icon-new.svg" alt="Home" />
         <a href="#"> <img class="logout" src="../assets/images/sign-out.svg" alt="Logout" /></a>
       </div>
     </header>
@@ -147,6 +147,12 @@
                 </div>
                 <div id="batchwise-data-template1">
                 </div>
+                <div class="tablecontent1">
+                  <div id="tableContainer1" class="table-grid"></div>
+    
+                </div>
+                
+                
               </div>
             </div>
         
@@ -211,6 +217,26 @@
 							<div id="evaluation-table-template2"></div>
 
 						</div>
+           
+            <div class="tablecontent2">
+              <div id="tableContainer2" class="table-grid"></div>
+
+            </div>
+            <div class="toolbar" id="toolbar">
+              <button onclick="toggleBold()">Bold</button>
+              <button onclick="toggleItalic()">Italic</button>
+              <button onclick="addBulletPoints()">Bullets</button>
+              <input type="color" id="fontColorPicker" onchange="changeFontColor()" />
+              <label for="fontColorPicker">Font Color</label>
+              <input type="color" id="bgColorPicker" onchange="changeBackgroundColor()" />
+              <label for="bgColorPicker">Background Color</label>
+              <button onclick="increaseFontSize()">Increase Font Size</button>
+          </div>
+          
+          <div class="editor-container" id="editor" contenteditable="true">
+              Type your text here...
+          </div>
+
 					</div>	
                     </div>
                 
@@ -353,6 +379,10 @@
            <div class="table-section">
  
              </div>
+             <div class="tablecontent3">
+              <div id="tableContainer3" class="table-grid"></div>
+
+            </div>
             </div>
           </div>
 
@@ -403,27 +433,46 @@
   
   
                   </div>
+                  
+                  
                   <div class="t4tablerightdiv">
+                  
                     <div class="t4table">
-  <!-- draw table here -->
-                    </div>
+  <!-- draw table here --> </div>
+                  
+
+                    
+                    
+
+                    
                   </div>
+                  
                  
   
                 </div>
+                <div class="tablecontent4">
+                  <div id="tableContainer4" class="table-grid"></div>
+    
+                </div>
+                
                 
                
               </div>
               
+              
+
+             
+              
             
           </div>
           <div class="right-sidebar">
-            <div class="right-sidebarContainer">
+            <div class="right-sidebarContainer" id="right-sidebarContainer">
               <div class="select-batch">
                 <select id="batchSelect">
                   <option value="">Select Batch</option>
                 </select>
                 </div>
+                <div class="select-theme">
                 <h2>select theme</h2>
                 <div class="sidebar-theme">
                   <div class="theme-color-dark-blue" id="theme-color-dark-blue"></div>
@@ -434,6 +483,7 @@
                   <div class="theme-color-orange" id="theme-color-orange"></div>
 
                 </div>
+              </div>
                 <div class="toggle-learners">
                   <h2>No. of Learners</h2>
                   <div class="learners">
@@ -487,6 +537,95 @@
 
 
                 </div>
+
+                <div class="table-options">
+                  <h3>Add Tables</h3>
+                  <label>Rows: <input type="number" id="rowCount" min="1" value="2"></label>
+                  <label>Columns: <input type="number" id="colCount" min="1" value="2"></label>
+                  <button onclick="createTable();showToolbar();">Add Table</button> 
+              </div>
+              <div class="text-bold">
+                <h3>Bold</h3>
+                <button onclick="toggleBold()">Bold Text</button>
+                <h3>Border</h3>
+                
+                <button onclick="toggleBorder()">Toggle Dark Border</button>
+              </div>
+              <div class="change-single-color">
+                <h3>Change Text color</h3>
+                <input type="color" id="textColorPicker" onchange="changeTextColor()" />
+                <label for="textColorPicker">choose a color</label>
+                
+                 <h3>Change cell background</h3>
+                <input type="color" id="bgColorPicker" onchange="changeCellColor()" />
+                <label for="bgColorPicker">choose a color</label>
+
+
+              </div>
+              <div class="table-controls">
+                <h3>Change Row Color</h3>
+                
+                <input type="color" id="rowColorPicker" />
+                <label for="rowColorPicker">choose a color</label>
+                <button onclick="changeRowColor()">Change Row Color</button>
+                <h3>Change Column color</h3>
+                
+                <input type="color" id="colColorPicker" />
+                <label for="colColorPicker">choose a color</label>
+                <button onclick="changeColumnColor()">Change Column Color</button>
+                
+              </div>
+                
+                <div class="controls">
+                  <h3>Merging cells</h3>
+                  <label>Merge From Row: <input type="number" id="mergeRowStart" min="1"></label>
+                  <label>To Row: <input type="number" id="mergeRowEnd" min="1"></label>
+                  <label>From Column: <input type="number" id="mergeColStart" min="1"></label>
+                  <label>To Column: <input type="number" id="mergeColEnd" min="1"></label>
+                  <button onclick="mergeCells()">Merge Cells</button>
+                  </div>
+              
+
+              <div class="delete-cell">
+                <h3>Delete Cell</h3>
+              <label>Row:</label>
+              <input type="number" id="deleteRow" min="1">
+              <label>Column:</label>
+              <input type="number" id="deleteCol" min="1">
+              <button onclick="deleteCell()">Delete Cell</button>
+
+              </div>
+
+
+              <div class="table-spacing">
+                <h3>Spacing Between Tables</h3>
+                <label>Spacing (in pixels): <input type="number" id="tableSpacing" min="0" value="10"></label>
+                <button onclick="setTableSpacing()">Set Spacing</button>
+            </div>
+
+            <div class="table-indent">
+              
+              
+              <h3>Indent Text</h3>
+              <button onclick="increaseIndent()">Increase Indent</button>
+              <button onclick="decreaseIndent()">Decrease Indent</button>
+          </div>
+
+          <div class="table-text-size">
+            <!-- Other controls here -->
+            
+            <h3>Text Size</h3>
+            <button onclick="increaseTextSize()">Increase Text Size</button>
+            <button onclick="decreaseTextSize()">Decrease Text Size</button>
+            <h3>Table Text Size</h3>
+            <button onclick="increaseTableTextSize()">Increase Table Text Size</button>
+            <button onclick="decreaseTableTextSize()">Decrease Table Text Size</button>
+        </div>
+
+              
+
+                
+            </div>
 
             </div>
           </div>
