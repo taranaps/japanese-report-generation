@@ -2105,6 +2105,85 @@ function renderCertificationLevelChart(
       });
   }
 
+  async function batchwiseDataTemplate5(selectedBatch) {
+
+    const batchDetails = await getBatchDetailsFromLatestCollection();
+    if (!batchDetails) {
+      console.error("No batch details found.");
+      return;
+    }
+
+    const sessionsPerBatch = batchDetails[selectedBatch].numberOfSessionsMonth;
+    const sessionsTemplate5 = document.getElementById("batch-sessions-template5");
+    sessionsTemplate5.textContent = `Total Sessions: ${sessionsPerBatch}`;
+
+    const durationPerBatch = batchDetails[selectedBatch].batchDurationMonth;
+    const durationTemplae5 = document.getElementById("batch-duration-template5");
+    durationTemplae5.textContent = `Total duration: ${durationPerBatch}`;
+
+    const currentDate = await getLatestCollection();
+    const filteredData = await getFilteredDocuments(selectedBatch);
+
+    const template1Header = document.getElementById("template5-month");
+    template1Header.textContent = formatCollectionName(currentDate);
+
+    await getAttendanceData(filteredData, "attendenceChart-t5");
+
+    const traineeDetailsTemplate1 = document.getElementById("trainee-details-template5");
+    const traineeTable1 = await getTraineeDetails(
+      filteredData,
+      "trainee-details-template5"
+    ); 
+    traineeDetailsTemplate1.appendChild(traineeTable1);
+
+    const evaluationTable1 = document.getElementById("evaluation-table-template5");
+    const table1 = await createEvaluationTable(filteredData, "evaluation-table-template5");
+    evaluationTable1.appendChild(table1);
+
+    initTrainerDetails("trainer-name-template5");
+
+    const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
+    const borderColor2 = 'rgba(255, 159, 64, 0.2)';
+    initCertificationChart(
+      "levelChart-t5",
+      backgroundColor2,
+      borderColor2
+    );
+
+    const numberOfTrainees = document.getElementById("learners-chart-template5");
+
+    const backgroundColor = [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+    ];
+    const borderColor = [
+      'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+    ];
+    numberOfTrainees.textContent = generateTraineePieChart(
+      "learners-chart-template5",
+      "pie",
+      backgroundColor,
+      borderColor
+    );
+    loadSessionsAndDurationWholeBatch(
+      "sessionsCharts-t5",
+      "batch-duration-chart"
+    );
+
+    const template5Header = document.getElementById("batch-title");
+    template5Header.textContent = selectedBatch;
+    console.log(selectedBatch);
+  }
+
   images.forEach((image) => {
     image.addEventListener("click", async function () {
       hideAllTemplates();
@@ -2249,6 +2328,13 @@ function renderCertificationLevelChart(
               // traineeTable = await getTraineeDetails(filteredData,"trainee-details-template2") // Call your attendance data function
               // traineeDetailsTemplate1.appendChild(traineeTable);
               break;
+              case "template5":
+                if (selectedBatch === "whole-batch") {
+                    
+                  } else {
+                    batchwiseDataTemplate5(selectedBatch);
+                  }
+                break;
           }
         }
 
