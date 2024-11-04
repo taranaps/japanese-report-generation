@@ -9,16 +9,21 @@
 }
 
 .sidebar {
-    width: 70px;
+    width: 60px;
     height: 60%;
+    margin-top: 40px;
     background-color: #DC143C;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
+    justify-content: center;
     position: fixed;
-    border-radius: 10px;
+    /* border-radius: 10px; */
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
     left: 0;
+
 }
 
 .nav-items {
@@ -76,8 +81,9 @@
 .nav-item::after {
     content: attr(data-tooltip); /* Display the text from data-tooltip */
     position: absolute;
-    left: 50%; /* Center horizontally */
-    bottom: 100%; /* Position tooltip above the icon */
+    /* right: 40px; */
+    left: 90%; /* Center horizontally */
+    bottom: 80%; /*Position tooltip above the icon */
     transform: translateX(-50%) translateY(-5px); /* Center tooltip horizontally and add space above icon */
     background-color: #181717b9;
     color: #fff;
@@ -100,11 +106,14 @@
 
 body {
     background-color: #f4f4f4;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: inter;
     display: flex;
     justify-content: center;
     align-items: flex-start; 
     height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .header {
@@ -157,20 +166,7 @@ body {
     width: 60%; 
 }
 
-.stat-box:hover {
-    transform: scale(1.1); 
-  }
 
-.stat-box h1 {
-    font-size: 80px;
-    margin-top: 5px;
-}
-
-.stat-box h2 {
-    padding: 10px;
-    align-items: center;
-    display: flex;
-}
 
 .card-image {
     width: 100%;
@@ -232,6 +228,7 @@ body {
 .carousel {
     position: relative;
     overflow: hidden;
+    margin-top: -25px;
 }
 
 .carousel-slide {
@@ -272,6 +269,24 @@ body {
     width: 200px;
     height: 200px; 
     background-color: #f9f9f9;
+    color: #DC143C;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box; 
+    position: relative;
+}
+.stat-box1 {
+    transition: transform 0.5s ease; /* Smooth transition */
+    width: 200px;
+    height: 200px; 
+    background-color: #ffeaea;
+    color: #181717;
     border-radius: 8px;
     padding: 20px;
     text-align: center;
@@ -284,11 +299,45 @@ body {
     position: relative;
 }
 
-.stat-box:hover {
-    background-color: #ffeaea;
+.stat-box1:hover {
+    background-color: #f9f9f9;
     color: #DC143C; 
 }
 
+.stat-box:hover {
+    background-color: #ffeaea;
+    color: #181717; 
+}
+.stat-box1:hover {
+    transform: scale(1.1); 
+  }
+
+.stat-box1 h1 {
+    font-size: 80px;
+    margin-top: -15px;
+}
+
+.stat-box1 h2 {
+    font-size: 25px;
+    /* padding: 10px;
+    align-items: center;
+    display: flex; */
+}
+.stat-box:hover {
+    transform: scale(1.1); 
+  }
+
+.stat-box h1 {
+    font-size: 80px;
+    margin-top: -15px;
+}
+
+.stat-box h2 {
+    font-size: 25px;
+    /* padding: 10px;
+    align-items: center;
+    display: flex; */
+}
 .graph {
     /* padding: 10px;
     position: absolute;
@@ -299,6 +348,7 @@ body {
 .box-content {
     position: absolute;
     z-index: 2;
+
 }
 
 /* ---Upload-Data Pop-up Styles--- */
