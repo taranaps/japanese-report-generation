@@ -1315,6 +1315,7 @@ function renderCertificationLevelChart(
 
 
   async function populateBatchDataTemplate2() {
+
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (!batchDetails) {
       console.error("No batch details found.");
@@ -1324,9 +1325,8 @@ function renderCertificationLevelChart(
     const mainContainer = document.getElementById("batchwise-data-template2");
     mainContainer.innerHTML = ""; // Clear any previous content
 
-    const numberOfBatches = Object.keys(batchDetails).length;
-    const batchCountDisplay = document.getElementById("number");
-    batchCountDisplay.textContent = numberOfBatches;
+
+    
 
     for (const [batchName, details] of Object.entries(batchDetails)) {
       const filteredData = await getFilteredDocuments(batchName);
@@ -1395,7 +1395,52 @@ function renderCertificationLevelChart(
         `trainee-details-${batchName}`
       ); // Call your attendance data function
       traineeDetailsTemplate2.appendChild(traineeTable2);
+
+    
     }
+    const numberOfBatches = Object.keys(batchDetails).length;
+
+    generateChartToggle(filteredData, 'attendanceChart', 'bar');
+
+    const numberOfTrainees =document.getElementById("learnersChart");
+    const backgroundColor = [
+                 'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+                ];
+    const borderColor = [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+                ];
+    numberOfTrainees.textContent = generateTraineePieChart("learnersChart","pie",backgroundColor,borderColor);
+
+    // const batchCountDisplay = document.getElementById("number");
+    batchCountDisplay.textContent = await getNofBatches();
+
+    const diaplayBatch = document.getElementById("batch-number");
+    diaplayBatch.textContent = generateTraineeDoughnutChart("batch-number","doughnut",backgroundColor,borderColor);
+
+    const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
+    const borderColor2 = 'rgba(153, 102, 255, 1)';
+    
+
+    initCertificationChart("levelChart",backgroundColor2,borderColor2,'bar');
+
+    loadAndDisplayBatchDetails("sessionsChart","batchDurationChart","durationChart",selectedBatch);
+    initTrainerDetails("trainer-name-template2");
+
+    const batchCountDisplay = document.getElementById("number");
+    batchCountDisplay.textContent = numberOfBatches;
+
+    
+    
   }
 
   async function createAllBatchEvaluationTabletemplate1(data, id) {
@@ -1463,12 +1508,15 @@ function renderCertificationLevelChart(
 
 
   async function populateBatchDataTemplate1() {
+
+    
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (!batchDetails) {
         console.error("No batch details found.");
         return;
     }
 
+    
     const rightContainer = document.getElementById('right-template1');
     rightContainer.innerHTML = ''; // Clear any previous content
 
@@ -1517,7 +1565,9 @@ function renderCertificationLevelChart(
         </div>    
       
         `
-   
+    
+    
+        
     const batchDetailsData = await getBatchDetailsFromLatestCollection();
     
     generateSessionDurationChart(batchDetailsData,'duration-graph-template1');
@@ -1533,9 +1583,51 @@ function renderCertificationLevelChart(
 
     const traineeTable1 = await getAllBatchTraineeDetails(traineeDetails,"all-trainee-table-template1");
     traineeDetailsTemplate1.appendChild(traineeTable1);
+
+    const numberOfTrainees = document.getElementById(
+        "trainee-piechart-template1"
+      );
+  
+      const backgroundColor = [
+       'rgba(255, 99, 132, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(255, 206, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(255, 159, 64, 0.2)'
+      ];
+      const borderColor = [
+        "rgba(128, 97, 195, 1)",
+        "rgba(146, 113, 209, 1)",
+        "rgba(164, 130, 223, 1)",
+        "rgba(182, 146, 237, 1)",
+        "rgba(200, 163, 251, 1)",
+        "rgba(218, 180, 255, 1)",
+      ];
+      numberOfTrainees.textContent = generateTraineePieChart(
+        "trainee-piechart-template1",
+        "pie",
+        backgroundColor,
+        borderColor
+      );
+  
+      const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
+      const borderColor2 = 'rgba(153, 102, 255, 1)';
+      initCertificationChart("certificationBarChart",backgroundColor2,borderColor2,'bar');
+
+      initTrainerDetails("trainer-name-template1");
+
+    loadAndDisplayBatchDetails(
+      "progressBarsContainer-templae1",
+      "whole-duration-data-templae1",
+      "duration-sessions-data-template1",
+      selectedBatch
+    );
+  
 }
 
   async function populateBatchDataTemplate3() {
+
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (!batchDetails) {
       console.error("No batch details found.");
@@ -1546,9 +1638,49 @@ function renderCertificationLevelChart(
     mainContainer.innerHTML = ""; // Clear any previous content
 
     const numberOfBatches = Object.keys(batchDetails).length;
+
     const batchCountDisplay = document.getElementById(
-      "number-of-Batch-tmeplate3"
-    );
+        "number-of-Batch-tmeplate3"
+      );
+      batchCountDisplay.textContent = await getNofBatches();
+  
+      initTrainerDetails("trainers-template3");
+  
+      const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
+      const borderColor2 = 'rgba(255, 159, 64, 0.2)';
+  
+  
+      const numberOfTrainees = document.getElementById("card-content");
+  
+      const backgroundColor = [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+      ];
+      const borderColor = [
+        'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+      ];
+      numberOfTrainees.textContent = generateTraineePieChart(
+        "card-content",
+        "pie",
+        backgroundColor,
+        borderColor
+      );
+      loadSessionsAndDurationWholeBatch(
+        "card-content-sessions",
+        "card-content-duration"
+      );
+
+      initCertificationChart("current-level-template3",backgroundColor2,borderColor2,'bar');  
+
     batchCountDisplay.textContent = numberOfBatches;
 
     for (const [batchName, details] of Object.entries(batchDetails)) {
@@ -1626,6 +1758,250 @@ function renderCertificationLevelChart(
       );
       traineeDetailsTemplate2.appendChild(traineeTable2);
     }
+  }
+
+//   async function batchwiseDataTemplate1(selectedBatch){
+
+    // const currentDate = await getLatestCollection();
+    // const filteredData = await getFilteredDocuments(selectedBatch);
+
+    // const template2Header = document.getElementById(
+    //     "batch-text-template1"
+    //   );
+    //   template2Header.textContent = selectedBatch;
+    // const template1Header = document.getElementById(
+    //   "header-template1-h3"
+    // );
+    // template1Header.textContent = formatCollectionName(currentDate); 
+    // generateChartToggle(filteredData, 'attendance-body-template1', 'bar');
+    // document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
+    // const selectedChartType = event.target.value;
+    // generateChartToggle(filteredData, 'attendance-body-template1', selectedChartType);
+        
+    // });
+    // // generateChartToggle(filteredData, 'attendance-body-template1', 'bar');
+
+    // const traineeDetailsTemplate1 = document.getElementById("trainee-details-template1");
+
+    // const traineeTable1 = await getTraineeDetails(filteredData,"trainee-details-template1");
+    // traineeDetailsTemplate1.appendChild(traineeTable1);
+
+    // const evaluationTable1 = document.getElementById(
+    //   "evaluation-table-template1"
+    // );
+    // const table1 = await createEvaluationTable(filteredData,"evaluation-table-template1");
+    // evaluationTable1.appendChild(table1);
+
+    // const numberOfTrainees = document.getElementById(
+    //   "trainee-piechart-template1"
+    // );
+
+    // const backgroundColor = [
+    //  'rgba(255, 99, 132, 0.2)',
+    // 'rgba(54, 162, 235, 0.2)',
+    // 'rgba(255, 206, 86, 0.2)',
+    // 'rgba(75, 192, 192, 0.2)',
+    // 'rgba(153, 102, 255, 0.2)',
+    // 'rgba(255, 159, 64, 0.2)'
+    // ];
+    // const borderColor = [
+    //   "rgba(128, 97, 195, 1)",
+    //   "rgba(146, 113, 209, 1)",
+    //   "rgba(164, 130, 223, 1)",
+    //   "rgba(182, 146, 237, 1)",
+    //   "rgba(200, 163, 251, 1)",
+    //   "rgba(218, 180, 255, 1)",
+    // ];
+    // numberOfTrainees.textContent = generateTraineePieChart(
+    //   "trainee-piechart-template1",
+    //   "pie",
+    //   backgroundColor,
+    //   borderColor
+    // );
+
+    // const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
+    // const borderColor2 = 'rgba(153, 102, 255, 1)';
+    // initCertificationChart("certificationBarChart",backgroundColor2,borderColor2,'bar');
+
+    // document.getElementById('chartType-dropdown-certification').addEventListener('change', (event) => {
+    //     const selectedChartType = event.target.value;
+    //     initCertificationChart("certificationBarChart",backgroundColor2,borderColor2,selectedChartType);
+        
+    //   });
+
+    // initTrainerDetails("trainer-name-template1");
+
+    // loadAndDisplayBatchDetails(
+    //   "progressBarsContainer-templae1",
+    //   "whole-duration-data-templae1",
+    //   "duration-sessions-data-template1",
+    //   selectedBatch
+    // );
+    
+    // document.getElementById('chartTypeDropdown').addEventListener('change', (event) => {
+    //     const selectedChartType = event.target.value;
+    //     generateTraineePieChart("trainee-piechart-template1",selectedChartType,backgroundColor,borderColor);
+        
+    //   });
+
+
+    // const template2Header = document.getElementById(
+    //     "batch-text-template1"
+    //   );
+    //   template2Header.textContent = selectedBatch;
+    // const template1Header = document.getElementById(
+    //   "header-template1-h3"
+    // );
+    // template1Header.textContent = formatCollectionName(currentDate); 
+    // generateChartToggle(filteredData, 'attendance-body-template1', 'bar');
+    // document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
+    // const selectedChartType = event.target.value;
+    // generateChartToggle(filteredData, 'attendance-body-template1', selectedChartType);
+        
+    // });
+    // // generateChartToggle(filteredData, 'attendance-body-template1', 'bar');
+
+    // const traineeDetailsTemplate1 = document.getElementById("trainee-details-template1");
+
+    // const traineeTable1 = await getTraineeDetails(filteredData,"trainee-details-template1");
+    // traineeDetailsTemplate1.appendChild(traineeTable1);
+
+    // const evaluationTable1 = document.getElementById(
+    //   "evaluation-table-template1"
+    // );
+    // const table1 = await createEvaluationTable(filteredData,"evaluation-table-template1");
+    // evaluationTable1.appendChild(table1);
+
+    // const numberOfTrainees = document.getElementById(
+    //   "trainee-piechart-template1"
+    // );
+
+    // const backgroundColor = [
+    //  'rgba(255, 99, 132, 0.2)',
+    // 'rgba(54, 162, 235, 0.2)',
+    // 'rgba(255, 206, 86, 0.2)',
+    // 'rgba(75, 192, 192, 0.2)',
+    // 'rgba(153, 102, 255, 0.2)',
+    // 'rgba(255, 159, 64, 0.2)'
+    // ];
+    // const borderColor = [
+    //   "rgba(128, 97, 195, 1)",
+    //   "rgba(146, 113, 209, 1)",
+    //   "rgba(164, 130, 223, 1)",
+    //   "rgba(182, 146, 237, 1)",
+    //   "rgba(200, 163, 251, 1)",
+    //   "rgba(218, 180, 255, 1)",
+    // ];
+    // numberOfTrainees.textContent = generateTraineePieChart(
+    //   "trainee-piechart-template1",
+    //   "pie",
+    //   backgroundColor,
+    //   borderColor
+    // );
+
+    // const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
+    // const borderColor2 = 'rgba(153, 102, 255, 1)';
+    // initCertificationChart("certificationBarChart",backgroundColor2,borderColor2,'bar');
+
+    // document.getElementById('chartType-dropdown-certification').addEventListener('change', (event) => {
+    //     const selectedChartType = event.target.value;
+    //     initCertificationChart("certificationBarChart",backgroundColor2,borderColor2,selectedChartType);
+        
+    //   });
+
+    // initTrainerDetails("trainer-name-template1");
+
+    // loadAndDisplayBatchDetails(
+    //   "progressBarsContainer-templae1",
+    //   "whole-duration-data-templae1",
+    //   "duration-sessions-data-template1",
+    //   selectedBatch
+    // );
+    
+    // document.getElementById('chartTypeDropdown').addEventListener('change', (event) => {
+    //     const selectedChartType = event.target.value;
+    //     generateTraineePieChart("trainee-piechart-template1",selectedChartType,backgroundColor,borderColor);
+        
+    //   });
+
+
+//   }
+
+  async function batchwiseDataTemplate2(selectedBatch){
+
+    const currentDate = await getLatestCollection();
+    const filteredData = await getFilteredDocuments(selectedBatch);
+
+    const template1Header = document.getElementById("template2-month");
+    template1Header.textContent = formatCollectionName(currentDate);
+
+    const evaluationTable1 = document.getElementById("evaluation-table-template2");
+    const table1 = await createEvaluationTable(filteredData,"evaluation-table-template2");
+    evaluationTable1.appendChild(table1);
+
+    const template2Header = document.getElementById("batch-name-template2");
+    template2Header.textContent = selectedBatch; 
+
+    generateChartToggle(filteredData, 'attendanceChart', 'bar');
+    document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
+    const selectedChartType = event.target.value;
+    generateChartToggle(filteredData, 'attendanceChart', selectedChartType);
+                    
+    });
+
+    const traineeDetailsTemplate2 = document.getElementById("trainee-details-template2");
+    const traineeTable2 = await getTraineeDetails(filteredData,"trainee-details-template2"); 
+    traineeDetailsTemplate2.appendChild(traineeTable2);
+
+    
+
+    const numberOfTrainees =document.getElementById("learnersChart");
+    const backgroundColor = [
+                 'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+                ];
+    const borderColor = [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+                ];
+    numberOfTrainees.textContent = generateTraineePieChart("learnersChart","pie",backgroundColor,borderColor);
+
+    const batchCountDisplay = document.getElementById("number");
+    batchCountDisplay.textContent = await getNofBatches();
+
+    const diaplayBatch = document.getElementById("batch-number");
+    diaplayBatch.textContent = generateTraineeDoughnutChart("batch-number","doughnut",backgroundColor,borderColor);
+
+    const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
+    const borderColor2 = 'rgba(153, 102, 255, 1)';
+    
+
+    initCertificationChart("levelChart",backgroundColor2,borderColor2,'bar');
+
+
+
+    document.getElementById('chartType-dropdown-certification').addEventListener('change', (event) => {
+        const selectedChartType = event.target.value;
+        initCertificationChart("levelChart",backgroundColor2,borderColor2,selectedChartType);
+                    
+       });
+    loadAndDisplayBatchDetails("sessionsChart","batchDurationChart","durationChart",selectedBatch);
+    initTrainerDetails("trainer-name-template2");
+                
+    document.getElementById('chartTypeDropdown').addEventListener('change', (event) => {
+    const selectedChartType = event.target.value;
+    generateTraineePieChart("learnersChart",selectedChartType,backgroundColor,borderColor);
+                    
+      });
+
   }
 
   async function batchwiseDataTemplate3(selectedBatch) {
@@ -1757,6 +2133,10 @@ function renderCertificationLevelChart(
                 populateBatchDataTemplate1();
                 
               } else {
+
+                // document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
+                //     const selectedChartType = event.target.value;
+
                 const template2Header = document.getElementById(
                     "batch-text-template1"
                   );
@@ -1771,7 +2151,7 @@ function renderCertificationLevelChart(
                 generateChartToggle(filteredData, 'attendance-body-template1', selectedChartType);
                     
                 });
-                // generateChartToggle(filteredData, 'attendance-body-template1', 'bar');
+                generateChartToggle(filteredData, 'attendance-body-template1', 'bar');
 
                 const traineeDetailsTemplate1 = document.getElementById("trainee-details-template1");
 
@@ -1835,6 +2215,7 @@ function renderCertificationLevelChart(
                     generateTraineePieChart("trainee-piechart-template1",selectedChartType,backgroundColor,borderColor);
                     
                   });
+                
               }
               break;
             case "template2":
@@ -1845,94 +2226,8 @@ function renderCertificationLevelChart(
                 populatedDataTemplate2.innerHTML = "";
                 populateBatchDataTemplate2();
               } else {
-                const template1Header =
-                  document.getElementById("template2-month");
-                template1Header.textContent = formatCollectionName(currentDate);
-
-                const evaluationTable1 = document.getElementById("evaluation-table-template2");
-                const table1 = await createEvaluationTable(filteredData,"evaluation-table-template2");
-                evaluationTable1.appendChild(table1);
-
-                const template2Header = document.getElementById(
-                  "batch-name-template2"
-                );
-                template2Header.textContent = selectedBatch; // Display selected batch instead
-
-                // await getAttendanceData(filteredData, "attendanceChart");
-
-                generateChartToggle(filteredData, 'attendanceChart', 'bar');
-                document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
-                    const selectedChartType = event.target.value;
-                    generateChartToggle(filteredData, 'attendanceChart', selectedChartType);
-                    
-                });
-
-                const traineeDetailsTemplate2 = document.getElementById(
-                  "trainee-details-template2"
-                );
-                const traineeTable2 = await getTraineeDetails(
-                  filteredData,
-                  "trainee-details-template2"
-                ); // Call your attendance data function
-                traineeDetailsTemplate2.appendChild(traineeTable2);
-                const numberOfTrainees =
-                  document.getElementById("learnersChart");
-                const backgroundColor = [
-                 'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-                ];
-                const borderColor = [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-                ];
-                numberOfTrainees.textContent = generateTraineePieChart(
-                  "learnersChart",
-                  "pie",
-                  backgroundColor,
-                  borderColor
-                );
-
-                const batchCountDisplay = document.getElementById("number");
-                batchCountDisplay.textContent = await getNofBatches();
-                const diaplayBatch = document.getElementById("batch-number");
-                diaplayBatch.textContent = generateTraineeDoughnutChart(
-                  "batch-number",
-                  "doughnut",
-                  backgroundColor,
-                  borderColor
-                );
-                const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
-                const borderColor2 = 'rgba(153, 102, 255, 1)';
-    
-
-                initCertificationChart("levelChart",backgroundColor2,borderColor2,'bar');
-
-                document.getElementById('chartType-dropdown-certification').addEventListener('change', (event) => {
-                    const selectedChartType = event.target.value;
-                    initCertificationChart("levelChart",backgroundColor2,borderColor2,selectedChartType);
-                    
-                  });
-                loadAndDisplayBatchDetails(
-                  "sessionsChart",
-                  "batchDurationChart",
-                  "durationChart",
-                  selectedBatch
-                );
-                initTrainerDetails("trainer-name-template2");
+                batchwiseDataTemplate2(selectedBatch);
                 
-                document.getElementById('chartTypeDropdown').addEventListener('change', (event) => {
-                    const selectedChartType = event.target.value;
-                    generateTraineePieChart("learnersChart",selectedChartType,backgroundColor,borderColor);
-                    
-                  });
               }
               break;
             case "template3":
@@ -1941,7 +2236,6 @@ function renderCertificationLevelChart(
                   "batchwise-data-template2"
                 );
                 populatedDataTemplate3.innerHTML = "";
-                batchwiseDataTemplate3(selectedBatch);
                 populateBatchDataTemplate3();
               } else {
                 batchwiseDataTemplate3(selectedBatch);
