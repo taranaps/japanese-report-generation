@@ -2008,6 +2008,7 @@ function renderCertificationLevelChart(
 
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (!batchDetails) {
+      
       console.error("No batch details found.");
       return;
     }
@@ -2105,6 +2106,99 @@ function renderCertificationLevelChart(
       });
   }
 
+  async function populateBatchDataTemplate5() {
+    const batchDetails = await getBatchDetailsFromLatestCollection();
+    if (!batchDetails) {
+      console.error("No batch details found.");
+      return;
+    }
+
+    const mainContainer = document.getElementById("batchwise-data-template5");
+    mainContainer.innerHTML = ""; // Clear any previous content
+
+    const numberOfBatches = Object.keys(batchDetails).length;
+    // const batchCountDisplay = document.getElementById(
+    //   ""
+    // );
+    // batchCountDisplay.textContent = numberOfBatches;
+
+    for (const [batchName, details] of Object.entries(batchDetails)) {
+      const filteredData = await getFilteredDocuments(batchName);
+
+      const batchContainer = document.createElement("div");
+      batchContainer.classList.add("batchwise-data-template5");
+
+      const batchDurationMonth = details.batchDurationMonth;
+      const numberOfSessionsMonth = details.numberOfSessionsMonth;
+
+      if (
+        batchDurationMonth === undefined ||
+        numberOfSessionsMonth === undefined
+      ) {
+        console.error(`No batch data available for ${batchName}.`);
+        continue; // Skip this iteration
+      }
+      batchContainer.innerHTML = `
+            <div class="batch-info">
+                  <h2 id="batch-name-t5-${batchName}"></h2>
+                </div>
+      
+                <div class="details-template5">
+                  <div class="trainee-list-template5">
+                    <h3>Trainee Details</h3>
+                    <div id="trainee-details-template5-${batchName}"></div>
+                  </div>
+                  <div class="details-right-template5">
+                    <div class="batch-duration-template5">
+                      <div class="sessions-temp5">
+                        <h3>Total Sessions</h3>
+                        <p id="batch-sessions-template5-${batchName}"></p>
+                      </div>
+                      <div class="sessions-temp5">
+                        <h3>Total Duration</h3>
+                        <p id="batch-duration-template5-${batchName}"></p>
+                      </div>
+                      <div id="durationChart-t5-${batchName}"></div>
+                    </div>
+                    <div class="attendance-template5">
+                      <h3>Attendance</h3>
+                      <canvas id="attendanceChart-t5-${batchName}"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="trainee-evaluation-template5">
+                  <h3>Evaluation Details</h3>
+                  <div id="evaluation-table-template5-${batchName}"></div>
+                </div>
+              </div>
+        `;
+
+      mainContainer.appendChild(batchContainer);
+
+      const evaluationTable = document.getElementById(
+        `t5-evaluation-table-${batchName}`
+      );
+      const table1 = await createEvaluationTable(
+        filteredData,
+        `t5-evaluation-table-${batchName}`
+      );
+      evaluationTable.appendChild(table1);
+
+      await getAttendanceData(filteredData, `t5-attendenceChart-${batchName}`);
+      // console.log(filteredData);
+
+      const traineeDetailsTemplate2 = document.getElementById(
+        `trainee-details-template5-${batchName}`
+      );
+      const traineeTable2 = await getTraineeDetails(
+        filteredData,
+        `trainee-details-template5-${batchName}`
+      );
+      traineeDetailsTemplate2.appendChild(traineeTable2);
+
+    }
+  }
+
   async function batchwiseDataTemplate5(selectedBatch) {
 
     const batchDetails = await getBatchDetailsFromLatestCollection();
@@ -2124,10 +2218,13 @@ function renderCertificationLevelChart(
     const currentDate = await getLatestCollection();
     const filteredData = await getFilteredDocuments(selectedBatch);
 
+    const batchText = document.getElementById('batch-name-t5');
+    batchText.textContent = selectedBatch;
+
     const template1Header = document.getElementById("template5-month");
     template1Header.textContent = formatCollectionName(currentDate);
 
-    await getAttendanceData(filteredData, "attendenceChart-t5");
+    await getAttendanceData(filteredData, "attendanceChart-t5");
 
     const traineeDetailsTemplate1 = document.getElementById("trainee-details-template5");
     const traineeTable1 = await getTraineeDetails(
@@ -2175,13 +2272,15 @@ function renderCertificationLevelChart(
       borderColor
     );
     loadSessionsAndDurationWholeBatch(
-      "sessionsCharts-t5",
-      "batch-duration-chart"
+      "batch-duration-chart-t5","sessionsChart-t5"
+      
     );
 
     const template5Header = document.getElementById("batch-title");
     template5Header.textContent = selectedBatch;
     console.log(selectedBatch);
+
+    
   }
 
   images.forEach((image) => {
@@ -2330,7 +2429,12 @@ function renderCertificationLevelChart(
               break;
               case "template5":
                 if (selectedBatch === "whole-batch") {
-                    
+                  const populatedDataTemplate5 = document.getElementById(
+                    "batchwise-data-template5"
+                  );
+                  populatedDataTemplate5.innerHTML = "";
+                  // batchwiseDataTemplate5(selectedBatch);
+                  populateBatchDataTemplate5();
                   } else {
                     batchwiseDataTemplate5(selectedBatch);
                   }
