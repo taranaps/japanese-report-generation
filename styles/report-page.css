@@ -1742,6 +1742,8 @@ text-align: center;
     display: flex;
     /* align-items: center; */
     justify-content: space-between;
+    background: white;
+    
     
   
   }
@@ -1813,6 +1815,7 @@ text-align: center;
     width: 50%;
     height: auto;
     border: 2px solid black;
+    background: white;
     /* padding: 20px; */
     
     /* margin-left: -15px; */
@@ -1827,6 +1830,7 @@ text-align: center;
     border: 2px solid black;
     margin-left: 0px;
     padding: 20px;
+    background: white;
   }
   .t3graphtraine{
     padding: 20;
