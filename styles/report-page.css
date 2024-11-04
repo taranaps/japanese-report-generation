@@ -197,6 +197,65 @@ body {
   background: #bda7ec;
 }
 
+#all-trainee-table-template1{
+  box-sizing: border-box;
+}  
+
+#all-trainee-table-template1 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 30px auto;
+  color:#7f719e ;
+}
+
+#all-trainee-table-template1 th{
+  background-color: #8061c3;
+  color: rgb(250, 245, 245);
+}
+
+#all-trainee-table-template1 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #000000;
+  border: 1px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}  
+
+#all-trainee-table-template1 td{
+  background: #bda7ec;
+}
+
+#all-evaluation-table-template1{
+  box-sizing: border-box;
+}  
+
+#all-evaluation-table-template1 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 30px auto;
+  color:#7f719e ;
+}
+
+#all-evaluation-table-template1 th{
+  background-color: #8061c3;
+  color: rgb(250, 245, 245);
+}
+
+#all-evaluation-table-template1 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #000000;
+  border: 1px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}  
+
+#all-evaluation-table-template1 td{
+  background: #bda7ec;
+}
 
 #evaluation-table-template1{
   box-sizing: border-box;
@@ -636,6 +695,16 @@ margin-top: 30px;
 .evaluation-template1{
   width: 100%;
   margin-top: 35px;  
+}
+.evaluation-trainee-template1{
+  width: 100%;
+  margin-top: 35px; 
+  display: flex;
+  flex-direction: column;
+
+}
+.duration-sessions-template1{
+  margin-top: 30px;
 }
 .evaluation-heading-template1{
   border-radius: 10px;

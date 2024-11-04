@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const batchNames = [...new Set(snapshot.docs.map((doc) => doc.data().batchName)),];
 
-      batchSelect.innerHTML ='<option value="">Select Batch</option> <option value="whole-batch">Whole Batch</option>';
+      batchSelect.innerHTML ='<option value="whole-batch">All Batches</option>';
       batchNames.forEach((batch) => {
         const option = document.createElement("option");
         option.value = batch;
@@ -172,6 +172,89 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     return table;
   }
+
+  function getAllBatchTraineeDetails(data, id) {
+    const createTable = document.getElementById(id);
+    createTable.innerHTML = ""; // Clear existing content
+    const table = document.createElement("table");
+    table.border = "1"; // Optional: Add border to the table for better visibility
+
+    const headerRow = document.createElement("tr");
+    const headers = ["SI No.", "Trainee Name", "Batch", "DU", "Avg. Attendance"];
+    
+    // Create a set to hold unique evaluation names
+    const uniqueEvaluations = new Set();
+
+    // First pass to gather unique evaluations
+    data.forEach(item => {
+        item.evaluations.forEach(evaluation => {
+            if (evaluation.evaluationName && evaluation.evaluationName !== "N/A") {
+                uniqueEvaluations.add(evaluation.evaluationName);
+            }
+        });
+    });
+
+    // Add evaluation headers to the headers array
+    uniqueEvaluations.forEach(evaluation => {
+        headers.push(evaluation);
+    });
+
+    // Create table headers
+    headers.forEach(headerText => {
+        const th = document.createElement("th");
+        th.textContent = headerText; // Set the text content of the header
+        headerRow.appendChild(th);
+    });
+
+    // Append the header row to the table
+    table.appendChild(headerRow);
+
+    // Populate table rows
+    data.forEach((item, index) => {
+        const row = document.createElement("tr");
+        
+        const siNoCell = document.createElement("td");
+        siNoCell.textContent = index + 1; // SI No.
+        row.appendChild(siNoCell);
+
+        const traineeCell = document.createElement("td");
+        traineeCell.textContent = item.traineeName; // Trainee Name
+        row.appendChild(traineeCell);
+
+        const batchCell = document.createElement("td");
+        batchCell.textContent = item.batchName; // Batch
+        row.appendChild(batchCell);
+
+        const duCell = document.createElement("td");
+        duCell.textContent = item.du; // DU
+        row.appendChild(duCell);
+
+        const attendanceCell = document.createElement("td");
+        attendanceCell.textContent = item.avgAttendance; // Avg. Attendance
+        row.appendChild(attendanceCell);
+
+        // Create a mapping for evaluations
+        const evaluationMap = {};
+        item.evaluations.forEach(evaluation => {
+            if (evaluation.evaluationName && evaluation.evaluationName !== "N/A") {
+                evaluationMap[evaluation.evaluationName] = evaluation.evaluationScore;
+            }
+        });
+
+        // Populate evaluation scores in the row
+        uniqueEvaluations.forEach(evaluationName => {
+            const evaluationCell = document.createElement("td");
+            evaluationCell.textContent = evaluationMap[evaluationName] || ""; // Evaluation Score
+            row.appendChild(evaluationCell);
+        });
+
+        table.appendChild(row); // Append each row to the table
+    });
+
+    createTable.appendChild(table); // Append the table to the designated element
+    return table;
+}
+
 
   async function generateChart(data, id) {
     const canvas = document.getElementById(id);
@@ -613,6 +696,8 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
     }
   }
 
+
+
   function renderTotalSessionsAndDuration(
     batchDetails,
     sessionTillDateId,
@@ -643,6 +728,327 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
       batchDurationContainer.innerHTML += batchDurationTilldateHTML;
     }
   }
+
+  async function generateSessionDurationChart(data, id) {
+    const canvas = document.getElementById(id);
+    if (!canvas) {
+      console.error(`Canvas with id "${id}" not found`);
+      return;
+    }
+  
+    const ctx = canvas.getContext("2d");
+  
+    // Extract batch details from the data object
+    const batchNames = Object.keys(data); // Extracts the batch names as an array
+    const batchDurations = batchNames.map((batch) => data[batch].batchDurationMonth); // Extracts the durations
+  
+    const chartData = {
+      labels: batchNames,
+      datasets: [
+        {
+          label: "Total Duration (Days)",
+          data: batchDurations,
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
+    };
+  
+    new Chart(ctx, {
+      type: "bar", // Change 'bar' to your desired chart type if needed
+      data: chartData,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 250, // Set maximum to 500 days
+            title: {
+              display: true,
+              text: "Duration (Days)",
+              color: "#333",
+            },
+          },
+          x: {
+            title: {
+              display: true,
+              text: "Batch Name",
+              color: "#333",
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: "top",
+          },
+        },
+      },
+    });
+  }
+
+  async function generateSessionChart(data, id) {
+    const canvas = document.getElementById(id);
+    if (!canvas) {
+      console.error(`Canvas with id "${id}" not found`);
+      return;
+    }
+  
+    const ctx = canvas.getContext("2d");
+  
+    // Extract batch details from the data object
+    const batchNames = Object.keys(data); // Extracts the batch names as an array
+    const batchDurations = batchNames.map((batch) => data[batch].numberOfSessionsMonth); // Extracts the durations
+  
+    const chartData = {
+      labels: batchNames,
+      datasets: [
+        {
+          label: "Total Sessions (Days)",
+          data: batchDurations,
+          backgroundColor: 'rgba(255, 159, 64, 0.2)',
+          borderColor: 'rgba(255, 159, 64, 1)',
+          borderWidth: 1,
+        },
+      ],
+    };
+  
+    new Chart(ctx, {
+      type: "line", // Change 'bar' to your desired chart type if needed
+      data: chartData,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 150 , 
+            title: {
+              display: true,
+              text: "Duration (Days)",
+              color: "#333",
+            },
+          },
+          x: {
+            title: {
+              display: true,
+              text: "Batch Name",
+              color: "#333",
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: "top",
+          },
+        },
+      },
+    });
+  }
+ 
+//   async function renderAllBatchDetails(){
+//     const latestCollectionName = await getLatestCollection();
+//     if (!latestCollectionName) {
+//         console.error("No collection found.");
+//         return;
+//       }
+//       const collectionRef = collection(db, latestCollectionName);
+//       const snapshot = await getDocs(collectionRef);
+      
+//       snapshot.forEach((doc) => {
+//         const data = doc.data();
+//         if (Array.isArray(data.trainerName)) {
+//             data.trainerName.forEach((trainer) => {
+//               trainerName.add(trainer);
+//               console.log("Adding trainer:", trainer);
+//             });
+//           } else {
+//             console.warn("trainerName is not an array:", data.trainerName);
+//           }
+      
+//           if (!batchData[data.batchName]) {
+//             batchData[data.batchName] = {
+//               trainees: [],
+//               sessionsTillDate: data.numberOfSessionsTillDate,
+//               durationTillDate: data.batchDurationTillDate,
+//               durationMonth: data.batchDurationMonth,
+//               totalAttendance: 0,
+//               certificationLevel: data.certificationLevel,
+//             };
+//           }
+//           batchData[data.batchName].trainees.push({
+//             name: data.traineeName,
+//             du: data.du,
+//             certificationLevel: data.certificationLevel,
+//             avgAttendance: data.avgAttendance,
+//           });
+//           batchData[data.batchName].totalAttendance += data.avgAttendance;
+//           totalTrainees++;
+//         });
+        
+//         renderBatchAttendanceChart(batchData)
+      
+//   }
+  
+  
+//   function renderBatchAttendanceChart(batchData) {
+//     const batchNames = Object.keys(batchData);
+//     const avgAttendances = batchNames.map((batchName) => {
+//       const details = batchData[batchName];
+//       return details.totalAttendance / details.trainees.length;
+//     });
+  
+//     const ctx = document
+//       .getElementById("attendance-body-graph-template1")
+//       .getContext("2d");
+//     new Chart(ctx, {
+//       type: "bar",
+//       data: {
+//         labels: batchNames,
+//         datasets: [
+//           {
+//             label: "Average Attendance by Batch (%)",
+//             data: avgAttendances,
+//             backgroundColor: "rgba(255, 99, 132, 0.5)",
+//             borderColor: "rgba(255, 99, 132, 1)",
+//             borderWidth: 1,
+//           },
+//         ],
+//       },
+//       options: {
+//         scales: {
+//           y: { beginAtZero: true, max: 100 },
+//         },
+//       },
+//     });
+//   }
+
+async function getBatchFromLatestCollection() {
+    try {
+        const latestCollectionName = await getLatestCollection();
+        if (!latestCollectionName) {
+            console.error("No latest collection name found.");
+            return;
+        }
+
+        const traineesCollection = collection(db, latestCollectionName);
+        const snapshot = await getDocs(traineesCollection);
+
+        const batchDetails = {};
+
+        snapshot.forEach((doc) => {
+            const trainee = doc.data();
+            const batchName = trainee.batchName;
+
+            // Log the entire trainee object to verify its structure
+            console.log(`Trainee data:`, trainee);
+
+            // Ensure avgAttendance is a number and default to 0 if NaN
+            const avgAttendance = parseFloat(trainee.avgAttendance) || 0; 
+            console.log(`Trainee's average attendance for ${batchName}: ${avgAttendance}`); // Log the avgAttendance
+
+            // If this batch is not yet in batchDetails, initialize it
+            if (!batchDetails[batchName]) {
+                batchDetails[batchName] = {
+                    numberOfTrainees: 0,
+                    totalAttendance: 0,
+                };
+            }
+
+            // Increment the trainee count and add their attendance to the total
+            batchDetails[batchName].numberOfTrainees += 1;
+            batchDetails[batchName].totalAttendance += avgAttendance; // Sum the attendance
+        });
+
+        // Calculate average attendance for each batch
+        for (const batchName in batchDetails) {
+            const batch = batchDetails[batchName];
+            if (batch.numberOfTrainees > 0) {
+                batch.averageAttendance = batch.totalAttendance / batch.numberOfTrainees;
+            } else {
+                batch.averageAttendance = 0; // Set to 0 if there are no trainees
+            }
+            console.log(`Final average attendance for ${batchName}: ${batch.averageAttendance}`); // Log final average
+        }
+
+        console.log(batchDetails); // Log the final batch details
+        return batchDetails;
+    } catch (error) {
+        console.error("Error fetching batch details from latest collection:", error);
+        alert("Failed to load batch details from the latest collection.");
+    }
+}
+
+async function getBatchDataForChart(id) {
+    const batchDetails = await getBatchFromLatestCollection();
+    if (!batchDetails) {
+        console.error("No batch details found.");
+        return;
+    }
+
+    const labels = [];
+    const avgAttendanceData = [];
+
+    // Iterate over the batchDetails to populate labels and data
+    for (const batchName in batchDetails) {
+        const details = batchDetails[batchName];
+        labels.push(batchName);
+        avgAttendanceData.push(details.averageAttendance || 0); // Use averageAttendance
+    }
+
+    console.log('Labels:', labels);
+    console.log('Average Attendance Data:', avgAttendanceData);
+
+    generateChartWithBatchData(labels, avgAttendanceData, id);
+}
+
+
+
+
+
+// Function to generate the chart
+function generateChartWithBatchData(labels, data, canvasId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) {
+        console.error(`Canvas with id "${canvasId}" not found.`);
+        return;
+    }
+
+    const ctx = canvas.getContext('2d');
+
+    // Destroy existing chart instance if present to prevent overlap
+    if (canvas.chartInstance) {
+        canvas.chartInstance.destroy();
+    }
+
+    canvas.chartInstance = new Chart(ctx, {
+        type: 'line', // Change to 'line', 'doughnut', etc., as needed
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Average Attendance',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.5)', // Customize as needed
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+            }],
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
+}
+
+
+  
+  
+  
 
   async function loadAndDisplayBatchDetails(
     sessionTillDateId,
@@ -676,11 +1082,13 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
     }
   }
 
-  function renderCertificationLevelChart(
+
+function renderCertificationLevelChart( 
     batchData,
     chartElementId,
     backgroundColor,
-    borderColor
+    borderColor,
+    chartType = 'bar' // Default to 'bar' if no type is provided
   ) {
     if (!Array.isArray(batchData) || batchData.length === 0) {
       console.error(
@@ -688,8 +1096,7 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
       );
       return;
     }
-
-    // Mapping certification levels to numerical values
+  
     const certificationLevelsMap = {
       N1: 5,
       N2: 4,
@@ -697,21 +1104,21 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
       N4: 2,
       N5: 1,
     };
-
+  
     const batchNames = batchData.map((batch) => batch.batchName);
     const certificationLevels = batchData.map(
       (batch) => certificationLevelsMap[batch.certificationLevel]
     );
-
+  
     // Destroy any existing chart instance
     if (window.certificationChart) {
       window.certificationChart.destroy();
     }
-
+  
     // Get the context of the canvas element
     const ctx = document.getElementById(chartElementId).getContext("2d");
     window.certificationChart = new Chart(ctx, {
-      type: "bar",
+      type: chartType, // Use the selected chart type here
       data: {
         labels: batchNames,
         datasets: [
@@ -725,7 +1132,7 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
         ],
       },
       options: {
-        indexAxis: "x", // Set to x for horizontal bars
+        indexAxis: chartType === 'bar' ? 'x' : undefined, // Set for horizontal bars only for bar type
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -735,7 +1142,6 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
             ticks: {
               stepSize: 1,
               callback: function (value) {
-                // Map numbers back to certification labels on the y-axis
                 const reverseMap = {
                   0: "0",
                   1: "N5",
@@ -778,11 +1184,7 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
     });
   }
 
-  async function initCertificationChart(
-    chartElementId,
-    backgroundColor,
-    borderColor
-  ) {
+  async function initCertificationChart(chartElementId,backgroundColor,borderColor,selectedChartType) {
     // Fetch batch details
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (!batchDetails) {
@@ -790,14 +1192,14 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
       return;
     }
 
-        // Log the batch details to inspect the structure
+
         console.log("Batch Details:", batchDetails);
 
-    // Convert batchDetails object to array format expected by renderCertificationLevelChart
+    
     const batchDataArray = Object.entries(batchDetails).map(
       ([batchName, details]) => ({
         batchName,
-        certificationLevel: details.certificationLevel, // Ensure you have this field
+        certificationLevel: details.certificationLevel,
       })
     );
 
@@ -807,12 +1209,12 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
       return;
     }
 
-    // Render the chart
     renderCertificationLevelChart(
       batchDataArray,
       chartElementId,
       backgroundColor,
-      borderColor
+      borderColor,
+      selectedChartType
     );
   }
 
@@ -827,7 +1229,7 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
         // Log the batch details to inspect the structure
         console.log("Batch Details:", batchDetails);
 
-    // Convert batchDetails object to array format expected by renderCertificationLevelChart
+    
     const batchDataArray = Object.entries(batchDetails).map(
       ([batchName, details]) => ({
         batchName,
@@ -844,6 +1246,8 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
     // Render the chart
     displayTrainers(batchDataArray, chartElementId);
   }
+
+
 
   function displayTrainers(batchDetails, id) {
     const trainerContainer = document.getElementById(id); // Assume you have a container in your HTML
@@ -875,6 +1279,41 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
     const numberOfBatches = Object.keys(batchDetails).length;
     return numberOfBatches;
   }
+
+  async function getTraineeDetailsFromLatestCollection() {
+    try {
+        const latestCollectionName = await getLatestCollection();
+        if (!latestCollectionName) {
+            console.error("No latest collection name found.");
+            return [];
+        }
+
+        const traineesCollection = collection(db, latestCollectionName);
+        const snapshot = await getDocs(traineesCollection);
+        const traineeDetails = [];
+
+        snapshot.forEach((doc) => {
+            const trainee = doc.data();
+            
+            // Create an object for each trainee with necessary details
+            traineeDetails.push({
+                traineeName: trainee.traineeName, // Trainee Name
+                du: trainee.du || "N/A", // DU (Default to "N/A" if not available)
+                avgAttendance: parseFloat(trainee.avgAttendance) || 0, // Average Attendance (ensure it's a number)
+                evaluations: trainee.evaluations || [], // Evaluations array
+                batchName:trainee.batchName || "N/A",
+            });
+        });
+
+        return traineeDetails; // Return the collected trainee details
+    } catch (error) {
+        console.error("Error fetching trainee details:", error);
+        alert("Failed to load trainee details.");
+        return [];
+    }
+}
+
+
   async function populateBatchDataTemplate2() {
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (!batchDetails) {
@@ -958,13 +1397,143 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
       traineeDetailsTemplate2.appendChild(traineeTable2);
     }
   }
+
+  async function createAllBatchEvaluationTabletemplate1(data, id) {
+    const tablePosition = document.getElementById(id);
+    tablePosition.innerHTML = ""; // Clear existing content
+
+    // Create the table element
+    const table = document.createElement("table");
+    table.border = "1"; // Optional: add a border for better visibility
+
+    // Create the header row
+    const headerRow = table.insertRow();
+    ["Trainee Name", "Batch Name", "DU"].forEach((headerText) => {
+        const th = document.createElement("th");
+        th.textContent = headerText;
+        headerRow.appendChild(th);
+    });
+
+    // Get unique evaluation names for the headers
+    const uniqueEvaluations = new Set();
+    data.forEach((item) => {
+        item.evaluations.forEach((evaluation) => {
+            if (evaluation.evaluationName !== "N/A") {
+                uniqueEvaluations.add(evaluation.evaluationName);
+            }
+        });
+    });
+
+    // Create headers for each unique evaluation
+    const evaluationHeaders = Array.from(uniqueEvaluations);
+    evaluationHeaders.forEach((header) => {
+        const th = document.createElement("th");
+        th.textContent = header; // Set header text
+        headerRow.appendChild(th); // Append header to the header row
+    });
+
+    // Append the header row to the table
+    table.appendChild(headerRow);
+
+    // Create rows for each trainee
+    data.forEach((item) => {
+        const row = table.insertRow();
+        row.insertCell().textContent = item.traineeName; // Insert trainee name
+        row.insertCell().textContent = item.batchName;
+        row.insertCell().textContent = item.du; // Insert DU
+
+        // Create a map for evaluations
+        const evaluationMap = {};
+        item.evaluations.forEach((evaluation) => {
+            if (evaluation.evaluationName !== "N/A") {
+                evaluationMap[evaluation.evaluationName] = evaluation.evaluationScore; // Map evaluation names to scores
+            }
+        });
+
+        // Insert evaluation scores into the table
+        evaluationHeaders.forEach((header) => {
+            const cell = row.insertCell();
+            cell.textContent = evaluationMap[header] || ""; // Use the score if available, else leave blank
+        });
+    });
+
+    // Append the created table to the specified position in the DOM
+    tablePosition.appendChild(table);
+}
+
+
   async function populateBatchDataTemplate1() {
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (!batchDetails) {
-      console.error("No batch details found.");
-      return;
+        console.error("No batch details found.");
+        return;
     }
-  }
+
+    const rightContainer = document.getElementById('right-template1');
+    rightContainer.innerHTML = ''; // Clear any previous content
+
+    rightContainer.innerHTML = `<div class="duration-sessions-template1">
+                  <div class="duration-sessions-heading-template1" id="duration-sessions-head-template1">
+                    <p>Batch Duration</p>
+                  </div>
+                  <div class="duration-sessions-body-template1">
+                    <canvas id="duration-graph-template1"></canvas>
+                  </div>
+                <div class="duration-sessions-template1" id="sessions-monthly-head-template1">
+                  <div class="duration-sessions-heading-template1" id="duration-sessions-head-template1">
+                    <p>No Of Sessions</p>
+                  </div>
+                  <div class="duration-sessions-body-template1">
+                    <canvas id="session-graph-template1"></canvas>
+                  </div>
+                </div>                  
+                <div class="attendance-template1">
+                  <div class="attendance-heading-template1" id="attendance-head-template1">
+                    <p>Average Attendance</p>
+                  </div>
+                  <div class="attendance-body-template1">
+                    <canvas id="attendance-body-graph-template1"></canvas>
+                  </div>
+                </div>`;
+   
+    const bottomContainer = document.getElementById('batch-evaluation-template1');
+    bottomContainer.innerHTML = '';
+    bottomContainer.innerHTML = `
+       <div class='evaluation-trainee-template1'> 
+            <div class="batch-evaluation-heading-template1" id="batch-evaluation-heading-template1">
+                    <p>Trainee Details</p>
+            </div>
+            <div class="batch-evaluation-body-template1">
+                <div id="all-trainee-table-template1"></div>
+            </div>
+        </div>
+        <div class='evaluation-trainee-template1'> 
+            <div class="batch-evaluation-heading-template1" id="batch-evaluation-heading-template1">
+                <p>Evaluation Details</p>
+            </div>
+            <div class="batch-evaluation-body-template1">
+                <div id="all-evaluation-table-template1"></div>
+            </div>
+        </div>    
+      
+        `
+   
+    const batchDetailsData = await getBatchDetailsFromLatestCollection();
+    
+    generateSessionDurationChart(batchDetailsData,'duration-graph-template1');
+    generateSessionChart(batchDetailsData, 'session-graph-template1');
+
+    getBatchDataForChart('attendance-body-graph-template1');
+
+    const traineeDetails = await getTraineeDetailsFromLatestCollection();
+
+    await createAllBatchEvaluationTabletemplate1(traineeDetails, "all-evaluation-table-template1");
+
+    const traineeDetailsTemplate1 = document.getElementById("all-trainee-table-template1");
+
+    const traineeTable1 = await getAllBatchTraineeDetails(traineeDetails,"all-trainee-table-template1");
+    traineeDetailsTemplate1.appendChild(traineeTable1);
+}
 
   async function populateBatchDataTemplate3() {
     const batchDetails = await getBatchDetailsFromLatestCollection();
@@ -1103,11 +1672,7 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
 
     const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
     const borderColor2 = 'rgba(255, 159, 64, 0.2)';
-    initCertificationChart(
-      "current-level-template3",
-      backgroundColor2,
-      borderColor2
-    );
+
 
     const numberOfTrainees = document.getElementById("card-content");
 
@@ -1155,6 +1720,13 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
           
       });  
 
+      initCertificationChart("current-level-template3",backgroundColor2,borderColor2,'bar');
+
+      document.getElementById('chartType-dropdown-certification').addEventListener('change', (event) => {
+      const selectedChartType = event.target.value;
+      initCertificationChart("current-level-template3",backgroundColor2,borderColor2,selectedChartType);
+                    
+      });
   }
 
   images.forEach((image) => {
@@ -1172,21 +1744,31 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
           switch (templateKey) {
             case "template1":
               if (selectedBatch === "whole-batch") {
-                const populatedDataTemplate2 = document.getElementById(
-                  "batchwise-data-template2"
+                const populateBatchTemplate1 = document.getElementById(
+                    'right-template1'
                 );
-                populatedDataTemplate2.innerHTML = "";
+                populateBatchTemplate1.innerHTML = "";
+                const populateBatchTemplate1_ev = document.getElementById('batch-evaluation-template1');
+                populateBatchTemplate1_ev.innerHTML = '';
+                const template2Header = document.getElementById(
+                    "batch-text-template1"
+                  );
+                template2Header.textContent="Batch";  
                 populateBatchDataTemplate1();
+                
               } else {
+                const template2Header = document.getElementById(
+                    "batch-text-template1"
+                  );
+                  template2Header.textContent = selectedBatch;
                 const template1Header = document.getElementById(
                   "header-template1-h3"
                 );
                 template1Header.textContent = formatCollectionName(currentDate); 
-                // await getAttendanceData(filteredData,"attendance-body-template1");
                 generateChartToggle(filteredData, 'attendance-body-template1', 'bar');
                 document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
-                    const selectedChartType = event.target.value;
-                    generateChartToggle(filteredData, 'attendance-body-template1', selectedChartType);
+                const selectedChartType = event.target.value;
+                generateChartToggle(filteredData, 'attendance-body-template1', selectedChartType);
                     
                 });
                 // generateChartToggle(filteredData, 'attendance-body-template1', 'bar');
@@ -1199,10 +1781,7 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
                 const evaluationTable1 = document.getElementById(
                   "evaluation-table-template1"
                 );
-                const table1 = await createEvaluationTable(
-                  filteredData,
-                  "evaluation-table-template1"
-                );
+                const table1 = await createEvaluationTable(filteredData,"evaluation-table-template1");
                 evaluationTable1.appendChild(table1);
 
                 const numberOfTrainees = document.getElementById(
@@ -1234,11 +1813,13 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
 
                 const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
                 const borderColor2 = 'rgba(153, 102, 255, 1)';
-                initCertificationChart(
-                  "certificationBarChart",
-                  backgroundColor2,
-                  borderColor2
-                );
+                initCertificationChart("certificationBarChart",backgroundColor2,borderColor2,'bar');
+
+                document.getElementById('chartType-dropdown-certification').addEventListener('change', (event) => {
+                    const selectedChartType = event.target.value;
+                    initCertificationChart("certificationBarChart",backgroundColor2,borderColor2,selectedChartType);
+                    
+                  });
 
                 initTrainerDetails("trainer-name-template1");
 
@@ -1268,13 +1849,8 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
                   document.getElementById("template2-month");
                 template1Header.textContent = formatCollectionName(currentDate);
 
-                const evaluationTable1 = document.getElementById(
-                  "evaluation-table-template2"
-                );
-                const table1 = await createEvaluationTable(
-                  filteredData,
-                  "evaluation-table-template2"
-                );
+                const evaluationTable1 = document.getElementById("evaluation-table-template2");
+                const table1 = await createEvaluationTable(filteredData,"evaluation-table-template2");
                 evaluationTable1.appendChild(table1);
 
                 const template2Header = document.getElementById(
@@ -1335,11 +1911,15 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
                 );
                 const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
                 const borderColor2 = 'rgba(153, 102, 255, 1)';
-                initCertificationChart(
-                  "levelChart",
-                  backgroundColor2,
-                  borderColor2
-                );
+    
+
+                initCertificationChart("levelChart",backgroundColor2,borderColor2,'bar');
+
+                document.getElementById('chartType-dropdown-certification').addEventListener('change', (event) => {
+                    const selectedChartType = event.target.value;
+                    initCertificationChart("levelChart",backgroundColor2,borderColor2,selectedChartType);
+                    
+                  });
                 loadAndDisplayBatchDetails(
                   "sessionsChart",
                   "batchDurationChart",
@@ -1361,13 +1941,11 @@ async function generateTraineePieChart(id, chartType = "pie", backgroundColor = 
                   "batchwise-data-template2"
                 );
                 populatedDataTemplate3.innerHTML = "";
+                batchwiseDataTemplate3(selectedBatch);
                 populateBatchDataTemplate3();
               } else {
                 batchwiseDataTemplate3(selectedBatch);
               }
-
-              // traineeTable = await getTraineeDetails(filteredData,"trainee-details-template3") // Call your attendance data function
-              // traineeDetailsTemplate1.appendChild(traineeTable);
               break;
             case "template4":
               // const template4Header = document.getElementById("t4date");
