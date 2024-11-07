@@ -365,6 +365,42 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
+.uploadimg{
+    width: 100%;
+    height: 130px;
+    background-color:#f9f9f9;
+    border: 1px dashed #3673E8;
+    box-sizing: border-box;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-around;
+    align-items: center;
+
+}
+.uploadimage{
+    width: 30%;
+    height: auto;
+    opacity: 20%;
+    
+}
+.input-buttons{
+    margin-left: 10px;
+}
+.downloaddiv{
+    width: 540px;
+    height: 60px;
+    background-color: #3673E8;
+    margin-top: 30px;
+    margin-left: -20px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius:8px ;
+}
+.downloaddiv p {
+    text-decoration: none;
+    color: white;
+    padding: 20px;
+}
+
 
 /* Modal button alignment */
 #uploadModal a {
@@ -407,9 +443,9 @@ body::before {
 }
 #uploadButton{
     /* margin-top: 100px; */
-    background: #DC143C;
+    background: #3673E8;
     border-radius: 10px;
-    border: solid 1px #DC143C;
+    border: solid 1px #3673E8;
     height: 30px;
     color: white;
     cursor: pointer;
@@ -433,19 +469,19 @@ body::before {
 #closeUploadModal{
     /* margin-top: 50px; */
     /* margin-left: 30px; */
-    background: #DC143C;
+    background: #3673E8;
     border-radius: 10px;
-    border: solid 1px #DC143C;
+    border: solid 1px #3673E8;
     height: 30px;
     color: white;
     cursor: pointer;
 }
-.input-buttons{
+/* .input-buttons{
     margin-top: 70px;
-    /* margin-left: 100px; */
-}
+    margin-left: 100px; 
+} */
 .download-template{
-    color: #DC143C;
+    color: wheat;
 }
 
 /* ---Message Display Pop-up Modal Styles--- */
