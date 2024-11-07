@@ -75,7 +75,7 @@
                 </div>
                 <div class="main-container">
                   <div class="left-template1" id="left-template1">
-                    <h1 id="batch-text-template1"><b> </b></h1>
+                    
                     <div class="learners-container-template1">
                       <div class="learners-template1" id="learners-template1">
                         <p>Number of Learners</p>
@@ -96,15 +96,16 @@
                       <div class="session-template1" id="session-template1">
                       <p>Total Sessions Till Date</p></div>
                       <div class="inner-session-template1">
-                        <div id="progressBarsContainer-templae1"></div>
+                        <canvas id="progressBarsContainer-templae1" width="200" height="220"></canvas>
                       </div>
                     </div>
+                    <div id="whole-batch-cutoff-container">
                     <div class="current-level-template1">
                       <div class="level-heading" id="level-heading">
                         <p>Current Level</p>
                       </div>
                       <div class="inner-level-template1">
-                        <canvas id="certificationBarChart"></canvas>                    
+                        <canvas id="certificationBarChart" width="300" height="200"></canvas>                    
                       </div>
                     </div>
                     <div class="batch-duration-template1">
@@ -112,11 +113,13 @@
                         <p>Total Batch Duration</p>
                       </div>
                       <div class="duration-body-template1">
-                        <div id="whole-duration-data-templae1"></div>
+                        <canvas id="whole-duration-data-templae1" width="250" height="190"></canvas>
                       </div>
                     </div>
                   </div>
+                  </div>
                   <div class="right-template1" id="right-template1">
+                    <h1 id="batch-text-template1"><b> </b></h1>
                     <div class="duration-sessions-template1">
                       <div class="duration-sessions-heading-template1" id="duration-sessions-heading-template1">
                         <p>Batch Duration</p>
@@ -130,7 +133,7 @@
                         <p>Average Attendance</p>
                       </div>
                       <div class="attendance-body-template1">
-                        <canvas id="attendance-body-template1"></canvas>
+                        <canvas id="attendance-body-template1" hight="300" width="200"></canvas>
                       </div>
                     </div>
                     <div class="evaluation-template1">
@@ -143,6 +146,7 @@
                     </div>              
                   </div>                  
                 </div>
+                <div id="bottum-cutoff-template1">
                 <div class="batch-evaluation-template1" id="batch-evaluation-template1">
                   <div class="batch-evaluation-heading-template1" id="batch-evaluation-heading-template1">
                     <p>Evaluation Details</p>
@@ -152,6 +156,7 @@
                   </div>
                   
                 </div>
+              </div>
                 <!-- <div id="batchwise-data-template1">
                 </div> -->
 
@@ -261,20 +266,20 @@
                             </div>
 							<div class="box-template2">
                                 <h3>Total No. of Sessions Till Date</h3>
-                                <div id="sessionsChart"></div>
+                                <canvas id="sessionsChart" width="120" height="200"></canvas>
                             </div>
                             <div class="box-template2">
                                 <h3>Number of Learners</h3>
-                                <canvas id="learnersChart"></canvas>
+                                <canvas id="learnersChart" width="200" height="300"></canvas>
                             </div>
                             
                             <div class="box-template2">
                                 <h3>Total Batch Duration</h3>
-                                <div id="batchDurationChart"></div>
+                                <canvas id="batchDurationChart" width="200" height="250"></canvas>
                             </div>
                             <div class="box-template2">
                                 <h3>Current Level</h3>
-                                <canvas id="levelChart"></canvas>
+                                <canvas id="levelChart"  width="200" height="300"></canvas>
                             </div>
                             <div class="box-template2">
                                 <h3>Trainers</h3>
@@ -409,7 +414,7 @@
               <div class="card-title">No. of Batches</div>
               <h1 id="number-of-Batch-tmeplate3"></h1>
 			  <h1 class="batch-text">Batches</h1>
-			  <canvas id="batch-number-template3"></canvas>
+			  <canvas id="batch-number-template3" width="200" height="230"></canvas>
             </div>
             <div class="batch-card">
               <div class="card-title">Trainers</div>
@@ -418,7 +423,7 @@
             <div class="batch-card">
               <div class="card-title">Current Level</div>
               <div class="bar-chart">
-                <canvas id="current-level-template3"></canvas>
+                <canvas id="current-level-template3" width="200" height="260"></canvas>
                 <div></div>
               </div>
             </div>
@@ -427,20 +432,20 @@
           <div class="batch-container">
             <div class="batch-card">
               <div class="card-title">No of Learners</div>
-              <canvas class="card-content" id="card-content"></canvas>
+              <canvas class="card-content" id="card-content" width="250" height="300"></canvas>
             </div>
   
             <div class="batch-card">
               <div class="card-title">Total Sessions</div>
 
-              <div class="card-content" id="card-content-sessions">
+              <canvas class="card-content" id="card-content-sessions" width="180" height="200">
 
-			  </div>
+			  </canvas>
             </div>
   
             <div class="batch-card">
               <div class="card-title" id="card-title">Total Durations</div>
-              <div class="card-content" id="card-content-duration"></div>
+              <canvas class="card-content" id="card-content-duration" width="180" height="200"></canvas>
             </div>
           </div>
 		</div>
@@ -461,7 +466,7 @@
 				</div> 
        			<div class="t3traineeatt">
 					<div class="graph-title-attendance">Trainee Attendence</div>
-       				<canvas class="t3graph-attendance" id="t3graph-attendance"> </canvas>
+       				<canvas id="t3graph-attendance" width="200" height="260"> </canvas>
              	</div>
 			</div>
            </div>
@@ -636,15 +641,16 @@
                 </div>
       
                 <div class="box-template5-2">
-                  <h3>Trainers</h3>
-                  <div id="trainer-name-template5"></div>
+                  <h3>Current Level</h3>
+                  <canvas id="levelChart-t5"></canvas>
                 </div>
               </div>
       
               <div class="second-box">
                 <div class="box-template5-5">
-                  <h3>Current Level</h3>
-                  <canvas id="levelChart-t5"></canvas>
+                  <h3>Trainers</h3>
+                  <div id="trainer-name-template5"></div>
+                  
                 </div>
                 <div class="box-template5-3">
                   <h3>Total Batch Duration</h3>
@@ -682,7 +688,7 @@
                     </div>
                     <div class="attendance-template5">
                       <h3>Attendance</h3>
-                      <canvas id="attendanceChart-t5"></canvas>
+                      <canvas id="attendanceChart-t5" ></canvas>
                     </div>
                   </div>
                 </div>
@@ -984,6 +990,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="../scripts/preview-page.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
