@@ -7,6 +7,8 @@ function preview_togglepopup() {
         document.getElementById("share-popup").classList.toggle("active");
     }
 
+   
+
     async function sendEmail() {
         const form = document.getElementById('email-form');
         const formData = new FormData(form);
@@ -24,7 +26,9 @@ function preview_togglepopup() {
             alert("Failed to send email.");
         }
     }
+
     
+
 
     const images = document.querySelectorAll('.image-container img');
 const templates = document.querySelectorAll('.workspace > div');
@@ -466,45 +470,689 @@ dropdown.forEach(dropdown => {
 
 
 
-const learner = document.querySelectorAll('.learners');
+// const learner = document.querySelectorAll('.learners');
 
-learner.forEach(learner => {
-    const select = learner.querySelector('.select-learner');
-    const caret = learner.querySelector('.ccaret');
-    const menu = learner.querySelector('.menu-learner');
-    const options = learner.querySelectorAll('.menu-learner li');
-    const selected = learner.querySelector('.selected-learner');
+// learner.forEach(learner => {
+//     const select = learner.querySelector('.select-learner');
+//     const caret = learner.querySelector('.ccaret');
+//     const menu = learner.querySelector('.menu-learner');
+//     const options = learner.querySelectorAll('.menu-learner li');
+//     const selected = learner.querySelector('.selected-learner');
 
-    // Toggle the dropdown on select click
-    select.addEventListener('click', () => {
-        select.classList.toggle('select-clicked-lerner');
-        caret.classList.toggle('caret-rotate-lerner');
-        menu.classList.toggle('menu-open-lerner');
-    });
+//     // Toggle the dropdown on select click
+//     select.addEventListener('click', () => {
+//         select.classList.toggle('select-clicked-lerner');
+//         caret.classList.toggle('caret-rotate-lerner');
+//         menu.classList.toggle('menu-open-lerner');
+//     });
 
-    // Handle option selection
-    options.forEach(option => {
-        option.addEventListener('click', () => {
-            // Update the selected text
-            selected.innerText = option.innerText;
+//     // Handle option selection
+//     options.forEach(option => {
+//         option.addEventListener('click', () => {
+//             // Update the selected text
+//             selected.innerText = option.innerText;
 
-            // Close the dropdown
-            select.classList.remove('select-clicked-lerner');
-            caret.classList.remove('caret-rotate-lerner');
-            menu.classList.remove('menu-open-lerner');
+//             // Close the dropdown
+//             select.classList.remove('select-clicked-lerner');
+//             caret.classList.remove('caret-rotate-lerner');
+//             menu.classList.remove('menu-open-lerner');
 
-            // Remove active class and styles from all options
-            options.forEach(opt => {
-                opt.classList.remove('active-learner');
-                opt.style.backgroundColor = '';
-            });
+//             // Remove active class and styles from all options
+//             options.forEach(opt => {
+//                 opt.classList.remove('active-learner');
+//                 opt.style.backgroundColor = '';
+//             });
 
-            // Set the clicked option as active
-            option.classList.add('active-learner');
-            option.style.backgroundColor = '#dc143cfa'; // Optional color change
-        });
-    });
+//             // Set the clicked option as active
+//             option.classList.add('active-learner');
+//             option.style.backgroundColor = '#dc143cfa'; // Optional color change
+//         });
+//     });
+// });
+
+
+
+
+
+
+
+
+
+
+let tableContainer;
+let toolbarId;
+let mergeRowIndex;
+let startColumnIndex;
+let endColumnIndex;
+let mergeColIndex;
+let startrowIndex;
+let endrowIndex;
+let toolbar_text;
+let textColorPicker;
+let highlightColorPicker;
+images.forEach(image => {
+    image.addEventListener('click', function() {
+        hideAllTemplates()
+        const templateKey = this.getAttribute('data-template');
+        // selectTemplate = this.getAttribute('data-template');
+        // console.log(templateKey);
+        selectTemplate=templateKey;
+
+        const selectedTemplate = document.getElementById(templateKey);
+        if (selectedTemplate) {
+
+            if(templateKey==="template2"){
+                tableContainer = document.getElementById('tableContent2')  
+                toolbarId='toolbar2'
+                mergeRowIndex='mergeRowIndex2'
+                startColumnIndex='startColumnIndex2'
+                endColumnIndex='endColumnIndex2'
+                mergeColIndex='mergeColIndex2'
+                startrowIndex='startRowIndex2'
+                endrowIndex='endRowIndex2'
+                toolbar_text='toolbar-text2'
+                textColorPicker='textColorPicker2'
+                highlightColorPicker='highlightColorPicker2'
+
+                
+            }
+            else if(templateKey==="template5"){
+                tableContainer=document.getElementById('tableContent4')
+               toolbarId='toolbar4'
+               mergeRowIndex='mergeRowIndex4'
+               startColumnIndex='startColumnIndex4'
+               endColumnIndex='endColumnIndex4'
+               mergeColIndex='mergeColIndex4'
+               startrowIndex='startRowIndex4'
+               endrowIndex='endRowIndex4'
+               toolbar_text='toolbar-text4'
+                textColorPicker='textColorPicker4'
+                highlightColorPicker='highlightColorPicker4'
+
+            }
+            else if(templateKey==="template3"){
+                tableContainer=document.getElementById('tableContent3')
+               toolbarId='toolbar3'
+               mergeRowIndex='mergeRowIndex3'
+               startColumnIndex='startColumnIndex3'
+               endColumnIndex='endColumnIndex3'
+               mergeColIndex='mergeColIndex3'
+               startrowIndex='startRowIndex3'
+               endrowIndex='endRowIndex3'
+               toolbar_text='toolbar-text3'
+                textColorPicker='textColorPicker3'
+                highlightColorPicker='highlightColorPicker3'
+
+            }
+            else{
+                tableContainer=document.getElementById('tableContent1')
+                toolbarId='toolbar1'
+                mergeRowIndex='mergeRowIndex1'
+                startColumnIndex='startColumnIndex1'
+                endColumnIndex='endColumnIndex1'
+                mergeColIndex='mergeColIndex1'
+                startrowIndex='startRowIndex1'
+                endrowIndex='endRowIndex1'
+                toolbar_text='toolbar-text1'
+                textColorPicker='textColorPicker1'
+                highlightColorPicker='highlightColorPicker1'
+
+
+            }
+
+            tableContainer.innerHTML = '';
+
+
+
+        }})});
+
+
+
+        const contentDiv = document.getElementById('workspace');
+
+
+
+
+
+let selectedCell = null;
+
+
+
+function createTable() {
+  const rows = parseInt(document.getElementById('rowCount').value);
+  const cols = parseInt(document.getElementById('colCount').value);
+
+  const table = document.createElement('table');
+  table.className = 'custom-table';
+  
+  for (let i = 0; i < rows; i++) {
+    const row = table.insertRow();
+    for (let j = 0; j < cols; j++) {
+      const cell = row.insertCell();
+      cell.contentEditable = true; // Make cell editable
+      cell.innerText = `Row ${i + 1}, Col ${j + 1}`;
+      cell.onclick = () => selectCell(cell); // Set as selected on click
+    }
+  }
+
+
+  tableContainer.appendChild(table);
+  selectedTable = table;
+
+
+ 
+
+
+  document.addEventListener('click', (event) => {
+    const toolbar = document.getElementById(toolbarId);
+    if (!toolbar.contains(event.target) && (!selectedTable || !selectedTable.contains(event.target))) {
+        toolbar.style.display = 'none';
+        // selectedCell = null;
+        // selectedTable = null;
+    }
 });
+}
+
+
+
+
+function selectCell(cell) {
+  selectedCell = cell;
+
+  // Display and position the toolbar
+  const toolbar = document.getElementById(toolbarId);
+  toolbar.style.display = 'block';
+  const rect = cell.getBoundingClientRect();
+  toolbar.style.top = `${rect.top - toolbar.offsetHeight - 5}px`;
+  toolbar.style.left = `${rect.left}px`;
+}
+
+function makeBold() {
+  if (selectedCell) {
+    selectedCell.style.fontWeight = 
+      selectedCell.style.fontWeight === 'bold' ? 'normal' : 'bold';
+  }
+}
+
+function increaseTextSize() {
+  if (selectedCell) {
+    const currentSize = window.getComputedStyle(selectedCell).fontSize;
+    selectedCell.style.fontSize = `${parseInt(currentSize) + 2}px`;
+  }
+}
+
+
+// function mergeCells() {
+//     if (!selectedTable) {
+//         alert("Please add a table first.");
+//         return;
+//     }
+
+//     const startRow = parseInt(document.getElementById("mergeRowStart").value) - 1;
+//     const endRow = parseInt(document.getElementById("mergeRowEnd").value) - 1;
+//     const startCol = parseInt(document.getElementById("mergeColStart").value) - 1;
+//     const endCol = parseInt(document.getElementById("mergeColEnd").value) - 1;
+
+//     // Validate inputs
+//     if (startRow < 0 || endRow < startRow || startCol < 0 || endCol < startCol) {
+//         alert("Please enter valid merge range.");
+//         return;
+//     }
+
+//     // Merge the selected cells by setting colspan and rowspan on the top-left cell
+//     const mainCell = selectedTable.rows[startRow].cells[startCol];
+//     const rowspan = endRow - startRow + 1;
+//     const colspan = endCol - startCol + 1;
+
+//     mainCell.rowSpan = rowspan;
+//     mainCell.colSpan = colspan;
+
+//     // Remove the merged cells from the table
+//     for (let i = startRow; i <= endRow; i++) {
+//         for (let j = startCol; j <= endCol; j++) {
+//             if (i === startRow && j === startCol) continue;
+//             selectedTable.rows[i].deleteCell(startCol); // Always delete at startCol as cells shift left
+//         }
+//     }
+// }
+
+
+
+        function deleteCell() {
+            if (!selectedTable) {
+                alert("Please add a table first.");
+                return;
+            }
+        
+            const deleteRow = parseInt(document.getElementById("deleteRow").value) - 1;
+            const deleteCol = parseInt(document.getElementById("deleteCol").value) - 1;
+        
+            // Validate inputs
+            if (deleteRow < 0 || deleteRow >= selectedTable.rows.length || 
+                deleteCol < 0 || deleteCol >= selectedTable.rows[deleteRow].cells.length) {
+                alert("Please enter a valid cell location.");
+                return;
+            }
+        
+            // Delete the specified cell
+            selectedTable.rows[deleteRow].deleteCell(deleteCol);
+        
+            // If the row has no more cells, delete the entire row
+            if (selectedTable.rows[deleteRow].cells.length === 0) {
+                selectedTable.deleteRow(deleteRow);
+            }
+        }
+
+        function setTableSpacing() {
+            const spacing = parseInt(document.getElementById('tableSpacing').value) || 0;
+            const tables = document.querySelectorAll('.custom-table');
+            
+            tables.forEach((table, index) => {
+                if (index > 0) { // Skip the first table to avoid top margin on it
+                    table.style.marginTop = `${spacing}px`;
+                }
+            });
+        }
+
+        function decreaseTextSize() {
+            if (selectedCell) {
+                let currentSize = parseInt(window.getComputedStyle(selectedCell).fontSize);
+                if (currentSize > 6) { // Prevents text size from becoming too small
+                    selectedCell.style.fontSize = (currentSize - 2) + 'px';
+                }
+            } else {
+                alert('Please select a cell to decrease text size.');
+            }
+        }
+
+        function increaseIndent() {
+            if (selectedCell) {
+                let currentIndent = parseInt(selectedCell.style.paddingLeft) || 0;
+                selectedCell.style.paddingLeft = (currentIndent + 10) + 'px';
+            } else {
+                alert('Please select a cell to indent.');
+            }
+        }
+        
+        
+        function decreaseIndent() {
+            if (selectedCell) {
+                let currentIndent = parseInt(selectedCell.style.paddingLeft) || 0;
+                if (currentIndent > 0) {
+                    selectedCell.style.paddingLeft = (currentIndent - 10) + 'px';
+                }
+            } else {
+                alert('Please select a cell to decrease indent.');
+            }
+        }
+
+
+
+        function increaseTableSize() {
+            if (selectedTable) {
+                const cells = selectedTable.getElementsByTagName('td');
+                for (let cell of cells) {
+                    let currentSize = parseInt(window.getComputedStyle(cell).fontSize);
+                    cell.style.fontSize = (currentSize + 2) + 'px';
+                }
+            } else {
+                alert('Please select a table to increase text size.');
+            }
+        }
+        
+        
+        function decreaseTableSize() {
+            if (selectedTable) {
+                const cells = selectedTable.getElementsByTagName('td');
+                for (let cell of cells) {
+                    let currentSize = parseInt(window.getComputedStyle(cell).fontSize);
+                    if (currentSize > 6) { // Prevents text size from becoming too small
+                        cell.style.fontSize = (currentSize - 2) + 'px';
+                    }
+                }
+            } else {
+                alert('Please select a table to decrease text size.');
+            }
+        }
+
+
+        function changeCellBackground() {
+            if (selectedCell) {
+              // Create a color picker dynamically
+              const colorPicker = document.createElement('input');
+              colorPicker.type = 'color';
+              colorPicker.style.position = 'relative';
+              colorPicker.style.zIndex = '1000';
+            //   colorPicker.style.opacity = '0'; // Hide the picker but keep it clickable
+          
+              // Add event listener to apply color on change
+              colorPicker.addEventListener('input', (event) => {
+                selectedCell.style.backgroundColor = event.target.value;
+              });
+          
+              // Append to body and click to open the picker
+              document.body.appendChild(colorPicker);
+              colorPicker.click();
+          
+              // Remove the color picker after color is selected
+              colorPicker.addEventListener('change', () => {
+                document.body.removeChild(colorPicker);
+              });
+            }
+          }
+
+
+          let defaultTextColor = '#000000'; // Initial default text color (black)
+
+function changeTextColorTable() {
+  if (selectedCell) {
+    // Create a color picker with the last chosen color as the default
+    const colorPicker = document.createElement('input');
+    colorPicker.type = 'color';
+    colorPicker.value = defaultTextColor; // Set the default text color
+    colorPicker.style.position = 'absolute';
+    colorPicker.style.zIndex = '1000';
+    colorPicker.style.opacity = '0';
+
+    // Add event listener to apply color on change
+    colorPicker.addEventListener('input', (event) => {
+      selectedCell.style.color = event.target.value;
+      defaultTextColor = event.target.value; // Update default text color
+    });
+
+    // Append to body and click to open the picker
+    document.body.appendChild(colorPicker);
+    colorPicker.click();
+
+    // Remove the color picker after color is selected
+    colorPicker.addEventListener('change', () => {
+      document.body.removeChild(colorPicker);
+    });
+  }
+}
+
+
+function changeRowBackground() {
+    if (selectedCell) {
+      // Create a color picker with the last chosen color as the default
+      const colorPicker = document.createElement('input');
+      colorPicker.type = 'color';
+      colorPicker.style.position = 'absolute';
+      colorPicker.style.zIndex = '1000';
+      colorPicker.style.opacity = '0';
+  
+      // Get the row of the selected cell
+      const row = selectedCell.parentElement;
+  
+      // Add event listener to apply color on change
+      colorPicker.addEventListener('input', (event) => {
+        row.style.backgroundColor = event.target.value; // Change the background color of the entire row
+      });
+  
+      // Append to body and click to open the picker
+      document.body.appendChild(colorPicker);
+      colorPicker.click();
+  
+      // Remove the color picker after color is selected
+      colorPicker.addEventListener('change', () => {
+        document.body.removeChild(colorPicker);
+      });
+    }
+  }
+
+  function changeColumnBackground() {
+    if (selectedCell) {
+      // Create a color picker with the last chosen color as the default
+      const colorPicker = document.createElement('input');
+      colorPicker.type = 'color';
+      colorPicker.style.position = 'absolute';
+      colorPicker.style.zIndex = '1000';
+      colorPicker.style.opacity = '0';
+  
+      // Get the column index of the selected cell
+      const colIndex = selectedCell.cellIndex;
+      const table = selectedCell.closest('table'); // Get the closest table
+  
+      // Add event listener to apply color on change
+      colorPicker.addEventListener('input', (event) => {
+        for (let row of table.rows) {
+          row.cells[colIndex].style.backgroundColor = event.target.value; // Change the background color of the entire column
+        }
+      });
+  
+      // Append to body and click to open the picker
+      document.body.appendChild(colorPicker);
+      colorPicker.click();
+  
+      // Remove the color picker after color is selected
+      colorPicker.addEventListener('change', () => {
+        document.body.removeChild(colorPicker);
+      });
+    }
+  }
+  
+
+
+
+  function mergeRowCells() {
+    const rowIndex = parseInt(document.getElementById(mergeRowIndex).value) - 1; // Convert to 0-based index
+    const startColIndex = parseInt(document.getElementById(startColumnIndex).value) - 1; // Convert to 0-based index
+    const endColIndex = parseInt(document.getElementById(endColumnIndex).value) - 1; // Convert to 0-based index
+    
+    if (selectedTable && rowIndex >= 0 && startColIndex >= 0 && endColIndex >= startColIndex) {
+        const row = selectedTable.rows[rowIndex];
+        if (row) {
+            const cellsToMerge = Array.from(row.cells).slice(startColIndex, endColIndex + 1); // Get the cells to merge
+            
+            if (cellsToMerge.length > 1) {
+                const mergedText = cellsToMerge.map(c => c.innerText).join(' '); // Combine text from merged cells
+                cellsToMerge[0].colSpan = cellsToMerge.length; // Set colspan for the first cell
+                cellsToMerge[0].innerText = mergedText; // Set combined text
+                cellsToMerge.slice(1).forEach(c => {
+                    c.style.display = 'none'; // Hide the merged cells
+                    c.classList.remove('selected'); // Remove selection from hidden cells
+                });
+                selectedCells = []; // Clear selected cells after merging
+                document.getElementById(toolbarId).style.display = 'none'; // Hide toolbar
+            }
+
+            document.getElementById(mergeRowIndex).value = '';
+            document.getElementById(startColumnIndex).value = '';
+            document.getElementById(endColumnIndex).value = '';
+        }
+    } else {
+        alert("Invalid row or column index");
+    }
+}
+
+
+function toggleTableBorder() {
+    if (selectedTable) {
+        const isBorderVisible = selectedTable.style.borderCollapse = 'collapse';
+        // selectedTable.style.borderCollapse = isBorderVisible ? 'separate' : 'collapse';
+        selectedTable.style.border = isBorderVisible ? '1px solid #333' : '2px solid #333';
+        
+        // Optionally, you can also toggle individual cell borders
+        const cells = selectedTable.getElementsByTagName('td');
+        for (let cell of cells) {
+            cell.style.border = isBorderVisible ? '1px solid #333' : '2px solid #333';
+        }
+    }
+    isBorderVisible='seperate'
+
+}
+
+
+
+function mergeColumnCells() {
+    const colIndex = parseInt(document.getElementById(mergeColIndex).value) - 1; // Convert to 0-based index
+    const startRowIndex = parseInt(document.getElementById(startrowIndex).value) - 1; // Convert to 0-based index
+    const endRowIndex = parseInt(document.getElementById(endrowIndex).value) - 1; // Convert to 0-based index
+    
+    if (selectedTable && colIndex >= 0 && startRowIndex >= 0 && endRowIndex >= startRowIndex) {
+        const rowsToMerge = Array.from(selectedTable.rows).slice(startRowIndex, endRowIndex + 1);
+        
+        if (rowsToMerge.length > 1) {
+            const mergedText = rowsToMerge.map(row => row.cells[colIndex]?.innerText || "").join(" ");
+            const firstCell = rowsToMerge[0].cells[colIndex];
+            
+            firstCell.rowSpan = rowsToMerge.length; // Set row span for the first cell
+            firstCell.innerText = mergedText; // Set combined text
+            
+            // Hide merged cells in subsequent rows
+            rowsToMerge.slice(1).forEach(row => {
+                row.cells[colIndex].style.display = 'none';
+            });
+            
+            // Clear toolbar inputs
+            document.getElementById(mergeColIndex).value = '';
+            document.getElementById(startrowIndex).value = '';
+            document.getElementById(endrowIndex).value = '';
+        }
+    } else {
+        alert("Invalid row or column index.");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let activeEditableDiv = null;
+
+function createTextarea() {
+    const specificDiv = tableContainer
+    
+    // Create a contenteditable div
+    const editableDiv = document.createElement('div');
+    editableDiv.contentEditable = "true";
+    editableDiv.className = "editable-div";
+    // editableDiv.style.border = "1px solid #ccc";
+    editableDiv.style.padding = "10px";
+    editableDiv.style.height = "auto";
+    editableDiv.style.fontSize = "16px"; // Default font size
+    editableDiv.innerText = "Enter your text here...";
+
+    // Show toolbar when div is focused (clicked)
+    editableDiv.addEventListener('click', () => {
+        activeEditableDiv = editableDiv;
+        showToolbar();
+    });
+
+    // Add the editable div to the specific container
+    specificDiv.appendChild(editableDiv);
+    activeEditableDiv = editableDiv;
+}
+
+function showToolbar() {
+    const toolbar = document.getElementById(toolbar_text);
+    toolbar.style.display = 'block';
+}
+
+function hideToolbar() {
+    const toolbar = document.getElementById(toolbar_text);
+    toolbar.style.display = 'none';
+}
+
+// Toolbar action functions
+function makeBold() {
+    document.execCommand('bold');
+}
+
+function makeItalic() {
+    document.execCommand('italic');
+}
+
+function makeUnderline() {
+    const selection = window.getSelection();
+    const range = selection.getRangeAt(0);
+    const selectedText = range.toString();
+
+    if (selectedText) {
+        const span = document.createElement('span');
+        const currentStyle = range.startContainer.parentElement.style.textDecoration;
+
+        // Check if the selected text is already underlined
+        if (currentStyle === 'underline') {
+            // Remove underline
+            range.startContainer.parentElement.style.textDecoration = '';
+        } else {
+            // Apply underline
+            span.style.textDecoration = 'underline';
+            span.textContent = selectedText;
+
+            // Replace the selected text with the underlined version
+            range.deleteContents();
+            range.insertNode(span);
+        }
+    }
+}
+
+
+function increaseFontSize() {
+    document.execCommand('fontSize', false, '5'); // Larger font size (default options: 1-7)
+}
+
+function decreaseFontSize() {
+    document.execCommand('fontSize', false, '3'); // Smaller font size
+}
+
+// Global event listener to hide toolbar if click is outside editable div or toolbar
+document.addEventListener('click', (event) => {
+    const toolbar = document.getElementById(toolbar_text);
+    if (activeEditableDiv && !toolbar.contains(event.target) && !activeEditableDiv.contains(event.target)) {
+        hideToolbar();
+        
+    }
+});
+
+
+function changeTextColor() {
+    const color = document.getElementById(textColorPicker).value;
+    document.execCommand("foreColor", false, color);
+}
+
+function highlightText() {
+    const color = document.getElementById( highlightColorPicker).value;
+    document.execCommand("backColor", false, color); // Use "hiliteColor" in some browsers
+}
+function toggleBulletPoints() {
+    document.execCommand("insertUnorderedList"); // Toggles bullet points
+}
+
+function applyIndent() { 
+ document.execCommand("indent"); // Indent selected text
+}
+
+function applyOutdent() {
+ document.execCommand("outdent"); // Outdent selected text  
+}
+b
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
 
 
     

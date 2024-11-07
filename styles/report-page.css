@@ -1983,6 +1983,7 @@ text-align: center;
   .right-sidebar{
     display: flex;
     margin-left: -150px;
+    margin-top: 40px;
     
     width: 170px;
     /* position: relative; */
@@ -1992,21 +1993,46 @@ text-align: center;
     border: 2px solid #dc143c;
     border-radius: 10px;
     height: calc(100vh - 150px);
+    /* height: auto; */
     /* position:static; */
     padding-bottom: 10px;
     position: fixed;
-  top: 90px;
+   overflow-y: auto;
+   overflow-x: hidden;
+  top: 50px;
   left: 1220px;
   padding-left: 10px;
+  background-color: white;
+  padding-bottom: 10px;
+
+
     
     
 
    
   }
-  .right-sidebarContainer{
-    margin-top: 30px;
-  }
 
+
+  .right-sidebar::-webkit-scrollbar {
+    width: 0; 
+}
+
+
+.right-sidebar {
+    -ms-overflow-style: none;
+}
+
+
+.right-sidebar {
+    scrollbar-width: none;
+}
+  .right-sidebarContainer{
+    max-height: calc(100vh - 130px);
+    margin-left: -10px;
+   align-items: center;
+ 
+   
+  }
 
   .theme-color-dark-blue, .theme-color-violet, .theme-color-red, .theme-color-orange, .theme-color-blue,.theme-color-green{
     
@@ -2044,14 +2070,18 @@ text-align: center;
     display: grid;
   grid-template-columns: auto auto auto;
   gap: 5px;
-  /* background-color: #2196F3; */
-  /* padding: 5px; */
+ padding: 10px;
+ width: 170px;
+ margin-left: 20px;
+
 
 
   }
   .right-sidebar h2{
     margin-top: 25px;
     margin-bottom: 10px;
+    margin-left: px;
+
   }
   .toggle h2{
     margin-left: 25px;
@@ -2362,7 +2392,260 @@ padding: 10px;
   transition: width 0.4s ease;
 }
 
+.select-batch{
+  margin-left: 10px;
+  margin-top: 50px;
+  background-color: white;
+  padding: 10px;
+  width: 170px;
+}
 
+
+
+
+
+.tablecontainer1{
+  border: 1px solid black;
+  height: auto;
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+  width: 90%;
+  border-collapse: collapse;
+  margin-bottom: 50px;
+  margin-left: 30px;
+  margin-top: -30px;
+  padding: 10px;
+  
+}
+.tablecontainer2{
+  height: auto;
+  color: black;
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 10px;
+
+}
+.tablecontainer3{
+  border: 2px solid black;
+  height: auto;
+  color: black;
+  background-color:white ;
+  padding: 10px;
+
+}
+.tablecontainer4{
+  height: auto;
+  color: black;
+  background-color: white;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px auto;
+  padding: 10px;
+  border: solid 1px #90a4ae;
+
+}
+.table-options{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+  padding: 10px;
+  /* margin-left: 10px; */
+  
+}
+.table-options input{
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+}
+
+
+.table-options button{
+  border-radius: 10px;
+  background-color: #dc143c;
+  width: 150px;
+  height: 20px;
+ 
+
+}
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.custom-table td[contenteditable="true"] {
+  cursor: text;
+}
+
+.controls{
+ 
+  padding: 2px;
+  margin-top: 10px;
+  background-color: white;
+  padding: 10px;
+  width: 170px;
+}
+
+.controls input{
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+
+}
+.controls button{
+  margin-top: 5px;
+  background-color: #dc143c;
+  border-radius: 10px;
+  width: 150px;
+  height: 20px;
+
+}
+
+.delete-cell{
+ 
+  padding: 2px;
+  margin-top: 10px;
+  background-color: white;
+  padding: 10px;
+  width: 170px;
+}
+
+.delete-cell input{
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+
+}
+.delete-cell button{
+  margin-top: 5px;
+  background-color: #dc143c;
+  border-radius: 10px;
+  width: 150px;
+  height: 20px;
+
+}
+
+.table-spacing{
+  margin-top: 10px;
+  background-color: white;
+  padding-left: 15px;
+  width: 170px;
+
+}
+
+.table-spacing button{
+  background-color: #dc143c;
+  border-radius: 10px;
+  width: 150px;
+  height: 20px;
+  margin-top: 5px;
+
+}
+.table-spacing input{
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+
+}
+
+
+
+
+.toolbar {
+  display: flex;
+  gap: 5px;
+  padding: 5px;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  /* height: auto; */
+ 
+  
+}
+
+.toolbar button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.toolbar button:hover {
+  background-color: #e0e0e0;
+  border-radius: 3px;
+}
+
+.toolbar i {
+  color: #333;
+}
+
+.selected-cell{
+  
+  background-color: #89bef8; /* Change this color to whatever you'd like for selected cells */
+}
+
+/* .dark-border td {
+  border: 2px solid #333;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.custom-table td[contenteditable="true"] {
+  cursor: text;
+} */
+#toolbar1{
+  margin-bottom: 50px;
+  width: 90%;
+  margin-left: 30px;
+}
+#toolbar3{
+  margin-bottom: 20px;
+  
+}
+#toolbar4{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.center-text { /* Center the text tool elements*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Align text to center */
+}
+#toolbar-text1{
+  margin-bottom: 40px;
+  width: 90%;
+  margin-left: 30px;
+}
+#toolbar-text3{
+  margin-bottom: 10px;
+}
 
 
 
