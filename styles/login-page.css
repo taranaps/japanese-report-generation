@@ -66,7 +66,7 @@ main{
 .login-button {
     width: 78%;
     /* height: 35px; */
-    /* padding: 0.4rem; */
+    padding: 0.4rem;
     background-color: transparent;
     color: white;
     border: 1px solid rgb(188, 184, 184);
@@ -75,7 +75,7 @@ main{
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;  
-    margin-top: 10px;
+    margin-top: 5px;
 }
 .login-button:active {
     border-color:white ;
