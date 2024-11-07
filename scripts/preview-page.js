@@ -844,7 +844,7 @@ function increaseTextSize() {
 
           let defaultTextColor = '#000000'; // Initial default text color (black)
 
-function changeTextColor() {
+function changeTextColorTable() {
   if (selectedCell) {
     // Create a color picker with the last chosen color as the default
     const colorPicker = document.createElement('input');
@@ -968,8 +968,8 @@ function changeRowBackground() {
 
 function toggleTableBorder() {
     if (selectedTable) {
-        const isBorderVisible = selectedTable.style.borderCollapse === 'collapse';
-        selectedTable.style.borderCollapse = isBorderVisible ? 'separate' : 'collapse';
+        const isBorderVisible = selectedTable.style.borderCollapse = 'collapse';
+        // selectedTable.style.borderCollapse = isBorderVisible ? 'separate' : 'collapse';
         selectedTable.style.border = isBorderVisible ? '1px solid #333' : '2px solid #333';
         
         // Optionally, you can also toggle individual cell borders
@@ -978,7 +978,7 @@ function toggleTableBorder() {
             cell.style.border = isBorderVisible ? '1px solid #333' : '2px solid #333';
         }
     }
-    
+    isBorderVisible='seperate'
 
 }
 
