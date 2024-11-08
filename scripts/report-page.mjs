@@ -813,7 +813,7 @@ async function generateTraineePieChart(id, chartType = "line", backgroundColor =
   
     // Extract batch details from the data object
     const batchNames = Object.keys(data); // Extracts the batch names as an array
-    const batchDurations = batchNames.map((batch) => data[batch].batchDurationMonth); // Extracts the durations
+    const batchDurations = batchNames.map((batch) => data[batch].batchDurationTillDate); // Extracts the durations
   
     const chartData = {
       labels: batchNames,
@@ -1314,18 +1314,14 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
 }
 
 
-// async function populateBatchDataTemplate1(){
-
-// }
-
-  async function populateBatchDataTemplate2() {
+  async function populateBatchDataTemplate2(currentDate) {
 
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (!batchDetails) {
       console.error("No batch details found.");
       return;
     }
-
+    
     const mainContainer = document.getElementById("batchwise-data-template2");
     mainContainer.innerHTML = "";
 
@@ -1379,7 +1375,8 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
       initCertificationChart("levelChart",backgroundColor,borderColor,selectedChartType);
                   
      });
-
+     const template1Header = document.getElementById("template2-month");
+    template1Header.textContent = formatCollectionName(currentDate);
 
     for (const [batchName, details] of Object.entries(batchDetails)) {
       const filteredData = await getFilteredDocuments(batchName);
@@ -1400,7 +1397,7 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
 
       batchContainer.innerHTML = `
             <div class="batch-info">
-                <h2>${batchName}</h2>
+                <h1>${batchName}</h1>
             </div>
             <div class="details-template2">
                 <div class="trainee-list-template2">
@@ -1651,7 +1648,7 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
   
     // Extract batch details from the data object
     const batchNames = Object.keys(data);
-    const batchDurations = batchNames.map((batch) => data[batch].numberOfSessionsMonth);
+    const batchDurations = batchNames.map((batch) => data[batch].numberOfSessionsTillDate);
   
     const chartData = {
       labels: batchNames,
@@ -1674,10 +1671,10 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
         scales: {
           y: {
             beginAtZero: true,
-            max: 150,
+            max: 250,
             title: {
               display: true,
-              text: "Duration (Days)",
+              text: "Sessions",
               color: "#333",
             },
           },
@@ -1710,67 +1707,8 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
   }
   
     
-    
-        
-    // const batchDetailsData = await getBatchDetailsFromLatestCollection();
-    
-    // generateSessionDurationChart(batchDetailsData,'duration-graph-template1');
-    // generateSessionChart(batchDetailsData, 'session-graph-template1');
 
-  //   // getBatchDataForChart('attendance-body-graph-template1');
-
-  //   // const traineeDetails = await getTraineeDetailsFromLatestCollection();
-
-  //   // await createAllBatchEvaluationTabletemplate1(traineeDetails, "all-evaluation-table-template1");
-
-  //   // const traineeDetailsTemplate1 = document.getElementById("all-trainee-table-template1");
-
-  //   // const traineeTable1 = await getAllBatchTraineeDetails(traineeDetails,"all-trainee-table-template1");
-  //   // traineeDetailsTemplate1.appendChild(traineeTable1);
-
-  //   // const numberOfTrainees = document.getElementById(
-  //   //     "trainee-piechart-template1"
-  //   //   );
-  
-  //   //   const backgroundColor = [
-  //   //    'rgba(255, 99, 132, 0.2)',
-  //   //   'rgba(54, 162, 235, 0.2)',
-  //   //   'rgba(255, 206, 86, 0.2)',
-  //   //   'rgba(75, 192, 192, 0.2)',
-  //   //   'rgba(153, 102, 255, 0.2)',
-  //   //   'rgba(255, 159, 64, 0.2)'
-  //   //   ];
-  //   //   const borderColor = [
-  //   //     "rgba(128, 97, 195, 1)",
-  //   //     "rgba(146, 113, 209, 1)",
-  //   //     "rgba(164, 130, 223, 1)",
-  //   //     "rgba(182, 146, 237, 1)",
-  //   //     "rgba(200, 163, 251, 1)",
-  //   //     "rgba(218, 180, 255, 1)",
-  //   //   ];
-  //   //   numberOfTrainees.textContent = generateTraineePieChart(
-  //   //     "trainee-piechart-template1",
-  //   //     "pie",
-  //   //     backgroundColor,
-  //   //     borderColor
-  //   //   );
-  
-  //   //   const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
-  //   //   const borderColor2 = 'rgba(153, 102, 255, 1)';
-  //   //   initCertificationChart("certificationBarChart",backgroundColor2,borderColor2,'bar');
-
-  //   //   initTrainerDetails("trainer-name-template1");
-
-  //   // loadAndDisplayBatchDetails(
-  //   //   "progressBarsContainer-templae1",
-  //   //   "whole-duration-data-templae1",
-  //   //   "duration-sessions-data-template1",
-  //   //   selectedBatch
-  //   // );
-  //   }
-  // }
-
-  async function populateBatchDataTemplate1() {
+  async function populateBatchDataTemplate1(currentDate) {
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (!batchDetails) {
         console.error("No batch details found.");
@@ -1793,7 +1731,6 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
       'rgba(255, 159, 64, 1)'
   ];
 
-    const numberOfBatches = Object.keys(batchDetails).length;
 
     const batchCountDisplay = document.getElementById(
         "number-of-Batch-tmeplate3"
@@ -1801,13 +1738,12 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
       batchCountDisplay.textContent = await getNofBatches();
   
       initTrainerDetails("trainer-name-template1");
-  
-      // const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
-      // const borderColor2 = 'rgba(255, 159, 64, 0.2)';
-  
-  
+
       const numberOfTrainees = document.getElementById("card-content");
-  
+    const template1Header = document.getElementById(
+      "header-template1-h3"
+    );
+    template1Header.textContent = formatCollectionName(currentDate); 
      
       numberOfTrainees.textContent = generateTraineePieChart(
         "trainee-piechart-template1",
@@ -1815,10 +1751,6 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
         backgroundColor,
         borderColor
       );
-      // loadSessionsAndDurationWholeBatch(
-      //   "progressBarsContainer-templae1",
-      //   "whole-duration-data-templae1"
-      // );
 
       const batchDetailsData = await getBatchDetailsFromLatestCollection();
     
@@ -1957,12 +1889,7 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
   
   
         
-        // document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
-        //   const selectedChartType = event.target.value;
-        //   generateChartToggle(filteredData,`single-batch-attendance-content-template1-${batchName}`, selectedChartType);
-                          
-        //   });
-  
+        
         const traineeDetailsTemplate2 = document.getElementById(
           `single-batch-trainee-content-template1-${batchName}`
         );
@@ -1973,6 +1900,11 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
         traineeDetailsTemplate2.appendChild(traineeTable2);
 
         await generateChartToggle(filteredData, `single-batch-attendance-content-template1-${batchName}`,'line');
+        document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
+          const selectedChartType = event.target.value;
+          generateChartToggle(filteredData, `single-batch-attendance-content-template1-${batchName}`, selectedChartType);
+          
+      }); 
     }
 
     
@@ -1980,7 +1912,7 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
 }
 
 
-  async function populateBatchDataTemplate3() {
+  async function populateBatchDataTemplate3(currentDate) {
 
     const batchDetails = await getBatchDetailsFromLatestCollection();
     if (!batchDetails) {
@@ -2006,6 +1938,8 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
       'rgba(153, 102, 255, 1)',
       'rgba(255, 159, 64, 1)'
   ];
+  const template1Header = document.getElementById("subtitle");
+  template1Header.textContent = formatCollectionName(currentDate);
 
     const numberOfBatches = Object.keys(batchDetails).length;
 
@@ -2052,6 +1986,7 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
  
 
     batchCountDisplay.textContent = numberOfBatches;
+    
 
     for (const [batchName, details] of Object.entries(batchDetails)) {
       const filteredData = await getFilteredDocuments(batchName);
@@ -2448,16 +2383,65 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
     }
 
     const mainContainer = document.getElementById("batchwise-data-template5");
-    mainContainer.innerHTML = ""; // Clear any previous content
-
+    mainContainer.innerHTML = ""; 
     // const numberOfBatches = Object.keys(batchDetails).length;
     // const batchCountDisplay = document.getElementById(
     //   ""
     // );
     // batchCountDisplay.textContent = numberOfBatches;
+    const backgroundColor = [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(255, 206, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(255, 159, 64, 0.2)'
+  ];
+  const borderColor = [
+    'rgba(255, 99, 132, 1)',
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(75, 192, 192, 1)',
+      'rgba(153, 102, 255, 1)',
+      'rgba(255, 159, 64, 1)'
+  ];
+
+    
+    initTrainerDetails("trainer-name-template5");
+
+    initCertificationChart(
+      "levelChart-t5",
+      backgroundColor,
+      borderColor
+    );
+
+    const numberOfTrainees = document.getElementById("learners-chart-template5");
+
+
+    numberOfTrainees.textContent = generateTraineePieChart(
+      "learners-chart-template5",
+      "pie",
+      backgroundColor,
+      borderColor
+    );
+    document.getElementById('chartTypeDropdown').addEventListener('change', (event) => {
+      const selectedChartType = event.target.value;
+      generateTraineePieChart("learners-chart-template5",selectedChartType,backgroundColor,borderColor);  
+      
+    });
+    document.getElementById('chartType-dropdown-certification').addEventListener('change', (event) => {
+      const selectedChartType = event.target.value;
+      initCertificationChart("levelChart-t5",backgroundColor,borderColor,selectedChartType);
+                    
+      });
+    const batchDetailsData = await getBatchDetailsFromLatestCollection();
+    generateSessionDurationChart(batchDetailsData,'batch-duration-chart-t5');
+    generateSessionChart(batchDetailsData, 'sessionsChart-t5');
+
 
     for (const [batchName, details] of Object.entries(batchDetails)) {
       const filteredData = await getFilteredDocuments(batchName);
+      const currentDate = await getLatestCollection();
 
       const batchContainer = document.createElement("div");
       batchContainer.classList.add("batchwise-data-template5");
@@ -2474,34 +2458,34 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
       }
       batchContainer.innerHTML = `
             <div class="batch-info">
-                  <h2 id="batch-name-t5-${batchName}"></h2>
+                  <h1 id="batch-name-t5-${batchName}">${batchName}</h1>
                 </div>
       
                 <div class="details-template5">
                   <div class="trainee-list-template5">
-                    <h3>Trainee Details</h3>
+                    <h2>Trainee Details</h2>
                     <div id="trainee-details-template5-${batchName}"></div>
                   </div>
                   <div class="details-right-template5">
                     <div class="batch-duration-template5">
                       <div class="sessions-temp5">
-                        <h3>Total Sessions</h3>
-                        <p id="batch-sessions-template5-${batchName}"></p>
+                        
+                        <h3 id="batch-sessions-template5-${batchName}">Total Sessions: ${numberOfSessionsMonth}</h3>
                       </div>
                       <div class="sessions-temp5">
-                        <h3>Total Duration</h3>
-                        <p id="batch-duration-template5-${batchName}"></p>
+                        
+                        <h3 id="batch-duration-template5-${batchName}">Total Duration: ${batchDurationMonth}</h3>
                       </div>
                       <div id="durationChart-t5-${batchName}"></div>
                     </div>
                     <div class="attendance-template5">
-                      <h3>Attendance</h3>
+                      <h2>Attendance</h2>
                       <canvas id="attendanceChart-t5-${batchName}"></canvas>
                     </div>
                   </div>
                 </div>
                 <div class="trainee-evaluation-template5">
-                  <h3>Evaluation Details</h3>
+                  <h2>Evaluation Details</h2>
                   <div id="evaluation-table-template5-${batchName}"></div>
                 </div>
               </div>
@@ -2509,8 +2493,31 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
 
       mainContainer.appendChild(batchContainer);
 
+      const template1Header = document.getElementById("template5-month");
+      template1Header.textContent = formatCollectionName(currentDate);
+
+    // await getAttendanceData(filteredData, "attendanceChart-t5");
+      await generateChartToggle(filteredData, `attendanceChart-t5-${batchName}`, 'bar');
+
+    const traineeDetailsTemplate1 = document.getElementById(`trainee-details-template5-${batchName}`);
+    const traineeTable1 = await getTraineeDetails(
+      filteredData,
+      `trainee-details-template5-${batchName}`
+    ); 
+    traineeDetailsTemplate1.appendChild(traineeTable1);
+
+    const evaluationTable1 = document.getElementById(`evaluation-table-template5-${batchName}`);
+    const table1 = await createEvaluationTable(filteredData, `evaluation-table-template5-${batchName}`);
+    evaluationTable1.appendChild(table1);
+
+    document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
+      const selectedChartType = event.target.value;
+      generateChartToggle(filteredData, `attendanceChart-t5-${batchName}`, selectedChartType);
+      
+  }); 
 
     }
+      
   }
 
   async function batchwiseDataTemplate5(selectedBatch) {
@@ -2520,6 +2527,23 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
       console.error("No batch details found.");
       return;
     }
+
+    const backgroundColor = [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(255, 206, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(255, 159, 64, 0.2)'
+  ];
+  const borderColor = [
+    'rgba(255, 99, 132, 1)',
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(75, 192, 192, 1)',
+      'rgba(153, 102, 255, 1)',
+      'rgba(255, 159, 64, 1)'
+  ];
 
     const sessionsPerBatch = batchDetails[selectedBatch].numberOfSessionsMonth;
     const sessionsTemplate5 = document.getElementById("batch-sessions-template5");
@@ -2538,7 +2562,8 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
     const template1Header = document.getElementById("template5-month");
     template1Header.textContent = formatCollectionName(currentDate);
 
-    await getAttendanceData(filteredData, "attendanceChart-t5");
+    // await getAttendanceData(filteredData, "attendanceChart-t5");
+    await generateChartToggle(filteredData, 'attendanceChart-t5', 'bar');
 
     const traineeDetailsTemplate1 = document.getElementById("trainee-details-template5");
     const traineeTable1 = await getTraineeDetails(
@@ -2553,48 +2578,45 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
 
     initTrainerDetails("trainer-name-template5");
 
-    const backgroundColor2 = 'rgba(153, 102, 255, 0.2)';
-    const borderColor2 = 'rgba(255, 159, 64, 0.2)';
     initCertificationChart(
       "levelChart-t5",
-      backgroundColor2,
-      borderColor2
+      backgroundColor,
+      borderColor
     );
 
     const numberOfTrainees = document.getElementById("learners-chart-template5");
 
-    const backgroundColor = [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
-    ];
-    const borderColor = [
-      'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-    ];
+
     numberOfTrainees.textContent = generateTraineePieChart(
       "learners-chart-template5",
       "pie",
       backgroundColor,
       borderColor
     );
-    loadSessionsAndDurationWholeBatch(
-      "batch-duration-chart-t5","sessionsChart-t5"
-      
-    );
+
+    const batchDetailsData = await getBatchDetailsFromLatestCollection();
+    generateSessionDurationChart(batchDetailsData,'batch-duration-chart-t5');
+    generateSessionChart(batchDetailsData, 'sessionsChart-t5');
 
     const template5Header = document.getElementById("batch-title");
     template5Header.textContent = selectedBatch;
     console.log(selectedBatch);
 
-    
+    document.getElementById('chartTypeDropdown').addEventListener('change', (event) => {
+      const selectedChartType = event.target.value;
+      generateTraineePieChart("learners-chart-template5",selectedChartType,backgroundColor,borderColor);  
+      
+    });
+    document.getElementById('chartType-dropdown-certification').addEventListener('change', (event) => {
+      const selectedChartType = event.target.value;
+      initCertificationChart("levelChart-t5",backgroundColor,borderColor,selectedChartType);
+                    
+      });
+      document.getElementById('chartTypeDropdownAttendance').addEventListener('change', (event) => {
+        const selectedChartType = event.target.value;
+        generateChartToggle(filteredData, 'attendanceChart-t5', selectedChartType);
+        
+    });   
   }
 
   images.forEach((image) => {
@@ -2622,7 +2644,7 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
                 //     "batch-text-template1"
                 //   );
                 // template2Header.textContent="Batch";  
-                populateBatchDataTemplate1();
+                populateBatchDataTemplate1(currentDate);
                 
               } else {
 
@@ -2637,7 +2659,7 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
                   "batchwise-data-template2"
                 );
                 populatedDataTemplate2.innerHTML = "";
-                populateBatchDataTemplate2();
+                populateBatchDataTemplate2(currentDate);
               } else {
                 batchwiseDataTemplate2(selectedBatch);
                 
@@ -2649,7 +2671,7 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
                   "batchwise-data-template2"
                 );
                 populatedDataTemplate3.innerHTML = "";
-                populateBatchDataTemplate3();
+                populateBatchDataTemplate3(currentDate);
               } else {
                 batchwiseDataTemplate3(selectedBatch);
               }

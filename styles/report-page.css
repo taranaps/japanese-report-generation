@@ -923,7 +923,8 @@ margin-top: 30px;
 }
 #duration-sessions-data-template1{
   width: 90%;
-  margin: 10px;
+  margin-top: 40px;
+  margin-left: 10px;
 }
 /* Progress bar background */
 
@@ -975,7 +976,7 @@ margin-top: 30px;
   border: solid black 1px;
   border-radius: 10px;
   background: white;
-  height: 250px;
+  height: 325px;
   width: 100%;
   margin: auto;
   padding-top:24px ;
@@ -1062,7 +1063,7 @@ margin-top: 30px;
   border-radius: 10px;
   background: white;
   height: auto;
-  width: 103%;
+  width: 110%;
   margin: auto;
   position: relative;
   top: 10px;
@@ -1095,7 +1096,7 @@ margin-top: 30px;
   border: solid black 1px;
   border-radius: 10px;
   background: white;
-  height: auto;
+  height: 200px;
   width: 100%;
   margin: auto;
   position: relative;
@@ -1361,10 +1362,11 @@ margin-top: 6px;
 padding: 1px;
 font-size: 20px;
 }
-.batch-info h2{
+.batch-info h1{
   text-align: center;
   padding: auto;
   color: #333;
+  font-size: 3rem;
 }
 .batchwise-data-template2 h3{
   margin: 10px;
@@ -2262,7 +2264,11 @@ text-align: center;
     margin-top: 30px;
   }
 
-
+#trainer-name-template5{
+  padding-top: 20px;
+  font-size: 2rem;
+  color: #0b2b69;
+}
 
 
 
@@ -2562,7 +2568,11 @@ text-align: center;
   font-weight: bold;
   color: #37474f; /* Slightly lighter blue-gray */
 }
+.sessions-temp5{
+  color: #0b2b69;
+  font-size: 1.6rem;
 
+}
 
 .details-template5 {
   display: flex;
@@ -2578,15 +2588,16 @@ text-align: center;
   background-color: #ffffff;
 }
 
-.trainee-list-template5 h3 {
+.trainee-list-template5 h2 {
   text-align: center;
-  font-size: 1.3em;
+  font-size: 2rem;
   color: #37474f;
   margin-bottom: 10px;
 }
 
-.batchwise-data-template5 {
-  margin: 10px;
+.template-five h2{
+  font-size: 2rem;
+
 }
 
 .batch-duration-template5 {
@@ -2613,9 +2624,15 @@ padding: 10px;
   height: auto;
   padding-bottom: 20px;
 }
+.attendance-template5 h2
+{  text-align: center;
+font-size: 2rem;
+color: #37474f;
+margin-bottom: 10px;
+}
 
-.trainee-evaluation-template5 h3 {
-  font-size: 1.3em;
+.trainee-evaluation-template5 h2 {
+  font-size: 2rem;
   color: #37474f;
   text-align: center;
 }
