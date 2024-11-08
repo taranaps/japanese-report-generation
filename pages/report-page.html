@@ -192,6 +192,24 @@
                   <button onclick="toggleTableBorder()" title="Toggle Borders">
                     <i class="fas fa-border-all"></i> 
                 </button>
+
+                <button onclick="addRow()"  title="Add Row">
+                  <i class="fas fa-plus"></i> 
+                </button>
+
+                <button onclick="addColumn()" title="Add Column">
+                  <i class="fas fa-columns"></i>
+                </button>
+
+                <button onclick="setUniformSize()" title="Set Cell Size">
+                  <i class="fas fa-expand"></i> 
+                </button>
+                <button onclick="deleteTable()">
+                  <i class="fas fa-trash"></i> Delete Table
+                </button>
+                <button onclick="deleteCell()">
+                  <i class="fas fa-trash"></i> Delete Cell
+                </button>
                 <br>
                   <input type="number" id="mergeRowIndex1" min="1" placeholder="Row to Merge" required>
                   <input type="number" id="startColumnIndex1" min="1" placeholder="Start Column" required>
@@ -346,6 +364,24 @@
             <button onclick="toggleTableBorder()" title="Toggle Borders">
               <i class="fas fa-border-all"></i> 
           </button>
+
+          <button onclick="addRow()"  title="Add Row">
+            <i class="fas fa-plus"></i> 
+          </button>
+
+          <button onclick="addColumn()" title="Add Column">
+            <i class="fas fa-columns"></i> 
+          </button>
+
+          <button onclick="setUniformSize()" title="Set Cell Size">
+            <i class="fas fa-expand"></i> 
+          </button>
+          <button onclick="deleteTable()">
+            <i class="fas fa-trash"></i> Delete Table
+          </button>
+          <button onclick="deleteCell()">
+            <i class="fas fa-trash"></i> Delete Cell
+          </button>
           <br>
             <input type="number" id="mergeRowIndex2" min="1" placeholder="Row to Merge" required>
             <input type="number" id="startColumnIndex2" min="1" placeholder="Start Column" required>
@@ -389,6 +425,28 @@
 
 
         </div>
+        <div class="toolbar" id="imageToolbar">
+          <button onclick="reduceImageSize()">
+            <i class="fas fa-minus"></i> 
+          </button>
+          <button onclick="increaseImageSize()">
+            <i class="fas fa-plus"></i>
+          </button>
+          <button onclick="indentImageLeft()">
+            <i class="fas fa-arrow-left"></i> 
+          </button>
+          <button onclick="indentImageRight()">
+            <i class="fas fa-arrow-right"></i> 
+          </button>
+          <input type="color" id="borderColorPicker" />
+          <button onclick="setImageBorderColor()">
+            <i class="fas fa-border-all"></i> 
+          </button>
+         
+          
+        </div>
+
+
           <div class="tablecontainer2">
             <div id="tableContent2"><p>asdfghjk</p></div>
 
@@ -507,6 +565,23 @@
       </button>
       <button onclick="toggleTableBorder()" title="Toggle Borders">
         <i class="fas fa-border-all"></i> 
+    </button>
+
+    <button onclick="addRow()"  title="Add Row">
+      <i class="fas fa-plus"></i> 
+    </button>
+
+    <button onclick="addColumn()" title="Add Column">
+      <i class="fas fa-columns"></i> 
+    </button>
+    <button onclick="setUniformSize()" title="Set Cell Size">
+      <i class="fas fa-expand"></i> 
+    </button>
+    <button onclick="deleteTable()">
+      <i class="fas fa-trash"></i> Delete Table
+    </button>
+    <button onclick="deleteCell()">
+      <i class="fas fa-trash"></i> Delete Cell
     </button>
     <br>
       <input type="number" id="mergeRowIndex3" min="1" placeholder="Row to Merge" required>
@@ -729,6 +804,24 @@
                 <button onclick="toggleTableBorder()" title="Toggle Borders">
                   <i class="fas fa-border-all"></i> 
               </button>
+
+              <button onclick="addRow()" title="Add Row">
+                <i class="fas fa-plus"></i>
+              </button>
+
+              <button onclick="addColumn()" title="Add Column">
+                <i class="fas fa-columns"></i>
+              </button>
+
+              <button onclick="setUniformSize()" title="Set Cell Size">
+                <i class="fas fa-expand"></i> 
+              </button>
+              <button onclick="deleteTable()">
+                <i class="fas fa-trash"></i> Delete Table
+              </button>
+              <button onclick="deleteCell()">
+                <i class="fas fa-trash"></i> Delete Cell
+              </button>
               <br>
                 <input type="number" id="mergeRowIndex4" min="1" placeholder="Row to Merge" required>
                 <input type="number" id="startColumnIndex4" min="1" placeholder="Start Column" required>
@@ -743,6 +836,7 @@
         <button onclick="mergeColumnCells()" title="Merge Column Cells">
             <i class="fas fa-arrows-alt-v"></i>
         </button>
+
         
               </div>
 
@@ -868,17 +962,13 @@
                 <div id="buttonContainer">
                   <button onclick="createTextarea()">Add Textarea</button>
               </div>
+               <div>
+                <input type="file" accept="image/*" id="uploadImage">
 
-            <div class="delete-cell">
-              <h3>Delete Cell</h3>
-            <label>Row:</label>
-            <input type="number" id="deleteRow" min="1">
-            <label>Column:</label>
-            <input type="number" id="deleteCol" min="1">
-            <button onclick="deleteCell()">Delete Cell</button>
+<!-- Button to display the uploaded image -->
+              <button onclick="displayUploadedPhotos()">Show Image</button>
 
-            </div>
-
+               </div>
 
             <div class="table-spacing">
               <h3>Spacing Between Tables</h3>
@@ -938,6 +1028,8 @@
 					  <div class="download">
 						<button  id="download-button">Download</button>
 						<button  id="share-button" onclick="share_togglepopup()">Share</button>
+            <input id="img-input" type="file"><br><br>
+            <button  id="save-button" >save</button>
 						
 						<div class="share-popup" id="share-popup">
 							<div class="share-overley"></div>
@@ -959,6 +1051,8 @@
                   <button id="send-email" type="button" onclick="sendEmail()">Send Email</button>
                   <button id="cancel-email" >Cancel</button>
               </form>
+
+
 							
 
 						</div>
