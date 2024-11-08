@@ -12,8 +12,6 @@ const closeUploadModal = document.getElementById('closeUploadModal');
 const messageModal = document.getElementById('messageModal');
 const messageContent = document.getElementById('messageContent');
 const closeMessageModal = document.getElementById('closeMessageModal');
-const tableButton = document.getElementById('tableButton');
-const reportButton = document.getElementById('reportButton');
 
 // Show the upload modal
 openUploadModal.addEventListener('click', () => {
