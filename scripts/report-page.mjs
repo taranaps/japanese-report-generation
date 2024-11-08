@@ -1,6 +1,9 @@
 import { checkAuth, logout } from "./auth.js";
 import { db } from "./firebaseConfig.mjs";
 import { collection, getDocs, getFirestore, doc, getDoc, where, query } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+import uploadImageToFirebase from '../scripts/uploadImage.mjs'
+
 // import {collection,getDocs,getFirestore,doc,getDoc,where,query,} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
 // Check authentication status
@@ -2900,5 +2903,25 @@ function applyTheme(themeId) {
 
 
 
+let imgurl='';
 
 
+async function uploadImage()
+{
+  const fileInput = document.getElementById("img-input");
+  let image= fileInput.files[0]
+
+      if (image) {
+          var imageUrl = await uploadImageToFirebase(image);
+          console.log("image link " + imageUrl)
+
+      }
+      imgurl=imageUrl;
+      getReportURL();
+}
+
+
+document.getElementById("save-button").addEventListener("click",uploadImage)
+ function getReportURL(){
+  
+ }

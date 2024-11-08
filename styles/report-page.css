@@ -2946,5 +2946,17 @@ margin-bottom: 10px;
 }
 
 
+table.custom-table td {
+  border: 1px solid #ddd;
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px;
+}
+
+#template2 img {
+  max-width: 100%;
+  height: auto;
+}
+
 
 
