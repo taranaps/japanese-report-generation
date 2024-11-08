@@ -369,7 +369,7 @@ body {
     width: 100%;
     height: 130px;
     background-color:#f9f9f9;
-    border: 1px dashed #3673E8;
+    border: 1px dashed #DC143C;
     box-sizing: border-box;
     display: flex;
     /* flex-direction: column; */
@@ -389,7 +389,7 @@ body {
 .downloaddiv{
     width: 540px;
     height: 60px;
-    background-color: #3673E8;
+    background-color: #DC143C;
     margin-top: 30px;
     margin-left: -20px;
     border-bottom-left-radius: 8px;
@@ -437,18 +437,16 @@ body::before {
 /* .download-template{
     color: #DC143C;
 } */
-#excelFile{
-    margin-top: 20px;
-    /* margin-bottom: 200px; */
-}
+
 #uploadButton{
     /* margin-top: 100px; */
-    background: #3673E8;
+    background: #DC143C;
     border-radius: 10px;
-    border: solid 1px #3673E8;
+    border: solid 1px #DC143C;
     height: 30px;
     color: white;
     cursor: pointer;
+    margin-top: 10px;
 }
 #tableButton{
     background: #DC143C;
@@ -469,9 +467,9 @@ body::before {
 #closeUploadModal{
     /* margin-top: 50px; */
     /* margin-left: 30px; */
-    background: #3673E8;
+    background: #DC143C;
     border-radius: 10px;
-    border: solid 1px #3673E8;
+    border: solid 1px #DC143C;
     height: 30px;
     color: white;
     cursor: pointer;

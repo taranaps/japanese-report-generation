@@ -1860,7 +1860,7 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
                       </div>
                     </div>
             <div class="attendance-template1">
-                <div class="attendance-heading-template1">
+                <div class="attendance-heading-template1" id="attendance-heading-template1">
                     <p>Average Attendance</p>
                 </div>
                 <div class="attendance-body-template1">
@@ -1895,23 +1895,23 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
         // Generate HTML for each batch and append it to the bottom container
         batchDiv.innerHTML = `
             <div class="single-batch-info-template1" id="single-batch-info-template1-${batchName}">
-                <div class="single-batch-info-heading-template1">
+                <div class="single-batch-info-heading-template1" id="single-batch-info-heading-template1">
                     <h1 id="batch-name-template1-${batchName}">${batchName}</h1>
                 </div>
                 <div class="single-batch-info-body-template1">
                     <div id="single-info-table-template1-${batchName}">
                         <div class="single-batch-template1-left">
                             <div class="single-batch-trainee-details-template1">
-                                <div class="single-batch-trainee-heading-template1">
+                                <div class="single-batch-trainee-heading-template1" >
                                     <p>Trainee Details</p>
                                 </div>
-                                <div class="single-batch-trainee-body-template1">
+                                <div class="single-batch-trainee-body-template1" id="single-batch-trainee-body-template1">
                                     <div id="single-batch-trainee-content-template1-${batchName}"></div>
                                 </div>
                             </div>
                             <div class="single-batch-template1-right">
                                 <div class="single-batch-sessionDuration-details-template1">
-                                    <div class="single-batch-sessionDuration-heading-template1">
+                                    <div class="single-batch-sessionDuration-heading-template1" id="single-batch-sessionDuration-heading-template1">
                                         <p>Sessions and Duration</p>
                                     </div>
                                     <div class="single-batch-sessionDuration-body-template1">
@@ -1922,7 +1922,7 @@ async function initCertificationChart(chartElementId, backgroundColor, borderCol
                                     </div>
                                 </div>
                                 <div class="single-batch-attendance-details-template1">
-                                    <div class="single-batch-attendance-heading-template1">
+                                    <div class="single-batch-attendance-heading-template1" id=".single-batch-attendance-heading-template1">
                                         <p>Average Attendance</p>
                                     </div>
                                     <div class="single-batch-attendance-body-template1">
@@ -2723,8 +2723,39 @@ const commonElements = [
   "attendance-heading-template1",
   "evaluation-heading-template1",
   "batch-evaluation-heading-template1",
-  "container-template2"
+  "container-template2",
+  "container-template5"
+  
+  
+ 
 ];
+
+const commonsecondarycolor =[
+  "header-template5",
+  "header-template2"
+]
+
+const commonsecondarycolorclass=[
+  "batch-info",
+  
+
+]
+
+const commonclass=[
+  "single-batch-sessionDuration-heading-template1",
+   "single-batch-info-heading-template1",
+   "single-batch-trainee-heading-template1",
+   "single-batch-attendance-heading-template1",
+   "single-batch-evaluation-heading-template1",
+   "t3sessions",
+   "card-title",
+   "graph-title-trainee",
+   "graph-title-attendance",
+   "table-title"
+
+  
+]
+
 function applyTheme(themeId) {
   const color = themeColors[themeId] || { bg: "#C3FFC0", accent: "green" };
   console.log("Selected Theme:", themeId);
@@ -2734,14 +2765,42 @@ function applyTheme(themeId) {
   // firstColorDiv.children[0].children[1].children[0].style.backgroundColor = color.accent;
 
   // Apply common background color to other elements
+  
   document.getElementById("left-template1").style.backgroundColor = color.accent;
   document.querySelector(".report-container").style.backgroundColor = color.accent;
+
+
+
   commonElements.forEach(id => {
       const element = document.getElementById(id);
       if (element) {
           element.style.backgroundColor = color.bg;
       }
   });
+
+  commonsecondarycolor.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+        element.style.backgroundColor = color.accent;
+    }
+});
+
+commonclass.forEach(id => {
+  const elements = document.getElementsByClassName(id); 
+  // console.log(elements);
+  Array.from(elements).forEach(element => {
+    element.style.backgroundColor = color.bg;
+  });
+});
+commonsecondarycolorclass.forEach(id => {
+  const elements = document.getElementsByClassName(id); 
+  Array.from(elements).forEach(element => {
+    element.style.backgroundColor = color.accent;
+  });
+});
+
+
+
 
   // Apply colors to tables and progress bars
   const tables = [
@@ -2750,7 +2809,9 @@ function applyTheme(themeId) {
       "#trainee-details-template2",
       "#batchwise-data-template2",
       ".t3graphtraine",
-      ".table-section"
+      ".table-section",
+      ".single-batch-trainee-body-template1",
+      ".single-batch-evaluation-body-template1"
 
       
       
@@ -2789,12 +2850,32 @@ function applyTheme(themeId) {
                   th2.forEach((e)=>{
                       e.style.backgroundColor=color.bg;
                   })
+                  // var th2 = document.querySelectorAll("#single-batch-info-heading-template1");
+                  // th2.forEach((e)=>{
+                  //     e.style.backgroundColor=color.bg;
+                  // })
+                 
 
    // Change text color for trainer names
-  const trainerNames = document.querySelectorAll("#trainer-name-template1 h3");
-  trainerNames.forEach(e => e.style.color = color.bg);
-  const trainerNames2 = document.querySelectorAll("#trainer-name-template2 h3");
-  trainerNames2.forEach(e => e.style.color = color.bg);
+  const trainerNamest1 = document.querySelectorAll("#trainer-name-template1 h3");
+  trainerNamest1.forEach(e => e.style.color = color.bg);
+  const trainerNamest2 = document.querySelectorAll("#trainer-name-template2 h3");
+  trainerNamest2.forEach(e => e.style.color = color.bg);
+  const t1singlebatch = document.querySelectorAll(".single-batch-sessionDuration-body-template1 h2");
+  t1singlebatch.forEach(e => e.style.color = color.bg);
+  const t2batchwiseduration = document.querySelectorAll(".batch-duration-template2 h1");
+  t2batchwiseduration.forEach(e => e.style.color = color.bg);
+  const t3sessions = document.querySelectorAll(".t3sessions h1");
+  t3sessions.forEach(e => e.style.color = color.bg);
+  const t3trainers = document.querySelectorAll("#trainers-template3");
+  t3trainers.forEach(e => e.style.color = color.bg);
+  const t3batchcard = document.querySelectorAll(".batch-card h1");
+  t3batchcard.forEach(e => e.style.color = color.bg);
+  // const t3batchesh1 = document.querySelectorAll(".t3sessions");
+  // t3batchesh1.forEach(e => e.style.color = white);
+
+  
+ 
 }
 
 

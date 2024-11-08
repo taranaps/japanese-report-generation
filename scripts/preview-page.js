@@ -1136,7 +1136,7 @@ function applyIndent() {
 function applyOutdent() {
  document.execCommand("outdent"); // Outdent selected text  
 }
-b
+
 
 
 
