@@ -24,27 +24,27 @@ document.getElementById("login-button").addEventListener("click", function () {
           switch (errorCode) {
               case 'auth/wrong-password':
                   errorMessage = "Incorrect password. Please try again.";
-                  alert(errorMessage);
+                //   alert(errorMessage);
                   break;
               case 'auth/user-not-found':
                   errorMessage = "No account found with this email. Please sign up.";
-                  alert(errorMessage);
+                //   alert(errorMessage);
                   break;
               case 'auth/invalid-email':
                   errorMessage = "Invalid email format.";
-                  alert(errorMessage);
+                //   alert(errorMessage);
                   break;
               case 'auth/too-many-requests':
                   errorMessage = "Too many login attempts. Please try again later.";
-                  alert(errorMessage);
+                //   alert(errorMessage);
                   break;
               default:
                   errorMessage = "Login failed. Please try again.";
-                  alert(errorMessage);
+                //   alert(errorMessage);
           }
 
           // Display the error message
-        //   document.getElementById("error-message").innerText = errorMessage;
+          document.getElementById("error-message").innerText = errorMessage;
           // console.error("Error logging in:", errorMessage);
       });
 });
