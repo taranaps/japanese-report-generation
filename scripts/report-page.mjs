@@ -369,13 +369,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
-  async function getAttendanceData(data, id) {
-    try {
-      generateChart(data, id);
-    } catch (error) {
-      console.error("Error fetching data from Firebase:", error);
-    }
-  }
+  // async function getAttendanceData(data, id) {
+  //   try {
+  //     generateChart(data, id);
+  //   } catch (error) {
+  //     console.error("Error fetching data from Firebase:", error);
+  //   }
+  // }
 
   async function getLatestCollection() {
     try {
@@ -403,50 +403,129 @@ document.addEventListener("DOMContentLoaded", async () => {
       return null;
     }
   }
-
   async function createEvaluationTable(data, id) {
     const tablePosition = document.getElementById(id);
     tablePosition.innerHTML = "";
     const table = document.createElement("table");
     const headerRow = table.insertRow();
+
+    // Standard headers
     ["Trainee Name", "DU"].forEach((headerText) => {
-      const th = document.createElement("th");
-      th.textContent = headerText;
-      headerRow.appendChild(th);
+        const th = document.createElement("th");
+        th.textContent = headerText;
+        headerRow.appendChild(th);
     });
+
+    // Collect unique evaluations without "N/A" names or scores
     const uniqueEvaluations = new Set();
     data.forEach((item) => {
-      item.evaluations.forEach((evaluation) => {
-        if (evaluation.evaluationName !== "N/A") {
-          uniqueEvaluations.add(evaluation.evaluationName);
-        }
-      });
+        item.evaluations.forEach((evaluation) => {
+            if (evaluation.evaluationName !== "N/A" && evaluation.evaluationScore !== "N/A") {
+                uniqueEvaluations.add(evaluation.evaluationName);
+            }
+        });
     });
+
+    // Create headers for each valid evaluation
     const evaluationHeaders = Array.from(uniqueEvaluations);
     evaluationHeaders.forEach((header) => {
-      const th = document.createElement("th");
-      th.textContent = header;
-      headerRow.appendChild(th);
+        const th = document.createElement("th");
+        th.textContent = header;
+        headerRow.appendChild(th);
     });
+
+    // Populate table rows
     data.forEach((item) => {
-      const row = table.insertRow();
-      row.insertCell().textContent = item.traineeName;
-      row.insertCell().textContent = item.du;
-      const evaluationMap = {};
-      item.evaluations.forEach((evaluation) => {
-        if (evaluation.evaluationName !== "N/A") {
-          evaluationMap[evaluation.evaluationName] = evaluation.evaluationScore;
-        }
-      });
-      evaluationHeaders.forEach((header) => {
-        const cell = row.insertCell();
-        cell.textContent = evaluationMap[header] || "";
-      });
+        const row = table.insertRow();
+        row.insertCell().textContent = item.traineeName;
+        row.insertCell().textContent = item.du;
+
+        // Map valid evaluations to their scores
+        const evaluationMap = {};
+        item.evaluations.forEach((evaluation) => {
+            if (evaluation.evaluationName !== "N/A" && evaluation.evaluationScore !== "N/A") {
+                evaluationMap[evaluation.evaluationName] = evaluation.evaluationScore;
+            }
+        });
+
+        // Insert cells for each evaluation header, showing score or blank if missing
+        evaluationHeaders.forEach((header) => {
+            const cell = row.insertCell();
+            const score = evaluationMap[header] || "";
+
+            // Set cell background color to red if score is 'F'
+            if (score === 'F') {
+                cell.style.backgroundColor = "red";
+                cell.style.color = "white"; // Optional: set text color to white for better contrast
+            }
+            else if (score.toLowerCase() === 'absent') {
+              cell.style.backgroundColor = "yellow";
+              cell.style.color = "black"; // Optional: set text color to black for contrast
+          }
+            
+            cell.textContent = score;
+        });
     });
 
     return table;
-  }
+}
 
+
+
+  // async function createEvaluationTable(data, id) {
+  //   const tablePosition = document.getElementById(id);
+  //   tablePosition.innerHTML = "";
+  //   const table = document.createElement("table");
+  
+  //   // Add basic headers
+  //   const headerRow = table.insertRow();
+  //   ["Trainee Name", "DU"].forEach((headerText) => {
+  //     const th = document.createElement("th");
+  //     th.textContent = headerText;
+  //     headerRow.appendChild(th);
+  //   });
+  
+  //   // Collect unique evaluation names, excluding those with "N/A" scores
+  //   const uniqueEvaluations = new Set();
+  //   data.forEach((item) => {
+  //     item.evaluations.forEach((evaluation) => {
+  //       if (evaluation.evaluationScore !== "N/A") {
+  //         uniqueEvaluations.add(evaluation.evaluationName);
+  //       }
+  //     });
+  //   });
+  
+  //   const evaluationHeaders = Array.from(uniqueEvaluations);
+  //   evaluationHeaders.forEach((header) => {
+  //     const th = document.createElement("th");
+  //     th.textContent = header;
+  //     headerRow.appendChild(th);
+  //   });
+  
+  //   // Populate table rows with trainee and evaluation data
+  //   data.forEach((item) => {
+  //     const row = table.insertRow();
+  //     row.insertCell().textContent = item.traineeName;
+  //     row.insertCell().textContent = item.du;
+  
+  //     // Map evaluation names to scores for this row
+  //     const evaluationMap = {};
+  //     item.evaluations.forEach((evaluation) => {
+  //       if (evaluation.evaluationName !== "N/A" || evaluation.evaluationScore !== "N/A") {
+  //         evaluationMap[evaluation.evaluationName] = evaluation.evaluationScore;
+  //       }
+  //     });
+  
+  //     // Populate cells based on evaluation headers
+  //     evaluationHeaders.forEach((header) => {
+  //       const cell = row.insertCell();
+  //       cell.textContent = evaluationMap[header] || "";
+  //     });
+  //   });
+  
+  //   return table;
+  // }
+  
   function formatCollectionName(collectionName) {
     const [month, year] = collectionName.split("-"); 
     return month.charAt(0).toUpperCase() + month.slice(1) + " " + year;
