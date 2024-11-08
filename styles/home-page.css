@@ -3,8 +3,8 @@
 /* nav-bar */
 
 .icon {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     color: white;
 }
 
@@ -127,7 +127,7 @@ body {
     justify-content: space-between;
     gap: 20px;
     z-index: 100;
-    background:#dc143c;
+    background:#dcdcdc85;
   }
 
 /* .sign-out {
@@ -165,8 +165,6 @@ body {
     flex-grow: 1; 
     width: 60%; 
 }
-
-
 
 .card-image {
     width: 100%;
@@ -269,7 +267,7 @@ body {
     width: 200px;
     height: 200px; 
     background-color: #f9f9f9;
-    color: #DC143C;
+    color: #000000;
     border-radius: 8px;
     padding: 20px;
     text-align: center;
@@ -281,8 +279,8 @@ body {
     box-sizing: border-box; 
     position: relative;
 }
-.stat-box1 {
-    transition: transform 0.5s ease; /* Smooth transition */
+/* .stat-box1 {
+    transition: transform 0.5s ease; 
     width: 200px;
     height: 200px; 
     background-color: #ffeaea;
@@ -302,11 +300,10 @@ body {
 .stat-box1:hover {
     background-color: #f9f9f9;
     color: #DC143C; 
-}
+} */
 
 .stat-box:hover {
     background-color: #ffeaea;
-    color: #181717; 
 }
 .stat-box1:hover {
     transform: scale(1.1); 
@@ -348,7 +345,6 @@ body {
 .box-content {
     position: absolute;
     z-index: 2;
-
 }
 
 /* ---Upload-Data Pop-up Styles--- */
