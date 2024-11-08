@@ -14,6 +14,7 @@ const messageContent = document.getElementById('messageContent');
 const closeMessageModal = document.getElementById('closeMessageModal');
 const tableButton = document.getElementById('tableButton');
 const reportButton = document.getElementById('reportButton');
+
 // Show the upload modal
 openUploadModal.addEventListener('click', () => {
     document.body.classList.add('modal-active');
@@ -25,16 +26,6 @@ closeUploadModal.addEventListener('click', () => {
     document.body.classList.remove('modal-active'); // Remove modal-active class
     uploadModal.style.display = 'none'; // Hide the modal
 });
-
-// Redirect to table.html
-// tableButton.addEventListener('click', () => {
-//     window.location.href = 'table.html';
-// });
-
-// Redirect to report-content.html
-// reportButton.addEventListener('click', () => {
-//     window.location.href = 'report-content.html';
-// });
 
 // Close message modal
 closeMessageModal.addEventListener('click', () => {
@@ -61,11 +52,25 @@ uploadButton.addEventListener('click', async () => {
         const sheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
 
-        const validationResult = validateData(jsonData);
-        // if (!validationResult.isValid) {
-        //     showMessageModal(validationResult.errorMessage, 'error');
-        //     return;  // Prevent upload if validation fails
-        // }
+        console.log("jsonData ka trainees:", jsonData); // View initial parsed data
+
+         // Preliminary validation for merged cell fields
+        //  const rawValidationResult = validateRawData(jsonData);
+        //  if (!rawValidationResult.isValid) {
+        //      showMessageModal(rawValidationResult.errorMessage, 'error');
+        //      return;
+        //  }
+ 
+
+        // Process data into structured format
+        const trainees = processTraineeData(sheet, jsonData);
+
+        console.log("processtrainee eventlistner ka trainees:", trainees);
+
+        const validationResult = validateData(trainees);
+
+        console.log("validationResult ka trainees:", validationResult); // Check if data validation passed or failed
+
         if (validationResult.isValid) {
             const trainees = processTraineeData(sheet, jsonData);
             const collectionName = getCollectionName(trainees[0].month);
@@ -75,6 +80,7 @@ uploadButton.addEventListener('click', async () => {
         } else {
             showMessageModal(validationResult.errorMessage, 'error');
         }
+
     } catch (err) {
         console.error('Error processing file:', err);
         showMessageModal('Error uploading data. Please try again.', 'error');
@@ -94,164 +100,123 @@ function getCollectionName(month) {
     return `${month.toLowerCase()}-${year}`;
 }
 
+// Validate raw data before processing trainee data
+// function validateRawData(rawData) {
+//     const requiredFields = [
+//         "Batch Name", "Trainer Name", "Number of Sessions Till Date",
+//         "Number of Sessions (Month)", "Batch Duration Till Date",
+//         "Batch Duration (Month)", "Month", "Certification Level"
+//     ];
+
+//     for (const row of rawData) {
+//         for (const field of requiredFields) {
+//             if (!row[field]) {
+//                 return { isValid: false, errorMessage: `Field '${field}' cannot be empty.` };
+//             }
+//         }
+//     }
+//     return { isValid: true };
+// }
+
 // Validate the uploaded data against the specified rules
-function validateData(data) {
-    const expectedHeaders = [
-        'Trainer Name', 'Batch Name', 'Number of Sessions Till Date', 'Number of Sessions (Month)',
-        'Batch Duration Till Date', 'Batch Duration (Month)', 'Certification Level', 'Month',
-        'Trainee Name', 'DU', 'Avg Attendance Percentage', 'Evaluation'
+function validateData(trainees) {
+    // Check if all trainee objects contain the required fields
+    const requiredHeaders = [
+        'traineeName', 'batchName', 'numberOfSessionsTillDate', 'numberOfSessionsMonth',
+        'batchDurationTillDate', 'batchDurationMonth', 'certificationLevel', 'month',
+        'du', 'avgAttendance', 'evaluations'
     ];
 
-    // Check headers
-    const headers = Object.keys(data[0]);
-    for (const header of expectedHeaders) {
-        if (!headers.includes(header)) {
+    const validScores = ['A', 'B', 'C', 'D', 'F', 'Absent', 'N/A'];
+    const validEvaluationNumbers = /^E\d+$/;
+    const validBatchNamePattern = /^Batch \d+$/;
+
+    // 1. Check if all headers are present
+    const keys = Object.keys(trainees[0] || {});
+    for (const header of requiredHeaders) {
+        if (!keys.includes(header)) {
             return { isValid: false, errorMessage: `Missing header: ${header}` };
         }
     }
 
-    // Check if all "Month" values are the same
-    const monthColumnValues = data.map(row => row['Month']).filter(Boolean); // Filter out any empty values
-    const uniqueMonths = [...new Set(monthColumnValues)];
+    for (const trainee of trainees) {
 
-    if (uniqueMonths.length !== 1) {
-        return { isValid: false, errorMessage: "All rows under the 'Month' column must have the same value." };
-    }
-
-
-    // Validation rules
-    for (let row of data) {
-        if (row['Batch Name'] && !/^Batch \d+$/.test(row['Batch Name'])) {
-            return { isValid: false, errorMessage: `Invalid Batch Name format for '${row['Batch Name']}'. Expected format: 'Batch [num]'` };
+        // Validate that batchName is not empty and follows "Batch X" format
+        if (!trainee.batchName || !validBatchNamePattern.test(trainee.batchName)) {
+            return { isValid: false, errorMessage: `Batch Name is required and must follow the format 'Batch X' where X is a number. Invalid Batch Name: '${trainee.batchName}' for trainee: ${trainee.traineeName}.` };
         }
 
-        if (row['Certification Level'] && !/^(N[1-5])$/.test(row['Certification Level'])) {
-            return { isValid: false, errorMessage: `Invalid Certification Level: '${row['Certification Level']}'. Expected values: N1, N2, N3, N4, N5` };
+        // Check for empty fields (other than evaluations)
+        if (trainee.traineeName) {
+            for (const field of requiredHeaders) {
+                if (!trainee[field] && field !== 'evaluations') {
+                    return { isValid: false, errorMessage: `Field ${field} cannot be empty for trainee: ${trainee.traineeName}` };
+                }
+            }
         }
 
-        if (row['Month'] && !['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].includes(row['Month'])) {
-            return { isValid: false, errorMessage: `Invalid Month: '${row['Month']}'. Expected a month name.` };
+        // Evaluation-specific validation
+        for (const evaluation of trainee.evaluations || []) {
+            if (!validEvaluationNumbers.test(evaluation.evaluationNo)) {
+                return { isValid: false, errorMessage: `Invalid Evaluation Number '${evaluation.evaluationNo}' for trainee: ${trainee.traineeName}. Expected format: E1, E2, ...` };
+            }
+
+            if (evaluation.evaluationName && (!evaluation.evaluationScore || !validScores.includes(evaluation.evaluationScore))) {
+                return { isValid: false, errorMessage: `Invalid or missing score for Evaluation Name: '${evaluation.evaluationName}' of trainee: ${trainee.traineeName}. Expected scores: ${validScores.join(", ")}.` };
+            }
+
+            if (!evaluation.evaluationName && evaluation.evaluationScore) {
+                return { isValid: false, errorMessage: `Evaluation Score provided without an Evaluation Name for trainee: ${trainee.traineeName}.` };
+            }
         }
 
-        if (row['DU'] && !/^DU \d+$/.test(row['DU'])) {
-            return { isValid: false, errorMessage: `Invalid DU format: '${row['DU']}'. Expected format: 'DU [num]' where num is from 1 to 6` };
+        // Additional validations (example: Certification Level format)
+        if (!/^(N[1-5])$/.test(trainee.certificationLevel)) {
+            return { isValid: false, errorMessage: `Invalid Certification Level: '${trainee.certificationLevel}'. Expected values: N1, N2, N3, N4, N5.` };
         }
 
-        if (row['Avg Attendance Percentage'] && (row['Avg Attendance Percentage'] < 1 || row['Avg Attendance Percentage'] > 100)) {
+        if (trainee.month && !['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].includes(trainee.month)) {
+            return { isValid: false, errorMessage: `Invalid Month: '${trainee.month}'. Expected a valid month name.` };
+        }
+
+        if (!/^DU \d+$/.test(trainee.du)) {
+            return { isValid: false, errorMessage: `Invalid DU format: '${trainee.du}'. Expected format: 'DU [num]' where num is from 1 to 6.` };
+        }
+
+        if (trainee.avgAttendance < 1 || trainee.avgAttendance > 100) {
             return { isValid: false, errorMessage: `Avg Attendance Percentage must be between 1 and 100.` };
         }
 
-        const { evalNumbers, evalDates, evalNames } = locateEvaluationRows(data);
+        // Ensure 'Batch duration (month)' < 'Batch Duration Till Date'
+        if (trainee.batchDurationMonth >= trainee.batchDurationTillDate) {
+            return { isValid: false, errorMessage: `Batch Duration (Month) should be less than Batch Duration Till Date for trainee: ${trainee.traineeName}.` };
+        }
 
-        // Ensure evalNumbers, evalDates, evalNames are arrays
-        // evalNumbers = Array.isArray(evalNumbers) ? evalNumbers : Object.values(evalNumbers || {});
-        // evalDates = Array.isArray(evalDates) ? evalDates : Object.values(evalDates || {});
-        // evalNames = Array.isArray(evalNames) ? evalNames : Object.values(evalNames || {});
-        // const evaluations = extractEvaluations(row, evalNumbers, evalDates, evalNames)
-        // const evaluations = extractEvaluations(row);
-        // console.log('---Evaluation in validation:', {evaluations});
-        // for (let evalEntry of evaluations) {
-        //     if (evalEntry.evaluationNo && !/^E\d+$/.test(evalEntry.evaluationNo)) {
-        //         return { isValid: false, errorMessage: `Invalid Evaluation No: '${evalEntry.evaluationNo}'. Expected format: 'E[num]'` };
-        //     }
-        //     if (evalEntry.evaluationDate && !isValidDate(evalEntry.evaluationDate, row['Month'])) {
-        //         return { isValid: false, errorMessage: `Invalid Date: '${evalEntry.evaluationDate}'. Expected format: 'DD/MM/YYYY' matching the month '${row['Month']}'` };
-        //     }
-        //     if (evalEntry.evaluationName && !evalEntry.evaluationDate) {
-        //         return { isValid: false, errorMessage: "Both Evaluation Name and Date must be provided." };
-        //     }
-        //     if (evalEntry.score && !['A', 'B', 'C', 'D', 'F', 'Absent'].includes(evalEntry.score)) {
-        //         return { isValid: false, errorMessage: `Invalid Score: '${evalEntry.score}'. Expected one of: A, B, C, D, F, Absent` };
-        //     }
-        // }
+        // Ensure 'Number of Sessions (month)' < 'Number of Sessions Till Date'
+        if (trainee.numberOfSessionsMonth >= trainee.numberOfSessionsTillDate) {
+            return { isValid: false, errorMessage: `Number of Sessions (Month) should be less than Number of Sessions Till Date for trainee: ${trainee.traineeName}.` };
+        }
 
+        // Check for integers in 'Number of Sessions' fields
+        if (!Number.isInteger(trainee.numberOfSessionsMonth) || !Number.isInteger(trainee.numberOfSessionsTillDate)) {
+            return { isValid: false, errorMessage: `Number of Sessions fields should be integers for trainee: ${trainee.traineeName}.` };
+        }
 
+        // Ensure 'Number of Sessions' and 'Batch Duration' fields are non-zero
+        if (trainee.numberOfSessionsMonth <= 0 || trainee.numberOfSessionsTillDate <= 0 || trainee.batchDurationMonth <= 0 || trainee.batchDurationTillDate <= 0) {
+            return { isValid: false, errorMessage: `Number of Sessions and Batch Duration fields cannot be 0 or empty for trainee: ${trainee.traineeName}.` };
+        }
+    }
 
-        // for(let i = 0; i < evalNumbers; i++){
-        //     if(evaluations) {
-        //         let eno = evaluations[i].evaluationNo;
-        //         let ename = evaluations[i].evaluationName;
-        //         let edate = evaluations[i].evaluationDate;
-        //         let escore = evaluations[i].evaluationNo;
-        //         console.log('---validation eno:', {eno});
-        //         console.log('---validation ename:', {ename});
-        //         console.log('---validation edate:', {edate});
-        //         console.log('---validation escore:', {escore});
-        //         if (evaluations[i].evaluationNo && !/^E\d+$/.test(evaluations[i].evaluationNo)) {
-        //                 return { isValid: false, errorMessage: `Invalid Evaluation No: '${evaluations.evaluationNo}'. Expected format: 'E[num]'` };
-        //             }
-
-        //         if (evaluations.evaluationDate && !isValidDate(evaluations.evaluationDate, row['Month'])) {
-        //                 return { isValid: false, errorMessage: `Invalid Date: '${evaluations.evaluationDate}'. Expected format: 'DD/MM/YYYY' with the month matching '${row['Month']}'` };
-        //             }
-
-        //                 // Check for required values in the evaluation columns
-        //         if ((evaluations.evaluationName && !evaluations.evaluationDate) || (evaluations.evaluationDate && !evaluations.evaluationName)) {
-        //                 return { isValid: false, errorMessage: `If Evaluation Name is provided, Date must also be provided and vice versa.` };
-        //             }
-        //         if (evaluations.score && !['A', 'B', 'C', 'D', 'F', 'Absent'].includes(evaluations.score)) {
-        //                 return { isValid: false, errorMessage: `Invalid Score: '${evaluations.score}'. Expected format: '['A', 'B', 'C', 'D', 'F', 'Absent']'` };
-        //             }
-        //     }
-        // }
-
-        // if (row['Trainee Name']) {
-        //     const rowValues = Object.values(row);
-        //     if (rowValues.some(value => value === "" && !['Evaluation'].includes(headers[rowValues.indexOf(value)]))) {
-        //         return { isValid: false, errorMessage: `All fields for trainee '${row['Trainee Name']}' must have values except under the Evaluation section.` };
-        //     }
-
-        //     // Evaluation-specific validation
-        //     if (row['Evaluation Name'] && row['Date']) {
-        //         const validScores = ["A", "B", "C", "D", "F", "Absent"];
-        //         const evaluationScores = headers.slice(headers.indexOf('Evaluation') + 1).map(header => row[header]);
-
-        //         if (evaluationScores.some(score => score && !validScores.includes(score))) {
-        //             return { isValid: false, errorMessage: `Invalid score for trainee '${row['Trainee Name']}'. Scores must be one of ${validScores.join(", ")}.` };
-        //         }
-
-        //         if (evaluationScores.some(score => score === "")) {
-        //             return { isValid: false, errorMessage: `All scores under Evaluation must be filled if Evaluation Name and Date are present for trainee '${row['Trainee Name']}'` };
-        //         }
-        //     }
-        // }
-
-        // Check if Trainee Name has corresponding values in all columns
-        // if (row['Trainee Name'] && Object.values(row).some(value => value === "")) {
-        //     return { isValid: false, errorMessage: `All fields for trainee '${row['Trainee Name']}' must have values.` };
-        // }
+    // Check for consistent 'Month' value
+    const monthValue = trainees[0]?.month;
+    for (const trainee of trainees) {
+        if (trainee.month !== monthValue) {
+            return { isValid: false, errorMessage: `All trainees must have the same 'Month' value.` };
+        }
     }
 
     return { isValid: true };
-}
-
-// Check if the date is valid and matches the month
-function isValidDate(dateString, expectedMonth) {
-    const dateParts = dateString.split('/');
-    if (dateParts.length !== 3) return false;
-
-    const day = parseInt(dateParts[0]);
-    const month = parseInt(dateParts[1]) - 1; // JS months are 0-indexed
-    const year = parseInt(dateParts[2]);
-
-    const date = new Date(year, month, day);
-    return date.getFullYear() === year && date.getMonth() === month && date.getDate() === day && isSameMonth(date, expectedMonth);
-}
-
-// Check if the date month matches the expected month
-function isSameMonth(date, expectedMonth) {
-    const monthNames = [
-        'January', 'February', 'March', 'April',
-        'May', 'June', 'July', 'August',
-        'September', 'October', 'November', 'December'
-    ];
-    return monthNames[date.getMonth()] === expectedMonth;
-}
-
-// Convert Excel dates to JavaScript Date objects
-function convertExcelDate(excelDate) {
-    const date = XLSX.SSF.parse_date_code(excelDate);
-    return new Date(date.y, date.m - 1, date.d); // JavaScript months are 0-indexed
 }
 
 // Process Excel data into structured objects
@@ -260,12 +225,9 @@ function processTraineeData(sheet, data) {
     let currentBatch = "", certLevel = "", month = "", trainerNames = [],
         nOfSessionsTillDate = "", nOfSessionsMonth = "", batchDurTillDate = "", batchDurMonth = "";
 
-    // Dynamically locate key rows for evaluations
-    let { evalNumbers, evalDates, evalNames } = locateEvaluationRows(data);
+    let { evalNumbers, evalNames } = locateEvaluationRows(data);
 
-    // Ensure evalNumbers, evalDates, evalNames are arrays
     evalNumbers = Array.isArray(evalNumbers) ? evalNumbers : Object.values(evalNumbers || {});
-    evalDates = Array.isArray(evalDates) ? evalDates : Object.values(evalDates || {});
     evalNames = Array.isArray(evalNames) ? evalNames : Object.values(evalNames || {});
 
     data.forEach((row) => {
@@ -273,81 +235,73 @@ function processTraineeData(sheet, data) {
         if (row["Certification Level"]) certLevel = row["Certification Level"];
         if (row["Month"]) month = row["Month"];
         if (row["Trainer Name"]) {
-            // Handle merged cells for trainer names
             trainerNames = row["Trainer Name"].split(",").map(name => name.trim());
         }
         if (row["Number of Sessions Till Date"]) nOfSessionsTillDate = row["Number of Sessions Till Date"];
         if (row["Number of Sessions (Month)"]) nOfSessionsMonth = row["Number of Sessions (Month)"];
         if (row["Batch Duration Till Date"]) batchDurTillDate = row["Batch Duration Till Date"];
         if (row["Batch Duration (Month)"]) batchDurMonth = row["Batch Duration (Month)"];
-        if (!row["Trainee Name"]) return; // Skip if no trainee name
+        if (!row["Trainee Name"]) return; 
 
         const trainee = {
-            traineeName: row["Trainee Name"],
-            batchName: currentBatch,
-            certificationLevel: certLevel,
-            month: month,
+            traineeName: row["Trainee Name"] || "",
+            batchName: currentBatch || "",
+            certificationLevel: certLevel || "",
+            month: month || "",
             du: row["DU"] || "",
             avgAttendance: row["Avg Attendance Percentage"] || 0,
-            trainerName: trainerNames, // Store trainer names as an array
+            trainerName: trainerNames || "", 
             numberOfSessionsTillDate: parseInt(nOfSessionsTillDate) || 0,
             numberOfSessionsMonth: parseInt(nOfSessionsMonth) || 0,
             batchDurationTillDate: parseFloat(batchDurTillDate) || 0,
             batchDurationMonth: parseFloat(batchDurMonth) || 0,
-            evaluations: extractEvaluations(row, evalNumbers, evalDates, evalNames)  // Updated call
+            evaluations: extractEvaluations(row, evalNumbers, evalNames) 
         };
 
         trainees.push(trainee);
     });
 
+    console.log("processTraineeData ka trainees:", trainees); 
+
     return trainees;
 }
 
 function locateEvaluationRows(data) {
-    let evalNumbers, evalDates, evalNames;
+    let evalNumbers, evalNames;
 
     data.forEach((row, index) => {
         const rowValues = Object.values(row)
-            .map(val => val.toString().trim().toLowerCase()); // Trim and lowercase all values
+            .map(val => val.toString().trim().toLowerCase()); 
 
-        // Check for the presence of keywords in the row values
         if (rowValues.some(val => val.includes("evaluation no"))) {
             evalNumbers = row;
-        } else if (rowValues.some(val => val.includes("date"))) {
-            evalDates = row;
-        } else if (rowValues.some(val => val.includes("evaluation name"))) {
+        } 
+        else if (rowValues.some(val => val.includes("evaluation name"))) {
             evalNames = row;
         }
     });
 
-    // If any row is not found, log a warning and assign empty objects to prevent crashes
-    if (!evalNumbers || !evalDates || !evalNames) {
+    if (!evalNumbers || !evalNames) {
         console.warn("Some evaluation rows could not be located. Check the sheet format.");
         return {
             evalNumbers: evalNumbers || {},
-            evalDates: evalDates || {},
             evalNames: evalNames || {},
         };
     }
 
-    return { evalNumbers, evalDates, evalNames };
+    return { evalNumbers, evalNames };
 }
 
 
 // Extract evaluations for each trainee
-function extractEvaluations(row, evalNumbers, evalDates, evalNames) {
+function extractEvaluations(row, evalNumbers, evalNames) {
     const evaluations = [];
 
-    // Get evaluation keys dynamically
     const evaluationKeys = Object.keys(row).filter(key => key.startsWith('__EMPTY'));
 
     const validEvalNumbers = evalNumbers
         .filter(num => typeof num === 'string' && num.trim() !== '' && !num.toLowerCase().includes("evaluation no"))
         .map(num => num.trim());
-
-    const validEvalDates = evalDates
-        .filter(num => typeof num === 'number' && !isNaN(num))
-        .map(num => convertExcelDate(num));
 
     const validEvalNames = evalNames
         .filter(num => typeof num === 'string' && num.trim() !== '' && !num.toLowerCase().includes("evaluation name"))
@@ -355,19 +309,16 @@ function extractEvaluations(row, evalNumbers, evalDates, evalNames) {
 
     evaluationKeys.forEach((key, index) => {
         const evalNo = validEvalNumbers[index] || `Evaluation ${index + 1}`;
-        const score = row[key] !== undefined ? row[key].toString().trim() : "Absent";
-        const evaluationDate = validEvalDates[index] ? validEvalDates[index].toLocaleDateString() : "N/A";
-        const evaluationName = validEvalNames[index] || "N/A";
+        const score = row[key] !== undefined ? row[key].toString().trim() : "Empty";
+        const evaluationName = validEvalNames[index];
 
         evaluations.push({
-            evaluationNo: evalNo,
-            evaluationDate: evaluationDate,
-            evaluationName: evaluationName,
-            evaluationScore: score
+            evaluationNo: evalNo || "",
+            evaluationName: evaluationName || "",
+            evaluationScore: score || ""
         });
         console.log('---Evaluation:', {
             evaluationNo: evalNo,
-            evaluationDate: evaluationDate,
             evaluationName: evalNames[index],
             evaluationScore: score
         });

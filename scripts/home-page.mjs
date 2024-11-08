@@ -26,14 +26,14 @@ async function fetchLatestCollection() {
     if (collectionNames && collectionNames.length > 0) {
       // Get the last added collection name
       const latestCollectionName = collectionNames[collectionNames.length - 1];
-      console.log("Latest collection name:", latestCollectionName);
+      // console.log("Latest collection name:", latestCollectionName);
       return latestCollectionName;
     } else {
-      console.log("No collections found in meta.");
+      // console.log("No collections found in meta.");
       return null;
     }
   } else {
-    console.log("Meta document does not exist.");
+    // console.log("Meta document does not exist.");
     return null;
   }
 }
@@ -60,10 +60,10 @@ async function renderDashboard() {
     if (Array.isArray(data.trainerName)) {
       data.trainerName.forEach((trainer) => {
         trainerName.add(trainer);
-        console.log("Adding trainer:", trainer);
+        // console.log("Adding trainer:", trainer);
       });
     } else {
-      console.warn("trainerName is not an array:", data.trainerName);
+      // console.warn("trainerName is not an array:", data.trainerName);
     }
 
     if (!batchData[data.batchName]) {
