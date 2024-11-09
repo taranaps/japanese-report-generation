@@ -519,6 +519,7 @@ dropdown.forEach(dropdown => {
 
 
 
+
 let tableContainer;
 let toolbarId;
 let mergeRowIndex;
@@ -530,6 +531,8 @@ let endrowIndex;
 let toolbar_text;
 let textColorPicker;
 let highlightColorPicker;
+let imageToolbar;
+let hideImage;
 images.forEach(image => {
     image.addEventListener('click', function() {
         hideAllTemplates()
@@ -553,6 +556,8 @@ images.forEach(image => {
                 toolbar_text='toolbar-text2'
                 textColorPicker='textColorPicker2'
                 highlightColorPicker='highlightColorPicker2'
+                imageToolbar='imageToolbar2'
+                hideImage='#tableContent2 img'
 
                 
             }
@@ -568,6 +573,8 @@ images.forEach(image => {
                toolbar_text='toolbar-text4'
                 textColorPicker='textColorPicker4'
                 highlightColorPicker='highlightColorPicker4'
+                imageToolbar='imageToolbar4'
+                hideImage='#tableContent4 img'
 
             }
             else if(templateKey==="template3"){
@@ -582,10 +589,13 @@ images.forEach(image => {
                toolbar_text='toolbar-text3'
                 textColorPicker='textColorPicker3'
                 highlightColorPicker='highlightColorPicker3'
+                imageToolbar='imageToolbar3'
+                hideImage='#tableContent3 img'
 
             }
             else{
                 tableContainer=document.getElementById('tableContent1')
+                tableId='tablecontainer1'
                 toolbarId='toolbar1'
                 mergeRowIndex='mergeRowIndex1'
                 startColumnIndex='startColumnIndex1'
@@ -596,6 +606,8 @@ images.forEach(image => {
                 toolbar_text='toolbar-text1'
                 textColorPicker='textColorPicker1'
                 highlightColorPicker='highlightColorPicker1'
+                imageToolbar='imageToolbar1'
+                hideImage='#tableContent1 img'
 
 
             }
@@ -612,10 +624,47 @@ images.forEach(image => {
 
 
 
+        document.getElementById("increaseMarginBtn").onclick = function() {
+          const targetDiv = document.getElementById(tableId);
+        
+          // Get the current margin-bottom of the div
+          const currentMarginTop = parseInt(window.getComputedStyle(targetDiv).marginTop);
+        
+          // Increase the margin-bottom by 10 pixels
+          targetDiv.style.marginTop = (currentMarginTop - 10) + "px";
+          let toolbar=document.getElementById(toolbarId)
+          toolbar.style.marginTop='-170px';
+          let toolbarText=document.getElementById(toolbar_text);
+          toolbarText.style.marginTop='-170px'
+          let toolbarImage=document.getElementById( imageToolbar);
+          toolbarImage.style.marginTop='-170px'
+        };
+
+        document.getElementById("decreaseMarginBtn").onclick = function() {
+          const targetDiv = document.getElementById(tableId);
+        
+          // Get the current margin-bottom of the div
+          const currentMarginTop = parseInt(window.getComputedStyle(targetDiv).marginTop);
+        
+          // Increase the margin-bottom by 10 pixels
+          targetDiv.style.marginTop = (currentMarginTop + 10) + "px";
+          let toolbar=document.getElementById(toolbarId)
+          toolbar.style.marginTop='70px';
+          let toolbarText=document.getElementById(toolbar_text);
+          toolbarText.style.marginTop='70px'
+          let toolbarImage=document.getElementById( imageToolbar);
+          toolbarImage.style.marginTop='70px'
+          
+    
+
+        };
 
 
-let selectedCell = null;
 
+
+
+let selectedTable = null; // Track the selected table
+let selectedCell = null;  // Track the selected cell
 
 
 function createTable() {
@@ -631,33 +680,17 @@ function createTable() {
       const cell = row.insertCell();
       cell.contentEditable = true; // Make cell editable
       cell.innerText = `Row ${i + 1}, Col ${j + 1}`;
-      cell.onclick = () => selectCell(cell); // Set as selected on click
+      cell.onclick = () => selectCell(cell, table); // Set as selected on click
     }
   }
 
-
   tableContainer.appendChild(table);
-  selectedTable = table;
-
-
- 
-
-
-  document.addEventListener('click', (event) => {
-    const toolbar = document.getElementById(toolbarId);
-    if (!toolbar.contains(event.target) && (!selectedTable || !selectedTable.contains(event.target))) {
-        toolbar.style.display = 'none';
-        // selectedCell = null;
-        // selectedTable = null;
-    }
-});
 }
 
-
-
-
-function selectCell(cell) {
+// Function to select a cell and set its table as the selectedTable
+function selectCell(cell, table) {
   selectedCell = cell;
+  selectedTable = table;
 
   // Display and position the toolbar
   const toolbar = document.getElementById(toolbarId);
@@ -666,6 +699,17 @@ function selectCell(cell) {
   toolbar.style.top = `${rect.top - toolbar.offsetHeight - 5}px`;
   toolbar.style.left = `${rect.left}px`;
 }
+
+// Close toolbar when clicking outside the toolbar and tables
+document.addEventListener('click', (event) => {
+  const toolbar = document.getElementById(toolbarId);
+  if (!toolbar.contains(event.target) && (!selectedTable || !selectedTable.contains(event.target))) {
+    toolbar.style.display = 'none';
+    selectedCell = null;
+    selectedTable = null;
+  }
+});
+
 
 function makeBold() {
   if (selectedCell) {
@@ -717,31 +761,6 @@ function increaseTextSize() {
 // }
 
 
-
-        function deleteCell() {
-            if (!selectedTable) {
-                alert("Please add a table first.");
-                return;
-            }
-        
-            const deleteRow = parseInt(document.getElementById("deleteRow").value) - 1;
-            const deleteCol = parseInt(document.getElementById("deleteCol").value) - 1;
-        
-            // Validate inputs
-            if (deleteRow < 0 || deleteRow >= selectedTable.rows.length || 
-                deleteCol < 0 || deleteCol >= selectedTable.rows[deleteRow].cells.length) {
-                alert("Please enter a valid cell location.");
-                return;
-            }
-        
-            // Delete the specified cell
-            selectedTable.rows[deleteRow].deleteCell(deleteCol);
-        
-            // If the row has no more cells, delete the entire row
-            if (selectedTable.rows[deleteRow].cells.length === 0) {
-                selectedTable.deleteRow(deleteRow);
-            }
-        }
 
         function setTableSpacing() {
             const spacing = parseInt(document.getElementById('tableSpacing').value) || 0;
@@ -849,7 +868,7 @@ function changeTextColorTable() {
     // Create a color picker with the last chosen color as the default
     const colorPicker = document.createElement('input');
     colorPicker.type = 'color';
-    colorPicker.value = defaultTextColor; // Set the default text color
+    // colorPicker.value = defaultTextColor; // Set the default text color
     colorPicker.style.position = 'absolute';
     colorPicker.style.zIndex = '1000';
     colorPicker.style.opacity = '0';
@@ -1015,6 +1034,84 @@ function mergeColumnCells() {
 }
 
 
+function addRow() {
+    if (selectedTable && selectedCell) {
+        const selectedRow = selectedCell.parentNode;
+        const rowIndex = selectedRow.rowIndex;
+        const newRow = selectedTable.insertRow(rowIndex + 1); // Insert below the selected row
+  
+        const cols = selectedTable.rows[0].cells.length;
+        for (let i = 0; i < cols; i++) {
+          const cell = newRow.insertCell();
+          cell.contentEditable = true;
+          cell.innerText = `New Row, Col ${i + 1}`;
+          cell.onclick = () => selectCell(cell, selectedTable);
+        }
+      } else {
+        alert('Please select a cell to insert a row below.');
+      }
+    }
+
+
+  function addColumn() {
+    if (selectedTable && selectedCell) {
+        const colIndex = selectedCell.cellIndex;
+  
+        for (let i = 0; i < selectedTable.rows.length; i++) {
+          const row = selectedTable.rows[i];
+          const newCell = row.insertCell(colIndex + 1); // Insert right of the selected cell
+          newCell.contentEditable = true;
+          newCell.innerText = `Row ${i + 1}, New Col ${colIndex + 2}`;
+          newCell.onclick = () => selectCell(newCell, selectedTable);
+        }
+      } else {
+        alert('Please select a cell to insert a column to the right.');
+      }
+  }
+
+
+
+  function setUniformSize() {
+    if (selectedTable) {
+      const width = prompt("Enter cell width in pixels:", "100");
+      const height = prompt("Enter cell height in pixels:", "50");
+      
+      if (width && height) {
+        const cells = selectedTable.getElementsByTagName("td");
+        for (let cell of cells) {
+          cell.style.width = `${width}px`;
+          cell.style.height = `${height}px`;
+        }
+      }
+    } else {
+      alert("Please select a table by clicking a cell first.");
+    }
+  }
+
+
+
+  function deleteTable() {
+    if (selectedTable) {
+      selectedTable.remove(); // Remove the selected table from the DOM
+      selectedTable = null; // Reset the selected table
+      document.getElementById(toolbarId).style.display = 'none'; // Hide the toolbar
+    } else {
+      alert("Please select a table to delete.");
+    }
+  }
+
+  function deleteCell() {
+    if (selectedCell) {
+      const row = selectedCell.parentNode;
+      row.deleteCell(selectedCell.cellIndex); // Delete the selected cell
+      selectedCell = null; // Reset the selected cell
+      document.getElementById(toolbarId).style.display = 'none'; // Hide the toolbar
+    } else {
+      alert("Please select a cell to delete.");
+    }
+  }
+
+  
 
 
 
@@ -1027,7 +1124,8 @@ function mergeColumnCells() {
 
 
 
-let activeEditableDiv = null;
+
+let activeEditableDiv;
 
 function createTextarea() {
     const specificDiv = tableContainer
@@ -1046,21 +1144,24 @@ function createTextarea() {
     editableDiv.addEventListener('click', () => {
         activeEditableDiv = editableDiv;
         showToolbar();
-    });
+    })
 
     // Add the editable div to the specific container
     specificDiv.appendChild(editableDiv);
     activeEditableDiv = editableDiv;
+    
+    function showToolbar() {
+      const toolbar1 = document.getElementById(toolbar_text);
+      toolbar1.style.display='block';
+       
+  }
 }
 
-function showToolbar() {
-    const toolbar = document.getElementById(toolbar_text);
-    toolbar.style.display = 'block';
-}
+
 
 function hideToolbar() {
-    const toolbar = document.getElementById(toolbar_text);
-    toolbar.style.display = 'none';
+    const toolbar1 = document.getElementById(toolbar_text);
+    toolbar1.style.display = 'none';
 }
 
 // Toolbar action functions
@@ -1108,8 +1209,8 @@ function decreaseFontSize() {
 
 // Global event listener to hide toolbar if click is outside editable div or toolbar
 document.addEventListener('click', (event) => {
-    const toolbar = document.getElementById(toolbar_text);
-    if (activeEditableDiv && !toolbar.contains(event.target) && !activeEditableDiv.contains(event.target)) {
+    const toolbar1 = document.getElementById(toolbar_text);
+    if (activeEditableDiv && !toolbar1.contains(event.target) && !activeEditableDiv.contains(event.target)) {
         hideToolbar();
         
     }
@@ -1136,7 +1237,117 @@ function applyIndent() {
 function applyOutdent() {
  document.execCommand("outdent"); // Outdent selected text  
 }
-b
+
+
+
+
+
+let selectedImages = [];
+  let selectedImageElement = null;
+
+  // Store the selected images when the user uploads them
+  document.getElementById("uploadImage").addEventListener("change", function(event) {
+    selectedImages = Array.from(event.target.files); // Convert file list to array
+  });
+
+  // Display all selected images in the container when the button is clicked
+  function displayUploadedPhotos() {
+    // const imageContainer = document.getElementById("imageContainer");
+    // imageContainer.innerHTML = ""; // Clear the container before displaying new images
+
+    if (selectedImages.length > 0) {
+      selectedImages.forEach(imageFile => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const imgElement = document.createElement("img");
+          imgElement.src = e.target.result;
+          imgElement.alt = "Uploaded Image";
+          imgElement.onclick = () => showToolbar(imgElement);
+          tableContainer.appendChild(imgElement);
+        };
+        reader.readAsDataURL(imageFile);
+      });
+    } else {
+      alert("Please select one or more images first.");
+    }
+  }
+
+  // Show toolbar above the clicked image
+  function showToolbar(imgElement) {
+    selectedImageElement = imgElement; // Set the selected image element
+    const toolbar = document.getElementById(imageToolbar);
+
+    // Calculate position above the image
+    const imgRect = imgElement.getBoundingClientRect();
+    toolbar.style.display = "block";
+    toolbar.style.top = `${imgRect.top - toolbar.offsetHeight - 10}px`;
+    toolbar.style.left = `${imgRect.left}px`;
+  }
+
+  // Reduce the size of the selected image
+  function reduceImageSize() {
+    if (selectedImageElement) {
+      // Get the current width of the image in pixels
+      const currentWidth = parseInt(window.getComputedStyle(selectedImageElement).width);
+      // Reduce the width by 10px
+      selectedImageElement.style.width = `${currentWidth - 10}px`;
+    }
+  }
+
+
+  function increaseImageSize() {
+    if (selectedImageElement) {
+      const currentWidth = parseInt(window.getComputedStyle(selectedImageElement).width);
+      selectedImageElement.style.width = `${currentWidth + 10}px`;
+    }
+  }
+
+  function indentImageLeft() {
+    if (selectedImageElement) {
+      const currentMarginLeft = parseInt(window.getComputedStyle(selectedImageElement).marginLeft) || 0;
+      selectedImageElement.style.marginLeft = `${currentMarginLeft - 10}px`; // Move left by 10px
+    }
+  }
+
+
+  function indentImageRight() {
+    if (selectedImageElement) {
+      const currentMarginLeft = parseInt(window.getComputedStyle(selectedImageElement).marginLeft) || 0;
+      selectedImageElement.style.marginLeft = `${currentMarginLeft + 10}px`; // Move right by 10px
+    }
+  }
+
+
+  function setImageBorderColor() {
+    if (selectedImageElement) {
+      const color = document.getElementById("borderColorPicker").value;
+      selectedImageElement.style.border = `2px solid ${color}`; // Apply border with the selected color
+    }
+  }
+  function addMarginTop(){
+    if (selectedImageElement) {
+      const currentMarginTop = parseInt(window.getComputedStyle(selectedImageElement).marginTop) || 0;
+      selectedImageElement.style.marginTop = `${currentMarginTop + 10}px`; // Move right by 10px
+  }
+}
+function addMarginBottom(){
+  if (selectedImageElement) {
+    const currentMarginBottom = parseInt(window.getComputedStyle(selectedImageElement).marginTop) || 0;
+    selectedImageElement.style.marginTop = `${currentMarginBottom - 10}px`; // Move right by 10px
+}
+
+}
+
+
+  // Hide toolbar when clicking outside of an image
+  document.addEventListener("click", function(event) {
+    const toolbar = document.getElementById(imageToolbar);
+    if (!event.target.closest(hideImage) && event.target !== toolbar && !toolbar.contains(event.target)) {
+      toolbar.style.display = "none";
+    }
+  });
+
+
 
 
 
