@@ -5,12 +5,11 @@
 .icon {
     width: 25px;
     height: 25px;
-    color: white;
 }
 
 .sidebar {
     width: 60px;
-    height: 60%;
+    height: 65%;
     margin-top: 40px;
     background-color: #DC143C;
     display: flex;
