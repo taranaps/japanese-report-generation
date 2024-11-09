@@ -3029,7 +3029,15 @@ commonsecondarycolorclass.forEach(id => {
       thElements.forEach(e => e.style.backgroundColor = color.bg);
       
       const tdElements = document.querySelectorAll(`${tableId} td`);
-      tdElements.forEach(e => e.style.backgroundColor = color.accent);
+      // tdElements.forEach(e => e.style.backgroundColor = color.accent);
+      tdElements.forEach(e => {
+        // Get the value inside the cell (can be empty or contain text)
+        const cellValue = e.textContent.trim();
+        // Only apply color if the value is not 'F' or empty
+        if (cellValue !== "F" && cellValue !== "Absent") {
+            e.style.backgroundColor = color.accent;
+        }
+    });
   });
 
                   var th4 = document.querySelectorAll("#whole-duration-data-templae1 .progress-bar");
