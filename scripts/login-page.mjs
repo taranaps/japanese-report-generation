@@ -2,11 +2,26 @@
 // Import the necessary functions from Firebase SDK
 import { auth } from "./firebaseConfig.mjs";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";  // Use the same version for auth
+const passwordInput = document.getElementById('password');
+  const togglePassword = document.getElementById('toggle-password');
 
-document.getElementById("login-button").addEventListener("click", function () {
+  togglePassword.addEventListener('click', function() {
+    // Toggle password visibility
+    const type = passwordInput.type === 'password' ? 'text' : 'password';
+    passwordInput.type = type;
+
+    // Toggle icon between showing and hiding password
+    this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+  });
+
+  document.getElementById("login-btn").addEventListener("click", function () {
+  console.log("login clicked");
+  
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
+  
+  
   signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
           // alert(userCredential)

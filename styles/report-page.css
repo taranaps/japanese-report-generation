@@ -181,7 +181,13 @@ body {
   /* box-sizing: border-box; */
 
 }
-
+#editor{
+  height: 500px;
+  width: 100%;
+  background: #faf4f4;
+  text-align: center;
+  padding-top: 240px;
+}
 #trainee-details-template1{
   box-sizing: border-box;
 }
@@ -1101,8 +1107,14 @@ margin-top: 30px;
   margin: auto;
   position: relative;
   top: 10px;
+  padding-top: 30px;
+  padding-left: 30px;
 }
+.duration-sessions-body-template1 h2{
+  color: #8061c3;
+  font-size: 2.5rem;
 
+}
 .batch-duration-template1{
   width: 100%;
   margin-top: 1px;
@@ -1576,11 +1588,11 @@ text-align: center;
   padding-bottom: 45px;
   /* background: #0E486B; */
 }
-#batchDurationChart{
+/* #batchDurationChart{ */
   /* width: 90%; */
   /* margin-left: 10px; */
   /* margin-top: 50px;   */
-}
+/* } */
 #batchDurationChart .progress-bar{
   width: 100%;
   height: 30px;
@@ -2027,7 +2039,7 @@ text-align: center;
     display: flex;
     justify-content: space-between;
   }
-  .t3batchname .t3sessions{
+  .t3sessions{
     width: 100%;
     height: 80px;
     border: 2px solid black;
@@ -2280,7 +2292,7 @@ text-align: center;
     margin-left: -150px;
     margin-top: 40px;
     
-    width: 170px;
+    width: 180px;
     /* position: relative; */
     justify-content: center;
     align-items: center;
@@ -2323,7 +2335,7 @@ text-align: center;
 }
   .right-sidebarContainer{
     max-height: calc(100vh - 130px);
-    margin-left: -10px;
+    margin-left: 10px;
    align-items: center;
  
    
@@ -2691,7 +2703,7 @@ margin-bottom: 10px;
 }
 
 .select-batch{
-  margin-left: 10px;
+  margin-left: -10px;
   margin-top: 50px;
   background-color: white;
   padding: 10px;
