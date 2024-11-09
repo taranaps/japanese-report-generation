@@ -2913,7 +2913,7 @@ function applyTheme(themeId) {
 
 
 
-let imgurl='';
+
 
 
 async function uploadImage()
@@ -2926,12 +2926,10 @@ async function uploadImage()
           console.log("image link " + imageUrl)
 
       }
-      imgurl=imageUrl;
-      getReportURL();
+     
+      
 }
 
 
 document.getElementById("save-button").addEventListener("click",uploadImage)
- function getReportURL(){
-  
- }
+ 
