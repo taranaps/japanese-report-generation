@@ -420,7 +420,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const uniqueEvaluations = new Set();
     data.forEach((item) => {
         item.evaluations.forEach((evaluation) => {
-            if (evaluation.evaluationName !== "Empty" && evaluation.evaluationScore !== "N/A") {
+            if (evaluation.evaluationName !== "" && evaluation.evaluationScore !== "N/A") {
                 uniqueEvaluations.add(evaluation.evaluationName);
             }
         });
