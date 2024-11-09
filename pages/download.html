@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download</title>
+    <link rel="stylesheet" href="../styles/home-page.css">
+    <link rel="stylesheet" href="../styles/download.css">    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img class="logo" src="../assets/images/experion-logo.png" alt="Logo">
+        </div>
+        <div class="dashboard-container">
+            <div class="sidebar">
+                <div class="nav-items">
+                    <a href="home-page.html" class="nav-item" data-tooltip="Home">
+                        <img class="icon" src="../assets/images/home-icon-new.svg">
+                    <a href="#" class="nav-item"  id="openUploadModal" data-tooltip="Upload Excel">
+                        <img class="icon" src="../assets/images/upload-big-arrow (1).svg">
+                    </a>
+                    <a href="report-page.html" class="nav-item" data-tooltip="Generate Report">
+                            <img class="icon" src="../assets/images/bar-chart (1).svg">
+                    </a>
+                    <a href="/index.html" class="nav-item"  data-tooltip="Logout">
+                        <img class="icon" id="logout" src="../assets/images/sign-out.svg">
+                    </a>
+                    <a href="#" class="nav-item" data-tooltip="History">
+                        <img class="icon" src="/assets/images/history (1).svg">
+                    </a>
+                </div>
+            </div>
+
+            <section class="templates">
+                <div id="imagesContainer"></div>
+
+<!-- Modal for full-size image and options -->
+
+
+<div id="imageModal" class="modal">
+    <span class="close" id="closeModal">&times;</span>
+    <img class="modal-content" id="fullSizeImage">
+    <div id="caption"></div>
+    <div class="modal-overlay">
+        <div class="modal-buttons">
+            <button id="copyUrlBtn">Copy URL</button>
+        </div>
+    </div>
+
+</div>
+
+            </section>
+        <script src="../scripts/retrieve.mjs" type="module"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+</body>
+</html>
+
