@@ -548,6 +548,8 @@ let endrowIndex;
 let toolbar_text;
 let textColorPicker;
 let highlightColorPicker;
+let imageToolbar;
+let hideImage;
 images.forEach(image => {
     image.addEventListener('click', function() {
         hideAllTemplates()
@@ -571,6 +573,8 @@ images.forEach(image => {
                 toolbar_text='toolbar-text2'
                 textColorPicker='textColorPicker2'
                 highlightColorPicker='highlightColorPicker2'
+                imageToolbar='imageToolbar2'
+                hideImage='#tableContent2 img'
 
                 
             }
@@ -586,6 +590,8 @@ images.forEach(image => {
                toolbar_text='toolbar-text4'
                 textColorPicker='textColorPicker4'
                 highlightColorPicker='highlightColorPicker4'
+                imageToolbar='imageToolbar4'
+                hideImage='#tableContent4 img'
 
             }
             else if(templateKey==="template3"){
@@ -600,10 +606,13 @@ images.forEach(image => {
                toolbar_text='toolbar-text3'
                 textColorPicker='textColorPicker3'
                 highlightColorPicker='highlightColorPicker3'
+                imageToolbar='imageToolbar3'
+                hideImage='#tableContent3 img'
 
             }
             else{
                 tableContainer=document.getElementById('tableContent1')
+                tableId='tablecontainer1'
                 toolbarId='toolbar1'
                 mergeRowIndex='mergeRowIndex1'
                 startColumnIndex='startColumnIndex1'
@@ -614,6 +623,8 @@ images.forEach(image => {
                 toolbar_text='toolbar-text1'
                 textColorPicker='textColorPicker1'
                 highlightColorPicker='highlightColorPicker1'
+                imageToolbar='imageToolbar1'
+                hideImage='#tableContent1 img'
 
 
             }
@@ -630,7 +641,40 @@ images.forEach(image => {
 
 
 
+        document.getElementById("increaseMarginBtn").onclick = function() {
+          const targetDiv = document.getElementById(tableId);
+        
+          // Get the current margin-bottom of the div
+          const currentMarginTop = parseInt(window.getComputedStyle(targetDiv).marginTop);
+        
+          // Increase the margin-bottom by 10 pixels
+          targetDiv.style.marginTop = (currentMarginTop - 10) + "px";
+          let toolbar=document.getElementById(toolbarId)
+          toolbar.style.marginTop='-170px';
+          let toolbarText=document.getElementById(toolbar_text);
+          toolbarText.style.marginTop='-170px'
+          let toolbarImage=document.getElementById( imageToolbar);
+          toolbarImage.style.marginTop='-170px'
+        };
 
+        document.getElementById("decreaseMarginBtn").onclick = function() {
+          const targetDiv = document.getElementById(tableId);
+        
+          // Get the current margin-bottom of the div
+          const currentMarginTop = parseInt(window.getComputedStyle(targetDiv).marginTop);
+        
+          // Increase the margin-bottom by 10 pixels
+          targetDiv.style.marginTop = (currentMarginTop + 10) + "px";
+          let toolbar=document.getElementById(toolbarId)
+          toolbar.style.marginTop='70px';
+          let toolbarText=document.getElementById(toolbar_text);
+          toolbarText.style.marginTop='70px'
+          let toolbarImage=document.getElementById( imageToolbar);
+          toolbarImage.style.marginTop='70px'
+          
+    
+
+        };
 
 
 
@@ -1084,6 +1128,7 @@ function addRow() {
     }
   }
 
+  
 
 
 
@@ -1096,7 +1141,8 @@ function addRow() {
 
 
 
-let activeEditableDiv = null;
+
+let activeEditableDiv;
 
 function createTextarea() {
     const specificDiv = tableContainer
@@ -1115,21 +1161,24 @@ function createTextarea() {
     editableDiv.addEventListener('click', () => {
         activeEditableDiv = editableDiv;
         showToolbar();
-    });
+    })
 
     // Add the editable div to the specific container
     specificDiv.appendChild(editableDiv);
     activeEditableDiv = editableDiv;
+    
+    function showToolbar() {
+      const toolbar1 = document.getElementById(toolbar_text);
+      toolbar1.style.display='block';
+       
+  }
 }
 
-function showToolbar() {
-    const toolbar = document.getElementById(toolbar_text);
-    toolbar.style.display = 'block';
-}
+
 
 function hideToolbar() {
-    const toolbar = document.getElementById(toolbar_text);
-    toolbar.style.display = 'none';
+    const toolbar1 = document.getElementById(toolbar_text);
+    toolbar1.style.display = 'none';
 }
 
 // Toolbar action functions
@@ -1177,8 +1226,8 @@ function decreaseFontSize() {
 
 // Global event listener to hide toolbar if click is outside editable div or toolbar
 document.addEventListener('click', (event) => {
-    const toolbar = document.getElementById(toolbar_text);
-    if (activeEditableDiv && !toolbar.contains(event.target) && !activeEditableDiv.contains(event.target)) {
+    const toolbar1 = document.getElementById(toolbar_text);
+    if (activeEditableDiv && !toolbar1.contains(event.target) && !activeEditableDiv.contains(event.target)) {
         hideToolbar();
         
     }
@@ -1243,7 +1292,7 @@ let selectedImages = [];
   // Show toolbar above the clicked image
   function showToolbar(imgElement) {
     selectedImageElement = imgElement; // Set the selected image element
-    const toolbar = document.getElementById("imageToolbar");
+    const toolbar = document.getElementById(imageToolbar);
 
     // Calculate position above the image
     const imgRect = imgElement.getBoundingClientRect();
@@ -1292,12 +1341,25 @@ let selectedImages = [];
       selectedImageElement.style.border = `2px solid ${color}`; // Apply border with the selected color
     }
   }
+  function addMarginTop(){
+    if (selectedImageElement) {
+      const currentMarginTop = parseInt(window.getComputedStyle(selectedImageElement).marginTop) || 0;
+      selectedImageElement.style.marginTop = `${currentMarginTop + 10}px`; // Move right by 10px
+  }
+}
+function addMarginBottom(){
+  if (selectedImageElement) {
+    const currentMarginBottom = parseInt(window.getComputedStyle(selectedImageElement).marginTop) || 0;
+    selectedImageElement.style.marginTop = `${currentMarginBottom - 10}px`; // Move right by 10px
+}
+
+}
 
 
   // Hide toolbar when clicking outside of an image
   document.addEventListener("click", function(event) {
-    const toolbar = document.getElementById("imageToolbar");
-    if (!event.target.closest("#tableContent2 img") && event.target !== toolbar && !toolbar.contains(event.target)) {
+    const toolbar = document.getElementById(imageToolbar);
+    if (!event.target.closest(hideImage) && event.target !== toolbar && !toolbar.contains(event.target)) {
       toolbar.style.display = "none";
     }
   });

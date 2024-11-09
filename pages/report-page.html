@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../styles/report-page.css" />
     <link rel="stylesheet" href="../styles/preview-page.css">
 	  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"  />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   </head>
   <body>
     <header>
@@ -183,10 +183,10 @@
                     <i class="fas fa-compress"></i>
                   </button>
                   <button onclick="changeCellBackground()" title="Change Background Color">
-                    <i class="fas fa-fill-drip"></i>
+                    <i class="fa-solid fa-fill"></i>
                   </button>
                   <button onclick="changeTextColorTable()" title="Change Text Color">
-                    <i class="fas fa-palette"></i>
+                    <i class="fa-solid fa-paintbrush"></i>
                   </button>
                   <button onclick="changeRowBackground()" title="Change Row Background Color">
                     <i class="fas fa-layer-group"></i>
@@ -197,18 +197,19 @@
                   <button onclick="toggleTableBorder()" title="Toggle Borders">
                     <i class="fas fa-border-all"></i> 
                 </button>
-
+      
                 <button onclick="addRow()"  title="Add Row">
-                  <i class="fas fa-plus"></i> 
+                  <i class="fa-solid fa-table-list"></i>
                 </button>
-
+      
                 <button onclick="addColumn()" title="Add Column">
-                  <i class="fas fa-columns"></i>
+                  <i class="fa-solid fa-table-cells"></i> 
                 </button>
-
+      
                 <button onclick="setUniformSize()" title="Set Cell Size">
-                  <i class="fas fa-expand"></i> 
+                  <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
                 </button>
+               
                 <button onclick="deleteTable()">
                   <i class="fas fa-trash"></i> Delete Table
                 </button>
@@ -259,12 +260,40 @@
     
   
               </div>
-
-                <div class="tablecontainer1">
-                  <div id="tableContent1"><p>asdfghjk</p></div>
-    
-                </div>
+              <div class="toolbar" id="imageToolbar1">
+                <button onclick="reduceImageSize()">
+                  <i class="fas fa-minus"></i> 
+                </button>
+                <button onclick="increaseImageSize()">
+                  <i class="fas fa-plus"></i>
+                </button>
+                <button onclick="indentImageLeft()">
+                  <i class="fas fa-arrow-left"></i> 
+                </button>
+                <button onclick="indentImageRight()">
+                  <i class="fas fa-arrow-right"></i> 
+                </button>
+                <button id="addMarginTopBtn" onclick="addMarginTop()">
+                  <i class="fas fa-arrow-down"></i> 
+              </button>
+              <button id="addMarginBottomBtn" onclick="addMarginBottom()">
+                <i class="fas fa-arrow-up"></i> 
+            </button>
+                <input type="color" id="borderColorPicker" />
+                <button onclick="setImageBorderColor()">
+                  <i class="fas fa-border-all"></i> 
+                </button>
+               
                 
+              </div>
+      
+
+                
+                
+              </div>
+              <div class="tablecontainer1" id="tablecontainer1">
+                <div id="tableContent1"></div>
+  
               </div>
             </div>
         
@@ -357,10 +386,10 @@
               <i class="fas fa-compress"></i>
             </button>
             <button onclick="changeCellBackground()" title="Change Background Color">
-              <i class="fas fa-fill-drip"></i>
+              <i class="fa-solid fa-fill"></i>
             </button>
             <button onclick="changeTextColorTable()" title="Change Text Color">
-              <i class="fas fa-palette"></i>
+              <i class="fa-solid fa-paintbrush"></i>
             </button>
             <button onclick="changeRowBackground()" title="Change Row Background Color">
               <i class="fas fa-layer-group"></i>
@@ -373,16 +402,17 @@
           </button>
 
           <button onclick="addRow()"  title="Add Row">
-            <i class="fas fa-plus"></i> 
+            <i class="fa-solid fa-table-list"></i>
           </button>
 
           <button onclick="addColumn()" title="Add Column">
-            <i class="fas fa-columns"></i> 
+            <i class="fa-solid fa-table-cells"></i> 
           </button>
 
           <button onclick="setUniformSize()" title="Set Cell Size">
-            <i class="fas fa-expand"></i> 
+            <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
           </button>
+         
           <button onclick="deleteTable()">
             <i class="fas fa-trash"></i> Delete Table
           </button>
@@ -394,7 +424,7 @@
             <input type="number" id="startColumnIndex2" min="1" placeholder="Start Column" required>
             <input type="number" id="endColumnIndex2" min="1" placeholder="End Column" required>
             <button onclick="mergeRowCells()" title="Merge Cells">
-                <i class="fas fa-compress-arrows-alt"></i>
+              <i class="fa-solid fa-arrows-left-right"></i>
             </button>
             <br>
             <input type="number" id="mergeColIndex2" min="1" placeholder="Column to Merge" required>
@@ -412,14 +442,7 @@
             <button onclick="makeUnderline()" title="Underline"><i class="fas fa-underline"></i></button>
             <button onclick="increaseFontSize()" title="Increase Font Size"><i class="fas fa-plus"></i></button>
             <button onclick="decreaseFontSize()" title="Decrease Font Size"><i class="fas fa-minus"></i></button>
-            <input type="color" id="textColorPicker2" title="Pick a Color">
-            <button onclick="changeTextColor()" title="Change Text Color">
-                <i class="fas fa-palette"></i>
-            </button>
-            <input type="color" id="highlightColorPicker2" title="Pick a Highlight Color">
-            <button onclick="highlightText()" title="Highlight Text">
-                <i class="fas fa-highlighter"></i>
-            </button>
+            
               <button onclick="toggleBulletPoints()" title="Bullet Points">
                   <i class="fas fa-list-ul"></i>
               </button>
@@ -429,10 +452,18 @@
             <button onclick="applyOutdent()" title="Decrease Indent">
               <i class="fas fa-outdent"></i>
           </button>
+          <input type="color" id="textColorPicker2" title="Pick a Color">
+            <button onclick="changeTextColor()" title="Change Text Color">
+                <i class="fas fa-palette"></i>
+            </button>
+            <input type="color" id="highlightColorPicker2" title="Pick a Highlight Color">
+            <button onclick="highlightText()" title="Highlight Text">
+                <i class="fas fa-highlighter"></i>
+            </button>
 
 
         </div>
-        <div class="toolbar" id="imageToolbar">
+        <div class="toolbar" id="imageToolbar2">
           <button onclick="reduceImageSize()">
             <i class="fas fa-minus"></i> 
           </button>
@@ -445,6 +476,12 @@
           <button onclick="indentImageRight()">
             <i class="fas fa-arrow-right"></i> 
           </button>
+          <button id="addMarginTopBtn" onclick="addMarginTop()">
+            <i class="fas fa-arrow-down"></i> 
+        </button>
+        <button id="addMarginBottomBtn" onclick="addMarginBottom()">
+          <i class="fas fa-arrow-up"></i> 
+      </button>
           <input type="color" id="borderColorPicker" />
           <button onclick="setImageBorderColor()">
             <i class="fas fa-border-all"></i> 
@@ -559,10 +596,10 @@
         <i class="fas fa-compress"></i>
       </button>
       <button onclick="changeCellBackground()" title="Change Background Color">
-        <i class="fas fa-fill-drip"></i>
+        <i class="fa-solid fa-fill"></i>
       </button>
       <button onclick="changeTextColorTable()" title="Change Text Color">
-        <i class="fas fa-palette"></i>
+        <i class="fa-solid fa-paintbrush"></i>
       </button>
       <button onclick="changeRowBackground()" title="Change Row Background Color">
         <i class="fas fa-layer-group"></i>
@@ -575,20 +612,23 @@
     </button>
 
     <button onclick="addRow()"  title="Add Row">
-      <i class="fas fa-plus"></i> 
+      <i class="fa-solid fa-table-list"></i>
     </button>
 
     <button onclick="addColumn()" title="Add Column">
-      <i class="fas fa-columns"></i> 
+      <i class="fa-solid fa-table-cells"></i> 
     </button>
+
     <button onclick="setUniformSize()" title="Set Cell Size">
-      <i class="fas fa-expand"></i> 
+      <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
     </button>
+   
     <button onclick="deleteTable()">
       <i class="fas fa-trash"></i> Delete Table
     </button>
     <button onclick="deleteCell()">
       <i class="fas fa-trash"></i> Delete Cell
+    </button>-trash"></i> Delete Cell
     </button>
     <br>
       <input type="number" id="mergeRowIndex3" min="1" placeholder="Row to Merge" required>
@@ -633,6 +673,33 @@
 
 
   </div>
+  <div class="toolbar" id="imageToolbar3">
+    <button onclick="reduceImageSize()">
+      <i class="fas fa-minus"></i> 
+    </button>
+    <button onclick="increaseImageSize()">
+      <i class="fas fa-plus"></i>
+    </button>
+    <button onclick="indentImageLeft()">
+      <i class="fas fa-arrow-left"></i> 
+    </button>
+    <button onclick="indentImageRight()">
+      <i class="fas fa-arrow-right"></i> 
+    </button>
+    <button id="addMarginTopBtn" onclick="addMarginTop()">
+      <i class="fas fa-arrow-down"></i> 
+  </button>
+  <button id="addMarginBottomBtn" onclick="addMarginBottom()">
+    <i class="fas fa-arrow-up"></i> 
+</button>
+    <input type="color" id="borderColorPicker" />
+    <button onclick="setImageBorderColor()">
+      <i class="fas fa-border-all"></i> 
+    </button>
+   
+    
+  </div>
+
     <div class="tablecontainer3">
       <div id="tableContent3"><p>asdfghjk</p></div>
 
@@ -798,10 +865,10 @@
                   <i class="fas fa-compress"></i>
                 </button>
                 <button onclick="changeCellBackground()" title="Change Background Color">
-                  <i class="fas fa-fill-drip"></i>
+                  <i class="fa-solid fa-fill"></i>
                 </button>
                 <button onclick="changeTextColorTable()" title="Change Text Color">
-                  <i class="fas fa-palette"></i>
+                  <i class="fa-solid fa-paintbrush"></i>
                 </button>
                 <button onclick="changeRowBackground()" title="Change Row Background Color">
                   <i class="fas fa-layer-group"></i>
@@ -812,18 +879,19 @@
                 <button onclick="toggleTableBorder()" title="Toggle Borders">
                   <i class="fas fa-border-all"></i> 
               </button>
-
-              <button onclick="addRow()" title="Add Row">
-                <i class="fas fa-plus"></i>
+    
+              <button onclick="addRow()"  title="Add Row">
+                <i class="fa-solid fa-table-list"></i>
               </button>
-
+    
               <button onclick="addColumn()" title="Add Column">
-                <i class="fas fa-columns"></i>
+                <i class="fa-solid fa-table-cells"></i> 
               </button>
-
+    
               <button onclick="setUniformSize()" title="Set Cell Size">
-                <i class="fas fa-expand"></i> 
+                <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
               </button>
+             
               <button onclick="deleteTable()">
                 <i class="fas fa-trash"></i> Delete Table
               </button>
@@ -875,6 +943,33 @@
   
 
             </div>
+            <div class="toolbar" id="imageToolbar4">
+              <button onclick="reduceImageSize()">
+                <i class="fas fa-minus"></i> 
+              </button>
+              <button onclick="increaseImageSize()">
+                <i class="fas fa-plus"></i>
+              </button>
+              <button onclick="indentImageLeft()">
+                <i class="fas fa-arrow-left"></i> 
+              </button>
+              <button onclick="indentImageRight()">
+                <i class="fas fa-arrow-right"></i> 
+              </button>
+              <button id="addMarginTopBtn" onclick="addMarginTop()">
+                <i class="fas fa-arrow-down"></i> 
+            </button>
+            <button id="addMarginBottomBtn" onclick="addMarginBottom()">
+              <i class="fas fa-arrow-up"></i> 
+          </button>
+              <input type="color" id="borderColorPicker" />
+              <button onclick="setImageBorderColor()">
+                <i class="fas fa-border-all"></i> 
+              </button>
+             
+              
+            </div>
+    
               
               <div class="tablecontainer4">
                 
@@ -1003,14 +1098,14 @@
                 <label>To Column: <input type="number" id="mergeColEnd" min="1"></label>
                 <button onclick="mergeCells()">Merge Cells</button>
                 </div> -->
-                <div id="buttonContainer">
-                  <button onclick="createTextarea()">Add Textarea</button>
+                <div id="textareaInsert">
+                  <button onclick="createTextarea()">Add Text</button>
               </div>
-               <div>
+               <div id="imageuploads">
                 <input type="file" accept="image/*" id="uploadImage">
 
 <!-- Button to display the uploaded image -->
-              <button onclick="displayUploadedPhotos()">Show Image</button>
+              <button onclick="displayUploadedPhotos()">Add Image</button>
 
                </div>
 
@@ -1019,6 +1114,11 @@
               <label>Spacing (in pixels): <input type="number" id="tableSpacing" min="0" value="10"></label>
               <button onclick="setTableSpacing()">Set Spacing</button>
           </div>
+          <div class="edit-div">
+            <button id="increaseMarginBtn">increase div</button>
+            <button id="decreaseMarginBtn">decrease div</button>
+          </div>
+          
 
 
             </div>
@@ -1072,7 +1172,7 @@
 					  <div class="download">
 						<button  id="download-button">Download</button>
 						<button  id="share-button" onclick="share_togglepopup()">Share</button>
-            <input id="img-input" type="file"><br><br>
+            <input id="img-input" type="file" style="display: none;"><br><br>
             <button  id="save-button" >save</button>
 						
 						<div class="share-popup" id="share-popup">
