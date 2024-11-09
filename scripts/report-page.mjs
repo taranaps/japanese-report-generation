@@ -2929,7 +2929,7 @@ const themeColors = {
   "theme-color-violet": { bg: "#8061c3", accent: "#bda7ec" },
   "theme-color-red": { bg: "#dc143c", accent: "#e66a83" },
   "theme-color-blue": { bg: "#64a2f5", accent: "#93bdf5" },
-  "theme-color-green": { bg: "#43bf73", accent: "#6bed9d" },
+  "theme-color-green": { bg: "#43bf73", accent: "#78d79c" },
   "theme-color-orange": { bg: "#f09951", accent: "#f7b57e" }
 };
 
@@ -3049,7 +3049,15 @@ commonsecondarycolorclass.forEach(id => {
       thElements.forEach(e => e.style.backgroundColor = color.bg);
       
       const tdElements = document.querySelectorAll(`${tableId} td`);
-      tdElements.forEach(e => e.style.backgroundColor = color.accent);
+      // tdElements.forEach(e => e.style.backgroundColor = color.accent);
+      tdElements.forEach(e => {
+        // Get the value inside the cell (can be empty or contain text)
+        const cellValue = e.textContent.trim();
+        // Only apply color if the value is not 'F' or empty
+        if (cellValue !== "F" && cellValue !== "Absent") {
+            e.style.backgroundColor = color.accent;
+        }
+    });
   });
 
                   var th4 = document.querySelectorAll("#whole-duration-data-templae1 .progress-bar");
