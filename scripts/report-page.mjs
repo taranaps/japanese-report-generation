@@ -2816,7 +2816,7 @@ const themeColors = {
   "theme-color-violet": { bg: "#8061c3", accent: "#bda7ec" },
   "theme-color-red": { bg: "#dc143c", accent: "#e66a83" },
   "theme-color-blue": { bg: "#64a2f5", accent: "#93bdf5" },
-  "theme-color-green": { bg: "#43bf73", accent: "#6bed9d" },
+  "theme-color-green": { bg: "#43bf73", accent: "#78d79c" },
   "theme-color-orange": { bg: "#f09951", accent: "#f7b57e" }
 };
 

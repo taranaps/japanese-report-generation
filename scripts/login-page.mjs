@@ -11,7 +11,7 @@ const passwordInput = document.getElementById('password');
     passwordInput.type = type;
 
     // Toggle icon between showing and hiding password
-    this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+    this.textContent = type === 'password' ? '👁️‍🗨️': '👁️'  ;
   });
 
   document.getElementById("login-btn").addEventListener("click", function () {
