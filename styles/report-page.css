@@ -1,0 +1,3031 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+}
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+body {
+  background: #fcfbfc;
+  color: #4d4d4d;
+  padding: 30px;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 73px;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  z-index: 100;
+  background:#dcdcdc85;
+
+}
+.home-logout{
+  display: flex;
+  gap: 20px;
+}
+.logo {
+  width: 110px;
+  margin-left: 10px;
+  height: auto;
+  cursor: pointer;
+}
+.header a img{
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.contents {
+  /* display: flex;
+  flex-direction: row;
+  align-items: stretch; /* Ensure each child takes the full width */
+  /* gap: 1rem; Add space between sections */
+  /* justify-content: space-between; */
+  
+ 
+  /* flex-wrap: wrap; */
+  /* margin-top: 20px; */
+  /* z-index: 50; */ 
+
+
+  display: grid;
+  grid-template-columns: 200px 1fr 150px; /* Side-bar, workspace, right-sidebar */
+  gap: 1rem; /* Space between sections */
+  margin-top: 20px;
+  align-items: stretch; /* Ensures each child takes full height */
+  
+
+
+}
+.side-bar {
+  grid-column: 1; /* Fixed width of 200px */
+}
+
+.workspace {
+  grid-column: 2; /* Fills remaining space */
+}
+
+.right-sidebar {
+  grid-column: 3; /* Fixed width of 150px */
+}
+.side-bar, .workspace, .right-sidebar {
+  width: 100%; /* Make each section take full width */
+}
+
+.side-bar {
+  /* width: auto; */
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  border: 2px solid #dc143c;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f8edef;
+  position: fixed;
+  top: 90px;
+  left: 20px;
+  width: 170px;
+  height: calc(100vh - 150px);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 90px;
+  overflow: hidden; /* Hide content outside container */
+}
+
+#image-scroll {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%; /* Ensure the container doesn't exceed the sidebar height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  transition: transform 0.5s ease; /* Smooth scrolling */
+
+  /* Hide scrollbar */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+#image-scroll::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.side-bar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.side-bar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Scrollbar track color */
+}
+
+.side-bar::-webkit-scrollbar-thumb {
+  background-color: #888; /* Scrollbar handle color */
+  border-radius: 10px; /* Rounded corners for the scrollbar handle */
+}
+
+.side-bar::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Handle color on hover */
+}
+
+.side-bar img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border: 2px solid #dc143c;
+  border-radius: 8px;
+  transition: background 0.5s, transform 0.5s, box-shadow 0.3s;
+
+}
+.side-bar img:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+  border-color: #ff4757;
+  cursor: pointer;
+}
+.arrow {
+  cursor: pointer;
+}
+
+.workspace {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  padding: 20px;
+  margin-top: 20px;
+  margin-left: 70px;
+  box-sizing: border-box;
+  /* position: relative; */
+  /* border: solid 1px #555; */
+  /* background: rgb(248, 245, 245); */
+  
+  /* box-sizing: border-box; */
+
+}
+#editor{
+  height: 500px;
+  width: 100%;
+  background: #faf4f4;
+  text-align: center;
+  padding-top: 240px;
+}
+#trainee-details-template1{
+  box-sizing: border-box;
+}
+#trainee-details-template1 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 30px auto;
+  color:#7f719e ;
+}
+#trainee-details-template1 th{
+  background-color: #8061c3;
+  color: rgb(250, 245, 245);
+}
+#trainee-details-template1 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #000000;
+  border: 1px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}  
+#trainee-details-template1 td{
+  background: #bda7ec;
+}
+
+#all-trainee-table-template1{
+  box-sizing: border-box;
+}  
+
+#all-trainee-table-template1 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 30px auto;
+  color:#7f719e ;
+}
+
+#all-trainee-table-template1 th{
+  background-color: #8061c3;
+  color: rgb(250, 245, 245);
+}
+
+#all-trainee-table-template1 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #000000;
+  border: 1px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}  
+
+#all-trainee-table-template1 td{
+  background: #bda7ec;
+}
+
+#all-trainee-table-template1{
+  box-sizing: border-box;
+}  
+
+#all-evaluation-table-template1 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 30px auto;
+  color:#7f719e ;
+}
+
+#all-evaluation-table-template1 th{
+  background-color: #8061c3;
+  color: rgb(250, 245, 245);
+}
+
+#all-evaluation-table-template1 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #000000;
+  border: 1px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}  
+
+#all-evaluation-table-template1 td{
+  background: #bda7ec;
+}
+
+#evaluation-table-template1{
+  box-sizing: border-box;
+}
+#evaluation-table-template1 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 30px auto;
+}
+#evaluation-table-template1 th{
+  background-color: #8061c3;
+  color: rgb(250, 245, 245);
+}
+#evaluation-table-template1 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #000000;
+  border: 1px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}  
+#evaluation-table-template1 td{
+  background: #bda7ec;
+}
+
+
+.single-batch-evaluation-body-template1{
+  box-sizing: border-box;
+  width: 100%;
+}
+.single-batch-evaluation-body-template1 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 30px auto;
+}
+.single-batch-evaluation-body-template1 th{
+  background-color: #8061c3;
+  color: rgb(250, 245, 245);
+}
+.single-batch-evaluation-body-template1 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #000000;
+  border: 1px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}  
+.single-batch-evaluation-body-template1 td{
+  background: #bda7ec;
+}
+
+.single-batch-trainee-body-template1{
+  box-sizing: border-box;
+}
+.single-batch-trainee-body-template1 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 30px auto;
+}
+.single-batch-trainee-body-template1 th{
+  background-color: #8061c3;
+  color: rgb(250, 245, 245);
+}
+.single-batch-trainee-body-template1 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #000000;
+  border: 1px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}  
+.single-batch-trainee-body-template1 td{
+  background: #bda7ec;
+}
+
+
+
+#certificationBarChart{
+  margin: auto;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+.button-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+#generate-report {
+  background-color: #dc143c;
+  color: white;
+  padding: 10px 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* margin-right: 46px; */
+  /* margin-bottom: 450px; */
+ 
+  
+}
+
+#generate-report:hover {
+  background-color: #f34668;
+}
+
+/* template1   */
+.template-one{
+  height: auto;
+  background: #fcfcfd;
+  width: 800px;
+  border-radius: 8px;
+  position: absolute;
+  top: 140px;
+  left: 60px;
+  box-sizing: border-box;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-left: 190px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: solid 1px #4d4d4d;
+  /* height: auto;
+  background: #fcfcfd;
+  width: 800px;
+  border-radius: 8px;
+  position: absolute;
+  /* top: 140px; */
+  /* left: 60px; */
+  /* box-sizing: border-box;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 30px; */
+  /* margin-left: 300px; */
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: solid 1px #4d4d4d; */ 
+  /* width: 1000px;
+  padding: 20px;
+  margin-top: 40px;
+  margin-left: 200px;
+  height: 1500px;
+  box-sizing: border-box;
+  background: rgb(248, 245, 245); */
+}
+/* 
+.container-template1 {
+  height: auto;
+  background: #fcfcfd;
+  width: 800px;
+  border-radius: 8px;
+  position: absolute;
+  top: 140px;
+  left: 60px;
+  box-sizing: border-box;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-left: 300px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: solid 1px #4d4d4d;
+} */
+
+
+.single-batch-info-template1{
+  width: 100%;
+  margin: -13px 10px;
+  padding-top: 60px;
+  height: auto;
+
+}
+.single-batch-info-heading-template1{
+  border-radius: 10px;
+  width: 600px;
+  height: 70px;
+  padding: auto;
+  background: #8061c3;
+  color: white;
+  position: absolute;
+  z-index: 1;
+  margin-left: 60px;
+  
+}
+.single-batch-info-heading-template1 h1 {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 3rem;
+  
+}
+
+.single-batch-info-body-template1{
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: auto;
+  width: 103%;
+  margin: auto;
+  position: relative;
+  top: 33px;
+  margin-bottom: 10px;
+}
+.single-batch-template1-left{
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+
+}
+.single-batch-trainee-details-template1{
+  width: 50%;
+  /* margin-top: 45px;  */
+  margin: 60px;
+  margin-left: 20px;
+  margin-right: 0; 
+}
+
+.single-batch-trainee-heading-template1{
+ 
+      border-radius: 10px;
+      width: 200px;
+      height: 25px;
+      padding: auto;
+      background: #8061c3;
+      color: white;
+      position: absolute;
+      z-index: 1;
+      margin-left: 60px;
+}
+.single-batch-trainee-heading-template1 p{
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.single-batch-trainee-body-template1{
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: auto;
+  width: 115%;
+  margin: auto;
+  position: relative;
+  top: 10px;
+}
+.single-batch-template1-right{
+  width: 50%;
+  margin: 20px;
+
+}
+
+.single-batch-sessionDuration-details-template1{
+  width: 100%;
+  /* margin-top: 45px;  */
+  margin: 30px 20px; 
+  height: 100px;
+}
+
+.single-batch-sessionDuration-heading-template1{
+ 
+      border-radius: 10px;
+      width: 200px;
+      height: 25px;
+      padding: auto;
+      background: #8061c3;
+      color: white;
+      position: absolute;
+      z-index: 1;
+      margin-left: 47px;
+}
+.single-batch-sessionDuration-heading-template1 p{
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.single-batch-sessionDuration-body-template1{
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: 150px;
+  width: 100%;
+  /* margin: auto; */
+  margin-right: 20px;
+  position: relative;
+  top: 10px;
+  padding-top: 50px;
+  padding-left: 55px;
+}
+.single-batch-sessionDuration-body-template1 h2{
+  color: #3e68b9;
+  font-size: 2rem;
+  padding-bottom: 10px;
+}
+
+.single-batch-attendance-details-template1{
+  width: 50%;
+  /* margin-top: 45px;  */
+  margin: 60px 20px; 
+}
+
+.single-batch-attendance-heading-template1{
+ 
+      border-radius: 10px;
+      width: 200px;
+      height: 25px;
+      padding: auto;
+      background: #8061c3;
+      color: white;
+      position: absolute;
+      z-index: 1;
+      margin-left: 47px;
+}
+.single-batch-attendance-heading-template1 p{
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.single-batch-attendance-body-template1{
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: 300px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  top: 10px;
+  padding-top: 60px;
+  
+}
+.single-batch-template1-right{
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  padding: 20px;
+}  
+/* .single-batch-sessionDuration-details-template1{
+  width: 100%;
+
+} */
+.single-batch-attendance-details-template1{
+  width: 100%;
+}
+
+.single-batch-evaluation-details-template1{
+  width: 95%;
+  /* margin-top: 45px;  */
+  margin-left:20px; 
+  margin-right: 20px;
+  margin-top: -10px;
+}
+
+.single-batch-evaluation-heading-template1{
+ 
+      border-radius: 10px;
+      width: 200px;
+      height: 25px;
+      padding: auto;
+      background: #8061c3;
+      color: white;
+      position: absolute;
+      z-index: 1;
+      margin-left: 250px;
+}
+.single-batch-evaluation-heading-template1 p{
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.single-batch-evaluation-body-template1{
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: auto;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  top: 10px;
+}
+
+.header-template1 {
+  background: #8061c3;
+  height: 20vw;
+  position: relative;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 30px;
+  padding-left: 313px;
+}
+
+.header-template1 h1 {
+  color: black;
+  /* padding-right: 70px;
+  padding-top: 30px; */
+}
+.header-template1 h3{
+  color: white;
+  padding-right: 60px;
+}
+.left-template1 {
+  height: auto;
+  box-sizing: border-box;
+  background: #bda7ec;
+  width: 54vh;
+  border-radius: 8px;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  padding: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+
+.left-template1 h1 {
+  color: black;
+  text-align: center;
+  font-size: xx-large;
+}
+.learners-container-template1{
+  position: relative;
+  height: auto;
+
+}
+
+.learners-template1 {
+  border-radius: 10px;
+  width: 180px;
+  height: 20px;
+  padding: auto;
+  background: #8061c3;
+  color: white;
+  position: absolute; 
+  z-index: 1;
+  margin-left: 60px;
+}
+
+.learners-template1 p {
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.inner-learners-template1 {
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: 325px;
+  width: 95%;
+  margin: auto;
+  position: relative;
+  top: 10px;
+  
+}
+
+.trainer-template1 {
+  border-radius: 10px;
+  width: 180px;
+  height: 20px;
+  padding: auto;
+  background: #8061c3;
+  color: white;
+  position: absolute;
+  z-index: 1;
+  margin-left: 60px;
+}
+
+.trainer-template1 p {
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.inner-trainer-template1 {
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: 150px;
+  width: 95%;
+  margin: auto;
+  position: relative;
+  top: 10px;
+}
+
+.session-template1 {
+  border-radius: 10px;
+  width: 180px;
+  height: 20px;
+  padding: auto;
+  background: #8061c3;
+  color: white;
+  position: absolute;
+  z-index: 1;
+  margin-left: 60px;
+}
+
+.session-template1 p {
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.inner-session-template1 {
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: 300px;
+  width: 95%;
+  margin: auto;
+  position: relative;
+  top: 10px;
+}
+.current-level-template1{
+  margin: 20px;
+  margin-top: 0;
+}
+
+.level-heading {
+  border-radius: 10px;
+  width: 180px;
+  height: 20px;
+  padding: auto;
+  background: #8061c3;
+  color: white;
+  position: absolute;
+  z-index: 1;
+  margin-left: 60px;
+}
+
+.level-heading p {
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.inner-level-template1 {
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: auto;
+  width: 111%;
+  margin: auto;
+  margin-left: -16px;
+  position: relative;
+  top: 10px;
+
+}
+.main-container {
+  display: flex;
+  justify-content: space-between;
+}
+.right-template1{
+
+  width: 46%;
+  margin-left: 400px;
+  margin-top: 25px;
+  padding: 0;
+}
+.attendance-template1{
+  width: 100%;
+margin-top: 30px;
+  
+}
+#trainer-name-template1{
+  margin: 20px;
+  padding: auto;
+}
+#trainer-name-template1 h3{
+  color: #8061c3;
+  font-size: 2.3rem;
+  text-align: center;
+  /* margin-top: 10px; */
+  /* font-weight: 100; */
+  
+}
+
+#progressBarsContainer-templae1{
+  width: 90%;
+  margin: 5px;
+}
+/* Progress bar background */
+
+#progressBarsContainer-templae1 .progress-bar {
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #8061c3;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+#progressBarsContainer-templae1 .progress-bar h3{
+  /* padding: auto; */
+  padding-top: 10px;
+  text-align: center;
+}
+
+/* Inner progress bar */
+#progressBarsContainer-templae1 .progress {
+  margin: 10px;
+  height: 40px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; /* Smooth transition for width change */
+}
+#progressBarsContainer-templae1 label{
+  color: #000000;
+}
+#whole-duration-data-templae1{
+  
+  margin: 10px;
+}
+/* Progress bar background */
+
+#whole-duration-data-templae1 .progress-bar {
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #8061c3;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+#whole-duration-data-templae1 .progress-bar h3{
+  /* padding: auto; */
+  padding-top: 10px;
+  text-align: center;
+}
+
+/* Inner progress bar */
+#whole-duration-data-templae1 .progress {
+  margin: 10px;
+  height: 40px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; /* Smooth transition for width change */
+}
+#whole-duration-data-templae1 label{
+  color: #000000;
+}
+#duration-sessions-data-template1{
+  width: 90%;
+  margin-top: 40px;
+  margin-left: 10px;
+}
+/* Progress bar background */
+
+#duration-sessions-data-template1 .progress-bar {
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #8061c3;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+#duration-sessions-data-template1 .progress-bar h3{
+  /* padding: auto; */
+  padding-top: 10px;
+  text-align: center;
+}
+
+#duration-sessions-data-template1 .progress {
+  margin: 10px;
+  height: 40px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; /* Smooth transition for width change */
+}
+#whole-duration-data-templae1 label{
+  color: #000000;
+}
+.attendance-heading-template1{
+  border-radius: 10px;
+  width: 200px;
+  height: 25px;
+  padding: auto;
+  background: #8061c3;
+  color: white;
+  position: absolute;
+  z-index: 1;
+  margin-left: 70px;
+
+}
+.attendance-heading-template1 p {
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.attendance-body-template1{
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: 325px;
+  width: 100%;
+  margin: auto;
+  padding-top:24px ;
+  position: relative;
+  top: 10px;
+}
+
+.evaluation-template1{
+  width: 100%;
+  margin-top: 35px;  
+}
+.evaluation-trainee-template1{
+  width: 100%;
+  margin-top: 35px; 
+  display: flex;
+  flex-direction: column;
+
+}
+.duration-sessions-template1{
+  margin-top: 30px;
+}
+.evaluation-heading-template1{
+  border-radius: 10px;
+  width: 200px;
+  height: 25px;
+  padding: auto;
+  background: #8061c3;
+  color: white;
+  position: absolute;
+  z-index: 1;
+  margin-left: 47px;
+}
+.evaluation-heading-template1 p {
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.evaluation-body-template1{
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: auto;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  top: 10px;
+}
+#batch-text-template1{
+  color: #000000;
+  font-size: 4rem;
+  text-align: center;
+}
+.batch-evaluation-template1{
+  width: 88%;
+  margin: 200px 30px;
+}
+
+#bottum-cutoff-template1{
+  width: 88%;
+  margin: 0 20px;
+}
+
+.batch-evaluation-heading-template1{
+  border-radius: 10px;
+  width: 200px;
+  height: 25px;
+  padding: auto;
+  background: #8061c3;
+  color: white;
+  position: absolute;
+  z-index: 1;
+  margin-left: 240px;
+  
+}
+.batch-evaluation-heading-template1 p {
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.batch-evaluation-body-template1{
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: auto;
+  width: 110%;
+  margin: auto;
+  position: relative;
+  top: 10px;
+  margin-bottom: 10px;
+}
+
+.duration-sessions-template1{
+  width: 100%;
+
+  
+}
+.duration-sessions-heading-template1{
+  border-radius: 10px;
+  width: 200px;
+  height: 25px;
+  padding: auto;
+  background: #8061c3;
+  color: white;
+  position: absolute;
+  z-index: 1;
+  margin-left: 70px;
+}
+.duration-sessions-heading-template1 p {
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.duration-sessions-body-template1{
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: 200px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  top: 10px;
+  padding-top: 30px;
+  padding-left: 30px;
+}
+.duration-sessions-body-template1 h2{
+  color: #8061c3;
+  font-size: 2.5rem;
+
+}
+.batch-duration-template1{
+  width: 100%;
+  margin-top: 1px;
+
+  
+}
+.duration-heading-template1{
+  border-radius: 10px;
+  width: 200px;
+  height: 25px;
+  padding: auto;
+  background: #8061c3;
+  color: white;
+  position: absolute;
+  z-index: 1;
+  margin-left:51px;
+}
+.duration-heading-template1 p {
+  text-align: center;
+  margin-top: 2px;
+  font-size: 1.3rem;
+}
+
+.duration-body-template1{
+  border: solid black 1px;
+  border-radius: 10px;
+  background: white;
+  height: 200px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  top: 10px;
+ 
+}
+
+
+/* template 4 */
+
+
+.template-four{
+  width : 800px;
+  border: 1px solid brown;
+  padding: 10px;
+  border-radius: 8px;
+  height: auto;
+  margin: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* padding: 10px; */
+  /* margin-left: auto; */
+
+}
+.t4top{
+  height:auto;
+  display: flex;
+  border-radius: 8px;
+  
+}
+.t4month{
+  width: 20%;
+  height: 100px;
+  background-color: #DEA49C;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  color: white;
+  margin: 20px;
+
+}
+.t4heading{
+  width: 80%;
+  height: 100px;
+  font-size: x-large;
+  color: #0E486B;
+  padding-left: 40px;
+  padding-top: 25px;
+  
+}
+
+.t4body{
+  border: 1px solid black;
+  margin-top: 5px;
+  height: 450px;
+  background-color: #0E486B;
+  display: flex;
+
+}
+.t4leftbody{
+  width: 40%;
+  padding-left: 10px;
+
+}
+.t4batch{
+  color: white;
+  font-size: large;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.t4trainee{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.traineedetails{
+  width:120px;
+  height: 120px;
+  background-color: #ffffff;
+  margin: 2px;
+  border-radius: 15px;
+  box-shadow: 1px 1px;
+}
+.t4rightbody{
+  width: 65%;
+
+}
+.graph{
+  background-color: white;
+  height: 360px;
+  width: 98%;
+  margin-top:50px ;
+  border-radius: 8px;
+}
+.t4tablediv{
+  display: flex;
+  height: 400px;
+  background-color: #DEA49C;
+  margin-top:5px;
+  border-radius: 8px;
+}
+.t4tableleftdiv{
+  width: 20%;
+  color: rgb(8, 8, 8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding-left: 20px;
+
+
+}
+
+.t4tablerightdiv{
+  width: 80%;
+
+}
+.t4table{
+  width: 95%;
+  height: 90%;
+  margin: 15px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+/* template 2 */
+
+
+.container-template2 {
+  width: 800px;
+  padding: 20px;
+  background-color: #C3FFC0;
+  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  border: solid 1px #c1f0c0 ;
+  box-sizing: border-box;
+  /* margin-left: auto; */
+  border-radius: 8px;
+  margin: 30px;
+  height: auto;
+}
+#trainer-name-template2 h3{
+  color: #59e952;
+  font-size: 2.5rem;
+  text-align: center;
+margin: 30px;  
+
+  
+}
+.header-template2 {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  height: 90px;
+  margin-bottom: 35px;
+  border: solid 1px rgb(8, 241, 144);
+  
+}
+
+.header-template2 h1 {
+  margin: 0;
+  font-size: 3em;
+  color: #333;
+}
+
+.header-template2 h2 {
+  margin: 0;
+  color: #333;
+}
+#trainee-piechart-template1{
+  margin-top: 20px
+}
+.summary-template2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  margin-top: 20px;
+}
+
+.box-template2 {
+  background-color: #ffffff;
+  padding: 10px;
+  text-align: center;
+  border-radius: 20px;
+  width: 240px;
+  height: 310px;
+  border: solid 1px rgb(8, 241, 144);
+  
+
+  /* max-width: 100%;  */
+}
+
+.box-template2 h3 {
+  margin-bottom: 10px;
+  font-size: 2em;
+}
+
+.box-template2 h1 {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.box-template2 .trainer {
+  font-size: 2em;
+  font-weight: bold;
+  color: #333;
+}
+
+.batch-info {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 90px;
+  font-size: 20px;
+  color: #0b2b69;
+}
+
+.batch-info p{
+align-self: flex-end;
+margin-top: 6px;
+padding: 1px;
+font-size: 20px;
+}
+.batch-info h1{
+  text-align: center;
+  padding: auto;
+  color: #333;
+  font-size: 3rem;
+}
+.batchwise-data-template2 h3{
+  margin: 10px;
+  font-size: 2em;
+  text-align: center;
+  color: #333;
+}
+.batchwise-data-template2 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+.batchwise-data-template2 th{
+  background-color: #69f170;
+  color: rgb(250, 245, 245);
+}
+.batchwise-data-template2 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ffffff;
+  color: #000000;
+  border: 2px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}
+.batchwise-data-template2 td{
+  background:#C3FFC0;
+}
+.details-template2 {
+  display: flex;
+  gap: 15px;
+  margin-top: 35px;
+
+}
+/* 
+
+#durationChart{
+  width: 90%;
+  margin: 10px;
+}
+
+
+#durationChart .progress-bar {
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #8061c3;
+  border-radius: 5px; 
+  overflow: hidden;
+  color: #fcfcfc;
+}
+#durationChart .progress-bar h3{
+  padding-top: 10px;
+  text-align: center;
+}
+
+
+#durationChart .progress {
+  margin: 10px;
+  height: 40px; 
+  background-color: #e0e0e0;
+  border-radius: 5px; 
+  transition: width 0.4s ease;
+}  
+#durationChart label{
+  color: #000000;
+} */
+
+#trainee-details-template2 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+#trainee-details-template2 th{
+  background-color: #69f170;
+  color: rgb(250, 245, 245);
+}
+#trainee-details-template2 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ffffff;
+  color: #000000;
+  border: 2px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}
+#trainee-details-template2 td{
+  background:#C3FFC0;
+}
+
+#evaluation-table-template2 table{
+  width: 90%;
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+#evaluation-table-template2 th{
+  background-color: #69f170;
+  color: rgb(250, 245, 245);
+}
+#evaluation-table-template2 th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ffffff;
+  color: #000000;
+  border: 2px solid #ebe8e8;
+  text-align: center; 
+  vertical-align: middle;
+}
+#evaluation-table-template2 td{
+  background:#C3FFC0;
+}
+
+.trainee-list-template2{
+  border: solid 1px rgb(8, 241, 144);
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+.batch-duration-template2{
+  border: solid 1px rgb(8, 241, 144);
+  width: 100%;
+  height: 100px;
+  background-color: #fff;
+  border-radius: 10px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 80px;
+  padding-top: 20px;
+}
+.batch-duration-template2 h1{
+  color: #69f170;
+  font-size: 2rem;
+
+}
+.trainee-list-template2 h3{
+  margin: 10px;
+  font-size: 2em;
+  text-align: center;
+}
+
+#template2-month{
+  text-align: center;
+  font-size: 18px;
+  padding-top: 5px;
+  margin-bottom: 20px;
+  color: #333;
+}
+.details-right-template2{
+  width: 50%;
+}
+.attendance-template2 {
+  border: solid 1px rgb(8, 241, 144);
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  background-color: #ffffff
+}
+.attendance-template2 h3{
+  text-align: center;
+  font-size: 2.1rem;
+  margin-bottom: 5px;
+}
+.trainee-evaluation-template2{
+  border: solid 1px rgb(8, 241, 144);
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  height: auto;
+  margin-top: 20px;
+}
+.trainee-evaluation-template2 h3{
+  margin: 10px;
+font-size: 2em;
+text-align: center;
+}
+
+/* .trainee-evelution-template2{
+  border: solid 1px rgb(8, 241, 144);
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  height: 250px;
+  margin-top: 20px;
+} */
+
+/* h4 {
+  margin-top: 0;
+  text-align: center;
+  color: #0b2b69;
+} */
+
+/* canvas {
+  width: 100%;
+  height: 200px;
+} */
+#levelChart{
+  width: 100%; 
+  height: 300px;
+  padding: 10px;
+  padding-bottom: 45px;
+  /* background: #0E486B; */
+}
+/* #batchDurationChart{ */
+  /* width: 90%; */
+  /* margin-left: 10px; */
+  /* margin-top: 50px;   */
+/* } */
+#batchDurationChart .progress-bar{
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #69f170;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+#batchDurationChart .progress-bar h3{
+  padding-top: 10px;
+  text-align: center;
+}
+#batchDurationChart .progress{
+  margin: 10px;
+  height: 40px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; 
+}
+#batchDurationChart label{
+  color: #000000;
+}
+/* #sessionsChart{
+  width: 90%;
+  margin-left: 10px;
+  margin-top: 50px; 
+  
+} */
+#sessionsChart .progress-bar{
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #69f170;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+#sessionsChart .progress-bar h3{
+  padding-top: 10px;
+  text-align: center;
+}
+#sessionsChart .progress{
+  /* margin: 10px; */
+  height: 40px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; 
+}
+#sessionsChart label{
+  color: #000000;
+}
+#durationChart{
+  width: 90%;
+  margin-top: 5px;
+  
+  /* margin-left: 10px; */
+  /* margin-top: 50px;  */
+}
+#durationChart .progress-bar{
+  width: 100%;
+  height: 20px;
+  margin-top: 10px;
+  padding: auto;
+  background-color:  #69f170;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+#durationChart .progress-bar h3{
+  padding-top: 5px;
+  text-align: center;
+}
+#durationChart .progress{
+  margin: 10px;
+  height: 30px; /* Height of the progress indicator */
+  background-color: #e0e0e0;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; 
+}
+#durationChart label{
+  color: #000000;
+}
+  /* template 3 */
+  
+
+
+
+  /* .template-three{
+    width : 800px;
+    border: 2px solid rgb(247, 205, 205);
+    height: auto; */
+    /* padding: 10px; */
+    /* margin: 30px; */
+    /* border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    /* box-shadow: #000000; */
+  /* } */
+  /* .report-container { */
+    
+    /* max-width: 900px; */
+    /* margin: 0 auto;
+    padding: 20px;
+    background-color: #fff8e6;
+    border-radius: 8px;
+  } */
+  
+  /* .title {
+    text-align: center;
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 5px;
+  } */
+  
+  
+  /* .batch-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding-bottom: 20px;
+  } */
+  
+  /* .batch-card {
+    position: relative;
+    width: 30%;
+    text-align: center;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 20px;
+    padding: 20px;
+    padding-top: 40px; 
+    margin-right: 20px; 
+    height: 150px;
+  } */
+  
+  /* .card-title {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #0062FF;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    width: 130px; */
+    /* border: 2px solid #0062FF; */
+  /* } */
+  /* .t3batchname{
+    width: 100%;
+    height: 50px; */
+    /* border: 2px solid black; */
+    /* border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+  
+  }
+   */
+  /* #subtitle {
+    text-align: center;
+    font-size: 18px; */
+    /* color: black; */
+    /* margin-bottom: 20px;
+  } */
+  
+  /* .table-section {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+  } */
+
+  
+  /* .batch-title { */
+    /* text-align: center; */
+    /* color: #333;
+    margin-top: 15px;
+    font-size: x-large;
+    margin-left: 10px;
+  } */
+  /* .t3sessions{
+    font-size: small;
+    margin-top: 10px;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+  } */
+  
+  /* .table-title {
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    margin-left: 300px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  } */
+  /* .table-section {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 250px;
+    border: 2px solid black;
+    border-radius: 25px;
+
+  } */
+  /* .graph-title{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    margin-left: 300px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  
+  } */
+  
+  /* .graph-title-trainee{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    margin-left: 300px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  
+  }
+  .graph-title-attendance{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    margin-left: 300px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  
+  
+  } */
+  /* .graph-title{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    margin-left: 300px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  
+  } */
+  /* .t3graph{
+    background-color: #ffe6cc;
+    width: 100%;
+    height: 250px;
+    margin-bottom: 15px;
+    border: 2px solid black;
+    border-radius: 20px;
+  } */
+  /* .t3graph-attendance{
+    background-color: #ffe6cc;
+    width: 49%;
+    height: 250px;
+    margin-bottom: 15px;
+    border: 2px solid black;
+    border-radius: 20px;
+  } */
+  /* .t3graph-trainee{
+    background-color: #ffe6cc;
+    width: 49%;
+    height: 250px;
+    margin-bottom: 15px;
+    border: 2px solid black;
+    border-radius: 20px;
+  }
+  
+  .table-section table {
+    width: 70%;
+    border-collapse: collapse;
+  }
+  
+  .table-section th, .table-section td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .table-section th {
+    background-color: #ff6f00;
+    color: white;
+  }
+  
+  .table-section td {
+    background-color: #ffe6cc;
+  } */
+
+  /* temp3 */
+
+.template-three{
+    width : 800px;
+    border: 2px solid rgb(247, 205, 205);
+    height: auto;
+    /* padding: 10px; */
+    margin: 30px;
+    /* border-radius: 8px; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: #000000; */
+  }
+  .report-container {
+    
+    /* max-width: 900px; */
+    margin: 0 auto;
+    padding: 40px;
+    /* margin-left: 10px; */
+    background-color: #fff8e6;
+    /* border-radius: 8px; */
+  }
+  .t3graph-trainee{
+    padding: 20px;
+    height: auto;
+
+  }
+  .title {
+    text-align: center;
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  /* .batch-container-main{
+
+  } */
+
+  
+/* .card-content{
+  width: 90%;
+  margin-left: 10px;
+  margin-top: 50px;  
+} */
+
+#trainers-template3{
+  color: #ff6f00;
+  font-size: 2.1rem;
+  font-weight: 100;
+  padding: 0;
+}
+#trainers-template3 h3{
+  padding-top: 10px;
+}
+.card-content .progress-bar{
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+  padding: auto;
+  background-color:  #ff6f00;/* Background color of the progress bar */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Ensures the inner progress fits */
+  color: #fcfcfc;
+}
+.card-content .progress-bar h3{
+  padding-top: 10px;
+  text-align: center;
+}
+.card-content .progress{
+  margin: 10px;
+  height: 40px; /* Height of the progress indicator */
+  background-color: #0062FF;/* Default color for the progress */
+  border-radius: 5px; /* Rounded corners */
+  transition: width 0.4s ease; 
+}
+  .batch-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding-bottom: 20px;
+  }
+  
+  .batch-card {
+    position: relative;
+    width: 30%;
+    text-align: center;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    /* border-radius: 20px; */
+    padding: 20px;
+    padding-top: 40px; 
+    /* margin-right: 20px;  */
+    height: 250px;
+  }
+  
+  .card-title {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #0062FF;
+    color: white;
+    padding: 5px 15px;
+    /* border-radius: 20px; */
+    font-size: 14px;
+    width: 130px;
+    /* border: 2px solid #0062FF; */
+  }
+ 
+  #current-level-template3{
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+  }
+  #subtitle {
+    text-align: center;
+    font-size: 18px;
+    /* color: black; */
+    margin-bottom: 20px;
+  }
+  
+  /* .table-section {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+  } */
+
+  
+ 
+  .trainee-attendance-div{
+    display: flex;
+    justify-content: space-between;
+  }
+  .t3sessions{
+    width: 100%;
+    height: 80px;
+    border: 2px solid black;
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    background: white;
+    
+    
+  
+  }
+  .batch-title {
+    text-align: center;
+    color: #333;
+    margin-top: 15px;
+    font-size: x-large;
+    padding: 10px;
+    width: 40%;
+
+   
+  }
+  .t3sessions-secondh{
+    width: 30%;
+    padding: 30px;
+    padding-left: 70px;
+    font-size: 1.3rem;
+      }
+ .t3sessions-firsth{
+        width: 30%;
+        padding: 30px;
+        font-size: 1.3rem;
+
+      }
+
+  .bar-chart{
+    margin-left: -28px;
+    margin-top: -42px;
+  }
+  .table-title {
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    /* border-radius: 20px; */
+    margin-bottom: 15px;
+    margin-left: 240px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  }
+  .table-section {
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    width: 100%;
+    margin-top: 10px;
+    padding: 30px;
+    margin-left: -2px;
+    margin-bottom: 20px;
+    height: auto;
+    border: 2px solid black;
+    /* border-radius: 25px; */
+
+  }
+
+  .traneediv{
+    width: 100%;
+    height: auto;
+    /* display: flex;
+    justify-content: space-between; */
+    margin-top: 20px;
+  }
+  .trainee-attendance-template3{
+    display: flex;
+    justify-content: space-between;
+  }
+  .t3graphtraine{
+    width: 50%;
+    height: auto;
+    border: 2px solid black;
+    background: white;
+    /* padding: 20px; */
+    
+    /* margin-left: -15px; */
+  }
+  .democheck{
+    display: flex;
+    justify-content: space-between;
+  }
+  .t3traineeatt{
+    width: 47%;
+    height: auto;
+    border: 2px solid black;
+    margin-left: 0px;
+    padding: 20px;
+    background: white;
+  }
+  .t3graphtraine{
+    padding: 20;
+  }
+  /* .graph-title{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    margin-left: 300px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  
+  } */
+  
+  .graph-title-trainee{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    /* border-radius: 20px; */
+    margin-bottom: 15px;
+    margin-left: 95px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -15px;
+  
+  }
+  .graph-title-attendance{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    /* border-radius: 20px; */
+    margin-bottom: 15px;
+    margin-left: 80px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -36px;
+  
+  
+  }
+  .graph-title{
+    background-color: #0062FF;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 16px;
+    /* border-radius: 20px; */
+    margin-bottom: 15px;
+    margin-left: 300px;
+    width: fit-content;
+    position: absolute;
+    margin-top: -10px;
+  
+  }
+  .t3graph{
+    background-color: #ffe6cc;
+    width: 100%;
+    height: 250px;
+    margin-bottom: 15px;
+    border: 2px solid black;
+    /* border-radius: 20px; */
+  }
+
+  /* .t3graph-attendance{
+    background-color: #ffe6cc;
+    width: 49%;
+    height: 250px;
+    margin-bottom: 15px;
+    border: 2px solid black; */
+    /* border-radius: 20px; */
+  /* } */
+  /* .t3graph-trainee{
+    background-color: #ffe6cc;
+    width: 49%;
+    height: 250px;
+    margin-bottom: 15px;
+    border: 2px solid black; */
+    /* border-radius: 20px; */
+  /* } */
+.t3graphtraine table{
+  width: 90%;
+  border-collapse: collapse;
+
+}
+
+.t3graphtraine th, .t3graphtraine td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+#number-of-Batch-tmeplate3{
+  color: #0062FF;
+  font-size: 8rem;
+}
+.batch-text{
+  padding-top: 30px;
+  color: #0062FF;
+  font-size: 2.8rem;
+}
+.t3graphtraine th {
+  background-color: #ff6f00;
+  color: white;
+}
+
+.t3graphtraine td {
+  background-color: #ffe6cc;
+}  
+  .table-section table {
+    width: 90%;
+    border-collapse: collapse;
+  }
+  
+  .table-section th, .table-section td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .table-section th {
+    background-color: #ff6f00;
+    color: white;
+  }
+  
+  .table-section td {
+    background-color: #ffe6cc;
+  }
+  .eval-table{
+    margin-top: 30px;
+  }
+
+#trainer-name-template5{
+  padding-top: 20px;
+  font-size: 2rem;
+  color: #0b2b69;
+}
+
+
+
+
+
+
+  .right-sidebar{
+    display: flex;
+    margin-left: -150px;
+    margin-top: 40px;
+    
+    width: 180px;
+    /* position: relative; */
+    justify-content: center;
+    align-items: center;
+    
+    border: 2px solid #dc143c;
+    border-radius: 10px;
+    height: calc(100vh - 150px);
+    /* height: auto; */
+    /* position:static; */
+    padding-bottom: 10px;
+    position: fixed;
+   overflow-y: auto;
+   overflow-x: hidden;
+  top: 50px;
+  left: 1220px;
+  padding-left: 10px;
+  background-color: white;
+  padding-bottom: 10px;
+
+
+    
+    
+
+   
+  }
+
+
+  .right-sidebar::-webkit-scrollbar {
+    width: 0; 
+}
+
+
+.right-sidebar {
+    -ms-overflow-style: none;
+}
+
+
+.right-sidebar {
+    scrollbar-width: none;
+}
+  .right-sidebarContainer{
+    max-height: calc(100vh - 130px);
+    margin-left: 10px;
+   align-items: center;
+   ;
+ 
+   
+  }
+  .right-sidebarContainer h2{
+    width: 150px;
+    margin-left: 10px;
+  }
+
+  .theme-color-dark-blue, .theme-color-violet, .theme-color-red, .theme-color-orange, .theme-color-blue,.theme-color-green{
+    
+    position: relative;
+    width: 2em; /* Width of the rhombus */
+    height: 2em; /* Base height of the rhombus for the 8x side */
+    clip-path: polygon(
+      0% 0%,   /* Top-left corner */
+      100% 0%,    /* Top-right corner */
+      100% 62.5%, /* Bottom-right corner */
+      0% 100%     /* Bottom-left corner */
+    );
+    cursor: pointer;
+    
+  }
+  .theme-color-dark-blue{
+    background-color: #3e68b9;
+  }
+  .theme-color-violet{
+    background-color: #8061c3;
+  }
+  .theme-color-red{
+    background-color: #dc143c;
+  }
+  .theme-color-blue{
+    background-color: #64a2f5;
+  }
+  .theme-color-green{
+    background-color: #43bf73;
+  }
+  .theme-color-orange{
+    background-color: #f09951;
+  }
+  .sidebar-theme{
+    display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 5px;
+ /* padding: 10px; */
+ width: 170px;
+ margin-left: 10px;
+
+
+
+  }
+  .right-sidebar h2{
+    margin-top: 25px;
+    margin-bottom: 10px;
+    margin-left: px;
+
+  }
+  .toggle h2{
+    margin-left: 25px;
+  }
+
+
+
+
+  .learners {
+    min-width: 10em;
+    position: relative;
+    margin-top: 5px;
+
+}
+
+.learners * {
+    box-sizing: border-box;
+    color: black;
+
+
+}
+
+.select-learner {
+    background: white;
+    display: flex;
+    /* border: 1px black solid; */
+    border-width: 1px;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    cursor: pointer;
+    transition: background 0.3s;
+    height: 25px;
+    width: 120px;
+
+
+
+}
+
+/* .select-clicked-lerner {
+    border: 2px black solid; */
+    /* box-shadow: 0 0 0.8em black; 
+} */
+
+.select-learner:hover {
+    background: #f3eeee;
+
+}
+
+.ccaret {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid black;
+    transition: 0.3s;
+    align-self: center;
+    margin-left: 60px;
+}
+
+.caret-rotate-lerner {
+    transform: rotate(180deg);
+}
+
+.menu-learner {
+    list-style: none;
+    padding: 0.2em 0.5em;
+    background: white;
+    border: 1px black solid;
+    box-shadow: 2px 2px 5px black;
+    border-radius: 0.5em;
+    position: absolute;
+    top: 2em;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    opacity: 0;
+    display: none;
+    transition: 0.2s;
+    z-index: 1;
+
+}
+
+.menu-learner li {
+    padding: 0.2em 0.5em;
+    margin: 0.3em 0;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.menu-learner li:hover {
+    background: #dc143c;
+}
+
+/* .active-learner {
+    /* background: #dc143c;
+} */ 
+
+.menu-open-lerner {
+    display: block;
+    opacity: 1;
+}
+
+
+/* template-5 */
+
+.container-template5 {
+  width: 800px;
+  padding: 20px;
+  background-color: #41698b;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  border: solid 1px #90a4ae;
+  border-radius: 10px;
+  margin: 30px auto;
+  height: auto;
+}
+
+.header-template5 {
+  text-align: center;
+  padding: 20px;
+  background-color: #41698b; 
+  color: #ffffff;
+  /* border-radius: 8px; */
+  /* border: 1px solid white; */
+  /* margin-bottom: 35px; */
+  width: 400px;
+ 
+}
+.first-box .box-template5-1 {
+ height: 326px;
+}
+.first-box .box-template5-2{
+  height: 326px;
+}
+.attendence-template5{
+  width: 50%;
+}
+.t5graphtraine{
+  width: 50%;
+}
+.header-template5 h1 {
+  margin: 0;
+  font-size: 45px;
+  text-align: left;
+  color: rgb(223, 223, 223);
+  margin-top: 0px;
+}
+
+.header-template5 h3 {
+  margin-top: 8px;
+  font-size: 2.5em;
+  color: #b0bec5;
+}
+
+.summary-template5 {
+  display: flex;
+  /* grid-template-columns: repeat(3, 1fr); */
+  gap: 20px;
+  margin-top: 20px;
+  align-items: center;
+/* margin-left: 50px; */
+
+}
+
+
+
+
+.box-template5-1 ,.box-template5-2,.box-template5-3,.box-template5-4,.box-template5-5{
+  background-color: #fafbfc;
+ 
+  padding: 20px;
+  text-align: center;
+  /* border-radius: 60px; */
+  border: solid 2px #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  height: 215px;
+  width: 370px;
+  margin-top: 10px;
+}
+
+.box-template5 h3 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #455a64; /* Dark blue-gray */
+}
+
+.box-template5 h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #37474f; /* Slightly lighter blue-gray */
+}
+.sessions-temp5{
+  color: #0b2b69;
+  font-size: 1.6rem;
+
+}
+
+.details-template5 {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.trainee-list-template5 {
+  border: solid 1px #90a4ae;
+  width: 60%;
+  padding: 10px;
+  /* border-radius: 8px; */
+  background-color: #ffffff;
+}
+
+.trainee-list-template5 h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #37474f;
+  margin-bottom: 10px;
+}
+
+.template-five h2{
+  font-size: 2rem;
+
+}
+
+.batch-duration-template5 {
+  border: solid 1px #90a4ae;
+  padding: 15px;
+  background-color: #ffffff;
+  height: auto;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 90px;
+}
+.duration-temp5 h3{
+padding: 10px;
+}
+
+.attendance-template5,
+.trainee-evaluation-template5 {
+  border: solid 1px #90a4ae;
+  padding: 20px;
+  background-color: #ffffff;
+  margin-top: 15px;
+  height: auto;
+  padding-bottom: 20px;
+}
+.attendance-template5 h2
+{  text-align: center;
+font-size: 2rem;
+color: #37474f;
+margin-bottom: 10px;
+}
+
+.trainee-evaluation-template5 h2 {
+  font-size: 2rem;
+  color: #37474f;
+  text-align: center;
+}
+
+.batchwise-data-template5 table,
+#trainee-details-template5 table,
+#evaluation-table-template5 table {
+  width: 95%;
+  border-collapse: collapse;
+  margin: 15px auto;
+  border: solid 1px #90a4ae;
+}
+
+.batchwise-data-template5 th,
+#trainee-details-template5 th,
+#evaluation-table-template5 th {
+  background-color: #263238; /* Dark blue-gray */
+  color: #ffffff;
+  padding: 8px;
+}
+
+.batchwise-data-template5 td,
+#trainee-details-template5 td,
+#evaluation-table-template5 td {
+  background-color: #eceff1;
+  color: #37474f;
+  padding: 10px;
+  border-bottom: 1px solid #cfd8dc;
+}
+
+
+/* #levelChart, */
+#batchDurationChart,
+#sessionsChart,
+#durationChart
+#attendanceChart {
+  width: 100%;
+  max-height: 250px;
+  padding: 5px;
+  /* background-color: #f0f4c3; Soft lime color */
+  /* border-radius: 8px; */
+}
+
+.progress-bar {
+  width: 100%;
+  height: 25px;
+  background-color: #7a8bb4; /* Soft coral */
+  /* border-radius: 4px; */
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: #b0bec5; /* Gray-blue */
+  transition: width 0.4s ease;
+}
+
+.select-batch{
+  margin-left: 20px;
+  margin-top: 50px;
+  background-color: white;
+  /* padding: 10px; */
+  width: 170px;
+  
+}
+.chart-toggle,.learners{
+  margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tablecontainer1{
+  border: 1px solid black;
+  height: auto;
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+  width: 90%;
+  border-collapse: collapse;
+  margin-bottom: 50px;
+  margin-left: 30px;
+  margin-top: 30px;
+  padding: 10px;
+  
+}
+.tablecontainer2{
+  height: auto;
+  color: black;
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 10px;
+
+}
+.tablecontainer3{
+  border: 2px solid black;
+  height: auto;
+  color: black;
+  background-color:white ;
+  padding: 10px;
+
+}
+.tablecontainer4{
+  height: auto;
+  color: black;
+  background-color: white;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px auto;
+  padding: 10px;
+  border: solid 1px #90a4ae;
+
+}
+.table-options{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+  padding: 10px;
+  /* margin-left: 10px; */
+  
+}
+.table-options input{
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+  /* margin-left: 10px; */
+}
+
+
+.table-options button{
+  border-radius: 10px;
+  background-color: #dc143c;
+  width: 150px;
+  height: 20px;
+  /* margin-left: 10px; */
+ 
+
+}
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.custom-table td[contenteditable="true"] {
+  cursor: text;
+}
+
+.controls{
+ 
+  padding: 2px;
+  margin-top: 10px;
+  background-color: white;
+  padding: 10px;
+  width: 170px;
+}
+
+.controls input{
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+
+}
+.controls button{
+  margin-top: 5px;
+  background-color: #dc143c;
+  border-radius: 10px;
+  width: 150px;
+  height: 20px;
+
+}
+
+
+
+.table-spacing{
+  margin-top: 10px;
+  background-color: white;
+  padding-left: 15px;
+  width: 170px;
+  margin-bottom: 10px;
+
+}
+
+.table-spacing button{
+  background-color: #dc143c;
+  border-radius: 10px;
+  width: 150px;
+  height: 20px;
+  margin-top: 5px;
+  margin-left: -8px;
+  
+
+}
+.table-spacing input{
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+  margin-left:-8px;
+
+}
+
+
+
+
+.toolbar {
+  display: flex;
+  gap: 5px;
+  padding: 5px;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  /* height: auto; */
+ 
+  
+}
+
+.toolbar button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.toolbar button:hover {
+  background-color: #e0e0e0;
+  border-radius: 3px;
+}
+
+.toolbar i {
+  color: #333;
+}
+
+.selected-cell{
+  
+  background-color: #89bef8; /* Change this color to whatever you'd like for selected cells */
+}
+
+/* .dark-border td {
+  border: 2px solid #333;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.custom-table td[contenteditable="true"] {
+  cursor: text;
+} */
+#toolbar1{
+  margin-bottom: 50px;
+  width: 90%;
+  margin-left: 30px;
+}
+#toolbar3{
+  margin-bottom: 20px;
+  
+}
+#toolbar4{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.center-text { /* Center the text tool elements*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Align text to center */
+}
+#toolbar-text1{
+  margin-bottom: 40px;
+  width: 90%;
+  margin-left: 30px;
+}
+#toolbar-text3{
+  margin-bottom: 10px;
+}
+
+
+table.custom-table td {
+  border: 1px solid #ddd;
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px;
+}
+
+#template2 img {
+  max-width: 100%;
+  height: auto;
+}
+#template1 img {
+  max-width: 100%;
+  height: auto;
+}
+#template3 img {
+  max-width: 100%;
+  height: auto;
+}
+#template5 img {
+  max-width: 100%;
+  height: auto;
+}
+#imageuploads{
+  width: 170px;
+}
+#imageuploads input{
+  width: 150px;
+  /* margin-left: 10px; */
+  margin-top: 20px;
+}
+
+#imageuploads button{
+  width: 150px;
+  height: 20px;
+ 
+  background-color: #dc143c;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  
+
+}
+#textareaInsert{
+  width: 170px;
+}
+#textareaInsert button{
+  width: 150px;
+  height: 20px;
+  background-color: #dc143c;
+  border-radius: 10px;
+  margin-left: 10px;
+
+
+}
+.edit-div button{
+  background-color: #dc143c;
+  margin-left: 10px;
+  border-radius: 10px;
+}
+
+
+
+

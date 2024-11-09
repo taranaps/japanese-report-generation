@@ -1,0 +1,140 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Body background and layout */
+  body {
+    font-family: monospace;
+    background-color: #ffffff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Main login container */
+  .login-container {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: 0.5s;
+  }
+  
+  /* Heading */
+  .login-container h2 {
+    color: #DC143C;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+
+  /* Input styles */
+  .input-box {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .input-box:focus {
+    border-color: #DC143C;
+    box-shadow: 0 0 10px rgba(255, 95, 109, 0.4);
+  }
+
+  /* Password visibility icon container */
+  .password-container {
+    position: relative;
+  }
+  .explogo{
+  width: 200px;
+  height: auto;
+  position: absolute;
+  /* border: 1px solid green; */
+  right: 100px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+  .eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 35%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #DC143C;
+  }
+
+  /* Login button styling */
+  .login-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #DC143C;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* transition: all 0.5s; */
+  }
+
+  /* .login-btn:hover {
+    background-color: #DC143C;
+    transform: translateY(-3px);
+  } */
+  .login-btn span {
+cursor: pointer;
+display: inline-block;
+position: relative;
+transition: 0.5s;
+}
+
+.login-btn span:after {
+content: '\00bb';
+position: absolute;
+opacity: 0;
+top: 0;
+right: -20px;
+transition: 0.5s;
+}
+
+.login-btn:hover span {
+padding-right: 25px;
+}
+
+.login-btn:hover span:after {
+opacity: 1;
+right: 0;
+}
+
+  img{
+  width:210px;
+  height: auto;
+}
+  /* Small screen responsiveness */
+  @media (max-width: 480px) {
+    .login-container {
+      width: 90%;
+      padding: 20px;
+    }
+
+    .login-container h2 {
+      font-size: 24px;
+    }
+ 
+  }

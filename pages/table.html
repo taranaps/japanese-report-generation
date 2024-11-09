@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Data Table</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Uploaded Trainee Data</h1>
+
+    <label for="collectionSelect">Select collection:</label>
+    <select id="collectionSelect">
+        <option value="" disabled selected>--Select a collection--</option>
+    </select>
+
+    <table id="dataTable" border="1">
+        <thead>
+            <tr>
+                <th>Trainee Name</th>
+                <th>Batch Name</th>
+                <th>Certification Level</th>
+                <th>Month</th>
+                <th>DU</th>
+                <th>Avg Attendance</th>
+                <th>Trainer Names</th>
+                <th>Sessions Till Date</th>
+                <th>Sessions This Month</th>
+                <th>Duration Till Date</th>
+                <th>Duration This Month</th>
+                <th>Evaluations</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Canvas for the bar chart -->
+    <canvas id="attendanceChart1" width="400" height="200"></canvas>
+    <canvas id="attendanceChart2" width="400" height="200"></canvas>
+    <canvas id="batch-duration-chart" width="400" height="200"></canvas>
+    <canvas id="session-count-chart" width="400" height="200"></canvas>
+
+    
+    <script type="module" src="../scripts/table.mjs"></script>
+</body>
+</html>

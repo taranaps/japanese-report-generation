@@ -1,0 +1,378 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.scaled-content {
+    width: 100%;
+    height: 100%;
+    transform-origin: top left;
+}
+
+
+.preview-popup .popup-overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(0, 0, 0, 0.7);
+    z-index: 1;
+    display: none;
+}
+
+.preview-popup .preview {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: #fff;
+    width: 450px;
+    height: 10px;
+    z-index: 2;
+}
+
+.preview-popup.active .popup-overlay {
+    display: block;
+}
+
+.preview-popup.active .preview {
+    transition: all 300ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
+
+}
+
+.preview-top {
+    display: grid;
+    background-color: white;
+    grid-column: 1 / -1;
+
+
+}
+
+.preview-top h1 {
+    color: black;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+
+.preview {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1px;
+
+    grid-template-columns: 450px 400px;
+    grid-template-rows: 40px 450px;
+
+    justify-content: center;
+    
+
+}
+
+.preview-report {
+    background-color: beige;
+   overflow: scroll;
+    grid-column: 1/2;
+    grid-row: 2/-1;
+    grid-template-rows: 560px;
+
+
+
+
+}
+
+
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #dc143cdb;
+    padding: 15px;
+    color: white;
+    grid-column: 2/2;
+    grid-row: 2/2;
+}
+
+.dropdown {
+    min-width: 10em;
+    position: relative;
+    margin-top: 5px;
+
+}
+
+.dropdown * {
+    box-sizing: border-box;
+    color: black;
+
+
+}
+
+.select {
+    background: white;
+    display: flex;
+    border: 2px black solid;
+    border-width: 1px;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    cursor: pointer;
+    transition: background 0.3s;
+    height: 25px;
+    width: 250px;
+
+
+
+}
+
+.select-clicked {
+    border: 2px black solid;
+    box-shadow: 0 0 0.8em black;
+}
+
+.select:hover {
+    background: #f3eeee;
+
+}
+
+.caret {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid black;
+    transition: 0.3s;
+    align-self: center;
+    margin-left: 200px;
+}
+
+.caret-rotate {
+    transform: rotate(180deg);
+}
+
+.menu {
+    list-style: none;
+    padding: 0.2em 0.5em;
+    background: white;
+    border: 1px black solid;
+    box-shadow: 2px 2px 5px black;
+    border-radius: 0.5em;
+    position: absolute;
+    top: 2em;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    opacity: 0;
+    display: none;
+    transition: 0.2s;
+    z-index: 1;
+
+}
+
+.menu li {
+    padding: 0.2em 0.5em;
+    margin: 0.3em 0;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.menu li:hover {
+    background: #dc143c;
+}
+
+.active {
+    /* background: #dc143c; */
+}
+
+.menu-open {
+    display: block;
+    opacity: 1;
+}
+
+.download {
+    margin-top: 50px;
+}
+
+.download button {
+    border-radius: 10px;
+    border-width: 1px;
+    height: 25px;
+    width: 80px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.cancel {
+    display: flex;
+    justify-content: flex-end;
+    /* margin-right: 20px; */
+}
+
+.cancel button {
+    background-color: white;
+    cursor: pointer;
+    border-width: 1px;
+    border-radius: 10px;
+    /* margin-top: 330px; */
+
+    height: 25px;
+    width: 100px;
+}
+
+.share-email input {
+    width: 320px;
+    height: 20px;
+
+}
+#label1,#label2,#label3,#label4{
+    color: black;
+}
+
+#to,
+#subject,
+#message {
+
+    border-radius: 10px;
+}
+
+input,
+textarea {
+    padding-left: 10px;
+}
+
+textarea {
+    padding-top: 10px;
+}
+
+
+.preview-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+#cancel-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 18px;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    margin-right: 20px;
+    margin-top: 10px;
+
+}
+
+#cancel-button:hover {
+    color: #dc143c;
+}
+
+
+
+
+
+
+
+
+.share-popup .share-overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100px;
+    z-index: 1;
+    display: none;
+}
+
+.share-popup .share-email {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: white;
+    /* width: 450px; */
+    height: 100px;
+    z-index: 2;
+
+    width: 370px;
+    height: max-content;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.share-popup.active .share-overlay {
+    display: block;
+}
+
+.share-popup.active .share-email {
+    transition: all 300ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
+
+}
+
+.share-email label{
+    color: #dc143c;
+}
+#to{
+    border-color: #dc143c;
+    border-width: 1px;
+    border-radius: 10px;
+    width: 320px;
+    height: 20px;
+}
+
+#send-email,#cancel-email{
+    background-color: #dc143c;
+}
+.share-email{
+    margin-top: 150px;
+}
+
+#to,#subject{
+    border-color: #dc143c;
+    border-width: 1px;
+    border-style: solid;
+    width: 320px;
+    height: 20px;
+}
+#message{
+    border-color: #dc143c;
+    border-width: 1px;
+    border-style: solid;
+    width: 320px;
+    height: 50px;
+
+}
+
+#share-button{
+    margin-left:10px ;
+}
+#file-input{
+    color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media print {
+    #template2{
+        page-break-inside: avoid; /* Prevents page break inside this element */
+    }
+}

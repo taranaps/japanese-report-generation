@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report Generation</title>
+    <link rel="stylesheet" href="../styles/report-page.css" />
+    <link rel="stylesheet" href="../styles/preview-page.css">
+	  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div>
+          <img class="logo" src="/assets/images/experion-logo.png" alt="Logo">
+      </div>
+      <div class="home-logout" >
+        <a href="home-page.html"> <img src="../assets/images/home-icon-new.svg" alt="Home" /></a>
+        <a href="#"> <img class="logout" id="logout" src="../assets/images/sign-out.svg" alt="Logout" /></a>
+      </div>
+      </div>
+    </header>
+    <main>
+      <section class="contents">
+        <div class="content">
+          <div class="side-bar">
+            <div class="arrow" id="arrow-up">&#9650;</div>
+            <div class="image-container" id="image-scroll">
+              <img
+                src="../assets/images/template-three.png"
+                alt="Template1"
+                data-template="template1"
+              />
+              <br>
+              <br>
+              <img
+                src="../assets/images/template-three.png"
+                alt="Template1"
+                data-template="template1"
+              />
+             
+              <img
+                src="../assets/images/template-two.png"
+                alt="Template2"
+                data-template="template2"
+              />
+              <img
+                src="../assets/images/template-one.png"
+                alt="Template3"
+                data-template="template3"
+              />
+              <img
+                src="../assets/images/template-four.png"
+                alt="Template5"
+                data-template="template5"
+              />
+              <img
+              src="../assets/images/template-three.png"
+              alt="Template1"
+              data-template="template1"
+            />
+            </div>
+            <div class="arrow" id="arrow-down">&#9660;</div>
+          </div>
+		  </div>
+		  
+		
+          </div>
+          <div class="workspace">
+            <div id="editor"><h2>Please select the batch and a template to start editing!</h2></div>
+             
+            
+            <div class="template-one" id="template1" style="display: none">
+              <div class="container-template1">
+                <div class="header-template1" id="header-template1">
+                  <h1>Japanese <br> Language <br> Training Report</h1>
+                  <h3 id="header-template1-h3">month</h3>
+                </div>
+                <div class="main-container">
+                  <div class="left-template1" id="left-template1">
+                    
+                    <div class="learners-container-template1">
+                      <div class="learners-template1" id="learners-template1">
+                        <p>Number of Learners</p>
+                      </div>
+                      <div class="inner-learners-template1">
+                        <canvas id="trainee-piechart-template1" width="200" height="200"></canvas>
+                      </div>
+                    </div>
+                    <div class="trainer-container-template1">
+                      <div class="trainer-template1" id="trainer-template1">
+                        <p>Trainer</p>
+                      </div>
+                      <div class="inner-trainer-template1">
+                        <div id="trainer-name-template1"></div>
+                      </div>
+                    </div>
+                    <div class="session-container-template1">
+                      <div class="session-template1" id="session-template1">
+                      <p>Total Sessions Till Date</p></div>
+                      <div class="inner-session-template1">
+                        <canvas id="progressBarsContainer-templae1" width="200" height="220"></canvas>
+                      </div>
+                    </div>
+                    <div id="whole-batch-cutoff-container">
+                    <!-- <div class="current-level-template1">
+                      <div class="level-heading" id="level-heading">
+                        <p>Current Level</p>
+                      </div>
+                      <div class="inner-level-template1">
+                        <canvas id="certificationBarChart" width="300" height="200"></canvas>                    
+                      </div>
+                    </div>
+                    <div class="batch-duration-template1">
+                      <div class="duration-heading-template1" id="duration-heading-template1">
+                        <p>Total Batch Duration</p>
+                      </div>
+                      <div class="duration-body-template1">
+                        <canvas id="whole-duration-data-templae1" width="250" height="190"></canvas>
+                      </div>
+                    </div> -->
+                  </div>
+                  </div>
+                  <div class="right-template1" id="right-template1">
+                    
+                  </div>                  
+                </div>
+                <div id="bottum-cutoff-template1">
+                
+              </div>
+                
+              </div>
+            </div>
+
+        
+            <div class="template-two" id="template2" style="display: none">
+                
+                    <div class="container-template2" id="container-template2">
+                        <div class="header-template2" id="header-template2">
+                            <h1>Japanese Language Training Report</h1>
+                            <h3 id="template2-month"></h3>
+                        </div>
+                
+                        <div class="summary-template2">
+                            <div class="box-template2">
+                                <h3>Active Batches</h3>
+                                <h1 id="number"></h1>
+								<!-- <h1 id="Batch-text-template2">Batches</h1> -->
+								<canvas id="batch-number"></canvas>
+                            </div>
+							<div class="box-template2">
+                                <h3>Total No. of Sessions Till Date</h3>
+                                <canvas id="sessionsChart" width="120" height="200"></canvas>
+                            </div>
+                            <div class="box-template2">
+                                <h3>Number of Learners</h3>
+                                <canvas id="learnersChart" width="200" height="300"></canvas>
+                            </div>
+                            
+                            <div class="box-template2">
+                                <h3>Total Batch Duration</h3>
+                                <canvas id="batchDurationChart" width="200" height="250"></canvas>
+                            </div>
+                            <div class="box-template2">
+                                <h3>Current Level</h3>
+                                <canvas id="levelChart"  width="200" height="300"></canvas>
+                            </div>
+                            <div class="box-template2">
+                                <h3>Trainers</h3>
+                                <div id="trainer-name-template2"></div>
+                            </div>
+                        </div>
+						<div id="batchwise-data-template2">
+                        <!-- <div class="batch-info">
+                            <h2 id="batch-name-template2"></h2>
+                        </div>
+                
+                        <div class="details-template2">
+                            <div class="trainee-list-template2">
+								<h3>Trainee Details</h3>
+								<div id="trainee-details-template2"></div>
+                            </div>
+                            <div class="details-right-template2">
+                                <div class="batch-duration-template2">
+					
+                                    <div id="durationChart"></div>
+                                </div>
+                                <div class="attendance-template2">
+                                    <h3>Attendance</h3>
+                                    <canvas id="attendanceChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+						<div class="trainee-evaluation-template2">
+							<h3>Evaluation Details</h3>
+							<div id="evaluation-table-template2"></div>
+
+						</div> -->
+					</div>	
+          <div id="toolbar2" class="toolbar" style="display: none;">
+            <button onclick="makeBold()" title="Bold">
+              <i class="fas fa-bold"></i>
+            </button>
+            <button onclick="increaseTextSize()" title="Increase Font Size">
+              <i class="fas fa-text-height"></i>
+            </button>
+            <button onclick="decreaseTextSize()" title="Decrease Font Size">
+              <i class="fas fa-text-width"></i>
+            </button>
+            <button onclick="increaseIndent()" title="Increase Indent">
+              <i class="fas fa-indent"></i>
+            </button>
+            <button onclick="decreaseIndent()" title="Decrease Indent">
+              <i class="fas fa-outdent"></i>
+            </button>
+            <button onclick="increaseTableSize()" title="Increase Table Size">
+              <i class="fas fa-expand"></i>
+            </button>
+            <button onclick="decreaseTableSize()" title="Decrease Table Size">
+              <i class="fas fa-compress"></i>
+            </button>
+            <button onclick="changeCellBackground()" title="Change Background Color">
+              <i class="fa-solid fa-fill"></i>
+            </button>
+            <button onclick="changeTextColorTable()" title="Change Text Color">
+              <i class="fa-solid fa-paintbrush"></i>
+            </button>
+            <button onclick="changeRowBackground()" title="Change Row Background Color">
+              <i class="fas fa-layer-group"></i>
+            </button>
+            <button onclick="changeColumnBackground()" title="Change Column Background Color">
+              <i class="fas fa-columns"></i>
+            </button>
+            <button onclick="toggleTableBorder()" title="Toggle Borders">
+              <i class="fas fa-border-all"></i> 
+          </button>
+
+          <button onclick="addRow()"  title="Add Row">
+            <i class="fa-solid fa-table-list"></i>
+          </button>
+
+          <button onclick="addColumn()" title="Add Column">
+            <i class="fa-solid fa-table-cells"></i> 
+          </button>
+
+          <button onclick="setUniformSize()" title="Set Cell Size">
+            <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+          </button>
+         
+          <button onclick="deleteTable()">
+            <i class="fas fa-trash"></i> Delete Table
+          </button>
+          <button onclick="deleteCell()">
+            <i class="fas fa-trash"></i> Delete Cell
+          </button>
+          <br>
+            <input type="number" id="mergeRowIndex2" min="1" placeholder="Row to Merge" required>
+            <input type="number" id="startColumnIndex2" min="1" placeholder="Start Column" required>
+            <input type="number" id="endColumnIndex2" min="1" placeholder="End Column" required>
+            <button onclick="mergeRowCells()" title="Merge Cells">
+              <i class="fa-solid fa-arrows-left-right"></i>
+            </button>
+            <br>
+            <input type="number" id="mergeColIndex2" min="1" placeholder="Column to Merge" required>
+    <input type="number" id="startRowIndex2" min="1" placeholder="Start Row" required>
+    <input type="number" id="endRowIndex2" min="1" placeholder="End Row" required>
+    <button onclick="mergeColumnCells()" title="Merge Column Cells">
+        <i class="fas fa-arrows-alt-v"></i>
+    </button>
+    
+          </div>
+
+          <div id="toolbar-text2"class="toolbar" style="display: none;">
+            <button onclick="makeBold()" title="Bold"><i class="fas fa-bold"></i></button>
+            <button onclick="makeItalic()" title="Italic"><i class="fas fa-italic"></i></button>
+            <button onclick="makeUnderline()" title="Underline"><i class="fas fa-underline"></i></button>
+            <button onclick="increaseFontSize()" title="Increase Font Size"><i class="fas fa-plus"></i></button>
+            <button onclick="decreaseFontSize()" title="Decrease Font Size"><i class="fas fa-minus"></i></button>
+            
+              <button onclick="toggleBulletPoints()" title="Bullet Points">
+                  <i class="fas fa-list-ul"></i>
+              </button>
+              <button onclick="applyIndent()" title="Increase Indent">
+                <i class="fas fa-indent"></i>
+            </button>
+            <button onclick="applyOutdent()" title="Decrease Indent">
+              <i class="fas fa-outdent"></i>
+          </button>
+          <input type="color" id="textColorPicker2" title="Pick a Color">
+            <button onclick="changeTextColor()" title="Change Text Color">
+                <i class="fas fa-palette"></i>
+            </button>
+            <input type="color" id="highlightColorPicker2" title="Pick a Highlight Color">
+            <button onclick="highlightText()" title="Highlight Text">
+                <i class="fas fa-highlighter"></i>
+            </button>
+
+
+        </div>
+        <div class="toolbar" id="imageToolbar2">
+          <button onclick="reduceImageSize()">
+            <i class="fas fa-minus"></i> 
+          </button>
+          <button onclick="increaseImageSize()">
+            <i class="fas fa-plus"></i>
+          </button>
+          <button onclick="indentImageLeft()">
+            <i class="fas fa-arrow-left"></i> 
+          </button>
+          <button onclick="indentImageRight()">
+            <i class="fas fa-arrow-right"></i> 
+          </button>
+          <button id="addMarginTopBtn" onclick="addMarginTop()">
+            <i class="fas fa-arrow-down"></i> 
+        </button>
+        <button id="addMarginBottomBtn" onclick="addMarginBottom()">
+          <i class="fas fa-arrow-up"></i> 
+      </button>
+          <input type="color" id="borderColorPicker" />
+          <button onclick="setImageBorderColor()">
+            <i class="fas fa-border-all"></i> 
+          </button>
+         
+          
+        </div>
+
+
+          <div class="tablecontainer2">
+            <div id="tableContent2"><p>asdfghjk</p></div>
+
+          </div>
+                    </div>
+                
+            </div>
+
+      <!-- temp3 new -->
+
+      <div class="template-three" id="template3" style="display: none"  >
+        <div class="report-container">
+          <h1 class="title">Japanese Training Report</h1>
+          <h3 id="subtitle"></h3>
+		<div class="batch-container-main">
+          <div class="batch-container">
+            <div class="batch-card">
+              <div class="card-title">No. of Batches</div>
+              <h1 id="number-of-Batch-tmeplate3"></h1>
+			  <h1 class="batch-text">Batches</h1>
+			  <canvas id="batch-number-template3" width="200" height="230"></canvas>
+            </div>
+            <div class="batch-card">
+              <div class="card-title">Trainers</div>
+              <div class="trainers-template3" id="trainers-template3"></div>
+            </div>
+            <div class="batch-card">
+              <div class="card-title">Current Level</div>
+              <div class="bar-chart">
+                <canvas id="current-level-template3" width="200" height="260"></canvas>
+                <div></div>
+              </div>
+            </div>
+          </div>          
+  
+          <div class="batch-container">
+            <div class="batch-card">
+              <div class="card-title">No of Learners</div>
+              <canvas class="card-content" id="card-content" width="250" height="300"></canvas>
+            </div>
+  
+            <div class="batch-card">
+              <div class="card-title">Total Sessions</div>
+
+              <canvas class="card-content" id="card-content-sessions" width="180" height="200">
+
+			  </canvas>
+            </div>
+  
+            <div class="batch-card">
+              <div class="card-title" id="card-title">Total Durations</div>
+              <canvas class="card-content" id="card-content-duration" width="180" height="200"></canvas>
+            </div>
+          </div>
+		</div>
+		  <div id="batchwise-data-template3">
+          <!-- <div class="t3batchname">
+            <div class="t3sessions">
+              <h2 class="t3sessions-firsth" id="t3sessions-firsth">Total Sessions:</h2>
+			  <h1 class="batch-title" id="batch-title"></h1>
+              <h2 class="t3sessions-secondh" id="t3sessions-secondh">Total Duration:</h2>
+            </div>
+          </div>
+          		
+            <div class="traneediv">
+				<div class="trainee-attendance-template3">
+                <div class="t3graphtraine">
+					<div class="graph-title-trainee">Trainee Details</div>
+                 	<div class="t3graph-trainee" id="t3graph-trainee"> </div>
+				</div> 
+       			<div class="t3traineeatt">
+					<div class="graph-title-attendance">Trainee Attendence</div>
+       				<canvas id="t3graph-attendance" width="200" height="260"> </canvas>
+             	</div>
+			</div>
+           </div>
+
+           <div class="eval-table">
+           		<div class="table-title">Trainee Evaluation</div>
+           		<div class="table-section" id="table-section"></div>
+            </div> -->
+		</div>
+    <div id="toolbar3" class="toolbar" style="display: none;">
+      <button onclick="makeBold()" title="Bold">
+        <i class="fas fa-bold"></i>
+      </button>
+      <button onclick="increaseTextSize()" title="Increase Font Size">
+        <i class="fas fa-text-height"></i>
+      </button>
+      <button onclick="decreaseTextSize()" title="Decrease Font Size">
+        <i class="fas fa-text-width"></i>
+      </button>
+      <button onclick="increaseIndent()" title="Increase Indent">
+        <i class="fas fa-indent"></i>
+      </button>
+      <button onclick="decreaseIndent()" title="Decrease Indent">
+        <i class="fas fa-outdent"></i>
+      </button>
+      <button onclick="increaseTableSize()" title="Increase Table Size">
+        <i class="fas fa-expand"></i>
+      </button>
+      <button onclick="decreaseTableSize()" title="Decrease Table Size">
+        <i class="fas fa-compress"></i>
+      </button>
+      <button onclick="changeCellBackground()" title="Change Background Color">
+        <i class="fa-solid fa-fill"></i>
+      </button>
+      <button onclick="changeTextColorTable()" title="Change Text Color">
+        <i class="fa-solid fa-paintbrush"></i>
+      </button>
+      <button onclick="changeRowBackground()" title="Change Row Background Color">
+        <i class="fas fa-layer-group"></i>
+      </button>
+      <button onclick="changeColumnBackground()" title="Change Column Background Color">
+        <i class="fas fa-columns"></i>
+      </button>
+      <button onclick="toggleTableBorder()" title="Toggle Borders">
+        <i class="fas fa-border-all"></i> 
+    </button>
+
+    <button onclick="addRow()"  title="Add Row">
+      <i class="fa-solid fa-table-list"></i>
+    </button>
+
+    <button onclick="addColumn()" title="Add Column">
+      <i class="fa-solid fa-table-cells"></i> 
+    </button>
+
+    <button onclick="setUniformSize()" title="Set Cell Size">
+      <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+    </button>
+   
+    <button onclick="deleteTable()">
+      <i class="fas fa-trash"></i> Delete Table
+    </button>
+    <button onclick="deleteCell()">
+      <i class="fas fa-trash"></i> Delete Cell
+    </button>-trash"></i> Delete Cell
+    </button>
+    <br>
+      <input type="number" id="mergeRowIndex3" min="1" placeholder="Row to Merge" required>
+      <input type="number" id="startColumnIndex3" min="1" placeholder="Start Column" required>
+      <input type="number" id="endColumnIndex3" min="1" placeholder="End Column" required>
+      <button onclick="mergeRowCells()" title="Merge Cells">
+          <i class="fas fa-compress-arrows-alt"></i>
+      </button>
+      <br>
+      <input type="number" id="mergeColIndex3" min="1" placeholder="Column to Merge" required>
+<input type="number" id="startRowIndex3" min="1" placeholder="Start Row" required>
+<input type="number" id="endRowIndex3" min="1" placeholder="End Row" required>
+<button onclick="mergeColumnCells()" title="Merge Column Cells">
+  <i class="fas fa-arrows-alt-v"></i>
+</button>
+
+    </div>
+
+    <div id="toolbar-text3"class="toolbar" style="display: none;">
+      <button onclick="makeBold()" title="Bold"><i class="fas fa-bold"></i></button>
+      <button onclick="makeItalic()" title="Italic"><i class="fas fa-italic"></i></button>
+      <button onclick="makeUnderline()" title="Underline"><i class="fas fa-underline"></i></button>
+      <button onclick="increaseFontSize()" title="Increase Font Size"><i class="fas fa-plus"></i></button>
+      <button onclick="decreaseFontSize()" title="Decrease Font Size"><i class="fas fa-minus"></i></button>
+      <input type="color" id="textColorPicker3" title="Pick a Color">
+      <button onclick="changeTextColor()" title="Change Text Color">
+          <i class="fas fa-palette"></i>
+      </button>
+      <input type="color" id="highlightColorPicker3" title="Pick a Highlight Color">
+      <button onclick="highlightText()" title="Highlight Text">
+          <i class="fas fa-highlighter"></i>
+      </button>
+        <button onclick="toggleBulletPoints()" title="Bullet Points">
+            <i class="fas fa-list-ul"></i>
+        </button>
+        <button onclick="applyIndent()" title="Increase Indent">
+          <i class="fas fa-indent"></i>
+      </button>
+      <button onclick="applyOutdent()" title="Decrease Indent">
+        <i class="fas fa-outdent"></i>
+    </button>
+
+
+  </div>
+  <div class="toolbar" id="imageToolbar3">
+    <button onclick="reduceImageSize()">
+      <i class="fas fa-minus"></i> 
+    </button>
+    <button onclick="increaseImageSize()">
+      <i class="fas fa-plus"></i>
+    </button>
+    <button onclick="indentImageLeft()">
+      <i class="fas fa-arrow-left"></i> 
+    </button>
+    <button onclick="indentImageRight()">
+      <i class="fas fa-arrow-right"></i> 
+    </button>
+    <button id="addMarginTopBtn" onclick="addMarginTop()">
+      <i class="fas fa-arrow-down"></i> 
+  </button>
+  <button id="addMarginBottomBtn" onclick="addMarginBottom()">
+    <i class="fas fa-arrow-up"></i> 
+</button>
+    <input type="color" id="borderColorPicker" />
+    <button onclick="setImageBorderColor()">
+      <i class="fas fa-border-all"></i> 
+    </button>
+   
+    
+  </div>
+
+    <div class="tablecontainer3">
+      <div id="tableContent3"><p>asdfghjk</p></div>
+
+    </div>
+        </div>
+      </div>
+
+    <!-- <div id="toolbar3" class="toolbar" style="display: none;">
+      <button onclick="makeBold()" title="Bold">
+        <i class="fas fa-bold"></i>
+      </button>
+      <button onclick="increaseTextSize()" title="Increase Font Size">
+        <i class="fas fa-text-height"></i>
+      </button>
+      <button onclick="decreaseTextSize()" title="Decrease Font Size">
+        <i class="fas fa-text-width"></i>
+      </button>
+      <button onclick="increaseIndent()" title="Increase Indent">
+        <i class="fas fa-indent"></i>
+      </button>
+      <button onclick="decreaseIndent()" title="Decrease Indent">
+        <i class="fas fa-outdent"></i>
+      </button>
+      <button onclick="increaseTableSize()" title="Increase Table Size">
+        <i class="fas fa-expand"></i>
+      </button>
+      <button onclick="decreaseTableSize()" title="Decrease Table Size">
+        <i class="fas fa-compress"></i>
+      </button>
+      <button onclick="changeCellBackground()" title="Change Background Color">
+        <i class="fa-solid fa-fill"></i>
+      </button>
+      <button onclick="changeTextColorTable()" title="Change Text Color">
+        <i class="fa-solid fa-paintbrush"></i>
+      </button>
+      <button onclick="changeRowBackground()" title="Change Row Background Color">
+        <i class="fas fa-layer-group"></i>
+      </button>
+      <button onclick="changeColumnBackground()" title="Change Column Background Color">
+        <i class="fas fa-columns"></i>
+      </button>
+      <button onclick="toggleTableBorder()" title="Toggle Borders">
+        <i class="fas fa-border-all"></i> 
+    </button>
+
+    <button onclick="addRow()"  title="Add Row">
+      <i class="fa-solid fa-table-list"></i>
+    </button>
+
+    <button onclick="addColumn()" title="Add Column">
+      <i class="fa-solid fa-table-cells"></i> 
+    </button>
+
+    <button onclick="setUniformSize()" title="Set Cell Size">
+      <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+    </button>
+   
+    <button onclick="deleteTable()">
+      <i class="fas fa-trash"></i> Delete Table
+    </button>
+    <button onclick="deleteCell()">
+      <i class="fas fa-trash"></i> Delete Cell
+    </button>-trash"></i> Delete Cell
+    </button>
+    <br>
+      <input type="number" id="mergeRowIndex3" min="1" placeholder="Row to Merge" required>
+      <input type="number" id="startColumnIndex3" min="1" placeholder="Start Column" required>
+      <input type="number" id="endColumnIndex3" min="1" placeholder="End Column" required>
+      <button onclick="mergeRowCells()" title="Merge Cells">
+          <i class="fas fa-compress-arrows-alt"></i>
+      </button>
+      <br>
+      <input type="number" id="mergeColIndex3" min="1" placeholder="Column to Merge" required>
+<input type="number" id="startRowIndex3" min="1" placeholder="Start Row" required>
+<input type="number" id="endRowIndex3" min="1" placeholder="End Row" required>
+<button onclick="mergeColumnCells()" title="Merge Column Cells">
+  <i class="fas fa-arrows-alt-v"></i>
+</button>
+
+    </div>
+
+    <div id="toolbar-text3"class="toolbar" style="display: none;">
+      <button onclick="makeBold()" title="Bold"><i class="fas fa-bold"></i></button>
+      <button onclick="makeItalic()" title="Italic"><i class="fas fa-italic"></i></button>
+      <button onclick="makeUnderline()" title="Underline"><i class="fas fa-underline"></i></button>
+      <button onclick="increaseFontSize()" title="Increase Font Size"><i class="fas fa-plus"></i></button>
+      <button onclick="decreaseFontSize()" title="Decrease Font Size"><i class="fas fa-minus"></i></button>
+      <input type="color" id="textColorPicker3" title="Pick a Color">
+      <button onclick="changeTextColor()" title="Change Text Color">
+          <i class="fas fa-palette"></i>
+      </button>
+      <input type="color" id="highlightColorPicker3" title="Pick a Highlight Color">
+      <button onclick="highlightText()" title="Highlight Text">
+          <i class="fas fa-highlighter"></i>
+      </button>
+        <button onclick="toggleBulletPoints()" title="Bullet Points">
+            <i class="fas fa-list-ul"></i>
+        </button>
+        <button onclick="applyIndent()" title="Increase Indent">
+          <i class="fas fa-indent"></i>
+      </button>
+      <button onclick="applyOutdent()" title="Decrease Indent">
+        <i class="fas fa-outdent"></i>
+    </button>
+
+
+  </div>
+  <div class="toolbar" id="imageToolbar3">
+    <button onclick="reduceImageSize()">
+      <i class="fas fa-minus"></i> 
+    </button>
+    <button onclick="increaseImageSize()">
+      <i class="fas fa-plus"></i>
+    </button>
+    <button onclick="indentImageLeft()">
+      <i class="fas fa-arrow-left"></i> 
+    </button>
+    <button onclick="indentImageRight()">
+      <i class="fas fa-arrow-right"></i> 
+    </button>
+    <button id="addMarginTopBtn" onclick="addMarginTop()">
+      <i class="fas fa-arrow-down"></i> 
+  </button>
+  <button id="addMarginBottomBtn" onclick="addMarginBottom()">
+    <i class="fas fa-arrow-up"></i> 
+</button>
+    <input type="color" id="borderColorPicker" />
+    <button onclick="setImageBorderColor()">
+      <i class="fas fa-border-all"></i> 
+    </button>
+   
+    
+  </div>
+
+    <div class="tablecontainer3">
+      <div id="tableContent3"><p>asdfghjk</p></div>
+
+    </div>
+        </div>
+
+         </div> -->
+
+      <!-- end of temp3 -->
+            <div class="template-four" id="template4" style="display: none;" >
+                <div class="t4top">
+                  <div class="t4month">
+                    
+                    <h3 id="t4date"></h3>
+                  </div>
+                  <div class="t4heading">
+                    <h1>JAPANESE LANGUAGE</h1>
+                    <h1>TRAINING REPORT</h1>
+                  </div>
+                </div>
+  
+                <div class="t4body">
+                  <div class="t4leftbody">
+                   <div class="t4batch"><h2></h2></div>
+                   <div class="t4trainee">
+                    <div class="traineedetails"></div>
+                    <div class="traineedetails"></div>
+                    <div class="traineedetails"></div>
+                    <div class="traineedetails"></div>
+                    <div class="traineedetails"></div>
+                    <div class="traineedetails"></div>
+                   </div>
+                  </div>
+                  <div class="t4rightbody">
+                    <div class="graph"></div>
+                  </div>
+                </div>
+  
+                <div class="t4tablediv">
+                  <div class="t4tableleftdiv"> 
+                    <!-- add table details here -->
+                     <p><h3>Grade Explanation </h3></p>
+                    <div class="grade">
+                      .
+                     <div class="gradeexp"><h2>A(90-100)</h2></div>
+                     <div class="gradeexp"><h2>B(80-89)</h2></div>
+                     <div class="gradeexp"><h2>C(70-79)</h2></div>
+                     <div class="gradeexp"><h2>D(60-69)</h2></div>
+                     <div class="gradeexp"><h2>E(< 59-Failed)</h2></div>
+                    </div>
+  
+  
+                  </div>
+                  <div class="t4tablerightdiv">
+                    <div class="t4table">
+  <!-- draw table here -->
+                    </div>
+                  </div>
+                 
+  
+                </div>
+                
+               
+              </div>
+
+          <!-- template-five -->
+
+          <div class="template-five" id="template5" style="display: none;" >
+            <div class="container-template5" id="container-template5">
+      
+              <div class="header-template5" id="header-template5">
+                <h1>Japanese Language Training Report</h1>
+                <h3 id="template5-month"></h3>
+              </div>
+      
+              <div class="summary-template5">
+               
+              <div class="first-box">
+                <div class="box-template5-1">
+                  <h2>Number of Learners</h2>
+                  <canvas id="learners-chart-template5" width="200" height="200"></canvas>
+                </div>
+      
+                <div class="box-template5-2">
+                  <h2>Current Level</h2>
+                  <canvas id="levelChart-t5" height="250" width="200"></canvas>
+                </div>
+              </div>
+      
+              <div class="second-box">
+                <div class="box-template5-5">
+                  <h2>Trainers</h2>
+                  <div id="trainer-name-template5"></div>
+                  
+                </div>
+                <div class="box-template5-3">
+                  <h2>Total Batch Duration</h2>
+                  <canvas id="batch-duration-chart-t5" width="250" height="180"></canvas>
+                </div>
+                <div class="box-template5-4" >
+                  <h2 >Total No. of Sessions Till Date</h2>
+                  <canvas id="sessionsChart-t5" width="250" height="180"></canvas>
+                </div>
+              </div>
+                
+              </div>
+      
+              <div id="batchwise-data-template5">
+                <!-- <div class="batch-info">
+                  <h1 id="batch-name-t5"></h1>
+                </div>
+      
+                <div class="details-template5">
+                  <div class="trainee-list-template5">
+                    <h2>Trainee Details</h2>
+                    <div id="trainee-details-template5"></div>
+                  </div>
+                  <div class="details-right-template5">
+                    <div class="batch-duration-template5">
+                      <div class="sessions-temp5">
+                        
+                        <h3 id="batch-sessions-template5"></h3>
+                      </div>
+                      <div class="sessions-temp5">
+                        
+                        <h3 id="batch-duration-template5"></h3>
+                      </div>
+                      <div id="durationChart-t5"></div>
+                    </div>
+                    <div class="attendance-template5">
+                      <h2>Attendance</h2>
+                      <canvas id="attendanceChart-t5" ></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="trainee-evaluation-template5">
+                  <h2>Evaluation Details</h2>
+                  <div id="evaluation-table-template5"></div>
+                </div> -->
+              </div>
+              <div id="toolbar4" class="toolbar" style="display: none;">
+                <button onclick="makeBold()" title="Bold">
+                  <i class="fas fa-bold"></i>
+                </button>
+                <button onclick="increaseTextSize()" title="Increase Font Size">
+                  <i class="fas fa-text-height"></i>
+                </button>
+                <button onclick="decreaseTextSize()" title="Decrease Font Size">
+                  <i class="fas fa-text-width"></i>
+                </button>
+                <button onclick="increaseIndent()" title="Increase Indent">
+                  <i class="fas fa-indent"></i>
+                </button>
+                <button onclick="decreaseIndent()" title="Decrease Indent">
+                  <i class="fas fa-outdent"></i>
+                </button>
+                <button onclick="increaseTableSize()" title="Increase Table Size">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <button onclick="decreaseTableSize()" title="Decrease Table Size">
+                  <i class="fas fa-compress"></i>
+                </button>
+                <button onclick="changeCellBackground()" title="Change Background Color">
+                  <i class="fa-solid fa-fill"></i>
+                </button>
+                <button onclick="changeTextColorTable()" title="Change Text Color">
+                  <i class="fa-solid fa-paintbrush"></i>
+                </button>
+                <button onclick="changeRowBackground()" title="Change Row Background Color">
+                  <i class="fas fa-layer-group"></i>
+                </button>
+                <button onclick="changeColumnBackground()" title="Change Column Background Color">
+                  <i class="fas fa-columns"></i>
+                </button>
+                <button onclick="toggleTableBorder()" title="Toggle Borders">
+                  <i class="fas fa-border-all"></i> 
+              </button>
+    
+              <button onclick="addRow()"  title="Add Row">
+                <i class="fa-solid fa-table-list"></i>
+              </button>
+    
+              <button onclick="addColumn()" title="Add Column">
+                <i class="fa-solid fa-table-cells"></i> 
+              </button>
+    
+              <button onclick="setUniformSize()" title="Set Cell Size">
+                <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+              </button>
+             
+              <button onclick="deleteTable()">
+                <i class="fas fa-trash"></i> Delete Table
+              </button>
+              <button onclick="deleteCell()">
+                <i class="fas fa-trash"></i> Delete Cell
+              </button>
+              <br>
+                <input type="number" id="mergeRowIndex4" min="1" placeholder="Row to Merge" required>
+                <input type="number" id="startColumnIndex4" min="1" placeholder="Start Column" required>
+                <input type="number" id="endColumnIndex4" min="1" placeholder="End Column" required>
+                <button onclick="mergeRowCells()" title="Merge Cells">
+                    <i class="fas fa-compress-arrows-alt"></i>
+                </button>
+                <br>
+                <input type="number" id="mergeColIndex4" min="1" placeholder="Column to Merge" required>
+        <input type="number" id="startRowIndex4" min="1" placeholder="Start Row" required>
+        <input type="number" id="endRowIndex4" min="1" placeholder="End Row" required>
+        <button onclick="mergeColumnCells()" title="Merge Column Cells">
+            <i class="fas fa-arrows-alt-v"></i>
+        </button>
+
+        
+              </div>
+
+
+              <div id="toolbar-text4"class="toolbar" style="display: none;">
+                <button onclick="makeBold()" title="Bold"><i class="fas fa-bold"></i></button>
+                <button onclick="makeItalic()" title="Italic"><i class="fas fa-italic"></i></button>
+                <button onclick="makeUnderline()" title="Underline"><i class="fas fa-underline"></i></button>
+                <button onclick="increaseFontSize()" title="Increase Font Size"><i class="fas fa-plus"></i></button>
+                <button onclick="decreaseFontSize()" title="Decrease Font Size"><i class="fas fa-minus"></i></button>
+                <input type="color" id="textColorPicker4" title="Pick a Color">
+                <button onclick="changeTextColor()" title="Change Text Color">
+                    <i class="fas fa-palette"></i>
+                </button>
+                <input type="color" id="highlightColorPicker4" title="Pick a Highlight Color">
+                <button onclick="highlightText()" title="Highlight Text">
+                    <i class="fas fa-highlighter"></i>
+                </button>
+                  <button onclick="toggleBulletPoints()" title="Bullet Points">
+                      <i class="fas fa-list-ul"></i>
+                  </button>
+                  <button onclick="applyIndent()" title="Increase Indent">
+                    <i class="fas fa-indent"></i>
+                </button>
+                <button onclick="applyOutdent()" title="Decrease Indent">
+                  <i class="fas fa-outdent"></i>
+              </button>
+  
+
+            </div>
+            <div class="toolbar" id="imageToolbar4">
+              <button onclick="reduceImageSize()">
+                <i class="fas fa-minus"></i> 
+              </button>
+              <button onclick="increaseImageSize()">
+                <i class="fas fa-plus"></i>
+              </button>
+              <button onclick="indentImageLeft()">
+                <i class="fas fa-arrow-left"></i> 
+              </button>
+              <button onclick="indentImageRight()">
+                <i class="fas fa-arrow-right"></i> 
+              </button>
+              <button id="addMarginTopBtn" onclick="addMarginTop()">
+                <i class="fas fa-arrow-down"></i> 
+            </button>
+            <button id="addMarginBottomBtn" onclick="addMarginBottom()">
+              <i class="fas fa-arrow-up"></i> 
+          </button>
+              <input type="color" id="borderColorPicker" />
+              <button onclick="setImageBorderColor()">
+                <i class="fas fa-border-all"></i> 
+              </button>
+             
+              
+            </div>
+    
+              
+              <div class="tablecontainer4">
+                
+                <div id="tableContent4"></div>
+          
+              </div>
+            </div>
+
+            
+          </div>
+
+          <!-- end of temp 5 -->
+              
+            
+          </div>
+          <div class="right-sidebar">
+            <div class="right-sidebarContainer">
+              <div class="select-batch">
+                <h2>Select Batch</h2>
+                <select id="batchSelect">
+                  <option value="">Select Batch</option>
+                </select>
+                </div>
+                <h2>select theme</h2>
+                <div class="sidebar-theme">
+                  <div class="theme-color-dark-blue" id="theme-color-dark-blue"></div>
+                  <div class="theme-color-violet" id="theme-color-violet"></div>
+                  <div class="theme-color-red" id="theme-color-red"></div>
+                  <div class="theme-color-blue" id="theme-color-blue"></div>
+                  <div class="theme-color-green" id="theme-color-green"></div>
+                  <div class="theme-color-orange" id="theme-color-orange"></div>
+
+                </div>
+                <div class="toggle-learners">
+                  <h2>No. of Learners</h2>
+				  <div class="chart-toggle">
+					<select id="chartTypeDropdown">
+					  <option value="pie">Pie Chart</option>
+					  <option value="bar">Bar Chart</option>
+					  <option value="line">Line Chart</option>
+					  <option value="doughnut">Doughnut Chart</option>
+					  <option value="radar">Radar</option>
+					  <option value="polarArea">Polar Area</option>
+					</select>
+				  </div>
+                  
+
+
+                </div>
+                <div class="toggle-certification">
+                  <h2>Current Level</h2>
+                  <div class="learners">
+                    <select id="chartType-dropdown-certification">
+						<option value="line">Line</option>
+						<option value="bar">Bar</option>
+						<option value="pie">Pie</option>
+						<option value="doughnut">Doughnut</option>
+						<option value="radar">Radar</option>
+						<option value="polarArea">Polar Area</option>
+					</select>
+                    </div>
+                  
+
+
+                </div>
+
+                <div class="toggle-sessions-till-date">
+                  <h2>Total Sessions Till Date</h2>
+                  <div class="learners">
+                    <select id="chartType-dropdown-session-tilldate">
+						<option value="line">Line</option>
+						<option value="bar">Bar</option>
+						<option value="pie">Pie</option>
+						<option value="doughnut">Doughnut</option>
+						<option value="radar">Radar</option>
+						<option value="polarArea">Polar Area</option>
+					</select>
+                    </div>
+                </div>
+
+                <div class="toggle-duration-till-date">
+                  <h2>Total Duration Till Date</h2>
+                  <div class="learners">
+                    <select id="chartType-dropdown-duration-tilldate">
+						<option value="line">Line</option>
+						<option value="bar">Bar</option>
+						<option value="pie">Pie</option>
+						<option value="doughnut">Doughnut</option>
+						<option value="radar">Radar</option>
+						<option value="polarArea">Polar Area</option>
+					</select>
+                    </div>
+                </div>
+
+
+                
+
+
+
+
+                <div class="toggle-attendence">
+                  <h2>Average Attendence</h2>
+                  <div class="learners">
+					<select id="chartTypeDropdownAttendance">
+						<option value="line">Line</option>
+						<option value="bar">Bar</option>
+						<option value="pie">Pie</option>
+						<option value="doughnut">Doughnut</option>
+						<option value="radar">Radar</option>
+						<option value="polarArea">Polar Area</option>
+					</select>
+                    </div>
+                  
+
+
+                </div>
+
+                <div class="table-options">
+                  <h3>Add Tables</h3>
+                  <label>Rows: <input type="number" id="rowCount" min="1" value="2"></label>
+                  <label>Columns: <input type="number" id="colCount" min="1" value="2"></label>
+                  <button onclick="createTable()">Add Table</button> 
+              </div>
+              <!-- <div class="controls">
+                <h3>Merging cells</h3>
+                <label>Merge From Row: <input type="number" id="mergeRowStart" min="1"></label>
+                <label>To Row: <input type="number" id="mergeRowEnd" min="1"></label>
+                <label>From Column: <input type="number" id="mergeColStart" min="1"></label>
+                <label>To Column: <input type="number" id="mergeColEnd" min="1"></label>
+                <button onclick="mergeCells()">Merge Cells</button>
+                </div> -->
+                <div id="textareaInsert">
+                  <button onclick="createTextarea()">Add Text</button>
+              </div>
+               <div id="imageuploads">
+                <input type="file" accept="image/*" id="uploadImage">
+
+<!-- Button to display the uploaded image -->
+              <button onclick="displayUploadedPhotos()">Add Image</button>
+
+               </div>
+
+            <div class="table-spacing">
+              <h3>Spacing Between Tables</h3>
+              <label>Spacing (in pixels): <input type="number" id="tableSpacing" min="0" value="10"></label>
+              <button onclick="setTableSpacing()">Set Spacing</button>
+          </div>
+          <div class="edit-div">
+            <button id="increaseMarginBtn">increase div</button>
+            <button id="decreaseMarginBtn">decrease div</button>
+          </div>
+
+            </div>
+          </div>
+          <div class="button-container">
+            <button id="generate-report"  onclick=" preview_togglepopup();copyHtml(selectTemplate);">Generate Report</button>
+          </div>
+        <!-- </section> -->
+      </section>
+      <section class="generate-btn">
+       
+      </section>
+
+
+      <div class="preview-popup" id="preview-popup">
+				<div class="popup-overlay"></div>
+				<div class="preview">
+					<div class="preview-top">
+						<div>
+							<h1>Create Document</h1>
+	
+						</div>
+						
+						<div>
+							<a href="../pages/report-page.html"><button id="cancel-button">✕</button></a>
+	
+						</div>
+						
+					</div>	 
+					
+				  <div class="preview-report" id="preview-report">
+				   
+				  </div>
+				  <canvas id="canvas" style="display: none"></canvas>
+				  
+				  <div class="sidebar">
+					<div class="sidebar-container">
+					  <p>File Type</p>
+					  <div class="dropdown">
+						<div class="select">
+						  <span class="selected">Select</span>
+						  <div class="caret"></div>
+						</div>
+						<ul class="menu">
+						  <li class="active">pdf</li>
+						  <li>png</li>
+						  <li>jpg</li>
+						</ul>
+					  </div>
+		  
+					  <div class="download">
+						<button  id="download-button">Download</button>
+						<button  id="share-button" onclick="share_togglepopup()">Share</button>
+            <input id="img-input" type="file" style="display: none;"><br><br>
+            <button  id="save-button" >save</button>
+						
+						
+						<div class="share-popup" id="share-popup">
+							<div class="share-overley"></div>
+							<div class="share-email" id="share-email">
+								<form id="email-form" enctype="multipart/form-data">
+                  <label id="label1" for="to">To:</label>
+                  <input type="email" id="to" name="to" required><br><br>
+          
+                  <label id="label2" for="subject">Subject:</label>
+                  <input type="text" id="subject" name="subject" value="Japanese Training Report" required><br><br>
+          
+                  <label id="label3" for="message">Message:</label>
+                  <textarea id="message" name="message" required>Please find below the Japanese Training Report of the month 
+                  </textarea><br><br>
+          
+                  <label id="label4" for="attachment">Attachment:</label>
+                  <input id="file-input" type="file" id="attachment" name="attachment"><br><br>
+          
+                  <button id="send-email" type="button" onclick="sendEmail()">Send Email</button>
+                  <button id="cancel-email" >Cancel</button>
+              </form>
+
+
+							
+
+						</div>
+						
+						</div>
+						
+					  </div>
+					</div>
+					
+				  </div>
+				</div>
+			  </div>
+	
+			</main>
+			  
+
+
+   
+    
+    </main>
+
+    <script src="../scripts/report-page.mjs" type="module"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="../scripts/preview-page.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+
+  </body>
+</html>

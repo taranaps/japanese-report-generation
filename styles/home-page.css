@@ -1,0 +1,533 @@
+/* ---Home Page Styles--- */
+
+/* nav-bar */
+
+.icon {
+    width: 25px;
+    height: 25px;
+}
+
+.sidebar {
+    width: 60px;
+    height: 65%;
+    margin-top: 40px;
+    background-color: #DC143C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    justify-content: center;
+    position: fixed;
+    /* border-radius: 10px; */
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    left: 0;
+
+}
+
+.nav-items {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    position: relative;
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav-item:hover {
+    color: #f5f6fa;
+}
+
+.nav-item:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background-color: white;
+    transition: transform 0.3s;
+    transform: scaleY(1);
+}
+
+.nav-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background-color: white;
+    transform: scaleY(0);
+    transition: transform 0.3s;
+    border-radius: 10px;
+}
+
+/* Tooltip styles */
+.nav-item {
+    position: relative;
+}
+
+.nav-item::after {
+    content: attr(data-tooltip); /* Display the text from data-tooltip */
+    position: absolute;
+    /* right: 40px; */
+    left: 90%; /* Center horizontally */
+    bottom: 80%; /*Position tooltip above the icon */
+    transform: translateX(-50%) translateY(-5px); /* Center tooltip horizontally and add space above icon */
+    background-color: #181717b9;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    font-size: 14px;
+    pointer-events: none; /* Prevents tooltip from blocking hover events */
+    z-index: 10;
+}
+
+/* Show tooltip on hover */
+.nav-item:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+body {
+    background-color: #f4f4f4;
+    font-family: inter;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    z-index: 100;
+    background:#dcdcdc85;
+  }
+
+/* .sign-out {
+    margin-top: 5px;
+    width: 35px;
+    height: 35px;
+} */
+
+/* .home {
+    margin-left: 1000px;
+    margin-top: 5px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+} */
+
+.content {
+    padding: 20px;
+    text-align: center;
+    min-height: 90vh;
+}
+
+.dashboard-container {
+    margin-top: 100px;
+    margin-left: 40px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    flex-grow: 1; 
+    width: 60%; 
+}
+
+.card-image {
+    width: 100%;
+    height: 100%; /* Adjust height as needed */
+    object-fit: cover; /* Ensures the image fits within the container */
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.attendance-chart {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    width: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.attendance-chart p {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.month {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 14px;
+    color: gray;
+}
+
+.nav-button {
+    border-radius: 5px;
+    background-color: #DC143C;
+    color: white;
+    border: none;
+    padding: 7px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}
+
+.nav-button:hover {
+    background-color: #DC143C;
+    /* color: #DC143C;; */
+    text-decoration: none;
+}
+
+/* Carousel Styles */
+.carousel-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e0f7fa;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.carousel {
+    position: relative;
+    overflow: hidden;
+    margin-top: -25px;
+}
+
+.carousel-slide {
+    display: none;
+    text-align: center;
+    padding-left: 45px;
+}
+
+.carousel-slide.active {
+    display: block;
+    animation: fade 1s ease-in-out;
+    margin-bottom: 50px;
+    margin-right: 50px;
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* .stat-box { 
+    transition: transform 0.5s ease; Smooth transition 
+    width: 150px;
+    height: 100px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+} */
+
+.stat-box {
+    transition: transform 0.5s ease; /* Smooth transition */
+    width: 200px;
+    height: 200px; 
+    background-color: #f9f9f9;
+    color: #000000;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box; 
+    position: relative;
+}
+/* .stat-box1 {
+    transition: transform 0.5s ease; 
+    width: 200px;
+    height: 200px; 
+    background-color: #ffeaea;
+    color: #181717;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box; 
+    position: relative;
+}
+
+.stat-box1:hover {
+    background-color: #f9f9f9;
+    color: #DC143C; 
+} */
+
+.stat-box:hover {
+    background-color: #ffeaea;
+}
+.stat-box1:hover {
+    transform: scale(1.1); 
+  }
+
+.stat-box1 h1 {
+    font-size: 80px;
+    margin-top: -15px;
+}
+
+.stat-box1 h2 {
+    font-size: 25px;
+    /* padding: 10px;
+    align-items: center;
+    display: flex; */
+}
+.stat-box:hover {
+    transform: scale(1.1); 
+  }
+
+.stat-box h1 {
+    font-size: 80px;
+    margin-top: -15px;
+}
+
+.stat-box h2 {
+    font-size: 25px;
+    /* padding: 10px;
+    align-items: center;
+    display: flex; */
+}
+.graph {
+    /* padding: 10px;
+    position: absolute;
+    z-index: 1; */
+    margin-top: 50px;
+}
+
+.box-content {
+    position: absolute;
+    z-index: 2;
+}
+
+/* ---Upload-Data Pop-up Styles--- */
+/* Center the modal */
+#uploadModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.uploadimg{
+    width: 100%;
+    height: 130px;
+    background-color:#f9f9f9;
+    border: 1px dashed #DC143C;
+    box-sizing: border-box;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-around;
+    align-items: center;
+
+}
+.uploadimage{
+    width: 30%;
+    height: auto;
+    opacity: 20%;
+    
+}
+.input-buttons{
+    margin-left: 10px;
+}
+.downloaddiv{
+    width: 540px;
+    height: 60px;
+    background-color: #DC143C;
+    margin-top: 30px;
+    margin-left: -20px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius:8px ;
+}
+.downloaddiv p {
+    text-decoration: none;
+    color: white;
+    padding: 20px;
+}
+
+
+/* Modal button alignment */
+#uploadModal a {
+    text-decoration: none;
+    color: #181717;
+}
+
+#uploadModal a:hover {
+    color: #df6b83;
+}
+
+/* Hide the modal background when not active */
+body::before {
+    content: "";
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Show the modal background when the modal is active */
+.modal-active body::before {
+    display: block;
+}
+
+#uploadModal{
+    width:500px;
+    height: 200px;
+}
+/* .download-template{
+    color: #DC143C;
+} */
+
+#uploadButton{
+    /* margin-top: 100px; */
+    background: #DC143C;
+    border-radius: 10px;
+    border: solid 1px #DC143C;
+    height: 30px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+#tableButton{
+    background: #DC143C;
+    border-radius: 10px;
+    border: solid 1px #DC143C;
+    height: 30px;
+    color: white;
+    cursor: pointer;
+}
+#reportButton{
+    background: #DC143C;
+    border-radius: 10px;
+    border: solid 1px #DC143C;
+    height: 30px;
+    color: white;
+    cursor: pointer;
+}
+#closeUploadModal{
+    /* margin-top: 50px; */
+    /* margin-left: 30px; */
+    background: #DC143C;
+    border-radius: 10px;
+    border: solid 1px #DC143C;
+    height: 30px;
+    color: white;
+    cursor: pointer;
+}
+/* .input-buttons{
+    margin-top: 70px;
+    margin-left: 100px; 
+} */
+.download-template{
+    color: wheat;
+}
+
+/* ---Message Display Pop-up Modal Styles--- */
+/* Message Modal Styles */
+#messageModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    width: 400px;
+    text-align: center;
+}
+
+.modal-content {
+    padding: 20px;
+}
+
+#messageContent.success {
+    color: green;
+    background-color: #e6ffe6;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#messageContent.error {
+    color: red;
+    background-color: #ffe6e6;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+
+
+
+
+
+

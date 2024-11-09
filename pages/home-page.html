@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/styles/home-page.css">  
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img class="logo" src="/assets/images/experion-logo.png" alt="Logo">
+        </div>
+        <div class="dashboard-container">
+            <div class="sidebar">
+                <div class="nav-items">
+                    <a href="#" class="nav-item" data-tooltip="Home">
+                        <!-- <button class="nav-button"> -->
+                            <img class="icon" src="/assets/images/home-icon-new.svg">
+                        <!-- </button> -->
+                    <a href="#" class="nav-item"  id="openUploadModal" data-tooltip="Upload Excel">
+                        <!-- <button id="openUploadModal" class="nav-button"> -->
+                            <img class="icon" src="/assets/images/upload-big-arrow (1).svg">
+                        <!-- </button> -->
+                    </a>
+                    <a href="report-page.html" class="nav-item" data-tooltip="Generate Report">
+                            <img class="icon" src="/assets/images/bar-chart (1).svg">
+                    </a>
+                    <a href="#" class="nav-item"  data-tooltip="Logout">
+                        <img class="icon" id="logout" src="/assets/images/sign-out.svg">
+                    </a>
+                    <a href="/pages/download.html" class="nav-item" data-tooltip="History">
+                        <img class="icon" src="/assets/images/history (1).svg">
+                    </a>
+                </div>
+            </div>
+            <div class="dashboard">
+                <div class="stat-box">
+                    <div class="box-content">
+                        <h4>Number of Batches</h4>
+                        <h1 id="activeBatches">0</h1>
+                    </div>
+                    <!-- <div class="graph">
+                        <img src="/assets/images/Line.png" alt="Sessions Graph" class="card-image">
+                    </div> -->
+                </div>
+                <div class="stat-box">
+                    <div class="box-content">
+                        <h4>Number of Trainees</h4>
+                        <h1 id="numTrainees">0</h1>
+                        <!-- <canvas id="numTrainees" width="100" height="100"></canvas> -->
+                    </div>
+                    <!-- <div class="graph">
+                        <img src="/assets/images/line2.png" alt="Sessions Graph" class="card-image">
+                    </div>  -->
+                </div>
+                <div class="stat-box">
+                    <div class="box-content">
+                        <h4>Sensei/Trainers</h4>
+                        <h2 id="trainerNames">Loading...</h2>
+                    </div>
+                    <!-- <div class="graph">
+                        <img src="/assets/images/line3.png" alt="Sessions Graph" class="card-image">
+                    </div> -->
+                </div>
+                <div class="stat-box">
+                    <div class="box-content">
+                        <h4>Certification Level</h4>
+                        <h5 class="carousel" id="certificationLevel">Loading...</h5>
+                    </div>
+                    <!-- <div class="graph">
+                        <img src="/assets/images/line (4).png" alt="Sessions Graph" class="card-image">
+                    </div> -->
+                </div>
+                <div class="stat-box">
+                    <div class="box-content">
+                        <h4>Total Duration</h4>
+                        <h5 class="carousel" id="totalDuration">Loading...</h5>
+                    </div>
+                    <!-- <div class="graph">
+                        <img src="/assets/images/Line (2).png" alt="Sessions Graph" class="card-image">
+                    </div> -->
+                </div>
+                <div class="stat-box">
+                    <div class="box-content">
+                        <h4>Total Sessions</h4>
+                        <h5 class="carousel" id="totalSessions">Loading...</h5>
+                    </div>
+                    <!-- <div class="graph">
+                        <img src="/assets/images/Line (3).png" alt="Sessions Graph" class="card-image">
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="attendance-chart">
+                <h4>Attendance</h4>
+                <canvas id="attendanceChart" height="280"></canvas>
+            </div>
+        </div>
+        <div id="uploadModal">
+            <!-- <p>Do you want to download the templates? <a href="../assets/excel/excel-template.csv" download><span class="download-template">Click Here</span></a></p>
+            <div class="input-excel">
+                <input type="file" id="excelFile" />
+            </div>
+            <div class="input-buttons">
+                <button id="uploadButton">Upload Data</button>
+                <button id="closeUploadModal">Close</button>
+            </div> -->
+            <div class="uploadimg">
+                <img class="uploadimage" src="../assets/images/uploadimg.png" alt="uploadimage" >
+                
+                <div class="input-buttons">
+                    <p>Upload your Excel (Max 10 MB)</p>
+                    <div class="input-excel">
+                        <input type="file" id="excelFile" />
+                    </div>
+                    
+                    <button id="uploadButton">Upload Data</button>
+                    <button id="closeUploadModal">Close</button>
+                </div> 
+            </div>
+            <div class="downloaddiv">
+                <p>Do you want to download the templates? <a href="../assets/excel/excel-template.csv" download><span class="download-template">Click Here</span></a></p>
+            </div>
+        </div>
+
+        <div id="messageModal" class="modal">
+            <div class="modal-content">
+                <span id="closeMessageModal" class="close">&times;</span>
+                <p id="messageContent"></p>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../scripts/upload-data.mjs" type="module"></script>
+        <script src="../scripts/home-page.mjs" type="module"></script>
+</body>
+</html>
+

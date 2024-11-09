@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles/login-page.css" />
+  </head>
+  <body>
+    <!-- Login Form Container -->
+
+    <div class="login-container">
+      <h2>Login</h2>
+
+      <!-- Form starts here -->
+      <!-- <form action="#" method="POST"> -->
+      <!-- Email input -->
+      <input
+        type="email"
+        class="input-box"
+        id="email"
+        placeholder="Enter your email"
+        required
+      />
+
+      <!-- Password input container with eye icon -->
+      <div class="password-container">
+        <input
+          type="password"
+          id="password"
+          class="input-box"
+          placeholder="Enter your password"
+          required
+        />
+        <span class="eye-icon" id="toggle-password">👁️‍🗨️</span>
+      </div>
+
+      <!-- Login button -->
+      <button id="login-btn" class="login-btn"><span>Login </span></button>
+
+      <!-- </form> -->
+      <div
+        id="error-message"
+        style="color: rgb(46, 222, 245); margin-top: 10px"
+      ></div>
+    </div>
+    <div class="explogo">
+      <img src="assets/images/exp logo.png" alt="explogo" />
+    </div>
+
+    <script src="scripts/login-page.mjs" type="module"></script>
+  </body>
+</html>
