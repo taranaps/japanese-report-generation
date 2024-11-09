@@ -237,6 +237,7 @@ images.forEach(image => {
 function copyHtml(selectTemplate) {
     var sourceDiv = document.getElementById(selectTemplate);
     var wrapperDiv = document.querySelector(".preview-report");
+    const fileInputButton = document.getElementById("img-input");
 
     // Use html2canvas to convert the source div to an image
     html2canvas(sourceDiv).then(canvas => {
@@ -282,10 +283,26 @@ function copyHtml(selectTemplate) {
 
             // Append the image to the wrapper div
             wrapperDiv.appendChild(img);
+
+            fetch(imgData)
+            .then(res => res.blob())
+            .then(blob => {
+                // Get the current date and time for a unique filename
+                const now = new Date();
+                const formattedDate = now.toISOString().replace(/[:.]/g, '-'); // Format YYYY-MM-DDTHH-MM-SS
+
+                // Create a unique file name using the timestamp
+                const fileName = `captured_image_${formattedDate}.png`;
+                const file = new File([blob], fileName, { type: "image/png" });
+
+                // Assign this file to the file input element's `files` property
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInputButton.files = dataTransfer.files;
+            });
         };
     });
 }
-
 
 
 
@@ -624,40 +641,40 @@ images.forEach(image => {
 
 
 
-        document.getElementById("increaseMarginBtn").onclick = function() {
-          const targetDiv = document.getElementById(tableId);
+        // document.getElementById("increaseMarginBtn").onclick = function() {
+        //   const targetDiv = document.getElementById(tableId);
         
-          // Get the current margin-bottom of the div
-          const currentMarginTop = parseInt(window.getComputedStyle(targetDiv).marginTop);
+        //   // Get the current margin-bottom of the div
+        //   const currentMarginTop = parseInt(window.getComputedStyle(targetDiv).marginTop);
         
-          // Increase the margin-bottom by 10 pixels
-          targetDiv.style.marginTop = (currentMarginTop - 10) + "px";
-          let toolbar=document.getElementById(toolbarId)
-          toolbar.style.marginTop='-170px';
-          let toolbarText=document.getElementById(toolbar_text);
-          toolbarText.style.marginTop='-170px'
-          let toolbarImage=document.getElementById( imageToolbar);
-          toolbarImage.style.marginTop='-170px'
-        };
+        //   // Increase the margin-bottom by 10 pixels
+        //   targetDiv.style.marginTop = (currentMarginTop - 10) + "px";
+        //   let toolbar=document.getElementById(toolbarId)
+        //   toolbar.style.marginTop='-170px';
+        //   let toolbarText=document.getElementById(toolbar_text);
+        //   toolbarText.style.marginTop='-170px'
+        //   let toolbarImage=document.getElementById( imageToolbar);
+        //   toolbarImage.style.marginTop='-170px'
+        // };
 
-        document.getElementById("decreaseMarginBtn").onclick = function() {
-          const targetDiv = document.getElementById(tableId);
+        // document.getElementById("decreaseMarginBtn").onclick = function() {
+        //   const targetDiv = document.getElementById(tableId);
         
-          // Get the current margin-bottom of the div
-          const currentMarginTop = parseInt(window.getComputedStyle(targetDiv).marginTop);
+        //   // Get the current margin-bottom of the div
+        //   const currentMarginTop = parseInt(window.getComputedStyle(targetDiv).marginTop);
         
-          // Increase the margin-bottom by 10 pixels
-          targetDiv.style.marginTop = (currentMarginTop + 10) + "px";
-          let toolbar=document.getElementById(toolbarId)
-          toolbar.style.marginTop='70px';
-          let toolbarText=document.getElementById(toolbar_text);
-          toolbarText.style.marginTop='70px'
-          let toolbarImage=document.getElementById( imageToolbar);
-          toolbarImage.style.marginTop='70px'
+        //   // Increase the margin-bottom by 10 pixels
+        //   targetDiv.style.marginTop = (currentMarginTop + 10) + "px";
+        //   let toolbar=document.getElementById(toolbarId)
+        //   toolbar.style.marginTop='70px';
+        //   let toolbarText=document.getElementById(toolbar_text);
+        //   toolbarText.style.marginTop='70px'
+        //   let toolbarImage=document.getElementById( imageToolbar);
+        //   toolbarImage.style.marginTop='70px'
           
     
 
-        };
+        // };
 
 
 

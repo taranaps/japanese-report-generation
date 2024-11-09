@@ -1,7 +1,11 @@
 import { checkAuth, logout } from "./auth.js";
 import { db } from "./firebaseConfig.mjs";
 import { collection, getDocs, getFirestore, doc, getDoc, where, query } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
-// import {collection,getDocs,getFirestore,doc,getDoc,where,query,} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+import uploadImageToFirebase from '../scripts/uploadimage.mjs'
+
+
+
 
 // Check authentication status
 checkAuth();
@@ -1726,6 +1730,7 @@ async function generateSessionChart(data, id, chartType) {
         generateTraineePieChart("trainee-piechart-template1",selectedChartType,backgroundColor,borderColor);  
         
       });
+     
       document.getElementById('chartType-dropdown-certification').addEventListener('change', (event) => {
         const selectedChartType = event.target.value;
         initCertificationChart("certificationBarChart",backgroundColor,borderColor,selectedChartType);
@@ -1734,6 +1739,7 @@ async function generateSessionChart(data, id, chartType) {
  
         const cutoffContainer= document.getElementById('whole-batch-cutoff-container');
         cutoffContainer.innerHTML='';
+        
     const rightContainer = document.getElementById('right-template1');
     if (rightContainer) {
         rightContainer.innerHTML = `
@@ -2064,7 +2070,24 @@ async function generateSessionChart(data, id, chartType) {
       console.error("No batch details found.");
       return;
     }
-
+    const certificationConatianer = document.getElementById('whole-batch-cutoff-container');
+    certificationConatianer.innerHTML='';
+    certificationConatianer.innerHTML = `<div class="current-level-template1">
+                      <div class="level-heading" id="level-heading">
+                        <p>Current Level</p>
+                      </div>
+                      <div class="inner-level-template1">
+                        <canvas id="certificationBarChart" width="200" height="200"></canvas>                    
+                      </div>
+                    </div>
+                    <div class="batch-duration-template1">
+                      <div class="duration-heading-template1" id="duration-heading-template1">
+                        <p>Total Batch Duration</p>
+                      </div>
+                      <div class="duration-body-template1">
+                        <canvas id="whole-duration-data-templae1" width="200" height="190"></canvas>
+                      </div>
+                    </div>`;
     const mainContainer = document.getElementById('right-template1');
     mainContainer.innerHTML = '';
     mainContainer.innerHTML = `<h1 id="batch-text-template1"></h1>
@@ -2164,13 +2187,13 @@ async function generateSessionChart(data, id, chartType) {
     );
 
 
-    initCertificationChart("certificationBarChart",backgroundColor,borderColor,'bar');
+    // initCertificationChart("certificationBarChart",backgroundColor,borderColor,'bar');
 
-    document.getElementById('chartType-dropdown-certification').addEventListener('change', (event) => {
-        const selectedChartType = event.target.value;
-        initCertificationChart("certificationBarChart",backgroundColor,borderColor,selectedChartType);
+    // document.getElementById('chartType-dropdown-certification').addEventListener('change', (event) => {
+    //     const selectedChartType = event.target.value;
+    //     initCertificationChart("certificationBarChart",backgroundColor,borderColor,selectedChartType);
         
-      });
+    //   });
 
     initTrainerDetails("trainer-name-template1");
 
@@ -3000,6 +3023,29 @@ function applyTheme(themeId) {
   const trainerNames2 = document.querySelectorAll("#trainer-name-template2 h3");
   trainerNames2.forEach(e => e.style.color = color.bg);
 }
+
+
+
+
+
+async function uploadImage()
+{
+  const fileInput = document.getElementById("img-input");
+  let image= fileInput.files[0]
+
+      if (image) {
+          var imageUrl = await uploadImageToFirebase(image);
+          console.log("image link " + imageUrl)
+
+      }
+     
+      
+}
+
+
+document.getElementById("save-button").addEventListener("click",uploadImage)
+
+
 
 
 
